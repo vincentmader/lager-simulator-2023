@@ -1,3 +1,17 @@
-p {
-    color: red;
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: black;
+}
+
+canvas {
+    --MARGIN: 4%;
+    /* background-color: green; */
+    width: calc(100% - 2 * var(--MARGIN));
+    margin: var(--MARGIN);
+    border: 1px solid white;
+    /* border-radius: 20px; */
 }
