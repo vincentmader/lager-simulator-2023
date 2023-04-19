@@ -1,6 +1,8 @@
 import {CoordinateTransformer, Position} from "./position.js";
 import {draw_floor_grid} from "./test_isometric.js";
 
+const ZOOM_LEVEL = 1;
+
 export class Renderer {
 
     constructor(world, canvas) {
@@ -60,7 +62,7 @@ export class Renderer {
     }
 
     draw_circle(position, r, color) {
-        position = this.coordinate_transformer.world_to_canvas(position);
+        position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
@@ -70,6 +72,7 @@ export class Renderer {
     }
 
     draw_rectangle(position, width, height, color) {
+        position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
