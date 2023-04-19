@@ -5,15 +5,16 @@ import {Woelfling, Jupfi} from "./person.js";
 import {Canvas} from "./canvas.js";
 import {MoveTask} from "./tasks.js";
 import {TaskExecutor} from "./task_list.js";
+import {Position} from "./position.js";
 
 
 export class Game {
 
     constructor() {
-        let person_1 = new Woelfling([100, 100]);
-        let person_2 = new Jupfi([200, 100]);
+        let person_1 = new Woelfling(new Position(100, 100));
+        let person_2 = new Jupfi(new Position(200, 100));
         let people = [person_1, person_2];
-        people[0].task_list.push(new MoveTask(200, 200));
+        people[0].task_list.push(new MoveTask(new Position(200, 200)));
 
         this.canvas = new Canvas();
         this.world = new World(people);

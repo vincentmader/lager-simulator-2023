@@ -3,7 +3,6 @@ export class Position {
         this.x = x;
         this.y = y;
     }
-
 }
 
 export class CoordinateTransformer {
@@ -21,8 +20,12 @@ export class CoordinateTransformer {
         return new Position(x, y);
     }
 
-    world_to_canvas() {}
+    world_to_canvas(position) {
+        return position; // TODO
+    }
 
-    canvas_to_world() {}
+    canvas_to_world(position) {
+        return position; // TODO
+    }
 }
 

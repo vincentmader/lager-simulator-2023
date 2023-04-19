@@ -6,10 +6,9 @@ class Task {
 
 
 export class MoveTask extends Task {
-    constructor(targetX, targetY) {
+    constructor(target_position) {
         super();
-        this.targetX = targetX;
-        this.targetY = targetY;
+        this.target_position = target_position;
     }
 }
 

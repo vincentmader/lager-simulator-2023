@@ -1,3 +1,4 @@
+import {CoordinateTransformer, Position} from "./position.js";
 import {draw_floor_grid} from "./test_isometric.js";
 
 export class Renderer {
@@ -7,6 +8,7 @@ export class Renderer {
         this.canvas = canvas;
         this.environment_clock = Date.now();
         this.fire_cache = []
+        this.coordinate_transformer = new CoordinateTransformer();
     }
 
     gaussian_random(mean = 0, stdev = 1) {
@@ -17,11 +19,14 @@ export class Renderer {
         return z * stdev + mean;
     }
 
-    draw_person(x, y, color) {
-        this.draw_circle(x, y, 5, color);
+    draw_person(position, color) {
+        this.draw_circle(position, 5, color);
     }
 
-    draw_fire(x, y) {
+    draw_fire(position) {
+        let x = position.x,
+            y = position.y;
+        // TODO Use position object instead of x & y. (?)
         let scale = 10
         if (Date.now() > this.environment_clock + 70) {
             this.environment_clock = Date.now()
@@ -41,27 +46,34 @@ export class Renderer {
                 part_y = this.fire_cache[i][1],
                 radius = this.fire_cache[i][2],
                 color = this.fire_cache[i][3];
-            this.draw_circle(part_x, part_y, radius, color);
+            let position = new Position(part_x, part_y);
+            // TODO ^ Use position object already earlier in this function. (?)
+            this.draw_circle(position, radius, color);
         }
         let wood_size = 6
-        this.draw_rectangle(x - wood_size * scale / 2, y,
-            wood_size * scale, wood_size * scale * 0.2, "rgb(120, 51, 0)")
+        this.draw_rectangle(
+            new Position(x - wood_size * scale / 2, y),
+            wood_size * scale,
+            wood_size * scale * 0.2,
+            "rgb(120, 51, 0)"
+        );
     }
 
-    draw_circle(x, y, r, color) {
+    draw_circle(position, r, color) {
+        position = this.coordinate_transformer.world_to_canvas(position);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
-        this.canvas.ctx.arc(x, y, r, 0, 2 * Math.PI);
+        this.canvas.ctx.arc(position.x, position.y, r, 0, 2 * Math.PI);
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
     }
 
-    draw_rectangle(x, y, width, height, color) {
+    draw_rectangle(position, width, height, color) {
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
-        this.canvas.ctx.rect(x, y, width, height);
+        this.canvas.ctx.rect(position.x, position.y, width, height);
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
     }
@@ -74,11 +86,9 @@ export class Renderer {
         this.clear_screen();
         draw_floor_grid();
         this.world.people.forEach((person) => {
-            let x = person.position[0],
-                y = person.position[1];
-            this.draw_person(x, y, person.color)
+            this.draw_person(person.position, person.color)
         });
-        this.draw_fire(this.world.fire.position[0], this.world.fire.position[1])
+        this.draw_fire(this.world.fire.position)
     }
 
 }

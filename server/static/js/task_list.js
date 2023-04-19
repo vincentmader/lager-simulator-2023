@@ -13,18 +13,18 @@ export class TaskExecutor {
 
     execute_move(task) {
         let person = task.owner
-        let directionX = task.targetX - person.position[0];
-        let directionY = task.targetY - person.position[1];
+        let directionX = task.target_position.x - person.position.x; // TODO Define `Vector` class.
+        let directionY = task.target_position.y - person.position.y;
         let distance = Math.sqrt(Math.pow(directionX, 2) + Math.pow(directionY, 2))
         directionX /= distance;
         directionY /= distance;
-        person.position[0] += person.speed * directionX * dt;
-        person.position[1] += person.speed * directionY * dt;
+        person.position.x += person.speed * directionX * dt;
+        person.position.y += person.speed * directionY * dt;
         return distance > 1;
     }
 
     execute(task) {
-        switch(task.constructor) {
+        switch (task.constructor) {
             case IdleTask:
                 return true
             case MoveTask:

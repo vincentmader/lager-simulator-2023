@@ -1,19 +1,11 @@
 import {MoveTask} from "./tasks.js";
+import {Position} from "./position.js";
 
 class InputHandler {
-    
+
     constructor(world, canvas) {
         this.world = world;
         this.canvas = canvas;
-    }
-
-    initialize() {
-        let canvas = this.canvas;
-        this.canvas.element.addEventListener('click', () => {
-            var x = event.pageX - canvas.elementLeft,
-                y = event.pageY - canvas.elementTop;
-        }, false);
-        return this;
     }
 }
 
@@ -27,7 +19,8 @@ export class LagerInputHandler extends InputHandler {
         this.canvas.element.addEventListener('click', () => {
             var x = event.pageX - this.canvas.elementLeft,
                 y = event.pageY - this.canvas.elementTop;
-            this.world.people[0].task_list.push(new MoveTask(x, y))
+            let position = new Position(x, y);
+            this.world.people[0].task_list.push(new MoveTask(position));
         }, false);
         return this;
     }
