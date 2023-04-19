@@ -1,7 +1,12 @@
-export class Position {
+export class Vector {
     constructor(x, y) {
         this.x = x;
         this.y = y;
+    }
+}
+export class Position extends Vector {
+    constructor(x, y) {
+        super(x, y);
     }
 }
 
@@ -39,4 +44,3 @@ export class CoordinateTransformer {
         return new Position(x, y);
     }
 }
-
