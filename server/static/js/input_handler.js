@@ -8,7 +8,6 @@ class InputHandler {
         this.canvas.element.addEventListener('click', () => {
             var x = event.pageX - canvas.elementLeft,
                 y = event.pageY - canvas.elementTop;
-            console.log(x, y);
         }, false);
         return this;
     }

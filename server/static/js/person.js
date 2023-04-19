@@ -6,7 +6,7 @@ class Person extends Entity {
         super(position);
         this.speed = speed;
         this.velocity = [speed, 0];
-        this.task_list = new TaskList([]);
+        this.task_list = new TaskList(this, []);
     }
 }
 export class Woelfling extends Person {
