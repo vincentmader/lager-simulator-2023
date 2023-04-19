@@ -1,8 +1,8 @@
-start:
+up:
 	docker-compose up -d --build
-stop:
+down:
 	docker-compose stop
 logs:
-	docker-compose logs
+	docker-compose logs -f -t
 browser:
-	open http:python_flask.lo
+	open http://lager-simulator-2023.lo
