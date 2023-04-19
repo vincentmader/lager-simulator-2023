@@ -7,5 +7,7 @@ export class World {
     constructor(people) {
         this.people = people
         this.fire = new Lagerfeuer(new Position(300, 300));
+
+        this.dimensions = [100, 100];
     }
 }
