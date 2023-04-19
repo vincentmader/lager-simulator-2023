@@ -1,7 +1,8 @@
-import {Position} from "./position.js";
+import {Position, CoordinateTransformer} from "./position.js";
 
 const canvas = document.getElementById("canvas-0");
 const ctx = canvas.getContext("2d");
+const coordinate_transformer = new CoordinateTransformer();
 
 class Rectangle {
     constructor(position, dimensions) {
@@ -42,7 +43,9 @@ const draw_rectangle = (rect) => {
     ctx.fillStyle = "white";
     ctx.beginPath();
     let corners = rect.corners();
-    corners = corners.map((c) => {return c.cartesian_to_isometric();});
+    corners = corners.map((c) => {
+        return coordinate_transformer.cartesian_to_isometric(c);
+    });
     for (let idx = 0; idx < corners.length; idx++) {
         let from = corners[idx];
         let jdx = idx + 1;

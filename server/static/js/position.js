@@ -4,15 +4,25 @@ export class Position {
         this.y = y;
     }
 
-    isometric_to_cartesian() {
-        let x = (2 * this.y + this.x) / 2;
-        let y = (2 * this.y - this.x) / 2;
-        return new Position(x, y);
-    };
-
-    cartesian_to_isometric() {
-        let x = this.x - this.y;
-        let y = (this.x + this.y) / 2;
-        return new Position(x, y);
-    };
 }
+
+export class CoordinateTransformer {
+    constructor() {}
+
+    isometric_to_cartesian(position) {
+        let x = (2 * position.y + position.x) / 2;
+        let y = (2 * position.y - position.x) / 2;
+        return new Position(x, y);
+    }
+
+    cartesian_to_isometric(position) {
+        let x = position.x - position.y;
+        let y = (position.x + position.y) / 2;
+        return new Position(x, y);
+    }
+
+    world_to_canvas() {}
+
+    canvas_to_world() {}
+}
+
