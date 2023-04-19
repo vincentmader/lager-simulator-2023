@@ -1,0 +1,103 @@
+#+title: Lager-Simulator 2023
+
+_Spiel-Ziel_:
+- den Banner klauen
+  bzw. den Banner nicht klauen lassen
+
+_Lager_:
+- Lagerfeuer
+- Bannermast
+- Zelte drum rum
+- Dixies
+- Baeume/Gebuesch
+
+_Bannermast_:
+- Ziel der Ueberfaeller (wollen Banner klauen)
+- muss beschuetzt werden, sonst: Game Over
+
+_Zelte_:
+- Leiter-Jurte
+- Stufen-Zelte
+  - hier schlafen Kinder (koennen geweckt werden)
+- Kuechen-Zelt
+  - Bier
+  - Nutella
+- Geruest-Zelt
+
+_Dixies_:
+- funktionieren als Versteck
+- niemand schaut rein (weil abgeschlossen)
+- wenn man weiss, da ist jmd, laesst man jmd da
+
+_Ueberfaeller_:
+- Ziele
+  - versuchen, den Banner zu klauen
+  - koennen sich verstecken (z.B. im Busch oder Dixi)
+- Varianten
+  - Box-Ueberfaeller / Piraten
+    - zur Ablenkung
+  - Spione / Elvins
+    - koennen ins Lager geschmuggelt werden
+    - klauen den eigenen Banner
+    - werden nicht erkannt von Woes & Jupfis
+- Items
+  - Messer
+    - damit kann man das Bannerseil durchschneiden
+      (ohne Messer geht auch, dauert halt laenger)
+
+_Nachtwache_:
+- muessen von Leitern aufgeweckt werden
+- koennen laut schreien: "Ueberfall!"
+  (wenn Ueberfaeller entdeckt wurde)
+- haben einen Vision-Radius
+- koennen tagsueber gelevelt werden: Aufstufung
+- Ziele
+  - versuchen, den Banner zu schuetzen
+- Varianten
+  - Woelflinge
+    - koennen am Wachposten einschlafen
+  - Jupfis
+  - Pfadis
+  - Rover
+    - koennen Ueberfaeller umtacklen
+  - Leiter
+    - saufen am Lagerfeuer
+    - brauchen Bier, um wach zu bleiben
+    - wenn kein Bier mehr da, gehen sie ins Bett
+- Items
+  - Taschen-Lampe / Fackel
+    - erhoeht den Vision-Radius (?)
+
+_Welt_:
+- Tag-Nacht-Rhythmus
+- Lager geht mehrere Tage lang
+
+_Ressourcen_:
+- Holz $\to$ benoetigt fuer's Feuer
+- Bier $\to$ benoetigt fuer die Leiter
+- Cola & Nutella-Brote $\to$ benoetigt, um Kinder wach zu halten
+- Geld (hat man am Anfang)
+- Wasser
+
+_Waehrungen_:
+- benoetigt fuer die Berechnung des Spiel-Scores
+- Varianten
+  - Macht-Punkte
+  - Bier
+  - Georgs-Punkte
+
+_User-Input_:
+- zieht die Patrouillen-Wege der Kinder
+- gibt Befehle
+  - dann laueft ein Leiter vom Lagerfeuer los
+    und fuehrt den Befehl aus
+  - e.g.:
+    - ein Kind braucht 'ne Cola
+    - Leiter laeuft zur Kueche
+    - holt die Cola
+    - bringt sie dem Kind
+
+_Spiel-Setup_:
+- die Zelte werden platziert
+- feste Zahl an Teilnehmern / Kindern / Leuten
+  - am Anfang (fast) nur Woelflinge
