@@ -6,11 +6,11 @@ export class Position {
 }
 
 export class CoordinateTransformer {
-    constructor(canvas, world) {
-        // this.world_width = world.dimensions[0];
-        // this.world_height = world.dimensions[1];
-        // this.canvas_width = canvas.W; // TODO Use dimensions field here as well.
-        // this.canvas_height = canvas.H;
+    constructor(world, canvas) {
+        this.world_width = world.dimensions[0];
+        this.world_height = world.dimensions[1];
+        this.canvas_width = canvas.W; // TODO Use dimensions field here as well?
+        this.canvas_height = canvas.H;
     }
 
     isometric_to_cartesian(position) {
@@ -26,12 +26,14 @@ export class CoordinateTransformer {
     }
 
     world_to_canvas(position, zoom_level) {
+        // TODO
         let x = position.x;
         let y = position.y;
         return new Position(x, y);
     }
 
     canvas_to_world(position, zoom_level) {
+        // TODO
         let x = position.x;
         let y = position.y;
         return new Position(x, y);
