@@ -1,3 +1,5 @@
+import {draw_floor_grid} from "./test_isometric.js";
+
 export class Renderer {
 
     constructor(world, canvas) {
@@ -69,6 +71,7 @@ export class Renderer {
 
     display() {
         this.clear_screen();
+        draw_floor_grid();
         this.world.people.forEach((person) => {
             let x = person.position[0],
                 y = person.position[1];
