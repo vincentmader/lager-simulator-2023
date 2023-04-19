@@ -1,4 +1,5 @@
-import {Entity, dt} from "./world.js";
+import {dt} from "./world.js";
+import {Entity} from "./structures.js"
 import {TaskList} from "./task_list.js";
 
 class Person extends Entity {

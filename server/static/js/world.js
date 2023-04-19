@@ -1,13 +1,10 @@
+import {Lagerfeuer} from "./structures.js";
+
 export const dt = 1; // TODO Make dynamic.
 
 export class World {
     constructor(people) {
         this.people = people
-    }
-}
-
-export class Entity {
-    constructor(position) {
-        this.position = position;
+        this.fire = new Lagerfeuer([300, 300]);
     }
 }
