@@ -1,4 +1,5 @@
 * {
+    --MARGIN: 4%;
     margin: 0px;
     padding: 0px;
 }
@@ -7,11 +8,17 @@ body {
     background-color: black;
 }
 
+h2 {
+    color: white;
+    text-align: center;
+    font-family: 'Trebuchet MS';
+    margin-top: var(--MARGIN);
+}
+
 canvas {
-    --MARGIN: 4%;
-    /* background-color: green; */
+    /* background-color: #004400; */
     width: calc(100% - 2 * var(--MARGIN));
     margin: var(--MARGIN);
     border: 1px solid white;
-    /* border-radius: 20px; */
+    border-radius: 20px;
 }
