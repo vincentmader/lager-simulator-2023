@@ -6,7 +6,9 @@ services:
       context: ./server
     restart: always
     environment:
-      VIRTUAL_HOST: python_flask.lo
+      VIRTUAL_HOST: lager-simulator-2023.lo
+      # LETSENCRYPT_HOST: # TODO Choose domain: lager-simulator.georgs-punkte.de (?)
+      # LETSENCRYPT_EMAIL: vincent.mader@icloud.com
     ports:
       - 5001:5000
     networks:
