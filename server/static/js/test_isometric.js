@@ -24,8 +24,8 @@ class Rectangle {
 
 const create_rectangles = () => {
     let N = 10;
-    let W = 100,
-        H = 100;
+    let W = 30,
+        H = 30;
     let rectangles = [];
     for (let idx = 0; idx < N; idx++) {
         for (let jdx = 0; jdx < N; jdx++) {
