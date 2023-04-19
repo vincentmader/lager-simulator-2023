@@ -1,8 +1,4 @@
-import {Position, CoordinateTransformer} from "./position.js";
-
-const canvas = document.getElementById("canvas-0");
-const ctx = canvas.getContext("2d");
-const coordinate_transformer = new CoordinateTransformer();
+import {Position} from "./position.js";
 
 class Rectangle {
     constructor(position, dimensions) {
@@ -23,7 +19,7 @@ class Rectangle {
     }
 }
 
-const create_rectangles = () => {
+export const create_rectangles = () => {
     let N = 10;
     let W = 30,
         H = 30;
@@ -36,31 +32,4 @@ const create_rectangles = () => {
         }
     }
     return rectangles;
-};
-
-const draw_rectangle = (rect) => {
-    ctx.strokeStyle = "white";
-    ctx.fillStyle = "white";
-    ctx.beginPath();
-    let corners = rect.corners();
-    corners = corners.map((c) => {
-        return coordinate_transformer.cartesian_to_isometric(c);
-    });
-    for (let idx = 0; idx < corners.length; idx++) {
-        let from = corners[idx];
-        let jdx = idx + 1;
-        if (jdx == corners.length) {jdx = 0;}
-        let to = corners[jdx];
-        ctx.moveTo(from.x, from.y);
-        ctx.lineTo(to.x, to.y);
-    }
-    ctx.stroke();
-    ctx.fill();
-};
-
-export const draw_floor_grid = () => {
-    let rectangles = create_rectangles();
-    rectangles.forEach((rect) => {
-        draw_rectangle(rect);
-    });
 };

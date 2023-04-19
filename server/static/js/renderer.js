@@ -1,5 +1,5 @@
 import {CoordinateTransformer, Position} from "./position.js";
-import {draw_floor_grid} from "./test_isometric.js";
+import {create_rectangles} from "./test_isometric.js";
 
 const ZOOM_LEVEL = 1;
 
@@ -10,7 +10,7 @@ export class Renderer {
         this.canvas = canvas;
         this.environment_clock = Date.now();
         this.fire_cache = []
-        this.coordinate_transformer = new CoordinateTransformer();
+        this.coordinate_transformer = new CoordinateTransformer(world, canvas);
     }
 
     gaussian_random(mean = 0, stdev = 1) {
@@ -53,7 +53,7 @@ export class Renderer {
             this.draw_circle(position, radius, color);
         }
         let wood_size = 6
-        this.draw_rectangle(
+        this.draw_rectangle_fast(
             new Position(x - wood_size * scale / 2, y),
             wood_size * scale,
             wood_size * scale * 0.2,
@@ -71,7 +71,7 @@ export class Renderer {
         this.canvas.ctx.fill();
     }
 
-    draw_rectangle(position, width, height, color) {
+    draw_rectangle_fast(position, width, height, color) {
         position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
@@ -81,13 +81,38 @@ export class Renderer {
         this.canvas.ctx.fill();
     }
 
+    draw_rectangle(rect) { // TODO Use different format for arguments?
+        this.canvas.ctx.strokeStyle = "white";
+        this.canvas.ctx.beginPath();
+        let corners = rect.corners();
+        corners = corners.map((c) => {
+            return this.coordinate_transformer.cartesian_to_isometric(c);
+        });
+        for (let idx = 0; idx < corners.length; idx++) {
+            let from = corners[idx];
+            let jdx = idx + 1;
+            if (jdx == corners.length) {jdx = 0;}
+            let to = corners[jdx];
+            this.canvas.ctx.moveTo(from.x, from.y);
+            this.canvas.ctx.lineTo(to.x, to.y);
+        }
+        this.canvas.ctx.stroke();
+    };
+
+    draw_floor_grid() {
+        let rectangles = create_rectangles();
+        rectangles.forEach((rect) => {
+            this.draw_rectangle(rect);
+        });
+    }
+
     clear_screen() {
         this.canvas.ctx.clearRect(0, 0, this.canvas.W, this.canvas.H);
     }
 
     display() {
         this.clear_screen();
-        draw_floor_grid();
+        this.draw_floor_grid();
         this.world.people.forEach((person) => {
             this.draw_person(person.position, person.color)
         });
