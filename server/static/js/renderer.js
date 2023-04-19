@@ -7,10 +7,10 @@ export class Renderer {
         this.fire_cache = []
     }
 
-    gaussian_random(mean=0, stdev=1) {
+    gaussian_random(mean = 0, stdev = 1) {
         let u = 1 - Math.random(); // Converting [0,1) to (0,1]
         let v = Math.random();
-        let z = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+        let z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
         // Transform to the desired mean and standard deviation:
         return z * stdev + mean;
     }
@@ -27,9 +27,9 @@ export class Renderer {
             for (let i = 0; i < 10; i++) {
                 let part_x = this.gaussian_random(x, scale);
                 let offset_y = Math.abs(this.gaussian_random(0, 3));
-                let part_y = y - offset_y*scale;
-                let radius = Math.max(3, (10 - offset_y)*0.1*scale + Math.random())
-                let color = "rgb(255, " + Math.min(100, (scale*offset_y)**2) + ", 0)";
+                let part_y = y - offset_y * scale;
+                let radius = Math.max(3, (10 - offset_y) * 0.1 * scale + Math.random())
+                let color = "rgb(255, " + Math.min(100, (scale * offset_y) ** 2) + ", 0)";
                 this.fire_cache.push([part_x, part_y, radius, color]);
             }
         }
@@ -41,8 +41,8 @@ export class Renderer {
             this.draw_circle(part_x, part_y, radius, color);
         }
         let wood_size = 6
-        this.draw_rectangle(x - wood_size*scale/2, y,
-            wood_size*scale, wood_size*scale*0.2, "rgb(120, 51, 0)")
+        this.draw_rectangle(x - wood_size * scale / 2, y,
+            wood_size * scale, wood_size * scale * 0.2, "rgb(120, 51, 0)")
     }
 
     draw_circle(x, y, r, color) {
