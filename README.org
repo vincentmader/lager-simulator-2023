@@ -34,7 +34,7 @@ _Ueberfaeller_:
   - versuchen, den Banner zu klauen
   - koennen sich verstecken (z.B. im Busch oder Dixi)
 - Varianten
-  - Box-Ueberfaeller / Piraten
+  - SoundBox-Ueberfaeller / Piraten
     - zur Ablenkung
   - Spione / Elvins
     - koennen ins Lager geschmuggelt werden
