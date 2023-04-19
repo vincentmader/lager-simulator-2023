@@ -26,12 +26,13 @@ export class Renderer {
         if (Date.now() > this.environment_clock + 70) {
             this.environment_clock = Date.now()
             this.fire_cache = [];
-            for (let i = 0; i < 10; i++) {
-                let part_x = this.gaussian_random(x, scale);
+            for (let i = 0; i < 25; i++) {
+                let offset_x = this.gaussian_random();
+                let part_x = x + offset_x * scale;
                 let offset_y = Math.abs(this.gaussian_random(0, 3));
                 let part_y = y - offset_y * scale;
                 let radius = Math.max(3, (10 - offset_y) * 0.1 * scale + Math.random())
-                let color = "rgb(255, " + Math.min(100, (scale * offset_y) ** 2) + ", 0)";
+                let color = "rgb(255, " + Math.min(220, (scale * offset_y) ** 1.5 + Math.abs(scale * offset_x ** 3)) + ", 0)";
                 this.fire_cache.push([part_x, part_y, radius, color]);
             }
         }
