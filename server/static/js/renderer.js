@@ -1,11 +1,14 @@
 export class Renderer {
+
     constructor(world, canvas) {
         this.world = world;
         this.canvas = canvas;
     }
+
     draw_person(x, y, color) {
         this.draw_circle(x, y, 5, color);
-    };
+    }
+
     draw_circle(x, y, r, color) {
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
@@ -14,9 +17,11 @@ export class Renderer {
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
     }
+
     clear_screen() {
         this.canvas.ctx.clearRect(0, 0, this.canvas.W, this.canvas.H);
     }
+
     display() {
         this.clear_screen();
         this.world.people.forEach((person) => {
@@ -25,4 +30,5 @@ export class Renderer {
             this.draw_person(x, y, person.color)
         });
     }
+
 }
