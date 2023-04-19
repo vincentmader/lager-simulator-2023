@@ -28,13 +28,20 @@ export class Game {
             if (!this.task_executor.execute(task)) {
                 person.task_list.shift();
             }
+            if (is_game_won()) {
+                window.clearInterval(this._run_id);
+            }
         });
-    }
+    } 
 
     run() {
-        window.setInterval(() => {
+        this._run_id = window.setInterval(() => {
             this.forward();
             this.renderer.display();
         }, 1000 / 60);
+    }
+
+    is_game_won() {
+        return !this.world.banner.is_up;
     }
 }

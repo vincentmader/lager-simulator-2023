@@ -19,3 +19,11 @@ export class IdleTask extends Task {
         super();
     }
 }
+
+
+export class CutBannerTask extends Task {
+    constructor(efficiency=1) {
+        super();
+        this.efficiency = efficiency;
+    }
+}

@@ -51,3 +51,10 @@ export class Lagerfeuer extends Entity {
         super(position);
     }
 }
+
+export class Banner extends Entity {
+    constructor(position) {
+        super(position);
+        this.is_up = true;
+    }
+}

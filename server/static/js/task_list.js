@@ -1,4 +1,4 @@
-import {MoveTask, IdleTask} from "./tasks.js";
+import {IdleTask, MoveTask, CutBannerTask} from "./tasks.js";
 
 
 var dt = 1; // TODO
@@ -23,12 +23,18 @@ export class TaskExecutor {
         return distance > 1;
     }
 
+    execute_cut_banner(task) {
+        return true;
+    }
+
     execute(task) {
         switch(task.constructor) {
             case IdleTask:
-                return true
+                return true;
             case MoveTask:
-                return this.execute_move(task)
+                return this.execute_move(task);
+            case CutBannerTask:
+                return this.execute_cut_banner(task);
         }
     }
 }
