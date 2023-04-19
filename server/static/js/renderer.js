@@ -4,13 +4,13 @@ export class Renderer {
         this.canvas = canvas;
     }
     draw_person(x, y, color) {
-        this.draw_circle(x, y, color);
+        this.draw_circle(x, y, 5, color);
     };
-    draw_circle(x, y, color) {
+    draw_circle(x, y, r, color) {
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
-        this.canvas.ctx.arc(x, y, 1, 0, 2 * Math.PI);
+        this.canvas.ctx.arc(x, y, r, 0, 2 * Math.PI);
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
     }
