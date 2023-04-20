@@ -4,7 +4,7 @@ import {LagerInputHandler} from "./input_handler.js";
 import {Woelfling, Jupfi} from "./data/entities/person.js";
 import {Canvas} from "./visual/canvas.js";
 import {MoveTask} from "./data/tasks.js";
-import {TaskExecutor} from "./task_list.js";
+import {TaskExecutor} from "./logic/task_list.js";
 import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
 
