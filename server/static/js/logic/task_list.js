@@ -42,6 +42,8 @@ export class TaskExecutor {
             && distance >= person.speed * dt
             && this.world.floor_grid.boundary.contains(future_position)) {
             person.position = future_position;
+            person.bounding_box.position = future_position;
+            person.bounding_box.corners = person.bounding_box._corners();
             this.collision_detector.update_cells(person);
             return true;
         }
