@@ -4,13 +4,24 @@ export class Vector {
         this.x = x;
         this.y = y;
     }
+    
+    mult(other) {
+        return new Vector(this.x * other.x, this.y * other.y);
+    }
+
+    add(other) {
+        return new Vector(this.x + other.x, this.y * other.y);
+    }
 }
+
+
 export class Position extends Vector {
 
     constructor(x, y) {
         super(x, y);
     }
 }
+
 
 export class CoordinateTransformer {
 
