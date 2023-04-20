@@ -116,7 +116,7 @@ export class Renderer {
             this.canvas.ctx.lineTo(to.x, to.y);
         }
         this.canvas.ctx.stroke();
-    };
+    }
 
     draw_floor_grid() {
         let color = "#444444";
