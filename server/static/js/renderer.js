@@ -154,7 +154,7 @@ export class Renderer {
         this.world.people.forEach((person) => {
             this.draw_person(person.position, person.color)
         });
-        // this.draw_fire(this.world.fire.position)
+        this.draw_fire(this.world.fire.position)
     }
 
 }
