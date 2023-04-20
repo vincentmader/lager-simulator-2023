@@ -1,6 +1,6 @@
 import {World} from "./data/world.js";
 import {Renderer} from "./visual/renderer.js";
-import {LagerInputHandler} from "./input_handler.js";
+import {LagerInputHandler} from "./inputs/input_handler.js";
 import {Woelfling, Jupfi} from "./data/entities/person.js";
 import {Canvas} from "./visual/canvas.js";
 import {MoveTask} from "./data/tasks.js";
