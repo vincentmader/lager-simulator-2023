@@ -26,10 +26,6 @@ export class LagerInputHandler extends InputHandler {
             let x = event.clientX - rect.left;
             let y = event.clientY - rect.top;
 
-            let window_scale_factor = 0.000771 * window.innerWidth;
-            x /= window_scale_factor;
-            y /= window_scale_factor;
-
             let canvas_coords = new Position(x, y);
 
             let world_coords = this.coordinate_transformer.canvas_to_world(canvas_coords, zoom_level)
