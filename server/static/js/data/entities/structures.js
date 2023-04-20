@@ -1,12 +1,15 @@
+import {Rectangle} from "./rectangle.js";
+
 export class Entity {
-    constructor(position) {
+    constructor(position, bounding_box_dims) {
         this.position = position;
+        this.bounding_box = new Rectangle(this.position, bounding_box_dims);
     }
 }
 
 class Zelt extends Entity {
     constructor(position) {
-        super(position);
+        super(position, [1, 1]);
     }
 }
 
@@ -48,6 +51,6 @@ export class LeiterJurte extends Zelt {
 
 export class Lagerfeuer extends Entity {
     constructor(position) {
-        super(position);
+        super(position, [3, 3]);
     }
 }

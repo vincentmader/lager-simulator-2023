@@ -1,4 +1,6 @@
-import {MoveTask, IdleTask} from "../data/tasks.js";
+import {MoveTask, IdleTask} from "./tasks.js";
+import {CollisionDetector} from "./collision.js"
+import {Position} from "./position.js";
 
 
 var dt = 1; // TODO
@@ -9,6 +11,7 @@ export class TaskExecutor {
 
     constructor(world) {
         this.world = world;
+        this.collision_detector = new CollisionDetector(this.world);
     }
 
     execute_move(task) {
@@ -18,9 +21,26 @@ export class TaskExecutor {
         let distance = Math.pow(Math.pow(dx, 2) + Math.pow(dy, 2), 0.5)
         let ux = dx / distance;
         let uy = dy / distance;
-        if (distance >= person.speed * dt) {
-            person.position.x += person.speed * ux * dt;
-            person.position.y += person.speed * uy * dt;
+        let future_position = new Position(person.position.x + person.speed * ux * dt,
+            person.position.y + person.speed * uy * dt);
+
+        let collision = false;
+        this.collision_detector.get_neighbouring_cells(person.position).forEach((cell) => {
+            cell._entities.forEach((neighbour) => {
+                if (neighbour.bounding_box !== undefined
+                    && neighbour.bounding_box.contains(future_position)) {
+                    collision = true;
+                    return;
+                }
+            });
+            if (collision) {
+                return;
+            }
+        });
+
+        if (!collision & distance >= person.speed * dt) {
+            person.position = future_position;
+            this.collision_detector.update_cells(person);
             return true;
         }
         return false;
@@ -29,9 +49,9 @@ export class TaskExecutor {
     execute(task) {
         switch (task.constructor) {
             case IdleTask:
-                return true
+                return true;
             case MoveTask:
-                return this.execute_move(task)
+                return this.execute_move(task);
         }
     }
 }
