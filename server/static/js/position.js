@@ -40,9 +40,9 @@ export class CoordinateTransformer {
         let y_max = this.world_height / 2;
         let p_max = this.canvas_width;
         let q_max = this.canvas_height;
-        let window_scale_factor = 0.000771 * window.innerWidth;
-        let x = (p_max * window_scale_factor) * (zoom_level * position.x - x_min) / (x_max - x_min);
-        let y = (q_max * window_scale_factor) * (zoom_level * position.y - y_max) / (y_min - y_max);
+        // TODO Check if it shouldn't be p_max * window_scale_factor (inversion of canvas_to_world-formula?)
+        let x = p_max * (zoom_level * position.x - x_min) / (x_max - x_min);
+        let y = q_max * (zoom_level * position.y - y_max) / (y_min - y_max);
         return new Position(x, y);
     }
 
