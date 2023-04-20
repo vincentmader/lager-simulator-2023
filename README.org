@@ -103,11 +103,12 @@ _Spiel-Setup_:
   - am Anfang (fast) nur Woelflinge
 
 _TODOs_:
-- 3D-Vektor
-- Sprites & Animation
-- Zoom
-- IO Class (?)
-- Pan (drag-&-drop und Pfeiltasten)
-- Feuer (Wind ausmachen)
-- Zelt malen
-- Personen anklicken
+- [ ] 3D-Vektor
+- [ ] Sprites & Animation
+- [X] Zoom
+- [X] IO Class (?)
+- [ ] Pan (drag-&-drop und Pfeiltasten)
+- [ ] Feuer (Wind ausmachen)
+- [ ] Zelt malen
+- [X] Personen anklicken
+- [ ] Personen abklicken
