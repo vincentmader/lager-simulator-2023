@@ -13,14 +13,17 @@ export class TaskExecutor {
 
     execute_move(task) {
         let person = task.owner
-        let directionX = task.target_position.x - person.position.x; // TODO Define `Vector` class.
-        let directionY = task.target_position.y - person.position.y;
-        let distance = Math.sqrt(Math.pow(directionX, 2) + Math.pow(directionY, 2))
-        directionX /= distance;
-        directionY /= distance;
-        person.position.x += person.speed * directionX * dt;
-        person.position.y += person.speed * directionY * dt;
-        return distance > 1;
+        let dx = task.target_position.x - person.position.x; // TODO Define `Vector` class.
+        let dy = task.target_position.y - person.position.y;
+        let distance = Math.pow(Math.pow(dx, 2) + Math.pow(dy, 2), 0.5)
+        let ux = dx / distance;
+        let uy = dy / distance;
+        if (distance >= person.speed) {
+            person.position.x += person.speed * ux * dt;
+            person.position.y += person.speed * uy * dt;
+            return true;
+        }
+        return false;
     }
 
     execute(task) {
