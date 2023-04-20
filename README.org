@@ -110,3 +110,4 @@ _TODOs_:
 - Pan (drag-&-drop und Pfeiltasten)
 - Feuer (Wind ausmachen)
 - Zelt malen
+- Personen anklicken

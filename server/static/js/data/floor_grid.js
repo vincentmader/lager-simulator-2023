@@ -1,10 +1,12 @@
 import {Position} from "../math/vector.js";
 import {Rectangle} from "../math/rectangle.js";
 
+
 export class FloorGrid { // TODO Move definition elsewhere?
 
     constructor(dimensions) {
         this.rectangles = this._rectangles(dimensions);
+        this.boundary = new Rectangle(new Position(0, 0), dimensions);
     }
 
     _rectangles(dimensions) {
