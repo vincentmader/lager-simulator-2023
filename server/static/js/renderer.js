@@ -1,5 +1,5 @@
 import {Position} from "./math/vector.js";
-import {CoordinateTransformer} from "./coordinate_transformer.js";
+import {CoordinateTransformer} from "./math/coordinate_transformer.js";
 import {Slider} from "./inputs.js";
 
 var ZOOM_LEVEL = 1; // TODO Move definition of zoom-level elsewhere.

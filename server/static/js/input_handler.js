@@ -1,6 +1,6 @@
 import {MoveTask} from "./tasks.js";
 import {Position} from "./math/vector.js";
-import {CoordinateTransformer} from "./coordinate_transformer.js";
+import {CoordinateTransformer} from "./math/coordinate_transformer.js";
 
 const zoom_level = 1; // TODO Get value! A.t.m it breaks at zoom != 11 (default).
 

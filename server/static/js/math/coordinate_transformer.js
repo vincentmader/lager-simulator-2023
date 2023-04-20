@@ -1,4 +1,4 @@
-import {Position} from "./math/vector.js";
+import {Position} from "../math/vector.js";
 
 export class CoordinateTransformer {
 
