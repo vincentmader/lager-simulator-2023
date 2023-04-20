@@ -1,5 +1,4 @@
 import {CoordinateTransformer, Position} from "./position.js";
-import {create_rectangles} from "./test_isometric.js";
 
 const ZOOM_LEVEL = 1; // TODO Fix influence on transformation.
 
@@ -104,7 +103,7 @@ export class Renderer {
 
     draw_floor_grid() {
         let color = "#444444";
-        let rectangles = create_rectangles(this.world);
+        let rectangles = this.world.floor_grid.rectangles;
         rectangles.forEach((rect) => {
             this.draw_rectangle(rect, color);
         });
