@@ -107,3 +107,4 @@ _TODOs_:
 - Sprites & Animation
 - Zoom
 - IO Class (?)
+- Personen anklicken
