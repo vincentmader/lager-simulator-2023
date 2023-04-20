@@ -1,4 +1,4 @@
-import {World} from "./world.js";
+import {World} from "./data/world.js";
 import {Renderer} from "./visual/renderer.js";
 import {LagerInputHandler} from "./input_handler.js";
 import {Woelfling, Jupfi} from "./data/entities/person.js";
