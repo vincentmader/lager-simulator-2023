@@ -1,27 +1,4 @@
-export class Vector {
-
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    
-    mult(other) {
-        return new Vector(this.x * other.x, this.y * other.y);
-    }
-
-    add(other) {
-        return new Vector(this.x + other.x, this.y * other.y);
-    }
-}
-
-
-export class Position extends Vector {
-
-    constructor(x, y) {
-        super(x, y);
-    }
-}
-
+import {Position} from "./math/vector.js";
 
 export class CoordinateTransformer {
 
@@ -52,6 +29,7 @@ export class CoordinateTransformer {
         let p_max = this.canvas_width;
         let q_max = this.canvas_height;
         // TODO Check if it shouldn't be p_max * window_scale_factor (inversion of canvas_to_world-formula?)
+        // let window_scale_factor = 0.000765 * window.innerWidth;
         let x = p_max * (zoom_level * position.x - x_min) / (x_max - x_min);
         let y = q_max * (zoom_level * position.y - y_max) / (y_min - y_max);
         return new Position(x, y);
@@ -64,7 +42,7 @@ export class CoordinateTransformer {
         let y_max = this.world_width / 2;
         let p_max = this.canvas_width;
         let q_max = this.canvas_height;
-        let window_scale_factor = 0.000765 * window.innerWidth;
+        let window_scale_factor = 0.000765 * window.innerWidth; // lollinger
         let x = (x_min + position.x / (p_max * window_scale_factor) * (x_max - x_min)) / zoom_level;
         let y = (y_max + position.y / (q_max * window_scale_factor) * (y_min - y_max)) / zoom_level;
         return new Position(x, y);

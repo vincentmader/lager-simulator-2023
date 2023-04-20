@@ -1,5 +1,5 @@
-import {Lagerfeuer} from "./structures.js";
-import {Position} from "./position.js";
+import {Lagerfeuer} from "./data/entities/structures.js";
+import {Position} from "./math/vector.js";
 import {Rectangle} from "./rectangle.js";
 
 export const dt = 1; // TODO Make dynamic.
