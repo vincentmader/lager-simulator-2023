@@ -20,8 +20,32 @@ export class Woelfling extends Person {
 export class Jupfi extends Person {
 
     constructor(position) {
-        super(position, 1);
+        super(position, 0.75);
         this.color = "blue";
+    }
+}
+
+export class Pfadi extends Person {
+
+    constructor(position) {
+        super(position, 1);
+        this.color = "green";
+    }
+}
+
+export class Rover extends Person {
+
+    constructor(position) {
+        super(position, 1.25);
+        this.color = "green";
+    }
+}
+
+export class Leiter extends Person {
+
+    constructor(position) {
+        super(position, 1.5);
+        this.color = "white";
     }
 }
 
