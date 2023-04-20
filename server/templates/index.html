@@ -6,8 +6,15 @@
 
 <body>
     <h2>Lager-Simulator 2023</h2>
+
     <canvas id="canvas-0"></canvas id="canvas-0">
     <script src="{{ url_for('static', filename='js/main.js') }}" type="module"></script>
+
+    <form id="zoom_form">
+        <!-- TODO: Make background-color something other than black. -->
+        <input type="range" id="zoom_slider" name="zoom">
+        <label for="zoom">Drag this slider to change the zoom level.</label>
+    </form>
 </body>
 
 </html>

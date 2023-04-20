@@ -2,6 +2,7 @@
     --MARGIN: 4%;
     margin: 0px;
     padding: 0px;
+    color: white;
 }
 
 body {
@@ -16,9 +17,19 @@ h2 {
 }
 
 canvas {
-    /* background-color: #004400; */
     width: calc(100% - 2 * var(--MARGIN));
     margin: var(--MARGIN);
     border: 1px solid white;
     border-radius: 20px;
+}
+
+#zoom_form {
+    width: calc(100% - 2 * var(--MARGIN));
+    margin-left: var(--MARGIN);
+    margin-right: var(--MARGIN);
+    text-align: center;
+}
+
+input[type="range"] {
+    width: 100%;
 }
