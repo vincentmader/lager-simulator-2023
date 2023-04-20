@@ -1,6 +1,6 @@
-import {MoveTask, IdleTask} from "./tasks.js";
+import {MoveTask, IdleTask} from "../data/tasks.js";
 import {CollisionDetector} from "./collision.js"
-import {Position} from "./position.js";
+import {Position} from "../math/vector.js";
 
 
 var dt = 1; // TODO

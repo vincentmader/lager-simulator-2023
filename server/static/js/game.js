@@ -12,7 +12,7 @@ import {run_tests} from "./tests/main.js";
 export class Game {
 
     constructor() {
-        let person_1 = new Woelfling(new Position(-5, 5));
+        let person_1 = new Woelfling(new Position(-6, 6));
         let person_2 = new Jupfi(new Position(-7, 7));
         let people = [person_1, person_2];
 

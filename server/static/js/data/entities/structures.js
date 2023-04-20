@@ -1,4 +1,4 @@
-import {Rectangle} from "./rectangle.js";
+import {Rectangle} from "../../math/rectangle.js";
 
 export class Entity {
     constructor(position, bounding_box_dims) {
@@ -51,6 +51,6 @@ export class LeiterJurte extends Zelt {
 
 export class Lagerfeuer extends Entity {
     constructor(position) {
-        super(position, [3, 3]);
+        super(position, [5, 5]);
     }
 }
