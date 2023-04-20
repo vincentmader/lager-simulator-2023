@@ -45,10 +45,10 @@ export class Renderer {
             for (let i = 0; i < 25; i++) {
                 let offset_x = this.gaussian_random();
                 let offset_y = Math.abs(this.gaussian_random(0, 3));
+                let radius = Math.max(3, (10 - offset_y) * 0.5 + Math.random()) * scale * ZOOM_LEVEL;
+                let color = "rgb(255, " + Math.min(220, (20 * scale * offset_y) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
                 let part_y = y - offset_y * scale;
-                let radius = Math.max(3, (10 - offset_y) * 0.1 + Math.random()) * scale * ZOOM_LEVEL;
-                let color = "rgb(255, " + Math.min(220, (scale * offset_y) ** 1.5 + Math.abs(scale * offset_x ** 3)) + ", 0)";
                 this.fire_cache.push([part_x, part_y, radius, color]);
             }
         }
@@ -61,7 +61,7 @@ export class Renderer {
             // TODO ^ Use position object already earlier in this function. (?)
             this.draw_circle(position, radius, color);
         }
-        let wood_size = 10 * ZOOM_LEVEL;
+        let wood_size = 12 * ZOOM_LEVEL;
         this.draw_rectangle_fast(
             new Position(x, y),
             wood_size,
@@ -125,7 +125,7 @@ export class Renderer {
 
     display() {
         this.clear_screen();
-        this.draw_floor_grid();
+        // this.draw_floor_grid();
         this.world.people.forEach((person) => {
             this.draw_person(person.position, person.color)
         });
