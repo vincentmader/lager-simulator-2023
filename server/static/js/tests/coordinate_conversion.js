@@ -1,7 +1,7 @@
 import {Position} from "../math/vector.js";
 
-export const test_coordinate_conversions = (renderer) => {
-    let coordinate_transformer = renderer.coordinate_transformer;
+export const test_coordinate_conversions = (io) => {
+    let coordinate_transformer = io.renderer.coordinate_transformer;
     let zoom_level = 1;
 
     test_conversion_between_world_and_canvas_coords(coordinate_transformer, zoom_level);
