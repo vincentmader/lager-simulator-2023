@@ -1,6 +1,6 @@
 import {Lagerfeuer} from "./data/entities/structures.js";
 import {Position} from "./math/vector.js";
-import {Rectangle} from "./rectangle.js";
+import {Rectangle} from "./math/rectangle.js";
 
 export const dt = 1; // TODO Make dynamic.
 
