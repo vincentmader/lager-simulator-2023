@@ -1,16 +1,19 @@
 export class Vector {
+
     constructor(x, y) {
         this.x = x;
         this.y = y;
     }
 }
 export class Position extends Vector {
+
     constructor(x, y) {
         super(x, y);
     }
 }
 
 export class CoordinateTransformer {
+
     constructor(world, canvas) {
         this.world_width = world.dimensions[0];
         this.world_height = world.dimensions[1];

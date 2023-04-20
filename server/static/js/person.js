@@ -1,8 +1,8 @@
-import {dt} from "./world.js";
 import {Entity} from "./structures.js"
 import {TaskList} from "./task_list.js";
 
 class Person extends Entity {
+
     constructor(position, speed) {
         super(position);
         this.speed = speed;
@@ -11,12 +11,14 @@ class Person extends Entity {
     }
 }
 export class Woelfling extends Person {
+
     constructor(position) {
         super(position, 1);
         this.color = "orange";
     }
 }
 export class Jupfi extends Person {
+
     constructor(position) {
         super(position, 2);
         this.color = "blue";

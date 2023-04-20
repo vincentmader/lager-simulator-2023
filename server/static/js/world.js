@@ -5,6 +5,7 @@ import {Rectangle} from "./rectangle.js";
 export const dt = 1; // TODO Make dynamic.
 
 export class World {
+
     constructor(people) {
         this.people = people
         this.fire = new Lagerfeuer(new Position(0, 0));
@@ -15,9 +16,11 @@ export class World {
 }
 
 export class FloorGrid { // TODO Move definition elsewhere?
+
     constructor() {
         this.rectangles = this._rectangles();
     }
+
     _rectangles() {
         let N = 100;
         let W = 1,

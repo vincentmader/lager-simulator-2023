@@ -11,6 +11,7 @@ class InputHandler {
 
 
 export class LagerInputHandler extends InputHandler {
+
     constructor(world, canvas) {
         super(world, canvas);
     }
@@ -33,6 +34,7 @@ export class LagerInputHandler extends InputHandler {
 
 
 export class UeberfaellerInputHandler extends InputHandler {
+
     constructor(world, canvas) {
         super(world, canvas);
     }

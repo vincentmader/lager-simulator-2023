@@ -1,6 +1,7 @@
 const RESOLUTION_FACTOR = 4;
 
 export class Canvas {
+
     constructor() {
         this.element = document.getElementById("canvas-0");
         this.ctx = this.element.getContext('2d');

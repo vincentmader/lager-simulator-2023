@@ -1,10 +1,12 @@
 import {Position} from "./position.js";
 
 export class Rectangle {
+
     constructor(position, dimensions) {
         this.position = position;
         this.dimensions = dimensions;
     }
+
     corners() {
         let x = this.position.x,
             y = this.position.y;
