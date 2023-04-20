@@ -1,7 +1,7 @@
-import {Position} from "./math/vector.js";
-import {CoordinateTransformer} from "./math/coordinate_transformer.js";
-import {Slider} from "./inputs.js";
-import {gaussian_random} from "./math/utils.js";
+import {Position} from "../math/vector.js";
+import {CoordinateTransformer} from "../math/coordinate_transformer.js";
+import {Slider} from "../inputs.js";
+import {gaussian_random} from "../math/utils.js";
 
 var ZOOM_LEVEL = 1; // TODO Move definition of zoom-level elsewhere.
 const setup_sliders = () => {
