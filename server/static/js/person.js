@@ -13,7 +13,7 @@ class Person extends Entity {
 export class Woelfling extends Person {
 
     constructor(position) {
-        super(position, 0.5); // TODO Test: Set this to 0.1 -> Weird behavior.
+        super(position, 0.1);
         this.color = "orange";
     }
 }
