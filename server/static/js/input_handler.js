@@ -22,8 +22,12 @@ export class LagerInputHandler extends InputHandler {
 
     init_movement_listener() {
         this.canvas.element.addEventListener('click', () => {
-            var x = event.pageX - this.canvas.elementLeft,
-                y = event.pageY - this.canvas.elementTop;
+            const rect = this.canvas.element.getBoundingClientRect()
+            let x = event.clientX - rect.left;
+            let y = event.clientY - rect.top;
+
+            x = 1.75 * x;
+            y = 1.75 * y;
 
             let canvas_coords = new Position(x, y);
             console.log("Canvas Coordinates: x=" + canvas_coords.x + ", y=" + canvas_coords.y);
