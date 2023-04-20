@@ -107,3 +107,6 @@ _TODOs_:
 - Sprites & Animation
 - Zoom
 - IO Class (?)
+- Pan (drag-&-drop und Pfeiltasten)
+- Feuer (Wind ausmachen)
+- Zelt malen
