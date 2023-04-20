@@ -79,7 +79,7 @@ export class Renderer {
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
-        this.canvas.ctx.arc(position.x, position.y, r, 0, 2 * Math.PI);
+        this.canvas.ctx.arc(position.x-r/2, position.y-r/2, r, 0, 2 * Math.PI);
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
     }

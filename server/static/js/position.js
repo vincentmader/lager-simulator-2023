@@ -53,7 +53,7 @@ export class CoordinateTransformer {
         let y_max = this.world_width / 2;
         let p_max = this.canvas_width;
         let q_max = this.canvas_height;
-        let window_scale_factor = 0.000771 * window.innerWidth;
+        let window_scale_factor = 0.000765 * window.innerWidth;
         let x = (x_min + position.x / (p_max * window_scale_factor) * (x_max - x_min)) / zoom_level;
         let y = (y_max + position.y / (q_max * window_scale_factor) * (y_min - y_max)) / zoom_level;
         return new Position(x, y);
