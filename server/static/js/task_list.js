@@ -18,7 +18,7 @@ export class TaskExecutor {
         let distance = Math.pow(Math.pow(dx, 2) + Math.pow(dy, 2), 0.5)
         let ux = dx / distance;
         let uy = dy / distance;
-        if (distance > person.speed * 1.5 * dt) {
+        if (distance > person.speed*dt) {
             person.position.x += person.speed * ux * dt;
             person.position.y += person.speed * uy * dt;
             return true;
