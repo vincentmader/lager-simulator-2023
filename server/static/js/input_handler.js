@@ -22,19 +22,18 @@ export class LagerInputHandler extends InputHandler {
 
     init_movement_listener() {
         this.canvas.element.addEventListener('click', () => {
-            const rect = this.canvas.element.getBoundingClientRect()
+            const rect = this.canvas.element.getBoundingClientRect();
             let x = event.clientX - rect.left;
             let y = event.clientY - rect.top;
 
-            x = 1.75 * x;
-            y = 1.75 * y;
+            let window_scale_factor = 0.000771 * window.innerWidth;
+            x /= window_scale_factor;
+            y /= window_scale_factor;
 
             let canvas_coords = new Position(x, y);
-            console.log("Canvas Coordinates:  x=" + Math.round(100 * canvas_coords.x) / 100 + ", y=" + Math.round(100 * canvas_coords.y) / 100);
 
             let world_coords = this.coordinate_transformer.canvas_to_world(canvas_coords, zoom_level)
             world_coords = this.coordinate_transformer.isometric_to_cartesian(world_coords);
-            console.log("World Coordinates:  x=" + Math.round(100 * world_coords.x) / 100 + ", y=" + Math.round(100 * world_coords.y) / 100);
 
             this.world.people[0].task_list.push(new MoveTask(world_coords));
         }, false);
