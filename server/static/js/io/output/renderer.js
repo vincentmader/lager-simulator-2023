@@ -1,18 +1,6 @@
 import {Position} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
-import {Slider} from "../input/inputs.js";
 import {gaussian_random} from "../../math/utils.js";
-
-var ZOOM_LEVEL = 1; // TODO Move definition of zoom-level elsewhere.
-const setup_sliders = () => {
-    var oninput = (value) => {
-        ZOOM_LEVEL = value;
-    };
-    let slider = new Slider("zoom_slider", {oninput: oninput, min: 1, max: 21, step: 0.01, value: ZOOM_LEVEL});
-}
-setup_sliders();
-// NOTE The above is here only temporarily for testing. 
-// TODO Move definition of sliders elsewhere.
 
 
 export class Renderer {
@@ -29,7 +17,7 @@ export class Renderer {
         let position = person.position;
         let color = person.color;
 
-        this.draw_circle(position, 5 * ZOOM_LEVEL, color);
+        this.draw_circle(position, 5 * this.canvas.zoom_level, color);
 
         // TODO Load sprite.
         // let x = position.x,
@@ -52,7 +40,7 @@ export class Renderer {
             for (let i = 0; i < 25; i++) {
                 let offset_x = gaussian_random();
                 let offset_y = Math.abs(gaussian_random(0, 3));
-                let radius = Math.max(3, (10 - offset_y) * 0.5 + Math.random()) * scale * ZOOM_LEVEL;
+                let radius = Math.max(3, (10 - offset_y) * 0.5 + Math.random()) * scale * this.canvas.zoom_level;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_y) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
                 let part_y = y - offset_y * scale;
@@ -68,7 +56,7 @@ export class Renderer {
             // TODO ^ Use position object already earlier in this function. (?)
             this.draw_circle(position, radius, color);
         }
-        let wood_size = 12 * ZOOM_LEVEL;
+        let wood_size = 12 * this.canvas.zoom_level;
         this.draw_rectangle_fast(
             new Position(x, y),
             wood_size,
@@ -81,7 +69,7 @@ export class Renderer {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         // TODO This conversion here leads to the fire blowing off at an angle.
         //      -> Fire particle coords should not be given as (x, y), but as (x, y, z) instead!
-        position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
+        position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
@@ -92,7 +80,7 @@ export class Renderer {
 
     draw_rectangle_fast(position, width, height, color) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
-        position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
+        position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
@@ -103,7 +91,7 @@ export class Renderer {
 
     draw_text(position, text_content, {font = "15px sans-serif", color = "white"}) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
-        position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
+        position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         this.canvas.ctx.font = font;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.fillText(text_content, position.x, position.y);
@@ -117,7 +105,7 @@ export class Renderer {
             return this.coordinate_transformer.cartesian_to_isometric(c);
         });
         corners = corners.map((c) => {
-            return this.coordinate_transformer.world_to_canvas(c, ZOOM_LEVEL);
+            return this.coordinate_transformer.world_to_canvas(c, this.canvas.zoom_level);
         });
         for (let idx = 0; idx < corners.length; idx++) {
             let from = corners[idx];
