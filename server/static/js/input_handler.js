@@ -30,7 +30,7 @@ export class LagerInputHandler extends InputHandler {
             y = 1.75 * y;
 
             let canvas_coords = new Position(x, y);
-            console.log("Canvas Coordinates: x=" + canvas_coords.x + ", y=" + canvas_coords.y);
+            console.log("Canvas Coordinates:  x=" + Math.round(100 * canvas_coords.x) / 100 + ", y=" + Math.round(100 * canvas_coords.y) / 100);
 
             let world_coords = this.coordinate_transformer.canvas_to_world(canvas_coords, zoom_level)
             world_coords = this.coordinate_transformer.isometric_to_cartesian(world_coords);
