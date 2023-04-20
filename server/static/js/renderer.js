@@ -1,6 +1,16 @@
 import {CoordinateTransformer, Position} from "./position.js";
+import {Slider} from "./inputs.js";
 
-const ZOOM_LEVEL = 1; // TODO Fix influence on transformation.
+var ZOOM_LEVEL = 11; // TODO Move definition of zoom-level elsewhere.
+const setup_sliders = () => {
+    var oninput = (value) => {
+        ZOOM_LEVEL = value;
+    };
+    let slider = new Slider("zoom_slider", {oninput: oninput, min: 1, max: 21, value: ZOOM_LEVEL});
+}
+setup_sliders();
+// NOTE The above is here only temporarily for testing. 
+// TODO Move definition of sliders elsewhere.
 
 export class Renderer {
 
@@ -28,7 +38,7 @@ export class Renderer {
         let x = position.x,
             y = position.y;
         // TODO Use position object instead of x & y. (?)
-        let scale = 1;
+        let scale = 0.2;
         if (Date.now() > this.environment_clock + 70) {
             this.environment_clock = Date.now()
             this.fire_cache = [];
@@ -37,7 +47,7 @@ export class Renderer {
                 let offset_y = Math.abs(this.gaussian_random(0, 3));
                 let part_x = x + offset_x * scale;
                 let part_y = y - offset_y * scale;
-                let radius = Math.max(3, (10 - offset_y) * 0.1 * scale + Math.random())
+                let radius = Math.max(3, (10 - offset_y) * 0.1 + Math.random()) * scale * ZOOM_LEVEL;
                 let color = "rgb(255, " + Math.min(220, (scale * offset_y) ** 1.5 + Math.abs(scale * offset_x ** 3)) + ", 0)";
                 this.fire_cache.push([part_x, part_y, radius, color]);
             }
@@ -51,11 +61,11 @@ export class Renderer {
             // TODO ^ Use position object already earlier in this function. (?)
             this.draw_circle(position, radius, color);
         }
-        let wood_size = 60;
+        let wood_size = 10 * ZOOM_LEVEL;
         this.draw_rectangle_fast(
             new Position(x, y),
-            wood_size * scale,
-            wood_size * scale * 0.2,
+            wood_size,
+            wood_size * 0.2,
             "rgb(120, 51, 0)"
         );
     }
