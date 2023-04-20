@@ -25,8 +25,20 @@ export class Renderer {
         this.coordinate_transformer = new CoordinateTransformer(world, canvas);
     }
 
-    draw_person(position, color) {
+    draw_person(person) {
+        let position = person.position;
+        let color = person.color;
+
         this.draw_circle(position, 5, color);
+
+        // TODO Load sprite.
+        // let x = position.x,
+        //     y = position.y;
+        // let w = 10, // TODO Define size.
+        //     h = 10;
+        // let image = new Image(w, h);
+        // image.src = "/static/img/sprite.png";
+        // this.canvas.ctx.drawImage(image, x, y, w, h);
     }
 
     draw_fire(position) {
@@ -116,7 +128,7 @@ export class Renderer {
             this.canvas.ctx.lineTo(to.x, to.y);
         }
         this.canvas.ctx.stroke();
-    };
+    }
 
     draw_floor_grid() {
         let color = "#444444";
@@ -146,7 +158,7 @@ export class Renderer {
         // this.draw_labeled_positions();
         // this.draw_floor_grid();
         this.world.people.forEach((person) => {
-            this.draw_person(person.position, person.color)
+            this.draw_person(person);
         });
         this.draw_fire(this.world.fire.position)
     }
