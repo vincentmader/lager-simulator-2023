@@ -101,3 +101,9 @@ _Spiel-Setup_:
 - die Zelte werden platziert
 - feste Zahl an Teilnehmern / Kindern / Leuten
   - am Anfang (fast) nur Woelflinge
+
+_TODOs_:
+- 3D-Vektor
+- Sprites & Animation
+- Zoom
+- IO Class (?)
