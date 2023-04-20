@@ -79,7 +79,7 @@ export class Renderer {
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
-        this.canvas.ctx.arc(position.x-r/2, position.y-r/2, r, 0, 2 * Math.PI);
+        this.canvas.ctx.arc(position.x - r / 2, position.y - r / 2, r, 0, 2 * Math.PI);
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
     }
@@ -150,7 +150,7 @@ export class Renderer {
     display() {
         this.clear_screen();
         // this.draw_labeled_positions();
-        // this.draw_floor_grid();
+        this.draw_floor_grid();
         this.world.people.forEach((person) => {
             this.draw_person(person.position, person.color)
         });
