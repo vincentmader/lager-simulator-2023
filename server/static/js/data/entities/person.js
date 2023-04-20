@@ -37,7 +37,7 @@ export class Rover extends Person {
 
     constructor(position) {
         super(position, 1.25);
-        this.color = "green";
+        this.color = "red";
     }
 }
 
