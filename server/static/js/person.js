@@ -13,7 +13,7 @@ class Person extends Entity {
 export class Woelfling extends Person {
 
     constructor(position) {
-        super(position, 0.1);
+        super(position, 0.5);
         this.color = "orange";
     }
 }
