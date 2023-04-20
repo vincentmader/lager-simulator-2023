@@ -6,9 +6,6 @@ export class Canvas {
         this.element = document.getElementById("canvas-0");
         this.ctx = this.element.getContext('2d');
 
-        this.elementLeft = this.element.offsetLeft + this.element.clientLeft;
-        this.elementTop = this.element.offsetTop + this.element.clientTop;
-
         let W_internal = this.element.width;
         let H_internal = W_internal;
 

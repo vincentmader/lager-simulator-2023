@@ -1,16 +1,17 @@
 import {CoordinateTransformer, Position} from "./position.js";
 import {Slider} from "./inputs.js";
 
-var ZOOM_LEVEL = 11; // TODO Move definition of zoom-level elsewhere.
+var ZOOM_LEVEL = 1; // TODO Move definition of zoom-level elsewhere.
 const setup_sliders = () => {
     var oninput = (value) => {
         ZOOM_LEVEL = value;
     };
-    let slider = new Slider("zoom_slider", {oninput: oninput, min: 1, max: 21, value: ZOOM_LEVEL});
+    let slider = new Slider("zoom_slider", {oninput: oninput, min: 1, max: 21, step: 0.01, value: ZOOM_LEVEL});
 }
 setup_sliders();
 // NOTE The above is here only temporarily for testing. 
 // TODO Move definition of sliders elsewhere.
+
 
 export class Renderer {
 
@@ -71,16 +72,20 @@ export class Renderer {
     }
 
     draw_circle(position, r, color) {
+        position = this.coordinate_transformer.cartesian_to_isometric(position);
+        // TODO This conversion here leads to the fire blowing off at an angle.
+        //      -> Fire particle coords should not be given as (x, y), but as (x, y, z) instead!
         position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
-        this.canvas.ctx.arc(position.x, position.y, r, 0, 2 * Math.PI);
+        this.canvas.ctx.arc(position.x - r / 2, position.y - r / 2, r, 0, 2 * Math.PI);
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
     }
 
     draw_rectangle_fast(position, width, height, color) {
+        position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
@@ -88,6 +93,14 @@ export class Renderer {
         this.canvas.ctx.rect(position.x - width / 2, position.y - height / 2, width, height);
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
+    }
+
+    draw_text(position, text_content, {font = "15px sans-serif", color = "white"}) {
+        position = this.coordinate_transformer.cartesian_to_isometric(position);
+        position = this.coordinate_transformer.world_to_canvas(position, ZOOM_LEVEL);
+        this.canvas.ctx.font = font;
+        this.canvas.ctx.fillStyle = color;
+        this.canvas.ctx.fillText(text_content, position.x, position.y);
     }
 
     draw_rectangle(rect, color) { // TODO Use different format for arguments?
@@ -119,12 +132,24 @@ export class Renderer {
         });
     }
 
+    draw_labeled_positions() {
+        let floor_grid = this.world.floor_grid;
+        let rectangles = floor_grid.rectangles;
+        rectangles.forEach((rect) => {
+            let position = rect.position;
+            this.draw_circle(position, 1, "#444444");
+            let text_content = " (" + position.x + "," + position.y + ")";
+            this.draw_text(position, text_content, {color: "#444444"});
+        });
+    }
+
     clear_screen() {
         this.canvas.ctx.clearRect(0, 0, this.canvas.W, this.canvas.H);
     }
 
     display() {
         this.clear_screen();
+        // this.draw_labeled_positions();
         // this.draw_floor_grid();
         this.world.people.forEach((person) => {
             this.draw_person(person.position, person.color)

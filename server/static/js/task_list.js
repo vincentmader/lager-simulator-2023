@@ -1,4 +1,6 @@
 import {MoveTask, IdleTask} from "./tasks.js";
+import {CollisionDetector} from "./collision.js"
+import {Position} from "./position.js";
 
 
 var dt = 1; // TODO
@@ -9,26 +11,47 @@ export class TaskExecutor {
 
     constructor(world) {
         this.world = world;
+        this.collision_detector = new CollisionDetector(this.world);
     }
 
     execute_move(task) {
         let person = task.owner
-        let directionX = task.target_position.x - person.position.x; // TODO Define `Vector` class.
-        let directionY = task.target_position.y - person.position.y;
-        let distance = Math.sqrt(Math.pow(directionX, 2) + Math.pow(directionY, 2))
-        directionX /= distance;
-        directionY /= distance;
-        person.position.x += person.speed * directionX * dt;
-        person.position.y += person.speed * directionY * dt;
-        return distance > 1;
+        let dx = task.target_position.x - person.position.x; // TODO Define `Vector` class.
+        let dy = task.target_position.y - person.position.y;
+        let distance = Math.pow(Math.pow(dx, 2) + Math.pow(dy, 2), 0.5)
+        let ux = dx / distance;
+        let uy = dy / distance;
+        let future_position = new Position(person.position.x + person.speed * ux * dt,
+            person.position.y + person.speed * uy * dt);
+
+        let collision = false;
+        this.collision_detector.get_neighbouring_cells(person.position).forEach((cell) => {
+            cell._entities.forEach((neighbour) => {
+                if (neighbour.bounding_box !== undefined
+                    && neighbour.bounding_box.contains(future_position)) {
+                    collision = true;
+                    return;
+                }
+            });
+            if (collision) {
+                return;
+            }
+        });
+
+        if (!collision & distance >= person.speed * dt) {
+            person.position = future_position;
+            this.collision_detector.update_cells(person);
+            return true;
+        }
+        return false;
     }
 
     execute(task) {
         switch (task.constructor) {
             case IdleTask:
-                return true
+                return true;
             case MoveTask:
-                return this.execute_move(task)
+                return this.execute_move(task);
         }
     }
 }
