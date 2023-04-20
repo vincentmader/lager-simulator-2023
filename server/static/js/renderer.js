@@ -7,7 +7,7 @@ const setup_sliders = () => {
         console.log("zoom level: " + ZOOM_LEVEL + " -> " + value);
         ZOOM_LEVEL = value;
     };
-    let slider = new Slider("zoom_slider", {oninput: oninput, min: 1, max: 21, value: ZOOM_LEVEL});
+    let slider = new Slider("zoom_slider", {oninput: oninput, min: 1, max: 21, step: 0.01, value: ZOOM_LEVEL});
 }
 setup_sliders();
 // NOTE The above is here only temporarily for testing. 
@@ -148,7 +148,7 @@ export class Renderer {
     }
 
     display() {
-        // this.clear_screen();
+        this.clear_screen();
         // this.draw_labeled_positions()
         this.draw_floor_grid();
         this.world.people.forEach((person) => {
