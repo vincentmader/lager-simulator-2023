@@ -1,10 +1,6 @@
-import {Position} from "./position.js";
+import {Position} from "../math/vector.js";
 
-export const run_tests = (renderer) => {
-    test_coordinate_conversions(renderer);
-};
-
-const test_coordinate_conversions = (renderer) => {
+export const test_coordinate_conversions = (renderer) => {
     let coordinate_transformer = renderer.coordinate_transformer;
     let zoom_level = 1;
 

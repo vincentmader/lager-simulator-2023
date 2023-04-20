@@ -1,5 +1,7 @@
-import {CoordinateTransformer, Position} from "./position.js";
-import {Slider} from "./inputs.js";
+import {Position} from "../math/vector.js";
+import {CoordinateTransformer} from "../math/coordinate_transformer.js";
+import {Slider} from "../inputs/inputs.js";
+import {gaussian_random} from "../math/utils.js";
 
 var ZOOM_LEVEL = 1; // TODO Move definition of zoom-level elsewhere.
 const setup_sliders = () => {
@@ -23,14 +25,6 @@ export class Renderer {
         this.coordinate_transformer = new CoordinateTransformer(world, canvas);
     }
 
-    gaussian_random(mean = 0, stdev = 1) { // TODO Move elsewhere.
-        let u = 1 - Math.random(); // Converting [0,1) to (0,1]
-        let v = Math.random();
-        let z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-        // Transform to the desired mean and standard deviation:
-        return z * stdev + mean;
-    }
-
     draw_person(position, color) {
         this.draw_circle(position, 5, color);
     }
@@ -44,8 +38,8 @@ export class Renderer {
             this.environment_clock = Date.now()
             this.fire_cache = [];
             for (let i = 0; i < 25; i++) {
-                let offset_x = this.gaussian_random();
-                let offset_y = Math.abs(this.gaussian_random(0, 3));
+                let offset_x = gaussian_random();
+                let offset_y = Math.abs(gaussian_random(0, 3));
                 let radius = Math.max(3, (10 - offset_y) * 0.5 + Math.random()) * scale * ZOOM_LEVEL;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_y) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;

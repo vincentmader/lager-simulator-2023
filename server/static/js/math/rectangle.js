@@ -1,4 +1,4 @@
-import {Position} from "./position.js";
+import {Position} from "./vector.js";
 
 export class Rectangle {
 
