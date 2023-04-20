@@ -1,7 +1,7 @@
 import {CoordinateTransformer, Position} from "./position.js";
 import {create_rectangles} from "./test_isometric.js";
 
-const ZOOM_LEVEL = 1;
+const ZOOM_LEVEL = 1; // TODO Fix influence on transformation.
 
 export class Renderer {
 
@@ -13,7 +13,7 @@ export class Renderer {
         this.coordinate_transformer = new CoordinateTransformer(world, canvas);
     }
 
-    gaussian_random(mean = 0, stdev = 1) {
+    gaussian_random(mean = 0, stdev = 1) { // TODO Move elsewhere.
         let u = 1 - Math.random(); // Converting [0,1) to (0,1]
         let v = Math.random();
         let z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
@@ -29,14 +29,14 @@ export class Renderer {
         let x = position.x,
             y = position.y;
         // TODO Use position object instead of x & y. (?)
-        let scale = 10
+        let scale = 1;
         if (Date.now() > this.environment_clock + 70) {
             this.environment_clock = Date.now()
             this.fire_cache = [];
             for (let i = 0; i < 25; i++) {
                 let offset_x = this.gaussian_random();
-                let part_x = x + offset_x * scale;
                 let offset_y = Math.abs(this.gaussian_random(0, 3));
+                let part_x = x + offset_x * scale;
                 let part_y = y - offset_y * scale;
                 let radius = Math.max(3, (10 - offset_y) * 0.1 * scale + Math.random())
                 let color = "rgb(255, " + Math.min(220, (scale * offset_y) ** 1.5 + Math.abs(scale * offset_x ** 3)) + ", 0)";
@@ -48,13 +48,13 @@ export class Renderer {
                 part_y = this.fire_cache[i][1],
                 radius = this.fire_cache[i][2],
                 color = this.fire_cache[i][3];
-            let position = new Position(part_x, part_y);
+            let position = new Position(part_x, -part_y);
             // TODO ^ Use position object already earlier in this function. (?)
             this.draw_circle(position, radius, color);
         }
-        let wood_size = 6
+        let wood_size = 60;
         this.draw_rectangle_fast(
-            new Position(x - wood_size * scale / 2, y),
+            new Position(x, y),
             wood_size * scale,
             wood_size * scale * 0.2,
             "rgb(120, 51, 0)"
@@ -76,17 +76,20 @@ export class Renderer {
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
         this.canvas.ctx.beginPath();
-        this.canvas.ctx.rect(position.x, position.y, width, height);
+        this.canvas.ctx.rect(position.x - width / 2, position.y - height / 2, width, height);
         this.canvas.ctx.stroke();
         this.canvas.ctx.fill();
     }
 
-    draw_rectangle(rect) { // TODO Use different format for arguments?
-        this.canvas.ctx.strokeStyle = "white";
+    draw_rectangle(rect, color) { // TODO Use different format for arguments?
+        this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.beginPath();
         let corners = rect.corners();
         corners = corners.map((c) => {
             return this.coordinate_transformer.cartesian_to_isometric(c);
+        });
+        corners = corners.map((c) => {
+            return this.coordinate_transformer.world_to_canvas(c, ZOOM_LEVEL);
         });
         for (let idx = 0; idx < corners.length; idx++) {
             let from = corners[idx];
@@ -100,9 +103,10 @@ export class Renderer {
     };
 
     draw_floor_grid() {
-        let rectangles = create_rectangles();
+        let color = "#444444";
+        let rectangles = create_rectangles(this.world);
         rectangles.forEach((rect) => {
-            this.draw_rectangle(rect);
+            this.draw_rectangle(rect, color);
         });
     }
 

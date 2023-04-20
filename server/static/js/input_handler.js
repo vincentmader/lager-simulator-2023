@@ -21,6 +21,7 @@ export class LagerInputHandler extends InputHandler {
                 y = event.pageY - this.canvas.elementTop;
             let position = new Position(x, y);
             this.world.people[0].task_list.push(new MoveTask(position));
+            console.log(x, y);
         }, false);
         return this;
     }
