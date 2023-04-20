@@ -1,4 +1,4 @@
-import {MoveTask, IdleTask} from "./tasks.js";
+import {MoveTask, IdleTask} from "./data/tasks.js";
 
 
 var dt = 1; // TODO

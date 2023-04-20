@@ -1,4 +1,4 @@
-import {MoveTask} from "./tasks.js";
+import {MoveTask} from "./data/tasks.js";
 import {Position} from "./math/vector.js";
 import {CoordinateTransformer} from "./math/coordinate_transformer.js";
 
