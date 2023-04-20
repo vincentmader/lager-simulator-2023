@@ -12,7 +12,6 @@ class InputHandler {
 }
 
 
-
 export class LagerInputHandler extends InputHandler {
 
     constructor(world, canvas) {
