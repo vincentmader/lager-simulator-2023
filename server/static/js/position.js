@@ -44,8 +44,8 @@ export class CoordinateTransformer {
         let y_max = +H / 2;
         let p_max = this.canvas_width;
         let q_max = this.canvas_height;
-        x = (zoom_level * p_max) * (x - x_min) / (x_max - x_min);
-        y = (zoom_level * q_max) * (y - y_max) / (y_min - y_max);
+        x = p_max * (zoom_level * x - x_min) / (x_max - x_min);
+        y = q_max * (zoom_level * y - y_max) / (y_min - y_max);
         return new Position(x, y);
     }
 
@@ -60,8 +60,8 @@ export class CoordinateTransformer {
         let y_max = +H / 2;
         let p_max = this.canvas_width;
         let q_max = this.canvas_height;
-        x = x_min + x / p_max * (x_max - x_min) / zoom_level;
-        y = y_max + y / q_max * (y_min - y_max) / zoom_level;
+        x = (x_min + x / p_max * (x_max - x_min)) / zoom_level;
+        y = (y_max + y / q_max * (y_min - y_max)) / zoom_level;
         return new Position(x, y);
     }
 }
