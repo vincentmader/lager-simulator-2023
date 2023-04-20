@@ -5,6 +5,7 @@ export class FloorGrid { // TODO Move definition elsewhere?
 
     constructor() {
         this.rectangles = this._rectangles();
+        this.boundary = new Rectangle(new Position(0, 0), [100, 100]);
     }
 
     _rectangles() {

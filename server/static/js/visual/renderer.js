@@ -112,7 +112,7 @@ export class Renderer {
     draw_rectangle(rect, color) { // TODO Use different format for arguments?
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.beginPath();
-        let corners = rect.corners();
+        let corners = rect.corners;
         corners = corners.map((c) => {
             return this.coordinate_transformer.cartesian_to_isometric(c);
         });
