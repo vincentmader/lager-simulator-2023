@@ -13,14 +13,14 @@ class Person extends Entity {
 export class Woelfling extends Person {
 
     constructor(position) {
-        super(position, 1);
+        super(position, 0.5); // TODO Test: Set this to 0.1 -> Weird behavior.
         this.color = "orange";
     }
 }
 export class Jupfi extends Person {
 
     constructor(position) {
-        super(position, 2);
+        super(position, 1);
         this.color = "blue";
     }
 }
