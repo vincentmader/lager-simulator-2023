@@ -3,6 +3,7 @@
     margin: 0px;
     padding: 0px;
     color: white;
+    font-family: "Arial Black";
 }
 
 body {
@@ -12,7 +13,6 @@ body {
 h2 {
     color: white;
     text-align: center;
-    font-family: 'Trebuchet MS';
     margin-top: var(--MARGIN);
 }
 
