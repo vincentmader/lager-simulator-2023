@@ -34,34 +34,26 @@ export class CoordinateTransformer {
     }
 
     world_to_canvas(position, zoom_level) {
-        let x = position.x;
-        let y = position.y;
-        let W = this.world_width;
-        let H = this.world_height;
-        let x_min = -W / 2;
-        let x_max = +W / 2;
-        let y_min = -H / 2;
-        let y_max = +H / 2;
+        let x_min = -this.world_width / 2;
+        let y_min = -this.world_height / 2;
+        let x_max = this.world_width / 2;
+        let y_max = this.world_height / 2;
         let p_max = this.canvas_width;
         let q_max = this.canvas_height;
-        x = p_max * (zoom_level * x - x_min) / (x_max - x_min);
-        y = q_max * (zoom_level * y - y_max) / (y_min - y_max);
+        let x = p_max * (zoom_level * position.x - x_min) / (x_max - x_min);
+        let y = q_max * (zoom_level * position.y - y_max) / (y_min - y_max);
         return new Position(x, y);
     }
 
     canvas_to_world(position, zoom_level) {
-        let x = position.x;
-        let y = position.y;
-        let W = this.world_width;
-        let H = this.world_height;
-        let x_min = -W / 2;
-        let x_max = +W / 2;
-        let y_min = -H / 2;
-        let y_max = +H / 2;
+        let x_min = -this.world_width / 2;
+        let y_min = -this.world_width / 2;
+        let x_max = this.world_width / 2;
+        let y_max = this.world_width / 2;
         let p_max = this.canvas_width;
         let q_max = this.canvas_height;
-        x = (x_min + x / p_max * (x_max - x_min)) / zoom_level;
-        y = (y_max + y / q_max * (y_min - y_max)) / zoom_level;
+        let x = (x_min + position.x / p_max * (x_max - x_min)) / zoom_level;
+        let y = (y_max + position.y / q_max * (y_min - y_max)) / zoom_level;
         return new Position(x, y);
     }
 }
