@@ -1,23 +1,26 @@
 export class Vector {
 
-    constructor(x, y) {
+    constructor(x, y, z = 0) {
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
     mult(other) {
         return new Vector(this.x * other.x, this.y * other.y);
+        // TODO z
     }
 
     add(other) {
         return new Vector(this.x + other.x, this.y * other.y);
+        // TODO z
     }
 }
 
 
 export class Position extends Vector {
 
-    constructor(x, y) {
-        super(x, y);
+    constructor(x, y, z = 0) {
+        super(x, y, z);
     }
 }
