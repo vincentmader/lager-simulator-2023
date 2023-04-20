@@ -156,7 +156,7 @@ export class Renderer {
     display() {
         this.clear_screen();
         // this.draw_labeled_positions();
-        // this.draw_floor_grid();
+        this.draw_floor_grid();
         this.world.people.forEach((person) => {
             this.draw_person(person);
         });
