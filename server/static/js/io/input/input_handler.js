@@ -2,8 +2,6 @@ import {MoveTask} from "../../data/tasks.js";
 import {Position} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 
-const zoom_level = 1; // TODO Get value! A.t.m it breaks at zoom != 11 (default).
-
 class InputHandler {
 
     constructor(world, canvas) {
@@ -28,7 +26,7 @@ export class LagerInputHandler extends InputHandler {
 
             let canvas_coords = new Position(x, y);
 
-            let world_coords = this.coordinate_transformer.canvas_to_world(canvas_coords, zoom_level)
+            let world_coords = this.coordinate_transformer.canvas_to_world(canvas_coords, this.canvas.zoom_level)
             world_coords = this.coordinate_transformer.isometric_to_cartesian(world_coords);
 
             this.world.people[0].task_list.push(new MoveTask(world_coords));

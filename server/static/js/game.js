@@ -14,8 +14,11 @@ export class Game {
         let person_2 = new Jupfi(new Position(-7, 7));
         let people = [person_1, person_2];
 
+        let zoom_level = 11;
+
         this.world = new World(people);
-        this.canvas = new Canvas(); // TODO Use `let canvas` here instead.
+        this.canvas = new Canvas(zoom_level);
+        // ^ TODO Use `let canvas` here instead.
         this.io = new IO(this.world, this.canvas);
         this.task_executor = new TaskExecutor(this.world);
 
