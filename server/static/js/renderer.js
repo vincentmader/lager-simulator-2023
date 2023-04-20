@@ -4,7 +4,7 @@ import {Slider} from "./inputs.js";
 var ZOOM_LEVEL = 1; // TODO Move definition of zoom-level elsewhere.
 const setup_sliders = () => {
     var oninput = (value) => {
-        console.log("zoom level: " + ZOOM_LEVEL + " -> " + value);
+        // console.log("zoom level: " + ZOOM_LEVEL + " -> " + value);
         ZOOM_LEVEL = value;
     };
     let slider = new Slider("zoom_slider", {oninput: oninput, min: 1, max: 21, step: 0.01, value: ZOOM_LEVEL});
@@ -149,7 +149,7 @@ export class Renderer {
 
     display() {
         this.clear_screen();
-        // this.draw_labeled_positions()
+        // this.draw_labeled_positions();
         this.draw_floor_grid();
         this.world.people.forEach((person) => {
             this.draw_person(person.position, person.color)
