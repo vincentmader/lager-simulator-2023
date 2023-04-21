@@ -12,9 +12,8 @@ export class CoordinateTransformer {
 
     isometric_to_cartesian(position) {
         let x = (2 * position.y + position.x) / 2;
-        let y = (2 * position.y - position.x) / 2;
-        let z = position.z;
-        return new Position(x, y, z);
+        let y = (2 * position.y - position.x) / 2 + position.z;
+        return new Position(x, y); // TODO Return `Position2D` here?
     }
 
     cartesian_to_isometric(position) {
