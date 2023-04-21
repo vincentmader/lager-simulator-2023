@@ -135,8 +135,8 @@ export class Renderer {
 
     draw_border() {
         let position = new Position(0, 0);
-        let dimensions = [256, 256];
-        let src = "/img/grass.jpg";
+        let dimensions = [556, 556];
+        let src = "/img/frame.jpg";
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         let w = dimensions[0],
@@ -149,11 +149,14 @@ export class Renderer {
         image.onload = function() {
             let iso_canvas = document.createElement("canvas");
             let iso_ctx = iso_canvas.getContext("2d");
-            iso_canvas.width = image.width*2;
-            iso_canvas.height = image.height*2;
-
+            iso_canvas.width = w*2;
+            iso_canvas.height = h*2;
             iso_ctx.setTransform(1, -0.5, 1, 0.5, 0, 0);
-            iso_ctx.drawImage(image, -image.width/2, image.height/2);
+            iso_ctx.fillStyle = iso_ctx.createPattern(image, "repeat");
+            iso_ctx.fillRect(-w/2, h/2, w, h)
+            //iso_ctx.fill();
+
+            //iso_ctx.drawImage(image, -image.width/2, image.height/2);
             page_ctx.drawImage(iso_canvas, x, y)
 
         };
