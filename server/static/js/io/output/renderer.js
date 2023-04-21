@@ -7,7 +7,7 @@ export class Renderer {
 
     constructor(world, canvas) {
         this.world = world;
-        this.canvas = canvas;
+        this.canvas = canvas; // TODO Rename to `game_display` (everywhere).
         this.environment_clock = Date.now();
         this.fire_cache = []
         this.coordinate_transformer = new CoordinateTransformer(world, canvas);
@@ -18,8 +18,10 @@ export class Renderer {
         if (this.canvas.draw_floor_background) {
             this.draw_floor_background();
         }
+        if (this.canvas.draw_world_boundary) {
+            this.draw_world_boundary();
+        }
         if (this.canvas.draw_floor_grid) {
-            // TODO Why is this not drawn on top of the background?
             this.draw_floor_grid();
         }
         if (this.canvas.draw_labeled_positions) {
@@ -145,7 +147,15 @@ export class Renderer {
         this.canvas.ctx.stroke();
     }
 
-    draw_floor_grid() { // TODO Rename, readd floor grid.
+    draw_floor_grid() {
+        let color = "#444444";
+        let rectangles = this.world.floor_grid.rectangles;
+        rectangles.forEach((rect) => {
+            this.draw_rectangle(rect, color);
+        });
+    }
+
+    draw_world_boundary() {
         let color = "rgb(255, 0, 0)";
         let rectangles = this.world.floor_grid.boundary;
         this.draw_rectangle(rectangles, color);

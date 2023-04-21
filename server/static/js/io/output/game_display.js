@@ -21,6 +21,7 @@ export class GameDisplay {
         this.draw_floor_grid = false;
         this.draw_labeled_positions = false;
         this.draw_floor_background = true;
+        this.draw_world_boundary = true;
 
         this._setup_sliders();
         this._setup_checkboxes();
@@ -59,5 +60,11 @@ export class GameDisplay {
             this.draw_labeled_positions = !this.draw_labeled_positions;
         };
         new CheckBox("labeled_positions_checkbox", {oninput: oninput});
+
+        // Setup checkbox for toggling display of in-world coordinates.
+        var oninput = (_value) => {
+            this.draw_world_boundary = !this.draw_world_boundary;
+        };
+        new CheckBox("world_boundary_checkbox", {oninput: oninput, checked: true});
     }
 }
