@@ -3,7 +3,7 @@ import {Position} from "../math/vector.js";
 import {FloorGrid} from "./floor_grid.js";
 
 export const dt = 1; // TODO Make dynamic.
-export const N = 100;
+export const N = 100; // TODO Test floor display for `N!=100`, e.g. 128.
 
 export class World {
 
