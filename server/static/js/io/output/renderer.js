@@ -154,6 +154,21 @@ export class Renderer {
             this.draw_person(person);
         });
         this.draw_fire(this.world.fire.position)
+
+        // TODO Remove this again (temporary test).
+        this.test_draw_tent(new Position(7, 6), "LEFT_NO_OUTLINE.png");
+        this.test_draw_tent(new Position(-5, 3), "RIGHT_NO_OUTLINE.png");
     }
 
+    // TODO Remove this again (temporary test).
+    test_draw_tent(position, filename) {
+        let src = "/img/sprites/sort/Isometriccampingtent/" + filename;
+        let scale = 1 / 12;
+        let dimensions = [
+            1024 * this.canvas.zoom_level * scale,
+            631 * this.canvas.zoom_level * scale,
+        ];
+        this.draw_image(src, position, dimensions);
+    };
 }
+
