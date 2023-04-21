@@ -45,7 +45,8 @@ export class Renderer {
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
                 let part_y = y;
-                let part_z = z + offset_z * scale;
+                let part_z = z + offset_z * scale * this.canvas.zoom_level / 4;
+                // Note: The factor 4 here is an ambiguous choice. Important is only to include the zoom level!
                 this.fire_cache.push([part_x, part_y, part_z, radius, color]);
             }
         }
