@@ -11,6 +11,8 @@ export class Renderer {
         this.environment_clock = Date.now();
         this.fire_cache = []
         this.coordinate_transformer = new CoordinateTransformer(world, canvas);
+        this.draw_border();
+        this.draw_floor_grid()
     }
 
     draw_person(person) {
@@ -132,35 +134,28 @@ export class Renderer {
     }
 
     draw_border() {
-        let world_rect = this.world.floor_grid.boundary;
+        let position = new Position(0, 0);
+        let dimensions = [256, 256];
+        let src = "/img/grass.jpg";
+        position = this.coordinate_transformer.cartesian_to_isometric(position);
+        position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
+        let w = dimensions[0],
+        h = dimensions[1];
+        let x = position.x - w / 2,
+        y = position.y - h / 2;
+        let image = new Image(w, h);
+        image.src = src;
+        let page_ctx = this.canvas.ctx;
+        image.onload = function() {
+            let iso_canvas = document.createElement("canvas");
+            let iso_ctx = iso_canvas.getContext("2d");
+            iso_canvas.width = image.width*2;
+            iso_canvas.height = image.height*2;
 
-        // Load Image.
-        let img = new Image();
-        img.src = '/img/grass.jpg';
+            iso_ctx.setTransform(1, -0.5, 1, 0.5, 0, 0);
+            iso_ctx.drawImage(image, -image.width/2, image.height/2);
+            page_ctx.drawImage(iso_canvas, x, y)
 
-        let ctx = this.canvas.ctx;
-        let zoom = this.canvas.zoom_level;
-        let transform = this.coordinate_transformer
-        img.onload = function() {
-            let corners = world_rect.corners;
-            // Project all corners to canvas-coordinates.
-            let projectedCoords = corners.map((coord) => {
-                let proj = transform.cartesian_to_isometric(coord);
-                proj = transform.world_to_canvas(proj, zoom);
-                return [proj.x, proj.y];
-            });
-
-            // Fill rectangle with tiled image.
-            ctx.fillStyle = ctx.createPattern(img, "repeat");
-            ctx.beginPath();
-            ctx.moveTo(...projectedCoords[0]);
-            ctx.lineTo(...projectedCoords[1]);
-            ctx.lineTo(...projectedCoords[2]);
-            ctx.lineTo(...projectedCoords[3]);
-            ctx.closePath();
-            // Account for zoom.
-            ctx.setTransform(zoom, 0, 0, zoom, 0, 0);
-            ctx.fill();
         };
     }
 
@@ -180,29 +175,31 @@ export class Renderer {
     }
 
     display() {
-        this.clear_screen();
-        this.draw_border();
-        // this.draw_labeled_positions();
-        // this.draw_floor_grid();
-        this.world.people.forEach((person) => {
-            this.draw_person(person);
-        });
-        this.draw_fire(this.world.fire.position)
-
-        // TODO Remove this again (temporary test).
-        this.test_draw_tent(new Position(7, 6), "LEFT_NO_OUTLINE.png");
-        this.test_draw_tent(new Position(-5, 3), "RIGHT_NO_OUTLINE.png");
+        return
     }
-
-    // TODO Remove this again (temporary test).
-    test_draw_tent(position, filename) {
-        let src = "/img/sprites/sort/Isometriccampingtent/" + filename;
-        let scale = 1 / 12;
-        let dimensions = [
-            1024 * this.canvas.zoom_level * scale,
-            631 * this.canvas.zoom_level * scale,
-        ];
-        this.draw_image(src, position, dimensions);
-    };
+//        this.clear_screen();
+//        // this.draw_labeled_positions();
+//        // this.draw_floor_grid();
+//        this.draw_border();
+//        this.world.people.forEach((person) => {
+//            this.draw_person(person);
+//        });
+//        this.draw_fire(this.world.fire.position)
+//
+//        // TODO Remove this again (temporary test).
+//        this.test_draw_tent(new Position(7, 6), "LEFT_NO_OUTLINE.png");
+//        this.test_draw_tent(new Position(-5, 3), "RIGHT_NO_OUTLINE.png");
+//    }
+//
+//    // TODO Remove this again (temporary test).
+//    test_draw_tent(position, filename) {
+//        let src = "/img/sprites/sort/Isometriccampingtent/" + filename;
+//        let scale = 1 / 12;
+//        let dimensions = [
+//            1024 * this.canvas.zoom_level * scale,
+//            631 * this.canvas.zoom_level * scale,
+//        ];
+//        this.draw_image(src, position, dimensions);
+//    };
 }
 
