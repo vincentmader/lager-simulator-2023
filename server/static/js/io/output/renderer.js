@@ -11,7 +11,6 @@ export class Renderer {
         this.environment_clock = Date.now();
         this.fire_cache = []
         this.coordinate_transformer = new CoordinateTransformer(world, canvas);
-        this.iso_canvas = this.draw_background();
     }
 
     draw_person(person) {
@@ -131,25 +130,15 @@ export class Renderer {
     }
 
     draw_background() {
-        let position = new Position(0, 0);
-        let src = "/img/grass_small.jpg";
-        position = this.coordinate_transformer.cartesian_to_isometric(position);
-        position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
-        let size = 2400
-        let image = new Image();
-        image.src = src;
-        let iso_canvas = document.createElement("canvas");
-        iso_canvas.width = size;
-        iso_canvas.height = size;
-        let iso_ctx = iso_canvas.getContext("2d");
-        iso_ctx.setTransform(1, -0.5, 1, 0.5, 0, 0);
-        let zoom = this.canvas.zoom_level
-        image.onload = function() {
-            let pattern = iso_ctx.createPattern(image, "repeat");
-            iso_ctx.fillStyle = pattern
-            iso_ctx.fillRect(-size*0.25*zoom, 0.5*size - 0.25*size*zoom, size/2*zoom, size/2*zoom)
-        };
-        return iso_canvas;
+        for (let x = 0; x < 2; x++) {
+            for (let y = 0; y < 2; y++) {
+                let x_pos = 50*(0.5-x)
+                let y_pos = 50*(0.5-y)
+                this.draw_image("/img/grassier_grass.png", new Position(x_pos, y_pos), [
+                    this.canvas.W*this.canvas.zoom_level, 
+                    this.canvas.H/2*this.canvas.zoom_level])
+            }
+        }
     }
 
     draw_labeled_positions() {
@@ -169,7 +158,7 @@ export class Renderer {
 
     display() {
         this.clear_screen();
-        this.canvas.ctx.drawImage(this.iso_canvas, -this.iso_canvas.width/4, 0) // needed
+        this.draw_background()
         // this.draw_labeled_positions();
         this.draw_floor_grid();
         this.world.people.forEach((person) => {
