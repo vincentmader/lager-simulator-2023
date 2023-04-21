@@ -132,23 +132,22 @@ export class Renderer {
 
     draw_background() {
         let position = new Position(0, 0);
-        let dimensions = [100, 100];
-        let src = "/img/grass.jpg";
+        let src = "/img/grass_small.jpg";
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
-        let w = dimensions[0],
-        h = dimensions[1];
-        let image = new Image(w, h);
+        let size = 2400
+        let image = new Image();
         image.src = src;
-        let size = w*24;
         let iso_canvas = document.createElement("canvas");
         iso_canvas.width = size;
         iso_canvas.height = size;
         let iso_ctx = iso_canvas.getContext("2d");
         iso_ctx.setTransform(1, -0.5, 1, 0.5, 0, 0);
+        let zoom = this.canvas.zoom_level
         image.onload = function() {
-            iso_ctx.fillStyle = iso_ctx.createPattern(image, "repeat");
-            iso_ctx.fillRect(-size/4, size/4, size/2, size/2)
+            let pattern = iso_ctx.createPattern(image, "repeat");
+            iso_ctx.fillStyle = pattern
+            iso_ctx.fillRect(-size*0.25*zoom, 0.5*size - 0.25*size*zoom, size/2*zoom, size/2*zoom)
         };
         return iso_canvas;
     }
@@ -170,7 +169,7 @@ export class Renderer {
 
     display() {
         this.clear_screen();
-        this.canvas.ctx.drawImage(this.iso_canvas, -this.iso_canvas.width/4, 0)
+        this.canvas.ctx.drawImage(this.iso_canvas, -this.iso_canvas.width/4, 0) // needed
         // this.draw_labeled_positions();
         this.draw_floor_grid();
         this.world.people.forEach((person) => {
