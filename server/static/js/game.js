@@ -6,7 +6,7 @@ import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
 import {IO} from "./io/io.js";
 
-const INITIAL_ZOOM_LEVEL = 1.3;
+const INITIAL_ZOOM_LEVEL = 2;
 
 export class Game {
 
