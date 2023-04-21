@@ -1,18 +1,18 @@
 export class Vector {
 
-    constructor(x, y, z = 0) {
+    constructor(x, y, z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
     mult(other) {
-        return new Vector(this.x * other.x, this.y * other.y);
+        return new Vector(this.x * other.x, this.y * other.y, this.z * other.z);
         // TODO z
     }
 
     add(other) {
-        return new Vector(this.x + other.x, this.y * other.y);
+        return new Vector(this.x + other.x, this.y * other.y, this.z + other.z);
         // TODO z
     }
 }
