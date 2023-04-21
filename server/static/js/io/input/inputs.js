@@ -42,3 +42,19 @@ export class Slider extends Input {
         this.element.value = value;
     }
 }
+
+export class CheckBox extends Input {
+    constructor(
+        element_id,
+        {
+            onclick = () => {},
+        }
+    ) {
+        super(
+            element_id,
+            {
+                onclick: onclick,
+            }
+        );
+    }
+}
