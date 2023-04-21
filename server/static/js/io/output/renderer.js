@@ -39,7 +39,7 @@ export class Renderer {
             this.fire_cache = [];
             for (let i = 0; i < 25; i++) {
                 let offset_x = gaussian_random();
-                let offset_z = Math.abs(gaussian_random(0, 3));
+                let offset_z = Math.abs(gaussian_random(0, 2));
                 let radius = Math.max(3, (10 - offset_z) * 0.5 + Math.random()) * scale * this.canvas.zoom_level;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
