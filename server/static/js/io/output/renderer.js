@@ -13,6 +13,20 @@ export class Renderer {
         this.coordinate_transformer = new CoordinateTransformer(world, canvas);
     }
 
+    display() {
+        this.clear_screen();
+        // this.draw_labeled_positions();
+        this.draw_floor_grid();
+        this.world.people.forEach((person) => {
+            this.draw_person(person);
+        });
+        this.draw_fire(this.world.fire.position)
+
+        // TODO Remove this again (temporary test).
+        this.test_draw_tent(new Position(7, 6), "LEFT_NO_OUTLINE.png");
+        this.test_draw_tent(new Position(-5, 3), "RIGHT_NO_OUTLINE.png");
+    }
+
     draw_person(person) {
         let position = person.position;
         let color = person.color;
@@ -144,20 +158,6 @@ export class Renderer {
 
     clear_screen() {
         this.canvas.ctx.clearRect(0, 0, this.canvas.W, this.canvas.H);
-    }
-
-    display() {
-        this.clear_screen();
-        // this.draw_labeled_positions();
-        this.draw_floor_grid();
-        this.world.people.forEach((person) => {
-            this.draw_person(person);
-        });
-        this.draw_fire(this.world.fire.position)
-
-        // TODO Remove this again (temporary test).
-        this.test_draw_tent(new Position(7, 6), "LEFT_NO_OUTLINE.png");
-        this.test_draw_tent(new Position(-5, 3), "RIGHT_NO_OUTLINE.png");
     }
 
     // TODO Remove this again (temporary test).
