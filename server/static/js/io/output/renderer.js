@@ -124,11 +124,21 @@ export class Renderer {
     }
 
     draw_floor_grid() {
-        let color = "#444444";
-        let rectangles = this.world.floor_grid.rectangles;
-        rectangles.forEach((rect) => {
-            this.draw_rectangle(rect, color);
-        });
+        let color = "rgb(255, 0, 0)";
+        let rectangles = this.world.floor_grid.boundary;
+        this.draw_rectangle(rectangles, color)
+    }
+
+    draw_background() {
+        for (let x = 0; x < 2; x++) {
+            for (let y = 0; y < 2; y++) {
+                let x_pos = 50*(0.5-x)
+                let y_pos = 50*(0.5-y)
+                this.draw_image("/img/grassier_grass.png", new Position(x_pos, y_pos), [
+                    this.canvas.W*this.canvas.zoom_level, 
+                    this.canvas.H/2*this.canvas.zoom_level])
+            }
+        }
     }
 
     draw_labeled_positions() {
@@ -148,6 +158,7 @@ export class Renderer {
 
     display() {
         this.clear_screen();
+        this.draw_background()
         // this.draw_labeled_positions();
         this.draw_floor_grid();
         this.world.people.forEach((person) => {
