@@ -45,7 +45,7 @@ export class Leiter extends Person {
 
     constructor(position) {
         super(position, 1.5);
-        this.color = "white";
+        this.color = "gray";
     }
 }
 
