@@ -34,6 +34,7 @@ export class Renderer {
             y = position.y,
             z = position.z;
         let scale = 0.2;
+        // Define fire particle locatins.
         if (Date.now() > this.environment_clock + 70) {
             this.environment_clock = Date.now()
             this.fire_cache = [];
@@ -48,6 +49,7 @@ export class Renderer {
                 this.fire_cache.push([part_x, part_y, part_z, radius, color]);
             }
         }
+        // Draw fire particles.
         for (let i = 0; i < this.fire_cache.length; i++) {
             let part_x = this.fire_cache[i][0],
                 part_y = this.fire_cache[i][1],
@@ -57,13 +59,10 @@ export class Renderer {
             let position = new Position(part_x, -part_y, part_z);
             this.draw_circle(position, radius, color);
         }
-        let wood_size = 12 * this.canvas.zoom_level;
-        this.draw_rectangle_fast(
-            new Position(x, y),
-            wood_size,
-            wood_size * 0.2,
-            "rgb(120, 51, 0)"
-        );
+        // Draw piece of wood.
+        let wood_width = 12 * this.canvas.zoom_level;
+        let wood_height = 0.2 * wood_width;
+        this.draw_rectangle_fast(new Position(x, y), wood_width, wood_height, "rgb(120, 51, 0)");
     }
 
     draw_circle(position, r, color) {
