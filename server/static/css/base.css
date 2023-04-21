@@ -7,7 +7,6 @@
     color: white;
     font-family: "Arial Black";
     font-size: 14px;
-    text-align: center;
 }
 
 body {
@@ -32,7 +31,7 @@ canvas {
 }
 
 .section-frame {
-    width: calc(100% - 2 * var(--DEFAULT-MARGIN));
+    width: calc(100% - 3 * var(--DEFAULT-MARGIN));
 
     margin-left: var(--DEFAULT-MARGIN);
     margin-right: var(--DEFAULT-MARGIN);
@@ -42,11 +41,15 @@ canvas {
     border-radius: var(--DEFAULT-BORDER-RADIUS);
 
     background-color: #222222;
+
+    padding: calc(var(--DEFAULT-MARGIN) / 2);
 }
 
-form {
-    padding: var(--DEFAULT-MARGIN);
+.section-frame#zoom-slider_section-frame {
+    text-align: center;
 }
+
+form {}
 
 input[type="range"] {
     width: calc(100% - 2 * var(--DEFAULT-MARGIN));

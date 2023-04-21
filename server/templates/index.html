@@ -10,7 +10,7 @@
     <canvas id="canvas-0"></canvas id="canvas-0">
     <script src="{{ url_for('static', filename='js/main.js') }}" type="module"></script>
 
-    <div class="section-frame">
+    <div class="section-frame" id="zoom-slider_section-frame">
         <form>
             <label for="zoom_slider">Drag this slider to change the zoom level.</label>
             <input type="range" id="zoom_slider" name="zoom_slider">
@@ -19,13 +19,12 @@
 
     <div class="section-frame">
         <form>
-            <label for="floor_grid_checkbox">Display floor grid:</label>
             <input type="checkbox" id="floor_grid_checkbox" name="floor_grid_checkbox">
+            <label for="floor_grid_checkbox">Display floor grid</label>
         </form>
-
         <form>
-            <label for="labeled_positions_checkbox">Display position labels:</label>
             <input type="checkbox" id="labeled_positions_checkbox" name="labeled_positions_checkbox">
+            <label for="labeled_positions_checkbox">Display position labels</label>
         </form>
     </div>
 
