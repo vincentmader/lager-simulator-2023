@@ -150,14 +150,14 @@ export class Renderer {
     }
 
     draw_background() {
+        let zoom_level = this.canvas.zoom_level;
+        let W = this.canvas.W,
+            H = this.canvas.H;
         for (let x = 0; x < 2; x++) {
             for (let y = 0; y < 2; y++) {
-                let x_pos = 50 * (0.5 - x);
-                let y_pos = 50 * (0.5 - y);
-                this.draw_image("/img/grassier_grass.png", new Position(x_pos, y_pos), [
-                    this.canvas.W * this.canvas.zoom_level,
-                    this.canvas.H / 2 * this.canvas.zoom_level
-                ]);
+                let position = new Position(50 * (0.5 - x), 50 * (0.5 - y));
+                let dimensions = [W * zoom_level, H / 2 * zoom_level];
+                this.draw_image("/img/grassier_grass.png", position, dimensions);
             }
         }
     }
