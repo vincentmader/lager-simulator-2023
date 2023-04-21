@@ -2,7 +2,7 @@ import {Slider} from "../input/inputs.js";
 
 const RESOLUTION_FACTOR = 4;
 
-export class Canvas {
+export class GameDisplay {
 
     constructor(zoom_level) {
         this.element = document.getElementById("canvas-0");
