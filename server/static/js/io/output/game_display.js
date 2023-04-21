@@ -28,7 +28,6 @@ export class GameDisplay {
     _setup_sliders() {
         // Setup slider for updating `zoom_level`.
         var oninput = (value) => {
-            console.log(value);
             this.zoom_level = value;
         };
         new Slider(
