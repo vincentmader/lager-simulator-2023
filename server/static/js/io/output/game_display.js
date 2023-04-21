@@ -1,4 +1,4 @@
-import {Slider} from "../input/inputs.js";
+import {CheckBox, Slider} from "../input/inputs.js";
 
 const RESOLUTION_FACTOR = 4;
 
@@ -20,6 +20,7 @@ export class GameDisplay {
         this.zoom_level = zoom_level;
         this.draw_floor_grid = false;
         this.draw_labeled_positions = false;
+        this.draw_floor_background = true;
 
         this._setup_sliders();
         this._setup_checkboxes();
@@ -41,16 +42,22 @@ export class GameDisplay {
     }
 
     _setup_checkboxes() {
+        // Setup checkbox for toggling display of floor background.
+        var oninput = (_value) => {
+            this.draw_floor_background = !this.draw_floor_background;
+        };
+        new CheckBox("floor_background_checkbox", {oninput: oninput, checked: true});
+
         // Setup checkbox for toggling display of `FloorGrid`.
         var oninput = (_value) => {
             this.draw_floor_grid = !this.draw_floor_grid;
         };
-        new Slider("floor_grid_checkbox", {oninput: oninput});
+        new CheckBox("floor_grid_checkbox", {oninput: oninput});
 
         // Setup checkbox for toggling display of in-world coordinates.
         var oninput = (_value) => {
             this.draw_labeled_positions = !this.draw_labeled_positions;
         };
-        new Slider("labeled_positions_checkbox", {oninput: oninput});
+        new CheckBox("labeled_positions_checkbox", {oninput: oninput});
     }
 }

@@ -47,14 +47,20 @@ export class CheckBox extends Input {
     constructor(
         element_id,
         {
+            oninput = () => {},
+            onchange = () => {},
             onclick = () => {},
+            checked = false,
         }
     ) {
         super(
             element_id,
             {
+                oninput: oninput,
+                onchange: onchange,
                 onclick: onclick,
             }
         );
+        this.element.checked = checked;
     }
 }

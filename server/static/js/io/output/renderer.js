@@ -15,7 +15,9 @@ export class Renderer {
 
     display() {
         this.clear_screen();
-        this.draw_background();
+        if (this.canvas.draw_floor_background) {
+            this.draw_floor_background();
+        }
         if (this.canvas.draw_floor_grid) {
             // TODO Why is this not drawn on top of the background?
             this.draw_floor_grid();
@@ -143,13 +145,13 @@ export class Renderer {
         this.canvas.ctx.stroke();
     }
 
-    draw_floor_grid() {
+    draw_floor_grid() { // TODO Rename, readd floor grid.
         let color = "rgb(255, 0, 0)";
         let rectangles = this.world.floor_grid.boundary;
         this.draw_rectangle(rectangles, color);
     }
 
-    draw_background() {
+    draw_floor_background() {
         let zoom_level = this.canvas.zoom_level;
         let W = this.canvas.W,
             H = this.canvas.H;
