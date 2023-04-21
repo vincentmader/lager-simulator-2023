@@ -68,8 +68,6 @@ export class Renderer {
 
     draw_circle(position, r, color) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
-        // TODO This conversion here leads to the fire blowing off at an angle.
-        //      -> Fire particle coords should not be given as (x, y), but as (x, y, z) instead!
         position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         this.canvas.ctx.strokeStyle = color;
         this.canvas.ctx.fillStyle = color;
