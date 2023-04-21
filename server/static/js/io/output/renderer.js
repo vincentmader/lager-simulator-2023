@@ -131,6 +131,39 @@ export class Renderer {
         });
     }
 
+    draw_border() {
+        let world_rect = this.world.floor_grid.boundary;
+
+        // Load Image.
+        let img = new Image();
+        img.src = '/img/grass.jpg';
+
+        let ctx = this.canvas.ctx;
+        let zoom = this.canvas.zoom_level;
+        let transform = this.coordinate_transformer
+        img.onload = function() {
+            let corners = world_rect.corners;
+            // Project all corners to canvas-coordinates.
+            let projectedCoords = corners.map((coord) => {
+                let proj = transform.cartesian_to_isometric(coord);
+                proj = transform.world_to_canvas(proj, zoom);
+                return [proj.x, proj.y];
+            });
+
+            // Fill rectangle with tiled image.
+            ctx.fillStyle = ctx.createPattern(img, "repeat");
+            ctx.beginPath();
+            ctx.moveTo(...projectedCoords[0]);
+            ctx.lineTo(...projectedCoords[1]);
+            ctx.lineTo(...projectedCoords[2]);
+            ctx.lineTo(...projectedCoords[3]);
+            ctx.closePath();
+            // Account for zoom.
+            ctx.setTransform(zoom, 0, 0, zoom, 0, 0);
+            ctx.fill();
+        };
+    }
+
     draw_labeled_positions() {
         let floor_grid = this.world.floor_grid;
         let rectangles = floor_grid.rectangles;
@@ -148,8 +181,9 @@ export class Renderer {
 
     display() {
         this.clear_screen();
+        this.draw_border();
         // this.draw_labeled_positions();
-        this.draw_floor_grid();
+        // this.draw_floor_grid();
         this.world.people.forEach((person) => {
             this.draw_person(person);
         });
