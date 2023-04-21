@@ -125,7 +125,7 @@ export class Renderer {
     }
 
     draw_floor_grid() {
-        let color = "#444444";
+        let color = "rgb(255, 0, 0)";
         let rectangles = this.world.floor_grid.boundary;
         this.draw_rectangle(rectangles, color)
     }
@@ -138,24 +138,18 @@ export class Renderer {
         position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         let w = dimensions[0],
         h = dimensions[1];
-        let x = position.x - w / 2,
-        y = position.y - h / 2;
         let image = new Image(w, h);
         image.src = src;
+        let size = w*24;
         let iso_canvas = document.createElement("canvas");
+        iso_canvas.width = size;
+        iso_canvas.height = size;
         let iso_ctx = iso_canvas.getContext("2d");
-        iso_canvas.width = w*23.5;
-        iso_canvas.height = iso_canvas.width;
         iso_ctx.setTransform(1, -0.5, 1, 0.5, 0, 0);
         image.onload = function() {
             iso_ctx.fillStyle = iso_ctx.createPattern(image, "repeat");
-            // Center background pane in isometric context iso_ctx.
-            // iso_ctx.fillRect(-iso_canvas.width/4, iso_canvas.height/4, iso_canvas.width/2, iso_canvas.height/2)
-            iso_ctx.fillRect(-w*23.5/4, w*23.5/4, w*23.5/2, w*23.5/2)
-            // Draw iso_ctx centered on x, y.
-
+            iso_ctx.fillRect(-size/4, size/4, size/2, size/2)
         };
-
         return iso_canvas;
     }
 
