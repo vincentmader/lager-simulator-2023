@@ -118,7 +118,12 @@ export class Renderer {
         this.canvas.ctx.fill();
     }
 
-    draw_text(position, text_content, {font = "15px sans-serif", color = "white"}) {
+    draw_text(position, text_content, {
+        font_size = 15,
+        font_family = "sans-serif",
+        color = "white"
+    }) {
+        let font = font_size + "px " + font_family;
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         this.canvas.ctx.font = font;
@@ -178,10 +183,13 @@ export class Renderer {
         let floor_grid = this.world.floor_grid;
         let rectangles = floor_grid.rectangles;
         rectangles.forEach((rect) => {
+            let scale = 5;
             let position = rect.position;
-            this.draw_circle(position, 1, "#444444");
+            let radius = 2 * this.canvas.zoom_level / scale;
+            this.draw_circle(position, radius, "#444444");
             let text_content = " (" + position.x + "," + position.y + ")";
-            this.draw_text(position, text_content, {color: "#444444"});
+            let font_size = 15 * this.canvas.zoom_level / scale;
+            this.draw_text(position, text_content, {font_size: font_size, color: "#444444"});
         });
     }
 
