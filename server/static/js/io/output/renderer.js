@@ -16,17 +16,23 @@ export class Renderer {
     draw_person(person) {
         let position = person.position;
         let color = person.color;
-
         this.draw_circle(position, 5 * this.canvas.zoom_level, color);
+        // let dimensions = [100, 100]; // TODO Define image size.
+        // let src = "/img/sprite.png";
+        // this.draw_image(src, position, dimensions);
 
-        // TODO Load sprite.
-        // let x = position.x,
-        //     y = position.y;
-        // let w = 10, // TODO Define size.
-        //     h = 10;
-        // let image = new Image(w, h);
-        // image.src = "/static/img/sprite.png";
-        // this.canvas.ctx.drawImage(image, x, y, w, h);
+    }
+
+    draw_image(src, position, dimensions) {
+        position = this.coordinate_transformer.cartesian_to_isometric(position);
+        position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
+        let w = dimensions[0],
+            h = dimensions[1];
+        let x = position.x - w / 2,
+            y = position.y - h / 2;
+        let image = new Image(w, h);
+        image.src = src;
+        this.canvas.ctx.drawImage(image, x, y, w, h);
     }
 
     draw_fire(position) {
