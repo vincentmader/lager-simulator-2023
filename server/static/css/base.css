@@ -1,9 +1,13 @@
 * {
-    --MARGIN: 4%;
+    --DEFAULT-MARGIN: 4%;
+    --DEFAULT-BORDER: 1px solid white;
+    --DEFAULT-BORDER-RADIUS: 20px;
     margin: 0px;
     padding: 0px;
     color: white;
     font-family: "Arial Black";
+    font-size: 14px;
+    text-align: center;
 }
 
 body {
@@ -13,23 +17,38 @@ body {
 h2 {
     color: white;
     text-align: center;
-    margin-top: var(--MARGIN);
+    margin-top: calc(var(--DEFAULT-MARGIN) / 2);
 }
 
 canvas {
-    width: calc(100% - 2 * var(--MARGIN));
-    margin: var(--MARGIN);
-    border: 1px solid white;
-    border-radius: 20px;
+    width: calc(100% - 2 * var(--DEFAULT-MARGIN));
+
+    margin-left: var(--DEFAULT-MARGIN);
+    margin-right: var(--DEFAULT-MARGIN);
+    margin-top: calc(var(--DEFAULT-MARGIN) / 2);
+
+    border: var(--DEFAULT-BORDER);
+    border-radius: var(--DEFAULT-BORDER-RADIUS);
 }
 
-#zoom_form {
-    width: calc(100% - 2 * var(--MARGIN));
-    margin-left: var(--MARGIN);
-    margin-right: var(--MARGIN);
-    text-align: center;
+.section-frame {
+    width: calc(100% - 2 * var(--DEFAULT-MARGIN));
+
+    margin-left: var(--DEFAULT-MARGIN);
+    margin-right: var(--DEFAULT-MARGIN);
+    margin-top: calc(var(--DEFAULT-MARGIN));
+
+    border: var(--DEFAULT-BORDER);
+    border-radius: var(--DEFAULT-BORDER-RADIUS);
+
+    background-color: #222222;
+}
+
+form {
+    padding: var(--DEFAULT-MARGIN);
 }
 
 input[type="range"] {
-    width: 100%;
+    width: calc(100% - 2 * var(--DEFAULT-MARGIN));
+    margin-top: calc(var(--DEFAULT-MARGIN) / 2);
 }
