@@ -11,6 +11,7 @@ export class Renderer {
         this.environment_clock = Date.now();
         this.fire_cache = []
         this.coordinate_transformer = new CoordinateTransformer(world, canvas);
+        this.image_cache = {};
     }
 
     draw_person(person) {
@@ -24,14 +25,20 @@ export class Renderer {
     }
 
     draw_image(src, position, dimensions) {
-        position = this.coordinate_transformer.cartesian_to_isometric(position);
-        position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         let w = dimensions[0],
             h = dimensions[1];
+        let image = null;
+        if (this.image_cache[src] == null) {
+            image = new Image(w, h);
+            image.src = src;
+            this.image_cache[src] = image;
+        } else {
+            image = this.image_cache[src];
+        }
+        position = this.coordinate_transformer.cartesian_to_isometric(position);
+        position = this.coordinate_transformer.world_to_canvas(position, this.canvas.zoom_level);
         let x = position.x - w / 2,
             y = position.y - h / 2;
-        let image = new Image(w, h);
-        image.src = src;
         this.canvas.ctx.drawImage(image, x, y, w, h);
     }
 
@@ -130,13 +137,16 @@ export class Renderer {
     }
 
     draw_background() {
-        for (let x = 0; x < 2; x++) {
-            for (let y = 0; y < 2; y++) {
-                let x_pos = 50*(0.5-x)
-                let y_pos = 50*(0.5-y)
+        let tiles = 16; // Since each grass-image contains 8x8 tiles, this amounts to 128 tiles in each direction.
+        let tile_size = 2400 / tiles * this.canvas.zoom_level;
+        for (let x = 0; x < tiles; x++) {
+            for (let y = 0; y < tiles; y++) {
+                let x_pos = this.world.dimensions[0]*((2*x - tiles + 1)/(2*tiles));
+                let y_pos = this.world.dimensions[0]*((2*y - tiles + 1)/(2*tiles));
                 this.draw_image("/img/grassier_grass.png", new Position(x_pos, y_pos), [
-                    this.canvas.W*this.canvas.zoom_level, 
-                    this.canvas.H/2*this.canvas.zoom_level])
+                    tile_size, 
+                    tile_size
+                    ]);
             }
         }
     }
@@ -158,7 +168,7 @@ export class Renderer {
 
     display() {
         this.clear_screen();
-        this.draw_background()
+        this.draw_background();
         // this.draw_labeled_positions();
         this.draw_floor_grid();
         this.world.people.forEach((person) => {
