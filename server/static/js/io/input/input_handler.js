@@ -4,20 +4,20 @@ import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 
 class InputHandler {
 
-    constructor(world, canvas) {
+    constructor(world, game_display) {
         this.world = world;
-        this.canvas = canvas;
-        this.coordinate_transformer = new CoordinateTransformer(world, canvas);
+        this.game_display = game_display;
+        this.coordinate_transformer = new CoordinateTransformer(world, game_display);
     }
 
     init_scroll_listener() {
-        this.canvas.element.addEventListener('wheel', () => {
+        this.game_display.element.addEventListener('wheel', () => {
             if (event.deltaY > 0
-                && this.canvas.zoom_level < 21) {
-                this.canvas.zoom_level += 0.1;
+                && this.game_display.zoom_level < 21) {
+                this.game_display.zoom_level += 0.1;
             } else if (event.deltaY < 0
-                && this.canvas.zoom_level > 1) {
-                this.canvas.zoom_level -= 0.1;
+                && this.game_display.zoom_level > 1) {
+                this.game_display.zoom_level -= 0.1;
             }
         });
     }
@@ -30,23 +30,23 @@ class InputHandler {
 
 export class LagerInputHandler extends InputHandler {
 
-    constructor(world, canvas) {
-        super(world, canvas);
+    constructor(world, game_display) {
+        super(world, game_display);
         this.active_person = null;
     }
 
     mouseclick_to_world_coordinates(event) {
-        const rect = this.canvas.element.getBoundingClientRect();
+        const rect = this.game_display.element.getBoundingClientRect();
         let x = event.clientX - rect.left;
         let y = event.clientY - rect.top;
-        let canvas_coords = new Position(x, y);
-        let world_coords = this.coordinate_transformer.canvas_to_world(canvas_coords, this.canvas.zoom_level)
+        let game_display_coords = new Position(x, y);
+        let world_coords = this.coordinate_transformer.game_display_to_world(game_display_coords, this.game_display.zoom_level)
         world_coords = this.coordinate_transformer.isometric_to_cartesian(world_coords);
         return world_coords;
     }
 
     init_movement_listener() {
-        this.canvas.element.addEventListener('click', () => {
+        this.game_display.element.addEventListener('click', () => {
             if (this.active_person !== null) {
                 let clicked_world_coords = this.mouseclick_to_world_coordinates(event);
                 this.active_person.task_list.push(new MoveTask(clicked_world_coords));
@@ -56,7 +56,7 @@ export class LagerInputHandler extends InputHandler {
     }
 
     init_select_character_listener() {
-        this.canvas.element.addEventListener('click', () => {
+        this.game_display.element.addEventListener('click', () => {
             if (this.active_person == null) {
                 let clicked_world_coords = this.mouseclick_to_world_coordinates(event);
                 // TODO This needs access to the collision_controller
@@ -82,8 +82,8 @@ export class LagerInputHandler extends InputHandler {
 
 export class UeberfaellerInputHandler extends InputHandler {
 
-    constructor(world, canvas) {
-        super(world, canvas);
+    constructor(world, game_display) {
+        super(world, game_display);
     }
 }
 
