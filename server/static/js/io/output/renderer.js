@@ -77,8 +77,8 @@ export class Renderer {
             this.fire_cache = [];
             for (let i = 0; i < 25; i++) {
                 let offset_x = gaussian_random();
-                let offset_z = Math.abs(gaussian_random(0, 2));
-                let radius = Math.max(3, (10 - offset_z) * 0.5 + Math.random()) * scale * this.game_display.zoom_level;
+                let offset_z = Math.abs(gaussian_random(0, 1.5));
+                let radius = Math.max(3, (10 - offset_z) * 0.6 + Math.random()) * scale * this.game_display.zoom_level;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
                 let part_y = y;
@@ -169,17 +169,18 @@ export class Renderer {
 
     draw_world_boundary() {
         let color = "rgb(255, 0, 0)";
-        let rectangles = this.world.floor_grid.boundary;
-        this.draw_rectangle(rectangles, color);
+        let boundary = this.world.floor_grid.boundary;
+        this.draw_rectangle(boundary, color);
     }
 
     draw_floor_background() {
+        // TODO Account for uneven number of cells.
         let tiles = 16; // Since each grass-image contains 8x8 tiles, this amounts to 128 tiles in each direction.
         let tile_size = 2400 / tiles * this.game_display.zoom_level;
         for (let x = 0; x < tiles; x++) {
             for (let y = 0; y < tiles; y++) {
-                let x_pos = this.world.dimensions[0]*((2*x - tiles + 1)/(2*tiles));
-                let y_pos = this.world.dimensions[0]*((2*y - tiles + 1)/(2*tiles));
+                let x_pos = this.world.dimensions[0]*((x + 0.5)/tiles - 0.5) - 0.5;
+                let y_pos = this.world.dimensions[1]*((y + 0.5)/tiles - 0.5) - 0.5;
                 this.draw_image("/img/grassier_grass.png", new Position(x_pos, y_pos), [
                     tile_size, 
                     tile_size
