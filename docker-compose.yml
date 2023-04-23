@@ -10,7 +10,7 @@ services:
       LETSENCRYPT_HOST: lager-simulator.georgs-punkte.de
       LETSENCRYPT_EMAIL: vincent.mader@icloud.com
     ports:
-      - 5011:5000
+      - 5011:5011
     networks:
       - reverse-proxy
 networks:
