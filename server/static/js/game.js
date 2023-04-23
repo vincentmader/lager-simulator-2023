@@ -5,6 +5,7 @@ import {TaskExecutor} from "./logic/task_list.js";
 import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
 import {IO} from "./io/io.js";
+import {RoverZelt, LeiterJurte, Lagerfeuer} from "./data/entities/structures.js";
 
 const INITIAL_ZOOM_LEVEL = 2;
 
@@ -18,7 +19,12 @@ export class Game {
         let person_5 = new Leiter(new Position(2, -3));
         let people = [person_1, person_2, person_3, person_4, person_5];
 
-        this.world = new World(people);
+        let leiter_jurte = new LeiterJurte(new Position(7, 6));
+        let rover_zelt = new RoverZelt(new Position(-5, 3));
+        let fire = new Lagerfeuer(new Position(0, 0));
+        let structures = [leiter_jurte, rover_zelt, fire];
+
+        this.world = new World(people, structures);
         this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL);
         // ^ TODO Use `let game_display` here instead.
         this.io = new IO(this.world, this.game_display);

@@ -1,6 +1,7 @@
 import {Position} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 import {gaussian_random} from "../../math/utils.js";
+import {JupfiZelt, Lagerfeuer, LeiterJurte, PfadiZelt, RoverZelt, WoelflingsZelt, Zelt} from "../../data/entities/structures.js";
 
 
 export class Renderer {
@@ -28,14 +29,26 @@ export class Renderer {
         if (this.game_display.draw_labeled_positions) {
             this.draw_labeled_positions();
         }
+
         this.world.people.forEach((person) => {
             this.draw_person(person);
         });
-        this.draw_fire(this.world.fire.position)
 
         // TODO Remove this again (temporary test).
-        this.test_draw_tent(new Position(7, 6), "LEFT_NO_OUTLINE.png");
-        this.test_draw_tent(new Position(-5, 3), "RIGHT_NO_OUTLINE.png");
+        this.world.structures.forEach((structure) => {
+            switch (structure.constructor) {
+                case Lagerfeuer:
+                    this.draw_fire(structure);
+                    break
+                case WoelflingsZelt:
+                case JupfiZelt:
+                case PfadiZelt:
+                case RoverZelt:
+                case LeiterJurte:
+                    this.test_draw_tent(structure);
+                    break
+            }
+        });
     }
 
     draw_person(person) {
@@ -66,10 +79,10 @@ export class Renderer {
         this.game_display.ctx.drawImage(image, x, y, w, h);
     }
 
-    draw_fire(position) {
-        let x = position.x,
-            y = position.y,
-            z = position.z;
+    draw_fire(fire) {
+        let x = fire.position.x,
+            y = fire.position.y,
+            z = fire.position.z;
         let scale = 0.2;
         // Define fire particle locatins.
         if (Date.now() > this.environment_clock + 70) {
@@ -77,8 +90,8 @@ export class Renderer {
             this.fire_cache = [];
             for (let i = 0; i < 25; i++) {
                 let offset_x = gaussian_random();
-                let offset_z = Math.abs(gaussian_random(0, 2));
-                let radius = Math.max(3, (10 - offset_z) * 0.5 + Math.random()) * scale * this.game_display.zoom_level;
+                let offset_z = Math.abs(gaussian_random(0, 1.5));
+                let radius = Math.max(3, (10 - offset_z) * 0.6 + Math.random()) * scale * this.game_display.zoom_level;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
                 let part_y = y;
@@ -169,17 +182,18 @@ export class Renderer {
 
     draw_world_boundary() {
         let color = "rgb(255, 0, 0)";
-        let rectangles = this.world.floor_grid.boundary;
-        this.draw_rectangle(rectangles, color);
+        let boundary = this.world.floor_grid.boundary;
+        this.draw_rectangle(boundary, color);
     }
 
     draw_floor_background() {
+        // TODO Account for uneven number of cells.
         let tiles = 16; // Since each grass-image contains 8x8 tiles, this amounts to 128 tiles in each direction.
         let tile_size = 2400 / tiles * this.game_display.zoom_level;
         for (let x = 0; x < tiles; x++) {
             for (let y = 0; y < tiles; y++) {
-                let x_pos = this.world.dimensions[0]*((2*x - tiles + 1)/(2*tiles));
-                let y_pos = this.world.dimensions[0]*((2*y - tiles + 1)/(2*tiles));
+                let x_pos = this.world.dimensions[0]*((x + 0.5)/tiles - 0.5) - 0.5;
+                let y_pos = this.world.dimensions[1]*((y + 0.5)/tiles - 0.5) - 0.5;
                 this.draw_image("/img/grassier_grass.png", new Position(x_pos, y_pos), [
                     tile_size, 
                     tile_size
@@ -207,14 +221,13 @@ export class Renderer {
     }
 
     // TODO Remove this again (temporary test).
-    test_draw_tent(position, filename) {
-        let src = "/img/sprites/sort/Isometriccampingtent/" + filename;
+    test_draw_tent(tent) {
         let scale = 1 / 12;
         let dimensions = [
             1024 * this.game_display.zoom_level * scale,
             631 * this.game_display.zoom_level * scale,
         ];
-        this.draw_image(src, position, dimensions);
+        this.draw_image(tent.texture, tent.position, dimensions);
     };
 }
 

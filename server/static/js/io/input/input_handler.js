@@ -42,6 +42,7 @@ export class LagerInputHandler extends InputHandler {
         let game_display_coords = new Position(x, y);
         let world_coords = this.coordinate_transformer.game_display_to_world(game_display_coords, this.game_display.zoom_level)
         world_coords = this.coordinate_transformer.isometric_to_cartesian(world_coords);
+        world_coords = new Position(Math.round(world_coords.x), Math.round(world_coords.y));
         return world_coords;
     }
 

@@ -7,7 +7,10 @@ export class CollisionDetector {
         for (let i = 0; i < this.granularity * this.granularity; i++) {
             this.cells[i] = new Cell();
         }
-        this.update_cells(this.world.fire)
+        this.world.structures.forEach((structure) => {
+            this.update_cells(structure)
+        });
+        // this.update_cells(this.world.fire)
     }
 
     update_cells(entity) {
