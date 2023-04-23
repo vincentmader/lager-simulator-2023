@@ -6,14 +6,16 @@ services:
       context: ./server
     restart: always
     environment:
-      VIRTUAL_HOST: lager-simulator-2023.lo
-      # LETSENCRYPT_HOST: # TODO Choose domain: lager-simulator.georgs-punkte.de (?)
-      # LETSENCRYPT_EMAIL: vincent.mader@icloud.com
+      VIRTUAL_HOST: lager-simulator.georgs-punkte.de, lager-simulator-2023.lo
+      LETSENCRYPT_HOST: lager-simulator.georgs-punkte.de
+      LETSENCRYPT_EMAIL: vincent.mader@icloud.com
     ports:
-      - 5001:5000
+      - 5011:5000
     networks:
       - reverse-proxy
 networks:
   reverse-proxy:
     external: true
-    name: proxy_my_awesome_proxy_network # same name as in `./proxy/docker-compose.yml` + prefix (see "docker network ls")
+    name: proxy_mxyz_proxy_network 
+    # ^ This has to be the same name as specified in `./proxy/docker-compose.yml`.
+    #   Additionally, it it prefixed by the proxy directory name (see "docker network ls").
