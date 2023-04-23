@@ -1,15 +1,16 @@
 import {Rectangle} from "../../math/rectangle.js";
 
 export class Entity {
-    constructor(position, bounding_box_dims) {
+    constructor(position, bounding_box_dims, texture) {
         this.position = position;
         this.bounding_box = new Rectangle(this.position, bounding_box_dims);
+        this.texture = texture;
     }
 }
 
-class Zelt extends Entity {
-    constructor(position) {
-        super(position, [1, 1]);
+export class Zelt extends Entity {
+    constructor(position, bounding_box_dims, texture) {
+        super(position, bounding_box_dims, texture);
     }
 }
 
@@ -39,18 +40,18 @@ export class PfadiZelt extends Zelt {
 
 export class RoverZelt extends Zelt {
     constructor(position) {
-        super(position);
+        super(position, [4, 6], "/img/sprites/sort/Isometriccampingtent/RIGHT_NO_OUTLINE.png");
     }
 }
 
 export class LeiterJurte extends Zelt {
     constructor(position) {
-        super(position);
+        super(position, [6, 4], "/img/sprites/sort/Isometriccampingtent/LEFT_NO_OUTLINE.png");
     }
 }
 
 export class Lagerfeuer extends Entity {
     constructor(position) {
-        super(position, [5, 5]);
+        super(position, [2, 2]);
     }
 }

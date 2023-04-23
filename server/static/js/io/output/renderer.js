@@ -1,6 +1,7 @@
 import {Position} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 import {gaussian_random} from "../../math/utils.js";
+import {JupfiZelt, Lagerfeuer, LeiterJurte, PfadiZelt, RoverZelt, WoelflingsZelt, Zelt} from "../../data/entities/structures.js";
 
 
 export class Renderer {
@@ -28,14 +29,26 @@ export class Renderer {
         if (this.game_display.draw_labeled_positions) {
             this.draw_labeled_positions();
         }
+
         this.world.people.forEach((person) => {
             this.draw_person(person);
         });
-        this.draw_fire(this.world.fire.position)
 
         // TODO Remove this again (temporary test).
-        this.test_draw_tent(new Position(7, 6), "LEFT_NO_OUTLINE.png");
-        this.test_draw_tent(new Position(-5, 3), "RIGHT_NO_OUTLINE.png");
+        this.world.structures.forEach((structure) => {
+            switch (structure.constructor) {
+                case Lagerfeuer:
+                    this.draw_fire(structure);
+                    break
+                case WoelflingsZelt:
+                case JupfiZelt:
+                case PfadiZelt:
+                case RoverZelt:
+                case LeiterJurte:
+                    this.test_draw_tent(structure);
+                    break
+            }
+        });
     }
 
     draw_person(person) {
@@ -66,10 +79,10 @@ export class Renderer {
         this.game_display.ctx.drawImage(image, x, y, w, h);
     }
 
-    draw_fire(position) {
-        let x = position.x,
-            y = position.y,
-            z = position.z;
+    draw_fire(fire) {
+        let x = fire.position.x,
+            y = fire.position.y,
+            z = fire.position.z;
         let scale = 0.2;
         // Define fire particle locatins.
         if (Date.now() > this.environment_clock + 70) {
@@ -208,14 +221,13 @@ export class Renderer {
     }
 
     // TODO Remove this again (temporary test).
-    test_draw_tent(position, filename) {
-        let src = "/img/sprites/sort/Isometriccampingtent/" + filename;
+    test_draw_tent(tent) {
         let scale = 1 / 12;
         let dimensions = [
             1024 * this.game_display.zoom_level * scale,
             631 * this.game_display.zoom_level * scale,
         ];
-        this.draw_image(src, position, dimensions);
+        this.draw_image(tent.texture, tent.position, dimensions);
     };
 }
 
