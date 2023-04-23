@@ -47,6 +47,7 @@ export class TaskExecutor {
             this.collision_detector.update_cells(person);
             return true;
         }
+        person.position = task.target_position;
         return false;
     }
 
