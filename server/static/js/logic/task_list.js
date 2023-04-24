@@ -31,7 +31,6 @@ export class TaskExecutor {
                     && neighbour.bounding_box !== undefined
                     && neighbour.bounding_box.contains(future_position)) {
                     collision = true;
-                    console.log("collision with ", cell._entities);
                     return;
                 }
             });
