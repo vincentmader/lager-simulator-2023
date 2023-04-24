@@ -194,7 +194,7 @@ export class Renderer {
             for (let y = 0; y < tiles; y++) {
                 let x_pos = this.world.dimensions[0]*((x + 0.5)/tiles - 0.5) - 0.5;
                 let y_pos = this.world.dimensions[1]*((y + 0.5)/tiles - 0.5) - 0.5;
-                this.draw_image("/img/grassier_grass.png", new Position(x_pos, y_pos), [
+                this.draw_image("/img/grass.png", new Position(x_pos, y_pos), [
                     tile_size, 
                     tile_size
                     ]);
