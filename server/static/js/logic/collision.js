@@ -10,7 +10,9 @@ export class CollisionDetector {
         this.world.structures.forEach((structure) => {
             this.update_cells(structure)
         });
-        // this.update_cells(this.world.fire)
+        this.world.people.forEach((person) => {
+            this.update_cells(person)
+        });
     }
 
     update_cells(entity) {

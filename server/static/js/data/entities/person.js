@@ -4,10 +4,16 @@ import {TaskList} from "../../logic/task_list.js";
 class Person extends Entity {
 
     constructor(position, speed) {
-        super(position, [0.5, 0.5], "");
+        super(position, [2, 2], "");
         this.speed = speed;
         this.velocity = [speed, 0];
         this.task_list = new TaskList(this, []);
+    }
+
+    move(new_position) {
+        this.position = new_position;
+        this.bounding_box.position = new_position;
+        this.bounding_box.corners = this.bounding_box._corners();
     }
 }
 export class Woelfling extends Person {

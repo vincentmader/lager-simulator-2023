@@ -27,9 +27,11 @@ export class TaskExecutor {
         let collision = false;
         this.collision_detector.get_neighbouring_cells(person.position).forEach((cell) => {
             cell._entities.forEach((neighbour) => {
-                if (neighbour.bounding_box !== undefined
+                if (neighbour !== person
+                    && neighbour.bounding_box !== undefined
                     && neighbour.bounding_box.contains(future_position)) {
                     collision = true;
+                    console.log("collision with ", cell._entities);
                     return;
                 }
             });
@@ -41,13 +43,11 @@ export class TaskExecutor {
         if (!collision) {
             if (distance >= person.speed * dt
             && this.world.floor_grid.boundary.contains(future_position)) {
-                person.position = future_position;
-                person.bounding_box.position = future_position;
-                person.bounding_box.corners = person.bounding_box._corners();
+                person.move(future_position)
                 this.collision_detector.update_cells(person);
                 return true;
             } else {
-                person.position = task.target_position;
+                person.move(task.target_position);
             }
         }
         return false;
