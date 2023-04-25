@@ -51,7 +51,7 @@ export class Renderer {
                 case PfadiZelt:
                 case RoverZelt:
                 case LeiterJurte:
-                    this.test_draw_tent(structure);
+                    this.draw_tent(structure);
                     break
             }
         });
@@ -94,7 +94,7 @@ export class Renderer {
     draw_person(person) {
         let position = person.position;
         let color = person.color;
-        this.draw_circle(position, 5 * this.game_display.zoom_level, color);
+        this.draw_circle(position, 0.5 * this.game_display.zoom_level, color);
         // let dimensions = [100, 100]; // TODO Define image size.
         // let src = "/img/sprite.png";
         // this.draw_image(src, position, dimensions);
@@ -261,9 +261,8 @@ export class Renderer {
         this.game_display.ctx.clearRect(0, 0, this.game_display.W, this.game_display.H);
     }
 
-    // TODO Remove this again (temporary test).
-    test_draw_tent(tent) {
-        let scale = 1 / 12;
+    draw_tent(tent) {
+        let scale = 1 / 100;
         let dimensions = [
             1024 * this.game_display.zoom_level * scale,
             631 * this.game_display.zoom_level * scale,
