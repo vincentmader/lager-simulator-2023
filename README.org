@@ -108,9 +108,10 @@ _TODOs_:
 - [X] Zoom
 - [X] IO Class (?)
 - [ ] Pan (drag-&-drop und Pfeiltasten)
-- [ ] Feuer (Wind ausmachen)
-- [ ] Zelt malen
+- [X] Feuer (Wind ausmachen)
+- [X] Zelt malen
 - [X] Personen anklicken
 - [ ] Personen abklicken
 - [ ] Debug-Option: Hit-Boxes anzeigen
 - [ ] Debug-Option: FPS anzeigen
+- [ ] Texturen: Pixel-Zahl == Tile-Size
