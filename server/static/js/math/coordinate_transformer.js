@@ -26,7 +26,7 @@ export class CoordinateTransformer {
     world_to_game_display(position, zoom_level) {
         let canvas_origin = new Position(this.game_display_width / 2, this.game_display_height / 2);
         let x = canvas_origin.x + position.x * zoom_level;
-        let y = canvas_origin.y + position.y * zoom_level;
+        let y = canvas_origin.y + position.y * zoom_level - position.z;
         return new Position(x, y);
     }
 
