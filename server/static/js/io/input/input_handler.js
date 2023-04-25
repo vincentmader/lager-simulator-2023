@@ -26,11 +26,11 @@ class InputHandler {
     init_scroll_listener() {
         this.game_display.element.addEventListener('wheel', (event) => {
             if (event.deltaY > 0
-                && this.game_display.zoom_level < 21) {
-                this.game_display.zoom_level += 0.1;
+                && this.game_display.zoom_level < 101) {
+                this.game_display.zoom_level *= 1.02;
             } else if (event.deltaY < 0
-                && this.game_display.zoom_level > 1) {
-                this.game_display.zoom_level -= 0.1;
+                && this.game_display.zoom_level > 5) {
+                this.game_display.zoom_level /= 1.02;
             }
         });
     }

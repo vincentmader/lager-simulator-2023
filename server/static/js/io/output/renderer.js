@@ -41,7 +41,7 @@ export class Renderer {
         }
         if (this.active_entity["field"] !== null) {
             let rect = new Rectangle(this.active_entity["field"], [1, 1]);
-            this.draw_rectangle(rect,  "white");
+            this.draw_rectangle(rect, "white");
         }
 
         this.world.people.forEach((person) => {
@@ -59,7 +59,7 @@ export class Renderer {
                 case PfadiZelt:
                 case RoverZelt:
                 case LeiterJurte:
-                    this.test_draw_tent(structure);
+                    this.draw_tent(structure);
                     break
             }
         });
@@ -69,26 +69,34 @@ export class Renderer {
             let speech_bubble_position = new Position(
                 active_person.position.x,
                 active_person.position.y,
-                active_person.position.z + 0.3*this.game_display.zoom_level
+                active_person.position.z + 5*this.game_display.zoom_level
             )
-            this.draw_speech_bubble(speech_bubble_position, 50 * this.game_display.zoom_level, 30 * this.game_display.zoom_level,
-            "Lass uns mal Tequila trinken!");
+            let speech_bubble_width = 15 * this.game_display.zoom_level,
+                speech_bubble_height = 5 * this.game_display.zoom_level;
+            let speech_bubble_text_content = "Lass uns mal Tequila trinken!";
+            this.draw_speech_bubble(
+                speech_bubble_position,
+                speech_bubble_width,
+                speech_bubble_height,
+                speech_bubble_text_content
+            );
         }
     }
 
     draw_speech_bubble(position, width, height, text) {
         let canvas_position = this.coordinate_transformer.cartesian_to_isometric(position);
         canvas_position = this.coordinate_transformer.world_to_game_display(canvas_position, this.game_display.zoom_level);
+
         this.game_display.ctx.fillStyle = "white";
         this.game_display.ctx.beginPath();
         let corners = [
-            new Position(canvas_position.x - width/2, canvas_position.y - height/2),
-            new Position(canvas_position.x + width/2, canvas_position.y - height/2),
-            new Position(canvas_position.x + width/2, canvas_position.y + height/2),
-            new Position(canvas_position.x + 0.1*width, canvas_position.y + height/2),
-            new Position(canvas_position.x, canvas_position.y + height*0.7),
-            new Position(canvas_position.x  - 0.1*width, canvas_position.y + height/2),
-            new Position(canvas_position.x - width/2, canvas_position.y + height/2),
+            new Position(canvas_position.x - width / 2, canvas_position.y - height / 2),
+            new Position(canvas_position.x + width / 2, canvas_position.y - height / 2),
+            new Position(canvas_position.x + width / 2, canvas_position.y + height / 2),
+            new Position(canvas_position.x + 0.1 * width, canvas_position.y + height / 2),
+            new Position(canvas_position.x, canvas_position.y + height * 0.7),
+            new Position(canvas_position.x - 0.1 * width, canvas_position.y + height / 2),
+            new Position(canvas_position.x - width / 2, canvas_position.y + height / 2),
         ]
         this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
         for (let idx = 1; idx < corners.length; idx++) {
@@ -96,18 +104,17 @@ export class Renderer {
         }
         this.game_display.ctx.closePath();
         this.game_display.ctx.fill();
-        let font_size = 15 * this.game_display.zoom_level / 5;
-        this.draw_text(position, text, {font_size:font_size, color:"black"});
+        let font_size = 1 * this.game_display.zoom_level;
+        this.draw_text(position, text, {font_size: font_size, color: "black"});
     }
 
     draw_person(person) {
         let position = person.position;
         let color = person.color;
-        this.draw_circle(position, 5 * this.game_display.zoom_level, color);
+        this.draw_circle(position, 0.5 * this.game_display.zoom_level, color);
         // let dimensions = [100, 100]; // TODO Define image size.
         // let src = "/img/sprite.png";
         // this.draw_image(src, position, dimensions);
-
     }
 
     draw_image(src, position, dimensions) {
@@ -138,9 +145,9 @@ export class Renderer {
             this.environment_clock = Date.now()
             this.fire_cache = [];
             for (let i = 0; i < 25; i++) {
-                let offset_x = gaussian_random();
-                let offset_z = Math.abs(gaussian_random(0, 1.5));
-                let radius = Math.max(3, (10 - offset_z) * 0.6 + Math.random()) * scale * this.game_display.zoom_level;
+                let offset_x = gaussian_random() * 2;
+                let offset_z = Math.abs(gaussian_random(0, 1.5)) * 20;
+                let radius = Math.max(3, (10 - offset_z) * 0.6 + Math.random()) * scale * this.game_display.zoom_level * 0.1;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
                 let part_y = y;
@@ -160,7 +167,7 @@ export class Renderer {
             this.draw_circle(position, radius, color);
         }
         // Draw piece of wood.
-        let wood_width = 12 * this.game_display.zoom_level;
+        let wood_width = 2 * this.game_display.zoom_level;
         let wood_height = 0.2 * wood_width;
         this.draw_rectangle_fast(new Position(x, y), wood_width, wood_height, "rgb(120, 51, 0)");
     }
@@ -168,6 +175,7 @@ export class Renderer {
     draw_circle(position, r, color) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
+
         this.game_display.ctx.strokeStyle = color;
         this.game_display.ctx.fillStyle = color;
         this.game_display.ctx.beginPath();
@@ -179,6 +187,7 @@ export class Renderer {
     draw_rectangle_fast(position, width, height, color) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
+
         this.game_display.ctx.strokeStyle = color;
         this.game_display.ctx.fillStyle = color;
         this.game_display.ctx.beginPath();
@@ -192,9 +201,10 @@ export class Renderer {
         font_family = "sans-serif",
         color = "white"
     }) {
-        let font = font_size + "px " + font_family;
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
+
+        let font = font_size + "px " + font_family;
         this.game_display.ctx.font = font;
         this.game_display.ctx.fillStyle = color;
         this.game_display.ctx.textAlign = "center";
@@ -202,8 +212,6 @@ export class Renderer {
     }
 
     draw_rectangle(rect, color) { // TODO Use different format for arguments?
-        this.game_display.ctx.strokeStyle = color;
-        this.game_display.ctx.beginPath();
         let corners = rect.corners;
         corners = corners.map((c) => {
             return this.coordinate_transformer.cartesian_to_isometric(c);
@@ -211,6 +219,9 @@ export class Renderer {
         corners = corners.map((c) => {
             return this.coordinate_transformer.world_to_game_display(c, this.game_display.zoom_level);
         });
+
+        this.game_display.ctx.strokeStyle = color;
+        this.game_display.ctx.beginPath();
         for (let idx = 0; idx < corners.length; idx++) {
             let from = corners[idx];
             let jdx = idx + 1;
@@ -242,12 +253,12 @@ export class Renderer {
         let tile_size = 2400 / tiles * this.game_display.zoom_level;
         for (let x = 0; x < tiles; x++) {
             for (let y = 0; y < tiles; y++) {
-                let x_pos = this.world.dimensions[0]*((x + 0.5)/tiles - 0.5) - 0.5;
-                let y_pos = this.world.dimensions[1]*((y + 0.5)/tiles - 0.5) - 0.5;
+                let x_pos = this.world.dimensions[0] * ((x + 0.5) / tiles - 0.5) - 0.5;
+                let y_pos = this.world.dimensions[1] * ((y + 0.5) / tiles - 0.5) - 0.5;
                 this.draw_image("/img/grass.png", new Position(x_pos, y_pos), [
-                    tile_size, 
+                    tile_size,
                     tile_size
-                    ]);
+                ]);
             }
         }
     }
@@ -270,9 +281,8 @@ export class Renderer {
         this.game_display.ctx.clearRect(0, 0, this.game_display.W, this.game_display.H);
     }
 
-    // TODO Remove this again (temporary test).
-    test_draw_tent(tent) {
-        let scale = 1 / 12;
+    draw_tent(tent) {
+        let scale = 1 / 100;
         let dimensions = [
             1024 * this.game_display.zoom_level * scale,
             631 * this.game_display.zoom_level * scale,

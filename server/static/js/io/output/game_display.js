@@ -1,30 +1,25 @@
 import {CheckBox, Slider} from "../input/inputs.js";
 
-const RESOLUTION_FACTOR = 4;
-
 export class GameDisplay {
 
     constructor(zoom_level) {
         this.element = document.getElementById("canvas-0");
         this.ctx = this.element.getContext('2d');
 
-        let W_internal = this.element.width;
-        let H_internal = W_internal;
-
-        this.W = W_internal * RESOLUTION_FACTOR;
-        this.H = H_internal * RESOLUTION_FACTOR;
+        this.W = window.innerWidth;
+        this.H = window.innerHeight;
 
         this.element.width = this.W;
         this.element.height = this.H;
 
         this.zoom_level = zoom_level;
-        this.draw_floor_grid = false;
+        this.draw_floor_grid = true;
         this.draw_labeled_positions = false;
-        this.draw_floor_background = true;
+        this.draw_floor_background = false;
         this.draw_world_boundary = true;
 
-        this._setup_sliders();
-        this._setup_checkboxes();
+        // this._setup_sliders();
+        // this._setup_checkboxes();
     }
 
     _setup_sliders() {
