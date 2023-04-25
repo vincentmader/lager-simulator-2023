@@ -158,7 +158,7 @@ export class Renderer {
             this.draw_circle(position, radius, color);
         }
         // Draw piece of wood.
-        let wood_width = 12 * this.game_display.zoom_level;
+        let wood_width = 2 * this.game_display.zoom_level;
         let wood_height = 0.2 * wood_width;
         this.draw_rectangle_fast(new Position(x, y), wood_width, wood_height, "rgb(120, 51, 0)");
     }
