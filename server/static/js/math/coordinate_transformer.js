@@ -24,29 +24,16 @@ export class CoordinateTransformer {
     }
 
     world_to_game_display(position, zoom_level) {
-        let x_min = -this.world_width / 2;
-        let y_min = -this.world_height / 2;
-        let x_max = this.world_width / 2;
-        let y_max = this.world_height / 2;
-        let p_max = this.game_display_width;
-        let q_max = this.game_display_height;
-        let x = p_max * (zoom_level * position.x - x_min) / (x_max - x_min);
-        let y = q_max * (zoom_level * position.y - y_max) / (y_min - y_max) - 100 * position.z;
-        //                                                                     ^ TODO Scale accurately: 
-        //                                                                            Use projection factor, 
-        //                                                                            as well as world-to-game_display rescaling .
+        let canvas_origin = new Position(this.game_display_width / 2, this.game_display_height / 2);
+        let x = canvas_origin.x + position.x * zoom_level;
+        let y = canvas_origin.y + position.y * zoom_level;
         return new Position(x, y);
     }
 
     game_display_to_world(position, zoom_level) {
-        let x_min = -this.world_width / 2;
-        let y_min = -this.world_width / 2;
-        let x_max = this.world_width / 2;
-        let y_max = this.world_width / 2;
-        let p_max = this.game_display_width;
-        let q_max = this.game_display_height;
-        let x = (x_min + position.x / p_max * (x_max - x_min)) / zoom_level;
-        let y = (y_max + position.y / q_max * (y_min - y_max)) / zoom_level;
+        let canvas_origin = new Position(this.game_display_width / 2, this.game_display_height / 2);
+        let x = (position.x - canvas_origin.x) / zoom_level;
+        let y = (position.y - canvas_origin.y) / zoom_level;
         return new Position(x, y);
     }
 }
