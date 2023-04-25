@@ -118,3 +118,21 @@ _TODOs_:
 - [ ] Debug-Option: Show 1x1x1 cube
 - [ ] Debug-Option in den Canvas hinein schieben
 - [X] Full-Screen Canvas (kein Scrolling)
+- [ ] Fortlaufende Uhr
+- [ ] Uhr visualisieren
+- [ ] Tag-Nacht Zyklus
+- [ ] Tag-Nacht Zyklus + Filter
+- [ ] Diskrete Bewegung
+- [ ] Charakter-Sprites
+- [ ] Direction-Enum
+- [ ] Himmelsrichtungen in den Ecken anzeigen (bei rauszoomen)
+- [ ] Hike
+- [ ] Fog of War
+- [ ] Taschenlampen-Kegel
+- [ ] Gedanken machen, was passiert wenn man jemanden anklickt
+- [ ] Baeume
+- [ ] Kommentare aufpoppen
+- [ ] Simple Vogel-Animation
+- [ ] Charakter-Inventar
+- [ ] Zelt-Kontor
+- [ ] Schoenere Umrandung fuer Spielwelt
