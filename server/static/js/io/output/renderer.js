@@ -33,7 +33,7 @@ export class Renderer {
         }
         if (this.active_entity["field"] !== null) {
             let rect = new Rectangle(this.active_entity["field"], [1, 1]);
-            this.draw_rectangle(rect,  "white");
+            this.draw_rectangle(rect, "white");
         }
 
         this.world.people.forEach((person) => {
@@ -60,10 +60,10 @@ export class Renderer {
             let speech_bubble_position = new Position(
                 this.active_entity["person"].position.x,
                 this.active_entity["person"].position.y,
-                this.active_entity["person"].position.z + 0.3*this.game_display.zoom_level
+                this.active_entity["person"].position.z + 0.3 * this.game_display.zoom_level
             )
             this.draw_speech_bubble(speech_bubble_position, 50 * this.game_display.zoom_level, 30 * this.game_display.zoom_level,
-            "Lass uns mal Tequila trinken!");
+                "Lass uns mal Tequila trinken!");
         }
     }
 
@@ -73,13 +73,13 @@ export class Renderer {
         this.game_display.ctx.fillStyle = "white";
         this.game_display.ctx.beginPath();
         let corners = [
-            new Position(canvas_position.x - width/2, canvas_position.y - height/2),
-            new Position(canvas_position.x + width/2, canvas_position.y - height/2),
-            new Position(canvas_position.x + width/2, canvas_position.y + height/2),
-            new Position(canvas_position.x + 0.1*width, canvas_position.y + height/2),
-            new Position(canvas_position.x, canvas_position.y + height*0.7),
-            new Position(canvas_position.x  - 0.1*width, canvas_position.y + height/2),
-            new Position(canvas_position.x - width/2, canvas_position.y + height/2),
+            new Position(canvas_position.x - width / 2, canvas_position.y - height / 2),
+            new Position(canvas_position.x + width / 2, canvas_position.y - height / 2),
+            new Position(canvas_position.x + width / 2, canvas_position.y + height / 2),
+            new Position(canvas_position.x + 0.1 * width, canvas_position.y + height / 2),
+            new Position(canvas_position.x, canvas_position.y + height * 0.7),
+            new Position(canvas_position.x - 0.1 * width, canvas_position.y + height / 2),
+            new Position(canvas_position.x - width / 2, canvas_position.y + height / 2),
         ]
         this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
         for (let idx = 1; idx < corners.length; idx++) {
@@ -88,7 +88,7 @@ export class Renderer {
         this.game_display.ctx.closePath();
         this.game_display.ctx.fill();
         let font_size = 15 * this.game_display.zoom_level / 5;
-        this.draw_text(position, text, {font_size:font_size, color:"black"});
+        this.draw_text(position, text, {font_size: font_size, color: "black"});
     }
 
     draw_person(person) {
@@ -233,12 +233,12 @@ export class Renderer {
         let tile_size = 2400 / tiles * this.game_display.zoom_level;
         for (let x = 0; x < tiles; x++) {
             for (let y = 0; y < tiles; y++) {
-                let x_pos = this.world.dimensions[0]*((x + 0.5)/tiles - 0.5) - 0.5;
-                let y_pos = this.world.dimensions[1]*((y + 0.5)/tiles - 0.5) - 0.5;
+                let x_pos = this.world.dimensions[0] * ((x + 0.5) / tiles - 0.5) - 0.5;
+                let y_pos = this.world.dimensions[1] * ((y + 0.5) / tiles - 0.5) - 0.5;
                 this.draw_image("/img/grass.png", new Position(x_pos, y_pos), [
-                    tile_size, 
+                    tile_size,
                     tile_size
-                    ]);
+                ]);
             }
         }
     }
