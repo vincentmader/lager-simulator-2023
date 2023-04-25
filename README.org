@@ -103,7 +103,7 @@ _Spiel-Setup_:
   - am Anfang (fast) nur Woelflinge
 
 _TODOs_:
-- [ ] 3D-Vektor
+- [X] 3D-Vektor
 - [ ] Sprites & Animation
 - [X] Zoom
 - [X] IO Class (?)
@@ -112,9 +112,9 @@ _TODOs_:
 - [X] Zelt malen
 - [X] Personen anklicken
 - [ ] Personen abklicken
-- [ ] Debug-Option: Hit-Boxes anzeigen
+- [X] Debug-Option: Hit-Boxes anzeigen
 - [ ] Debug-Option: FPS anzeigen
 - [ ] Texturen: Pixel-Zahl == Tile-Size
 - [ ] Debug-Option: Show 1x1x1 cube
 - [ ] Debug-Option in den Canvas hinein schieben
-- [ ] Full-Screen Canvas (kein Scrolling)
+- [X] Full-Screen Canvas (kein Scrolling)
