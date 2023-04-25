@@ -47,7 +47,7 @@ export class CoordinateTransformer {
         let y_max = this.world_width / 2;
         let p_max = this.game_display_width;
         let q_max = this.game_display_height;
-        let window_scale_factor = 0.000765 * window.innerWidth; // TODO Is this absolutely needed? Weirdly specific number...
+        let window_scale_factor = 0.000835 * window.innerWidth; // TODO Is this absolutely needed? Weirdly specific number...
         let x = (x_min + position.x / (p_max * window_scale_factor) * (x_max - x_min)) / zoom_level;
         let y = (y_max + position.y / (q_max * window_scale_factor) * (y_min - y_max)) / zoom_level;
         return new Position(x, y);
