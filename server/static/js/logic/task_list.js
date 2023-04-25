@@ -36,9 +36,9 @@ export class TaskExecutor {
             }
         });
 
-        if (!collision) {
-            if (distance >= person.speed * dt
+        if (!collision
             && this.world.floor_grid.boundary.contains(future_position)) {
+            if (distance >= person.speed * dt) {
                 person.move(future_position);
                 this.collision_detector.update_cells(person);
                 return true;
