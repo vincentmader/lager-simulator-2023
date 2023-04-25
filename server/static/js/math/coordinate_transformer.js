@@ -6,8 +6,9 @@ export class CoordinateTransformer {
     constructor(world, game_display) {
         this.world_width = world.dimensions[0];
         this.world_height = world.dimensions[1];
-        this.game_display_width = game_display.W; // TODO Use dimensions field here as well?
-        this.game_display_height = game_display.H;
+        this.game_display_width = game_display.width;
+        this.game_display_height = game_display.height;
+        // ^ TODO Use dimensions field here as well?
     }
 
     isometric_to_cartesian(position) {
