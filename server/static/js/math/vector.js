@@ -6,14 +6,18 @@ export class Vector {
         this.z = z;
     }
 
-    mult(other) {
+    mul(other) {
         return new Vector(this.x * other.x, this.y * other.y, this.z * other.z);
         // TODO z
     }
 
     add(other) {
-        return new Vector(this.x + other.x, this.y * other.y, this.z + other.z);
+        return new Vector(this.x + other.x, this.y + other.y, this.z + other.z);
         // TODO z
+    }
+
+    sub(other) {
+        return new Vector(this.x - other.x, this.y - other.y, this.z - other.z);
     }
 }
 

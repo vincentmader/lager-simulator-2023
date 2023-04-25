@@ -4,9 +4,8 @@ import {TaskList} from "../../logic/task_list.js";
 class Person extends Entity {
 
     constructor(position, speed) {
-        super(position, [2, 2], "");
+        super(position, [1, 1], "");
         this.speed = speed;
-        this.velocity = [speed, 0];
         this.task_list = new TaskList(this, []);
     }
 

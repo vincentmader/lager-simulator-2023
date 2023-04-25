@@ -21,28 +21,25 @@ export class TaskExecutor {
         let distance = Math.pow(Math.pow(dx, 2) + Math.pow(dy, 2), 0.5)
         let ux = dx / distance;
         let uy = dy / distance;
-        let future_position = new Position(person.position.x + person.speed * ux * dt,
-            person.position.y + person.speed * uy * dt);
+        let direction = new Position(
+            person.speed * ux * dt,
+            person.speed * uy * dt
+        );
+        let future_position = new Position(person.position.x + direction.x,
+            person.position.y + direction.y);
 
         let collision = false;
         this.collision_detector.get_neighbouring_cells(person.position).forEach((cell) => {
-            cell._entities.forEach((neighbour) => {
-                if (neighbour !== person
-                    && neighbour.bounding_box !== undefined
-                    && neighbour.bounding_box.contains(future_position)) {
-                    collision = true;
-                    return;
-                }
-            });
-            if (collision) {
-                return;
+            let relevant_entities = cell._entities.filter((obj) => obj !== person);
+            if (person.bounding_box.overlaps_towards_direction(relevant_entities.map(e => e.bounding_box), direction)) {
+                collision = true;
             }
         });
 
         if (!collision) {
             if (distance >= person.speed * dt
             && this.world.floor_grid.boundary.contains(future_position)) {
-                person.move(future_position)
+                person.move(future_position);
                 this.collision_detector.update_cells(person);
                 return true;
             } else {
