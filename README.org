@@ -116,3 +116,5 @@ _TODOs_:
 - [ ] Debug-Option: FPS anzeigen
 - [ ] Texturen: Pixel-Zahl == Tile-Size
 - [ ] Debug-Option: Show 1x1x1 cube
+- [ ] Debug-Option in den Canvas hinein schieben
+- [ ] Full-Screen Canvas (kein Scrolling)
