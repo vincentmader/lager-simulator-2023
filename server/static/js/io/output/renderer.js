@@ -81,6 +81,7 @@ export class Renderer {
                 speech_bubble_text_content
             );
         }
+        // this.game_display.element.style.filter = "grayscale(100%)";
     }
 
     draw_speech_bubble(position, width, height, text) {
