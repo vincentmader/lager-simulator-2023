@@ -112,3 +112,5 @@ _TODOs_:
 - [ ] Zelt malen
 - [X] Personen anklicken
 - [ ] Personen abklicken
+- [ ] Debug-Option: Hit-Boxes anzeigen
+- [ ] Debug-Option: FPS anzeigen
