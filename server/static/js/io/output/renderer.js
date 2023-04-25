@@ -62,8 +62,15 @@ export class Renderer {
                 this.active_entity["person"].position.y,
                 this.active_entity["person"].position.z + 0.3 * this.game_display.zoom_level
             )
-            this.draw_speech_bubble(speech_bubble_position, 50 * this.game_display.zoom_level, 30 * this.game_display.zoom_level,
-                "Lass uns mal Tequila trinken!");
+            let speech_bubble_width = 5 * this.game_display.zoom_level,
+                speech_bubble_height = 3 * this.game_display.zoom_level;
+            let speech_bubble_text_content = "Lass uns mal Tequila trinken!";
+            this.draw_speech_bubble(
+                speech_bubble_position,
+                speech_bubble_width,
+                speech_bubble_height,
+                speech_bubble_text_content
+            );
         }
     }
 
