@@ -45,12 +45,15 @@ class InputHandler {
                     return;
                 }
             });
-            this.active_entity["person"] = clicked_person;
+            if (clicked_person !== null) {
+                this.active_entity["person"] = clicked_person;
+                this.current_task = MoveTask // TODO This should not be here! Get this information from the elsif statement below, from a button!
+            }
         } else if (this.current_task == null) {
             // TODO Get from clicked button.
         } else {
-            this.active_entity["person"].task_list.push(this.current_task(clicked_world_coords));
-            this.active_person = null;
+            this.active_entity["person"].task_list.push(new this.current_task(clicked_world_coords));
+            this.active_entity["person"] = null;
             this.current_task = null;
         }
     }
