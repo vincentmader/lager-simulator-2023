@@ -70,6 +70,7 @@ export class Renderer {
     draw_speech_bubble(position, width, height, text) {
         let canvas_position = this.coordinate_transformer.cartesian_to_isometric(position);
         canvas_position = this.coordinate_transformer.world_to_game_display(canvas_position, this.game_display.zoom_level);
+
         this.game_display.ctx.fillStyle = "white";
         this.game_display.ctx.beginPath();
         let corners = [
@@ -158,6 +159,7 @@ export class Renderer {
     draw_circle(position, r, color) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
+
         this.game_display.ctx.strokeStyle = color;
         this.game_display.ctx.fillStyle = color;
         this.game_display.ctx.beginPath();
@@ -169,6 +171,7 @@ export class Renderer {
     draw_rectangle_fast(position, width, height, color) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
+
         this.game_display.ctx.strokeStyle = color;
         this.game_display.ctx.fillStyle = color;
         this.game_display.ctx.beginPath();
@@ -182,9 +185,10 @@ export class Renderer {
         font_family = "sans-serif",
         color = "white"
     }) {
-        let font = font_size + "px " + font_family;
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
+
+        let font = font_size + "px " + font_family;
         this.game_display.ctx.font = font;
         this.game_display.ctx.fillStyle = color;
         this.game_display.ctx.textAlign = "center";
@@ -192,8 +196,6 @@ export class Renderer {
     }
 
     draw_rectangle(rect, color) { // TODO Use different format for arguments?
-        this.game_display.ctx.strokeStyle = color;
-        this.game_display.ctx.beginPath();
         let corners = rect.corners;
         corners = corners.map((c) => {
             return this.coordinate_transformer.cartesian_to_isometric(c);
@@ -201,6 +203,9 @@ export class Renderer {
         corners = corners.map((c) => {
             return this.coordinate_transformer.world_to_game_display(c, this.game_display.zoom_level);
         });
+
+        this.game_display.ctx.strokeStyle = color;
+        this.game_display.ctx.beginPath();
         for (let idx = 0; idx < corners.length; idx++) {
             let from = corners[idx];
             let jdx = idx + 1;
