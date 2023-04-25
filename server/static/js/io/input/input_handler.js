@@ -55,9 +55,15 @@ class InputHandler {
         }
     }
 
+    handle_mouse_movement(event) {
+        let hover_world_coords = this.mouseclick_to_world_coordinates(event);
+        this.active_entity["field"] = hover_world_coords;
+    }
+
     initialize() {
         this.init_scroll_listener();
         this.game_display.element.addEventListener("click", (event) => {this.handle_task_lifecycle(event)});
+        this.game_display.element.addEventListener("mousemove", (event) => {this.handle_mouse_movement(event)});
     }
 }
 

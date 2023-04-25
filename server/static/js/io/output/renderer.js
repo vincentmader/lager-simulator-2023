@@ -31,19 +31,14 @@ export class Renderer {
         if (this.game_display.draw_labeled_positions) {
             this.draw_labeled_positions();
         }
+        if (this.active_entity["field"] !== null) {
+            let rect = new Rectangle(this.active_entity["field"], [1, 1]);
+            this.draw_rectangle(rect,  "white");
+        }
 
         this.world.people.forEach((person) => {
             this.draw_person(person);
         });
-        if (this.active_entity["person"] !== null) {
-            let speech_bubble_position = new Position(
-                this.active_entity["person"].position.x,
-                this.active_entity["person"].position.y,
-                this.active_entity["person"].position.z + 0.3*this.game_display.zoom_level
-            )
-            this.draw_speech_bubble(speech_bubble_position, 50 * this.game_display.zoom_level, 30 * this.game_display.zoom_level,
-            "Lass uns mal Tequila trinken!");
-        }
 
         // TODO Remove this again (temporary test).
         this.world.structures.forEach((structure) => {
@@ -60,6 +55,16 @@ export class Renderer {
                     break
             }
         });
+
+        if (this.active_entity["person"] !== null) {
+            let speech_bubble_position = new Position(
+                this.active_entity["person"].position.x,
+                this.active_entity["person"].position.y,
+                this.active_entity["person"].position.z + 0.3*this.game_display.zoom_level
+            )
+            this.draw_speech_bubble(speech_bubble_position, 50 * this.game_display.zoom_level, 30 * this.game_display.zoom_level,
+            "Lass uns mal Tequila trinken!");
+        }
     }
 
     draw_speech_bubble(position, width, height, text) {
