@@ -1,4 +1,5 @@
 import {CheckBox, Slider} from "../input/inputs.js";
+import {Position} from "../../math/vector.js";
 
 export class GameDisplay {
 
@@ -6,17 +7,19 @@ export class GameDisplay {
         this.element = document.getElementById("canvas-0");
         this.ctx = this.element.getContext('2d');
 
-        this.W = window.innerWidth;
-        this.H = window.innerHeight;
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
 
-        this.element.width = this.W;
-        this.element.height = this.H;
+        this.element.width = this.width;
+        this.element.height = this.height;
 
         this.zoom_level = zoom_level;
         this.draw_floor_grid = true;
         this.draw_labeled_positions = false;
         this.draw_floor_background = false;
         this.draw_world_boundary = true;
+
+        this.display_origin = new Position(0, 0);
 
         // this._setup_sliders();
         // this._setup_checkboxes();

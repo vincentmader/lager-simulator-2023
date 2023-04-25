@@ -278,7 +278,9 @@ export class Renderer {
     }
 
     clear_screen() {
-        this.game_display.ctx.clearRect(0, 0, this.game_display.W, this.game_display.H);
+        let W = this.game_display.width,
+            H = this.game_display.height;
+        this.game_display.ctx.clearRect(0, 0, W, H);
     }
 
     draw_tent(tent) {

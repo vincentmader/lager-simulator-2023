@@ -6,8 +6,7 @@ export class CoordinateTransformer {
     constructor(world, game_display) {
         this.world_width = world.dimensions[0];
         this.world_height = world.dimensions[1];
-        this.game_display_width = game_display.W; // TODO Use dimensions field here as well?
-        this.game_display_height = game_display.H;
+        this.game_display = game_display;
     }
 
     isometric_to_cartesian(position) {
@@ -24,16 +23,16 @@ export class CoordinateTransformer {
     }
 
     world_to_game_display(position, zoom_level) {
-        let canvas_origin = new Position(this.game_display_width / 2, this.game_display_height / 2);
-        let x = canvas_origin.x + position.x * zoom_level;
-        let y = canvas_origin.y + position.y * zoom_level - position.z;
+        let canvas_origin = new Position(this.game_display.width / 2, this.game_display.height / 2);
+        let x = canvas_origin.x + (position.x + this.game_display.display_origin.x) * zoom_level;
+        let y = canvas_origin.y + (position.y + this.game_display.display_origin.y) * zoom_level - position.z;
         return new Position(x, y);
     }
 
     game_display_to_world(position, zoom_level) {
-        let canvas_origin = new Position(this.game_display_width / 2, this.game_display_height / 2);
-        let x = (position.x - canvas_origin.x) / zoom_level;
-        let y = (position.y - canvas_origin.y) / zoom_level;
+        let canvas_origin = new Position(this.game_display.width / 2, this.game_display.height / 2);
+        let x = (position.x - canvas_origin.x) / zoom_level - this.game_display.display_origin.x;
+        let y = (position.y - canvas_origin.y) / zoom_level - this.game_display.display_origin.y;
         return new Position(x, y);
     }
 }
