@@ -115,3 +115,4 @@ _TODOs_:
 - [ ] Debug-Option: Hit-Boxes anzeigen
 - [ ] Debug-Option: FPS anzeigen
 - [ ] Texturen: Pixel-Zahl == Tile-Size
+- [ ] Debug-Option: Show 1x1x1 cube
