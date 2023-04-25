@@ -7,7 +7,7 @@ import {run_tests} from "./tests/main.js";
 import {IO} from "./io/io.js";
 import {RoverZelt, LeiterJurte, Lagerfeuer} from "./data/entities/structures.js";
 
-const INITIAL_ZOOM_LEVEL = 10;
+const INITIAL_ZOOM_LEVEL = 20;
 
 export class Game {
 
