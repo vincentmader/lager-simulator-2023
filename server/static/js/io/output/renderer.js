@@ -1,18 +1,20 @@
 import {Position} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 import {gaussian_random} from "../../math/utils.js";
-import {JupfiZelt, Lagerfeuer, LeiterJurte, PfadiZelt, RoverZelt, WoelflingsZelt, Zelt} from "../../data/entities/structures.js";
+import {JupfiZelt, Lagerfeuer, LeiterJurte, PfadiZelt, RoverZelt, WoelflingsZelt} from "../../data/entities/structures.js";
+import {Rectangle} from "../../math/rectangle.js";
 
 
 export class Renderer {
 
-    constructor(world, game_display) {
+    constructor(world, game_display, active_entity) {
         this.world = world;
         this.game_display = game_display; // TODO Rename to `game_display` (everywhere).
         this.environment_clock = Date.now();
         this.fire_cache = []
         this.coordinate_transformer = new CoordinateTransformer(world, game_display);
         this.image_cache = {};
+        this.active_entity = active_entity;
     }
 
     display() {
@@ -33,6 +35,15 @@ export class Renderer {
         this.world.people.forEach((person) => {
             this.draw_person(person);
         });
+        if (this.active_entity["person"] !== null) {
+            let speech_bubble_position = new Position(
+                this.active_entity["person"].position.x,
+                this.active_entity["person"].position.y,
+                this.active_entity["person"].position.z + 0.3*this.game_display.zoom_level
+            )
+            this.draw_speech_bubble(speech_bubble_position, 50 * this.game_display.zoom_level, 30 * this.game_display.zoom_level,
+            "Lass uns mal Tequila trinken!");
+        }
 
         // TODO Remove this again (temporary test).
         this.world.structures.forEach((structure) => {
@@ -49,6 +60,30 @@ export class Renderer {
                     break
             }
         });
+    }
+
+    draw_speech_bubble(position, width, height, text) {
+        let canvas_position = this.coordinate_transformer.cartesian_to_isometric(position);
+        canvas_position = this.coordinate_transformer.world_to_game_display(canvas_position, this.game_display.zoom_level);
+        this.game_display.ctx.fillStyle = "white";
+        this.game_display.ctx.beginPath();
+        let corners = [
+            new Position(canvas_position.x - width/2, canvas_position.y - height/2),
+            new Position(canvas_position.x + width/2, canvas_position.y - height/2),
+            new Position(canvas_position.x + width/2, canvas_position.y + height/2),
+            new Position(canvas_position.x + 0.1*width, canvas_position.y + height/2),
+            new Position(canvas_position.x, canvas_position.y + height*0.7),
+            new Position(canvas_position.x  - 0.1*width, canvas_position.y + height/2),
+            new Position(canvas_position.x - width/2, canvas_position.y + height/2),
+        ]
+        this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
+        for (let idx = 1; idx < corners.length; idx++) {
+            this.game_display.ctx.lineTo(corners[idx].x, corners[idx].y);
+        }
+        this.game_display.ctx.closePath();
+        this.game_display.ctx.fill();
+        let font_size = 15 * this.game_display.zoom_level / 5;
+        this.draw_text(position, text, {font_size:font_size, color:"black"});
     }
 
     draw_person(person) {
@@ -148,6 +183,7 @@ export class Renderer {
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
         this.game_display.ctx.font = font;
         this.game_display.ctx.fillStyle = color;
+        this.game_display.ctx.textAlign = "center";
         this.game_display.ctx.fillText(text_content, position.x, position.y);
     }
 

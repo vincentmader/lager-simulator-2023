@@ -4,35 +4,12 @@ import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 
 class InputHandler {
 
-    constructor(world, game_display) {
+    constructor(world, game_display, active_entity) {
         this.world = world;
         this.game_display = game_display;
         this.coordinate_transformer = new CoordinateTransformer(world, game_display);
-    }
-
-    init_scroll_listener() {
-        this.game_display.element.addEventListener('wheel', () => {
-            if (event.deltaY > 0
-                && this.game_display.zoom_level < 21) {
-                this.game_display.zoom_level += 0.1;
-            } else if (event.deltaY < 0
-                && this.game_display.zoom_level > 1) {
-                this.game_display.zoom_level -= 0.1;
-            }
-        });
-    }
-
-    initialize() {
-        this.init_scroll_listener();
-    }
-}
-
-
-export class LagerInputHandler extends InputHandler {
-
-    constructor(world, game_display) {
-        super(world, game_display);
-        this.active_person = null;
+        this.active_entity = active_entity;
+        this.current_task = null;
     }
 
     mouseclick_to_world_coordinates(event) {
@@ -46,45 +23,57 @@ export class LagerInputHandler extends InputHandler {
         return world_coords;
     }
 
-    init_movement_listener() {
-        this.game_display.element.addEventListener('click', () => {
-            if (this.active_person !== null) {
-                let clicked_world_coords = this.mouseclick_to_world_coordinates(event);
-                this.active_person.task_list.push(new MoveTask(clicked_world_coords));
-            }
-        }, false);
-        return this;
-    }
-
-    init_select_character_listener() {
-        this.game_display.element.addEventListener('click', () => {
-            if (this.active_person == null) {
-                let clicked_world_coords = this.mouseclick_to_world_coordinates(event);
-                // TODO This needs access to the collision_controller
-                let clicked_person = null;
-                this.world.people.forEach((person) => {
-                    if (person.bounding_box.contains(clicked_world_coords)) {
-                        clicked_person = person;
-                        return;
-                    }
-                });
-                this.active_person = clicked_person;
+    init_scroll_listener() {
+        this.game_display.element.addEventListener('wheel', (event) => {
+            if (event.deltaY > 0
+                && this.game_display.zoom_level < 21) {
+                this.game_display.zoom_level += 0.1;
+            } else if (event.deltaY < 0
+                && this.game_display.zoom_level > 1) {
+                this.game_display.zoom_level -= 0.1;
             }
         });
     }
 
+    handle_task_lifecycle(event) {
+        let clicked_world_coords = this.mouseclick_to_world_coordinates(event);
+        if (this.active_entity["person"] == null) {
+            let clicked_person = null;
+            this.world.people.forEach((person) => {
+                if (person.bounding_box.contains(clicked_world_coords)) {
+                    clicked_person = person;
+                    return;
+                }
+            });
+            this.active_entity["person"] = clicked_person;
+        } else if (this.current_task == null) {
+            // TODO Get from clicked button.
+        } else {
+            this.active_entity["person"].task_list.push(this.current_task(clicked_world_coords));
+            this.active_person = null;
+            this.current_task = null;
+        }
+    }
+
     initialize() {
-        super.initialize();
-        this.init_select_character_listener();
-        this.init_movement_listener();
+        this.init_scroll_listener();
+        this.game_display.element.addEventListener("click", (event) => {this.handle_task_lifecycle(event)});
+    }
+}
+
+
+export class LagerInputHandler extends InputHandler {
+
+    constructor(world, game_display, active_entity) {
+        super(world, game_display, active_entity);
     }
 }
 
 
 export class UeberfaellerInputHandler extends InputHandler {
 
-    constructor(world, game_display) {
-        super(world, game_display);
+    constructor(world, game_display, active_entity) {
+        super(world, game_display, active_entity);
     }
 }
 
