@@ -20,14 +20,7 @@ body {
 /* } */
 
 canvas {
-    width: calc(100% - 2 * var(--DEFAULT-MARGIN));
-
-    margin-left: var(--DEFAULT-MARGIN);
-    margin-right: var(--DEFAULT-MARGIN);
-    margin-top: calc(var(--DEFAULT-MARGIN) / 2);
-
-    border: var(--DEFAULT-BORDER);
-    border-radius: var(--DEFAULT-BORDER-RADIUS);
+    width: 100%;
 }
 
 /* .section-frame { */
