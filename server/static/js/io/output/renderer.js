@@ -60,10 +60,10 @@ export class Renderer {
             let speech_bubble_position = new Position(
                 this.active_entity["person"].position.x,
                 this.active_entity["person"].position.y,
-                this.active_entity["person"].position.z + 0.3 * this.game_display.zoom_level
+                this.active_entity["person"].position.z + 5 * this.game_display.zoom_level
             )
-            let speech_bubble_width = 5 * this.game_display.zoom_level,
-                speech_bubble_height = 3 * this.game_display.zoom_level;
+            let speech_bubble_width = 15 * this.game_display.zoom_level,
+                speech_bubble_height = 5 * this.game_display.zoom_level;
             let speech_bubble_text_content = "Lass uns mal Tequila trinken!";
             this.draw_speech_bubble(
                 speech_bubble_position,
@@ -95,7 +95,7 @@ export class Renderer {
         }
         this.game_display.ctx.closePath();
         this.game_display.ctx.fill();
-        let font_size = 15 * this.game_display.zoom_level / 5;
+        let font_size = 1 * this.game_display.zoom_level;
         this.draw_text(position, text, {font_size: font_size, color: "black"});
     }
 
