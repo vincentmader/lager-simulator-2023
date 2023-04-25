@@ -35,6 +35,40 @@ class InputHandler {
         });
     }
 
+    init_keyboard_listener() {
+        let game_display = this.game_display;
+
+        function keyHandler(e) {
+            let origin = game_display.display_origin;
+            let pan_speed = 15;
+            let direction;
+            // NOTE: x-direction is inverted, y-direction is not!
+            if (e.code == "ArrowUp") {
+                direction = new Position(0, pan_speed);
+                game_display.display_origin = origin.add(direction);
+            }
+            else if (e.code == "ArrowDown") {
+                direction = new Position(0, -pan_speed);
+                game_display.display_origin = origin.add(direction);
+            }
+            else if (e.code == "ArrowLeft") {
+                direction = new Position(pan_speed, 0);
+                game_display.display_origin = origin.add(direction);
+            }
+            else if (e.code == "ArrowRight") {
+                direction = new Position(-pan_speed, 0);
+                game_display.display_origin = origin.add(direction);
+            }
+            else {
+                return;
+                // TODO: Define all other key-press events.
+            }
+        }
+
+        document.addEventListener("keydown", keyHandler);
+        document.addEventListener("keyup", keyHandler);
+    }
+
     handle_task_lifecycle(event) {
         let clicked_world_coords = this.mouseclick_to_world_coordinates(event);
         if (this.active_entity["person"] == null) {
@@ -65,6 +99,7 @@ class InputHandler {
 
     initialize() {
         this.init_scroll_listener();
+        this.init_keyboard_listener();
         this.game_display.element.addEventListener("click", (event) => {this.handle_task_lifecycle(event)});
         this.game_display.element.addEventListener("mousemove", (event) => {this.handle_mouse_movement(event)});
     }
