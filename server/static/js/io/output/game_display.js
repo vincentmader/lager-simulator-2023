@@ -23,8 +23,8 @@ export class GameDisplay {
         this.draw_floor_background = true;
         this.draw_world_boundary = true;
 
-        this._setup_sliders();
-        this._setup_checkboxes();
+        // this._setup_sliders();
+        // this._setup_checkboxes();
     }
 
     _setup_sliders() {
