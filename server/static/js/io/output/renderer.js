@@ -98,7 +98,6 @@ export class Renderer {
         // let dimensions = [100, 100]; // TODO Define image size.
         // let src = "/img/sprite.png";
         // this.draw_image(src, position, dimensions);
-
     }
 
     draw_image(src, position, dimensions) {
