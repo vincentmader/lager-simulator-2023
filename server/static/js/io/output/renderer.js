@@ -250,7 +250,7 @@ export class Renderer {
     draw_floor_background() {
         // TODO Account for uneven number of cells.
         let tiles = 16; // Since each grass-image contains 8x8 tiles, this amounts to 128 tiles in each direction.
-        let tile_size = 2400 / tiles * this.game_display.zoom_level;
+        let tile_size = 256 / tiles * this.game_display.zoom_level;
         for (let x = 0; x < tiles; x++) {
             for (let y = 0; y < tiles; y++) {
                 let x_pos = this.world.dimensions[0] * ((x + 0.5) / tiles - 0.5) - 0.5;

@@ -14,9 +14,9 @@ export class GameDisplay {
         this.element.height = this.height;
 
         this.zoom_level = zoom_level;
-        this.draw_floor_grid = true;
+        this.draw_floor_grid = false;
         this.draw_labeled_positions = false;
-        this.draw_floor_background = false;
+        this.draw_floor_background = true;
         this.draw_world_boundary = true;
 
         this.display_origin = new Position(0, 0);
