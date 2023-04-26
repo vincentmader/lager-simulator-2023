@@ -1,5 +1,5 @@
 import {MoveTask} from "../../data/tasks.js";
-import {Position} from "../../math/vector.js";
+import {Position, Vector} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 
 class InputHandler {
@@ -39,25 +39,25 @@ class InputHandler {
         let game_display = this.game_display;
 
         function keyHandler(e) {
-            let origin = game_display.display_origin;
+            let camera_velocity = game_display.camera_velocity;
             let pan_speed = 15;
             let direction;
             // NOTE: x-direction is inverted, y-direction is not!
             if (e.code == "ArrowUp") {
-                direction = new Position(0, pan_speed);
-                game_display.display_origin = origin.add(direction);
+                direction = new Vector(0, pan_speed);
+                game_display.camera_velocity = camera_velocity.add(direction);
             }
             else if (e.code == "ArrowDown") {
-                direction = new Position(0, -pan_speed);
-                game_display.display_origin = origin.add(direction);
+                direction = new Vector(0, -pan_speed);
+                game_display.camera_velocity = camera_velocity.add(direction);
             }
             else if (e.code == "ArrowLeft") {
-                direction = new Position(pan_speed, 0);
-                game_display.display_origin = origin.add(direction);
+                direction = new Vector(pan_speed, 0);
+                game_display.camera_velocity = camera_velocity.add(direction);
             }
             else if (e.code == "ArrowRight") {
-                direction = new Position(-pan_speed, 0);
-                game_display.display_origin = origin.add(direction);
+                direction = new Vector(-pan_speed, 0);
+                game_display.camera_velocity = camera_velocity.add(direction);
             }
             else {
                 return;

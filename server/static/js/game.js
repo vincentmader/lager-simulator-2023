@@ -33,6 +33,11 @@ export class Game {
     }
 
     forward() {
+        let display_origin = this.io.renderer.game_display.display_origin,
+            camera_velocity = this.io.renderer.game_display.camera_velocity;
+        this.io.renderer.game_display.display_origin = display_origin.add(camera_velocity);
+        this.io.renderer.game_display.camera_velocity = camera_velocity.mul(0.9);
+
         this.world.people.forEach((person) => {
             let task = person.task_list.peek();
             if (!this.task_executor.execute(task)) {
