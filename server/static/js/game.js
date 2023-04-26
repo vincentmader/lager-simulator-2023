@@ -74,15 +74,15 @@ const test_create_random_tree_distribution = () => {
         // Convert to cartesian coordinates.
         let x = r * Math.cos(phi),
             y = r * Math.sin(phi);
-        let position = new Position(x, y);
-        // Define bounding box. TODO
-        let bounding_box_dims = [3, 3];
+        let position = new Position(Math.round(x), Math.round(y));
         // Get random tree texture.
         let texture_idx = random_randint(1, 10);
         let texture = "/img/sprites/structures/trees/tree_" + texture_idx + ".png";
         // Push tree to array.
-        let tree = new Tree(position, bounding_box_dims, texture);
+        let tree = new Tree(position, texture);
         trees.push(tree);
     }
+    // TODO sort trees by y-coordinate in order to render forefround-trees first.
+    // TODO Only use free tiles for a tree, a tree takes up 3x3 tiles. => No overlapping trees
     return trees;
 };

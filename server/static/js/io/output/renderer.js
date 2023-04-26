@@ -130,7 +130,7 @@ export class Renderer {
         // this.draw_image(src, position, dimensions);
     }
 
-    draw_image(src, position, dimensions) {
+    draw_image(src, position, dimensions, texture_origin) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
 
@@ -144,8 +144,10 @@ export class Renderer {
         } else {
             image = this.image_cache[src];
         }
-        let x = position.x - w / 2,
-            y = position.y - h / 2;
+        let x = null, 
+            y = null;
+            x = position.x - w*texture_origin[0];
+            y = position.y - h*texture_origin[1];
         this.game_display.ctx.drawImage(image, x, y, w, h);
     }
 
@@ -282,7 +284,7 @@ export class Renderer {
                 this.draw_image("/img/grass.png", new Position(x_pos, y_pos), [
                     tile_size,
                     tile_size
-                ]);
+                ], [0.5, 0.5]);
             }
         }
     }
@@ -313,7 +315,7 @@ export class Renderer {
             1024 * this.game_display.zoom_level * scale,
             631 * this.game_display.zoom_level * scale,
         ];
-        this.draw_image(tent.texture, tent.position, dimensions);
+        this.draw_image(tent.texture, tent.position, dimensions, tent.texture_origin);
     };
 
     draw_tree(tree) {
@@ -322,7 +324,7 @@ export class Renderer {
             150 * this.game_display.zoom_level * scale,
             150 * this.game_display.zoom_level * scale,
         ];
-        this.draw_image(tree.texture, tree.position, dimensions);
+        this.draw_image(tree.texture, tree.position, dimensions, tree.texture_origin);
     }
 
     draw_bounding_box(entity) {
