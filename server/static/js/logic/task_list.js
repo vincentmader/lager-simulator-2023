@@ -18,7 +18,6 @@ export class TaskExecutor {
         let person = task.owner
         let step_size = person.speed * dt;
         let diff = task.target_position.sub(person.position);
-        console.log(diff)
         let distance = Math.abs(diff.x) + Math.abs(diff.y);
         let move_along_x_axis = Math.abs(diff.x) >= step_size;
         let discrete_diff = new Vector(
