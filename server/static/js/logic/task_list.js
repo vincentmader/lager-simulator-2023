@@ -1,9 +1,9 @@
 import {MoveTask, IdleTask} from "../data/tasks.js";
 import {CollisionDetector} from "./collision.js"
-import {Position} from "../math/vector.js";
+import {Position, Vector} from "../math/vector.js";
 
 
-var dt = 0.1; // TODO
+var dt = 1; // TODO
 var idle_task = new IdleTask();
 
 
@@ -16,30 +16,22 @@ export class TaskExecutor {
 
     execute_move(task) {
         let person = task.owner
+        let step_size = person.speed * dt;
         let diff = task.target_position.sub(person.position);
         let distance = Math.abs(diff.x) + Math.abs(diff.y);
-        let dd = null;
-        if (Math.abs(diff.x) > Math.abs(diff.y)) {
-            dd = new Position(1, 0);
-        } else {
-            dd = new Position(0, 1);
-        }
-        let discrete_diff = null;
-        if (Math.abs(diff.x) >= 1) {
-            discrete_diff = dd
-        }
-        let discrete_diff = new Position(
-            (Math.abs(diff.x) > Math.abs(diff.y)) * Math.sign(diff.x),
-            (Math.abs(diff.x < Math.abs(diff.y))) * Math.sign(diff.y)
+        let move_along_x_axis = Math.abs(diff.x) >= step_size;
+        let discrete_diff = new Vector(
+            Math.sign(diff.x) * move_along_x_axis,
+            Math.sign(diff.y) * (1-move_along_x_axis),
         );
-        // let distance = Math.abs(diff.x) + Math.abs(diff.y)
         let direction = new Position(
-            person.speed * discrete_diff.x * dt,
-            person.speed * discrete_diff.y * dt
+            discrete_diff.x * step_size,
+            discrete_diff.y * step_size,
         );
-        let future_position = new Position(person.position.x + direction.x,
-            person.position.y + direction.y);
-
+        let future_position = new Position(
+            person.position.x + direction.x,
+            person.position.y + direction.y
+        );
         let collision = false;
         this.collision_detector.get_neighbouring_cells(person.position).forEach((cell) => {
             let relevant_entities = cell._entities.filter((obj) => obj !== person);
@@ -50,7 +42,8 @@ export class TaskExecutor {
 
         if (!collision
             && this.world.floor_grid.boundary.contains(future_position)) {
-            if (distance >= person.speed * dt) {
+            // Math.sqrt(2) since both axes may have an offset of < step-size due to smooth movement.
+            if (distance >= Math.sqrt(2) * step_size) {
                 person.move(future_position);
                 this.collision_detector.update_cells(person);
                 return true;

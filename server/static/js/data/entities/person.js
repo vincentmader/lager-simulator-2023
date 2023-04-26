@@ -18,14 +18,14 @@ class Person extends Entity {
 export class Woelfling extends Person {
 
     constructor(position) {
-        super(position, 0.5);
+        super(position, 0.05);
         this.color = "orange";
     }
 }
 export class Jupfi extends Person {
 
     constructor(position) {
-        super(position, 0.75);
+        super(position, 0.075);
         this.color = "blue";
     }
 }
@@ -33,7 +33,7 @@ export class Jupfi extends Person {
 export class Pfadi extends Person {
 
     constructor(position) {
-        super(position, 1);
+        super(position, 0.1);
         this.color = "green";
     }
 }
@@ -41,7 +41,7 @@ export class Pfadi extends Person {
 export class Rover extends Person {
 
     constructor(position) {
-        super(position, 1.25);
+        super(position, 0.125);
         this.color = "red";
     }
 }
@@ -49,7 +49,7 @@ export class Rover extends Person {
 export class Leiter extends Person {
 
     constructor(position) {
-        super(position, 1.5);
+        super(position, 0.15);
         this.color = "gray";
     }
 }
