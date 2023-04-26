@@ -1,8 +1,8 @@
 import {Position} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 import {gaussian_random} from "../../math/utils.js";
-import {JupfiZelt, Lagerfeuer, LeiterJurte, PfadiZelt, RoverZelt, WoelflingsZelt} from "../../data/entities/structures.js";
 import {Rectangle} from "../../math/rectangle.js";
+// import {JupfiZelt, Lagerfeuer, LeiterJurte, PfadiZelt, RoverZelt, WoelflingsZelt} from "../../data/entities/structures.js";
 
 
 export class Renderer {
@@ -308,13 +308,22 @@ export class Renderer {
     }
 
     draw_tent(tent) {
-        let scale = 1 / 100;
+        let scale = 1 / 100; // TODO Remove magic number.
         let dimensions = [
             1024 * this.game_display.zoom_level * scale,
             631 * this.game_display.zoom_level * scale,
         ];
         this.draw_image(tent.texture, tent.position, dimensions);
     };
+
+    draw_tree(tree) {
+        let scale = 1 / 20; // TODO Remove magic number.
+        let dimensions = [
+            150 * this.game_display.zoom_level * scale,
+            150 * this.game_display.zoom_level * scale,
+        ];
+        this.draw_image(tree.texture, tree.position, dimensions);
+    }
 
     draw_bounding_box(entity) {
         this.draw_rectangle(entity.bounding_box, "red");
