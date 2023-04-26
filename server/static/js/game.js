@@ -82,7 +82,9 @@ const test_create_random_tree_distribution = () => {
         let tree = new Tree(position, texture);
         trees.push(tree);
     }
-    // TODO sort trees by y-coordinate in order to render forefround-trees first.
+    trees = trees.sort((tree_a, tree_b) => {
+        return (tree_a.position.x+tree_a.position.y) - (tree_b.position.x+tree_b.position.y);
+    });
     // TODO Only use free tiles for a tree, a tree takes up 3x3 tiles. => No overlapping trees
     return trees;
 };
