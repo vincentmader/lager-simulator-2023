@@ -122,6 +122,9 @@ export class Renderer {
     }
 
     draw_image(src, position, dimensions) {
+        position = this.coordinate_transformer.cartesian_to_isometric(position);
+        position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
+
         let w = dimensions[0],
             h = dimensions[1];
         let image = null;
@@ -132,8 +135,6 @@ export class Renderer {
         } else {
             image = this.image_cache[src];
         }
-        position = this.coordinate_transformer.cartesian_to_isometric(position);
-        position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
         let x = position.x - w / 2,
             y = position.y - h / 2;
         this.game_display.ctx.drawImage(image, x, y, w, h);
