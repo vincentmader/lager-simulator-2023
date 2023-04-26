@@ -25,8 +25,7 @@ export class Game {
         let structures = [leiter_jurte, rover_zelt, fire];
 
         this.world = new World(people, structures);
-        this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL);
-        // ^ TODO Use `let game_display` here instead.
+        this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL); // <- TODO Use `let game_display` here instead?
         this.io = new IO(this.world, this.game_display);
         this.task_executor = new TaskExecutor(this.world);
 
