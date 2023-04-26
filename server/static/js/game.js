@@ -4,6 +4,7 @@ import {GameDisplay} from "./io/output/game_display.js";
 import {TaskExecutor} from "./logic/task_list.js";
 import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
+import {random_randint} from "./math/random.js";
 import {IO} from "./io/io.js";
 import {RoverZelt, LeiterJurte, Lagerfeuer, Tree} from "./data/entities/structures.js";
 
@@ -85,15 +86,3 @@ const test_create_random_tree_distribution = () => {
     }
     return trees;
 };
-
-function random_choice(choices) {
-    var index = Math.floor(Math.random() * choices.length);
-    return choices[index];
-}
-
-function random_randint(min, max) {
-    // NOTE: The maximum is exclusive and the minimum is inclusive
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
-}
