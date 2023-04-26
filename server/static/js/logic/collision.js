@@ -1,6 +1,6 @@
 export class CollisionDetector {
 
-    constructor(world, granularity=10) {
+    constructor(world, granularity = 10) {
         this.world = world;
         this.granularity = granularity;
         this.cells = new Array(this.granularity * this.granularity);
@@ -35,8 +35,8 @@ export class CollisionDetector {
         let cell_x = cell_coords[0],
             cell_y = cell_coords[1];
         let neighbouring_cells = [];
-        [cell_x-1, cell_x, cell_x+1].forEach((x) => {
-            [cell_y-1, cell_y, cell_y+1].forEach((y) => {
+        [cell_x - 1, cell_x, cell_x + 1].forEach((x) => {
+            [cell_y - 1, cell_y, cell_y + 1].forEach((y) => {
                 if (this.in_bounds(x) && this.in_bounds(y)) {
                     neighbouring_cells.push(this.cells[this.cell_index(x, y)])
                 }
@@ -46,13 +46,13 @@ export class CollisionDetector {
     }
 
     cell_coordinates(position) {
-        let cell_x = Math.floor((position.x + this.world.dimensions[0]/2)/(this.world.dimensions[0]/this.granularity));
-        let cell_y = Math.floor((position.y + this.world.dimensions[1]/2)/(this.world.dimensions[1]/this.granularity));
+        let cell_x = Math.floor((position.x + this.world.dimensions[0] / 2) / (this.world.dimensions[0] / this.granularity));
+        let cell_y = Math.floor((position.y + this.world.dimensions[1] / 2) / (this.world.dimensions[1] / this.granularity));
         return [cell_x, cell_y];
     }
 
     cell_index(coord_x, coord_y) {
-        return coord_x*this.granularity + coord_y;
+        return coord_x * this.granularity + coord_y;
     }
 
     in_bounds(cell_coordinate) {
