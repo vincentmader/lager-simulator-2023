@@ -105,12 +105,18 @@ _Spiel-Setup_:
 _Sprueche-Sammlung_:
 - "Wenn ich einen seh' ... Der kriegt's mit meinem Multitool zu tun!"
 
+_Game Over Conditions_:
+- banner weg
+- einer ist gestorben
+- waldbrand verursacht
+- kein bier mehr?
+
 _TODOs_:
 - [X] 3D-Vektor
 - [ ] Sprites & Animation
 - [X] Zoom
 - [X] IO Class (?)
-- [ ] Pan (drag-&-drop und Pfeiltasten)
+- [X] Pan (drag-&-drop und Pfeiltasten)
 - [X] Feuer (Wind ausmachen)
 - [X] Zelt malen
 - [X] Personen anklicken
@@ -125,7 +131,7 @@ _TODOs_:
 - [ ] Uhr visualisieren
 - [ ] Tag-Nacht Zyklus
 - [ ] Tag-Nacht Zyklus + Filter
-- [ ] Diskrete Bewegung
+- [X] Diskrete Bewegung
 - [ ] Charakter-Sprites
 - [ ] Direction-Enum
 - [ ] Himmelsrichtungen in den Ecken anzeigen (bei rauszoomen)
@@ -139,3 +145,5 @@ _TODOs_:
 - [ ] Charakter-Inventar
 - [ ] Zelt-Kontor
 - [ ] Schoenere Umrandung fuer Spielwelt
+- [ ] git pipeline
+- [ ] Aufnaeher
