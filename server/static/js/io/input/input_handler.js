@@ -40,7 +40,7 @@ class InputHandler {
 
         function keyHandler(e) {
             let camera_velocity = game_display.camera_velocity;
-            let pan_speed = 15;
+            let pan_speed = 1;
             let direction;
             // NOTE: x-direction is inverted, y-direction is not!
             if (e.code == "ArrowUp") {
