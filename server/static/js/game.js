@@ -64,11 +64,11 @@ export class Game {
 }
 
 const test_create_random_tree_distribution = () => {
-    const NR_OF_TREES = 200;
+    const NR_OF_TREES = 300;
     let trees = [];
     for (let idx = 0; idx < NR_OF_TREES; idx++) {
         // Choose position randomly (in polar coordinates).
-        let [r_min, r_max] = [20, 50];
+        let [r_min, r_max] = [20, 64 - 1];
         let r = r_min + Math.random() * (r_max - r_min),
             phi = Math.random() * 2 * Math.PI;
         // Convert to cartesian coordinates.
@@ -76,14 +76,14 @@ const test_create_random_tree_distribution = () => {
             y = r * Math.sin(phi);
         let position = new Position(Math.round(x), Math.round(y));
         // Get random tree texture.
-        let texture_idx = random_randint(1, 10);
+        let texture_idx = random_randint(1, 6);
         let texture = "/img/sprites/structures/trees/tree_" + texture_idx + ".png";
         // Push tree to array.
         let tree = new Tree(position, texture);
         trees.push(tree);
     }
     trees = trees.sort((tree_a, tree_b) => {
-        return (tree_a.position.x+tree_a.position.y) - (tree_b.position.x+tree_b.position.y);
+        return (tree_a.position.x + tree_a.position.y) - (tree_b.position.x + tree_b.position.y);
     });
     // TODO Only use free tiles for a tree, a tree takes up 3x3 tiles. => No overlapping trees
     return trees;
