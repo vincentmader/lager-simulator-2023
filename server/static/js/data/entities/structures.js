@@ -10,8 +10,8 @@ export class Entity {
 }
 
 export class Zelt extends Entity {
-    constructor(position, bounding_box_dims, texture) {
-        super(position, bounding_box_dims, texture);
+    constructor(position, bounding_box_dims, texture, texture_origin) {
+        super(position, bounding_box_dims, texture, texture_origin);
     }
 }
 
@@ -41,13 +41,13 @@ export class PfadiZelt extends Zelt {
 
 export class RoverZelt extends Zelt {
     constructor(position) {
-        super(position, [6, 4], "/img/sprites/structures/tents/RIGHT_NO_OUTLINE.png");
+        super(position, [5, 3], "/img/sprites/structures/tents/RIGHT_NO_OUTLINE.png", [0.6, 0.67]);
     }
 }
 
 export class LeiterJurte extends Zelt {
     constructor(position) {
-        super(position, [4, 6], "/img/sprites/structures/tents/LEFT_NO_OUTLINE.png");
+        super(position, [3, 5], "/img/sprites/structures/tents/LEFT_NO_OUTLINE.png", [0.4, 0.67]);
     }
 }
 
