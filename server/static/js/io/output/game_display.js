@@ -20,6 +20,7 @@ export class GameDisplay {
         this.draw_world_boundary = true;
 
         this.display_origin = new Position(0, 0);
+        this.frame_idx = 0;
 
         // this._setup_sliders();
         // this._setup_checkboxes();

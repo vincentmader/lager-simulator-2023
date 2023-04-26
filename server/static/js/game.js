@@ -39,6 +39,7 @@ export class Game {
                 person.task_list.shift();
             }
         });
+        this.io.renderer.game_display.frame_idx += 1;
     }
 
     run() {
