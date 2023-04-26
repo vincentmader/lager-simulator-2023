@@ -38,7 +38,7 @@ export class Renderer {
             this.world.people.forEach((person) => {
                 this.draw_bounding_box(person);
             });
-            this.world.structures.forEach((structure) => {
+            this.world.structures().forEach((structure) => {
                 this.draw_bounding_box(structure);
             })
         }
@@ -50,22 +50,31 @@ export class Renderer {
         this.world.people.forEach((person) => {
             this.draw_person(person);
         });
+        this.world.trees.forEach((tree) => {
+            this.draw_tree(tree);
+        });
+        this.world.tents.forEach((tent) => {
+            this.draw_tent(tent);
+        });
+        this.world.campfires.forEach((campfire) => {
+            this.draw_campfire(campfire);
+        });
 
         // TODO Remove this again (temporary test).
-        this.world.structures.forEach((structure) => {
-            switch (structure.constructor) {
-                case Lagerfeuer:
-                    this.draw_fire(structure);
-                    break
-                case WoelflingsZelt:
-                case JupfiZelt:
-                case PfadiZelt:
-                case RoverZelt:
-                case LeiterJurte:
-                    this.draw_tent(structure);
-                    break
-            }
-        });
+        // this.world.structures.forEach((structure) => {
+        //     switch (structure.constructor) {
+        //         case Lagerfeuer:
+        //             this.draw_fire(structure);
+        //             break
+        //         case WoelflingsZelt:
+        //         case JupfiZelt:
+        //         case PfadiZelt:
+        //         case RoverZelt:
+        //         case LeiterJurte:
+        //             this.draw_tent(structure);
+        //             break
+        //     }
+        // });
 
         if (this.active_entity["person"] !== null) {
             let active_person = this.active_entity["person"];
@@ -150,7 +159,7 @@ export class Renderer {
         this.game_display.ctx.fillText(text_content, position.x, position.y);
     }
 
-    draw_fire(fire) {
+    draw_campfire(fire) {
         let x = fire.position.x,
             y = fire.position.y,
             z = fire.position.z;

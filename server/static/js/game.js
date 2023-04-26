@@ -21,10 +21,14 @@ export class Game {
 
         let leiter_jurte = new LeiterJurte(new Position(7, 6));
         let rover_zelt = new RoverZelt(new Position(-5, 3));
-        let fire = new Lagerfeuer(new Position(0, 0));
-        let structures = [leiter_jurte, rover_zelt, fire];
+        let tents = [leiter_jurte, rover_zelt];
 
-        this.world = new World(people, structures);
+        let campfire = new Lagerfeuer(new Position(0, 0));
+        let campfires = [campfire];
+
+        let trees = [];
+
+        this.world = new World(people, tents, trees, campfires);
         this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL); // <- TODO Use `let game_display` here instead?
         this.io = new IO(this.world, this.game_display);
         this.task_executor = new TaskExecutor(this.world);
