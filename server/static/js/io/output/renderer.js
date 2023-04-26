@@ -31,6 +31,9 @@ export class Renderer {
         if (this.game_display.draw_labeled_positions) {
             this.draw_labeled_positions();
         }
+        if (this.draw_frame_idx) {
+            this.draw_frame_idx();
+        }
         if (true) {
             this.world.people.forEach((person) => {
                 this.draw_bounding_box(person);
@@ -134,6 +137,16 @@ export class Renderer {
         let x = position.x - w / 2,
             y = position.y - h / 2;
         this.game_display.ctx.drawImage(image, x, y, w, h);
+    }
+
+    draw_frame_idx() {
+        let font_size = 30;
+        let position = new Position(10, font_size);
+        let text_content = this.game_display.frame_idx;
+        this.game_display.ctx.font = font_size + "px " + "sans-serif";
+        this.game_display.ctx.fillStyle = "white";
+        this.game_display.ctx.textAlign = "left";
+        this.game_display.ctx.fillText(text_content, position.x, position.y);
     }
 
     draw_fire(fire) {

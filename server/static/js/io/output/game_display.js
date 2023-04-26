@@ -18,6 +18,7 @@ export class GameDisplay {
         this.draw_labeled_positions = false;
         this.draw_floor_background = true;
         this.draw_world_boundary = true;
+        this.draw_frame_idx = true;
 
         this.display_origin = new Position(0, 0);
         this.frame_idx = 0;
