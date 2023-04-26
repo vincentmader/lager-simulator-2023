@@ -29,9 +29,6 @@ export class Renderer {
         if (this.game_display.draw_labeled_positions) {
             this.draw_labeled_positions();
         }
-        if (this.draw_frame_idx) {
-            this.draw_frame_idx();
-        }
         if (true) {
             this.world.people.forEach((person) => {
                 this.draw_bounding_box(person);
@@ -57,6 +54,9 @@ export class Renderer {
         this.world.campfires.forEach((campfire) => {
             this.draw_campfire(campfire);
         });
+        if (this.draw_frame_idx) {
+            this.draw_frame_idx();
+        }
 
         // TODO Remove this again (temporary test).
         // this.world.structures.forEach((structure) => {
