@@ -1,5 +1,5 @@
 import {CheckBox, Slider} from "../input/inputs.js";
-import {Position} from "../../math/vector.js";
+import {Position, Vector} from "../../math/vector.js";
 
 export class GameDisplay {
 
@@ -21,6 +21,7 @@ export class GameDisplay {
         this.draw_frame_idx = true;
 
         this.display_origin = new Position(0, 0);
+        this.camera_velocity = new Vector(0, 0);
         this.frame_idx = 0;
 
         // this._setup_sliders();
