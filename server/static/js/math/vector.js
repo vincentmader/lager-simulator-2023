@@ -26,6 +26,10 @@ export class Vector {
     max() {
         return Math.max(this.x, this.y, this.z);
     }
+
+    abs() {
+        return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
+    }
 }
 
 
