@@ -3,7 +3,7 @@ import {CollisionDetector} from "./collision.js"
 import {Position} from "../math/vector.js";
 
 
-var dt = 1; // TODO
+var dt = 0.1; // TODO
 var idle_task = new IdleTask();
 
 
@@ -16,14 +16,26 @@ export class TaskExecutor {
 
     execute_move(task) {
         let person = task.owner
-        let dx = task.target_position.x - person.position.x; // TODO Define `Vector` class.
-        let dy = task.target_position.y - person.position.y;
-        let distance = Math.pow(Math.pow(dx, 2) + Math.pow(dy, 2), 0.5)
-        let ux = dx / distance;
-        let uy = dy / distance;
+        let diff = task.target_position.sub(person.position);
+        let distance = Math.abs(diff.x) + Math.abs(diff.y);
+        let dd = null;
+        if (Math.abs(diff.x) > Math.abs(diff.y)) {
+            dd = new Position(1, 0);
+        } else {
+            dd = new Position(0, 1);
+        }
+        let discrete_diff = null;
+        if (Math.abs(diff.x) >= 1) {
+            discrete_diff = dd
+        }
+        let discrete_diff = new Position(
+            (Math.abs(diff.x) > Math.abs(diff.y)) * Math.sign(diff.x),
+            (Math.abs(diff.x < Math.abs(diff.y))) * Math.sign(diff.y)
+        );
+        // let distance = Math.abs(diff.x) + Math.abs(diff.y)
         let direction = new Position(
-            person.speed * ux * dt,
-            person.speed * uy * dt
+            person.speed * discrete_diff.x * dt,
+            person.speed * discrete_diff.y * dt
         );
         let future_position = new Position(person.position.x + direction.x,
             person.position.y + direction.y);
@@ -46,6 +58,10 @@ export class TaskExecutor {
                 person.move(task.target_position);
             }
         }
+        person.move(new Position(
+            Math.round(person.position.x), 
+            Math.round(person.position.y)
+        ));
         return false;
     }
 

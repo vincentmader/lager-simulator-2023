@@ -22,6 +22,10 @@ export class Vector {
     sub(other) {
         return new Vector(this.x - other.x, this.y - other.y, this.z - other.z);
     }
+
+    max() {
+        return Math.max(this.x, this.y, this.z);
+    }
 }
 
 

@@ -52,7 +52,7 @@ export class LeiterJurte extends Zelt {
 
 export class Lagerfeuer extends Entity {
     constructor(position) {
-        super(position, [2, 2]);
+        super(position, [3, 3]);
     }
 }
 
