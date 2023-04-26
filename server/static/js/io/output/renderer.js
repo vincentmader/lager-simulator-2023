@@ -142,10 +142,10 @@ export class Renderer {
         } else {
             image = this.image_cache[src];
         }
-        let x = null, 
+        let x = null,
             y = null;
-            x = position.x - w*texture_origin[0];
-            y = position.y - h*texture_origin[1];
+        x = position.x - w * texture_origin[0];
+        y = position.y - h * texture_origin[1];
         this.game_display.ctx.drawImage(image, x, y, w, h);
     }
 
@@ -199,15 +199,15 @@ export class Renderer {
         if (Date.now() > light.animation_clock + light.animation_offset) {
             update_lighting_values = true;
         }
-        for (let dx = -radius; dx<=radius; dx++) {
-            for (let dy = -radius; dy<=radius; dy++) {
-                let lighting_cache_index = (dx+radius)*2*radius + (dy+radius)
+        for (let dx = -radius; dx <= radius; dx++) {
+            for (let dy = -radius; dy <= radius; dy++) {
+                let lighting_cache_index = (dx + radius) * 2 * radius + (dy + radius)
                 if (update_lighting_values) {
-                    light.lighting_cache[lighting_cache_index] = (0.5-(Math.abs(dx) + Math.abs(dy))/(4*radius) + Math.random()*0.1)
+                    light.lighting_cache[lighting_cache_index] = (0.5 - (Math.abs(dx) + Math.abs(dy)) / (4 * radius) + Math.random() * 0.1)
                 }
                 this.fill_rectangle(new Rectangle(
-                    light.position.add(new Position(dx, dy)), 
-                    [1, 1]), 
+                    light.position.add(new Position(dx, dy)),
+                    [1, 1]),
                     "rgba(255, 102, 0, " + light.lighting_cache[lighting_cache_index] + ")")
             }
         }
