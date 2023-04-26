@@ -22,10 +22,10 @@ export class Rectangle {
     }
 
     contains(position) {
-        return position.x <= this.corners[1].x
-            && position.x >= this.corners[0].x
-            && position.y <= this.corners[2].y
-            && position.y >= this.corners[0].y;
+        return position.x < this.corners[1].x
+            && position.x > this.corners[0].x
+            && position.y < this.corners[2].y
+            && position.y > this.corners[0].y;
     }
 
     closest_corner_indices(position) {
