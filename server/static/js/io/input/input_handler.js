@@ -49,24 +49,34 @@ class InputHandler {
 
         function keyHandler(e) {
             let camera_velocity = game_display.camera_velocity;
-            let pan_speed = 1;
+            let camera_speed = camera_velocity.abs();
+            let max_camera_speed = 1; // TODO Adjust magic number.
+            let pan_speed = 3 / game_display.zoom_level; // TODO Ajust magic number.
             let direction;
             // NOTE: x-direction is inverted, y-direction is not!
             if (e.code == "ArrowUp") {
-                direction = new Vector(0, pan_speed);
-                game_display.camera_velocity = camera_velocity.add(direction);
+                if (camera_speed < max_camera_speed) {
+                    direction = new Vector(0, pan_speed);
+                    game_display.camera_velocity = camera_velocity.add(direction);
+                }
             }
             else if (e.code == "ArrowDown") {
-                direction = new Vector(0, -pan_speed);
-                game_display.camera_velocity = camera_velocity.add(direction);
+                if (camera_speed < max_camera_speed) {
+                    direction = new Vector(0, -pan_speed);
+                    game_display.camera_velocity = camera_velocity.add(direction);
+                }
             }
             else if (e.code == "ArrowLeft") {
-                direction = new Vector(pan_speed, 0);
-                game_display.camera_velocity = camera_velocity.add(direction);
+                if (camera_speed < max_camera_speed) {
+                    direction = new Vector(pan_speed, 0);
+                    game_display.camera_velocity = camera_velocity.add(direction);
+                }
             }
             else if (e.code == "ArrowRight") {
-                direction = new Vector(-pan_speed, 0);
-                game_display.camera_velocity = camera_velocity.add(direction);
+                if (camera_speed < max_camera_speed) {
+                    direction = new Vector(-pan_speed, 0);
+                    game_display.camera_velocity = camera_velocity.add(direction);
+                }
             }
             else {
                 return;
