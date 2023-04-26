@@ -5,7 +5,7 @@ import {TaskExecutor} from "./logic/task_list.js";
 import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
 import {IO} from "./io/io.js";
-import {RoverZelt, LeiterJurte, Lagerfeuer} from "./data/entities/structures.js";
+import {RoverZelt, LeiterJurte, Lagerfeuer, Tree} from "./data/entities/structures.js";
 
 const INITIAL_ZOOM_LEVEL = 20;
 
@@ -28,7 +28,8 @@ export class Game {
         let campfires = [campfire_1, campfire_2];
         //                           ^ added for testing -> TODO Fix flames, not drawn at the moment!
 
-        let trees = [];
+        let trees = test_create_random_tree_distribution();
+        //                ^ TODO Rename/Move this function.
 
         this.world = new World(people, tents, trees, campfires);
         this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL); // <- TODO Use `let game_display` here instead?
@@ -59,4 +60,40 @@ export class Game {
             this.io.renderer.display();
         }, 1000 / 60);
     }
+}
+
+const test_create_random_tree_distribution = () => {
+    const NR_OF_TREES = 200;
+    let trees = [];
+    for (let idx = 0; idx < NR_OF_TREES; idx++) {
+        // Choose position randomly (in polar coordinates).
+        let [r_min, r_max] = [20, 50];
+        let r = r_min + Math.random() * (r_max - r_min),
+            phi = Math.random() * 2 * Math.PI;
+        // Convert to cartesian coordinates.
+        let x = r * Math.cos(phi),
+            y = r * Math.sin(phi);
+        let position = new Position(x, y);
+        // Define bounding box. TODO
+        let bounding_box_dims = [3, 3];
+        // Get random tree texture.
+        let texture_idx = random_randint(1, 10);
+        let texture = "/img/sprites/structures/trees/tree_" + texture_idx + ".png";
+        // Push tree to array.
+        let tree = new Tree(position, bounding_box_dims, texture);
+        trees.push(tree);
+    }
+    return trees;
+};
+
+function random_choice(choices) {
+    var index = Math.floor(Math.random() * choices.length);
+    return choices[index];
+}
+
+function random_randint(min, max) {
+    // NOTE: The maximum is exclusive and the minimum is inclusive
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
 }
