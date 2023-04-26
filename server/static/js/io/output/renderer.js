@@ -160,7 +160,7 @@ export class Renderer {
             this.fire_cache = [];
             for (let i = 0; i < 25; i++) {
                 let offset_x = gaussian_random() * 2;
-                let offset_z = Math.abs(gaussian_random(0, 1.5)) * 20;
+                let offset_z = Math.abs(gaussian_random(0, 1.5));
                 let radius = Math.max(3, (10 - offset_z) * 0.6 + Math.random()) * scale * this.game_display.zoom_level * 0.1;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
