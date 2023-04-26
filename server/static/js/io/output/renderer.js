@@ -72,7 +72,7 @@ export class Renderer {
             let speech_bubble_position = new Position(
                 active_person.position.x,
                 active_person.position.y,
-                active_person.position.z + 5 * this.game_display.zoom_level
+                active_person.position.z + 5,
             )
             let speech_bubble_width = 15 * this.game_display.zoom_level,
                 speech_bubble_height = 5 * this.game_display.zoom_level;
