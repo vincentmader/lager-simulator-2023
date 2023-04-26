@@ -57,6 +57,7 @@ export class Lagerfeuer extends Entity {
         this.animation_clock = 0;
         this.animation_offset = 70;
         this.particle_cache = [];
+        this.lighting_cache = [];
     }
 }
 

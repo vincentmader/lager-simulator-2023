@@ -163,6 +163,7 @@ export class Renderer {
         let x = fire.position.x,
             y = fire.position.y,
             z = fire.position.z;
+        this.draw_point_light(fire);
         let scale = 0.2;
         // Define fire particle locatins.
         if (Date.now() > fire.animation_clock + fire.animation_offset) {
@@ -190,6 +191,26 @@ export class Renderer {
         let wood_width = 2 * this.game_display.zoom_level;
         let wood_height = 0.2 * wood_width;
         this.draw_rectangle_fast(new Position(x, y), wood_width, wood_height, "rgb(120, 51, 0)");
+    }
+
+    draw_point_light(light) {
+        let radius = Math.ceil(light.bounding_box.dimensions[0]);
+        let update_lighting_values = false;
+        if (Date.now() > light.animation_clock + light.animation_offset) {
+            update_lighting_values = true;
+        }
+        for (let dx = -radius; dx<=radius; dx++) {
+            for (let dy = -radius; dy<=radius; dy++) {
+                let lighting_cache_index = (dx+radius)*2*radius + (dy+radius)
+                if (update_lighting_values) {
+                    light.lighting_cache[lighting_cache_index] = (0.5-(Math.abs(dx) + Math.abs(dy))/(4*radius) + Math.random()*0.1)
+                }
+                this.fill_rectangle(new Rectangle(
+                    light.position.add(new Position(dx, dy)), 
+                    [1, 1]), 
+                    "rgba(255, 102, 0, " + light.lighting_cache[lighting_cache_index] + ")")
+            }
+        }
     }
 
     draw_circle(position, r, color) {
@@ -251,6 +272,28 @@ export class Renderer {
             this.game_display.ctx.lineTo(to.x, to.y);
         }
         this.game_display.ctx.stroke();
+    }
+
+    fill_rectangle(rect, color) { // TODO Use different format for arguments?
+        let corners = rect.corners;
+        corners = corners.map((c) => {
+            return this.coordinate_transformer.cartesian_to_isometric(c);
+        });
+        corners = corners.map((c) => {
+            return this.coordinate_transformer.world_to_game_display(c, this.game_display.zoom_level);
+        });
+
+        this.game_display.ctx.fillStyle = color;
+        this.game_display.ctx.beginPath();
+        this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
+        for (let idx = 0; idx < corners.length; idx++) {
+            let from = corners[idx];
+            let jdx = idx + 1;
+            if (jdx == corners.length) {jdx = 0;}
+            let to = corners[jdx];
+            this.game_display.ctx.lineTo(to.x, to.y);
+        }
+        this.game_display.ctx.fill();
     }
 
     draw_floor_grid() {
