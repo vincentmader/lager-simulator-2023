@@ -102,6 +102,9 @@ _Spiel-Setup_:
 - feste Zahl an Teilnehmern / Kindern / Leuten
   - am Anfang (fast) nur Woelflinge
 
+_Sprueche-Sammlung_:
+- "Wenn ich einen seh' ... Der kriegt's mit meinem Multitool zu tun!"
+
 _TODOs_:
 - [X] 3D-Vektor
 - [ ] Sprites & Animation
