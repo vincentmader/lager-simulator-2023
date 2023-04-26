@@ -40,13 +40,13 @@ export class PfadiZelt extends Zelt {
 
 export class RoverZelt extends Zelt {
     constructor(position) {
-        super(position, [4, 6], "/img/sprites/sort/Isometriccampingtent/RIGHT_NO_OUTLINE.png");
+        super(position, [6, 4], "/img/sprites/sort/Isometriccampingtent/RIGHT_NO_OUTLINE.png");
     }
 }
 
 export class LeiterJurte extends Zelt {
     constructor(position) {
-        super(position, [6, 4], "/img/sprites/sort/Isometriccampingtent/LEFT_NO_OUTLINE.png");
+        super(position, [4, 6], "/img/sprites/sort/Isometriccampingtent/LEFT_NO_OUTLINE.png");
     }
 }
 
