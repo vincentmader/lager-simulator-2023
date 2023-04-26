@@ -23,8 +23,10 @@ export class Game {
         let rover_zelt = new RoverZelt(new Position(-5, 3));
         let tents = [leiter_jurte, rover_zelt];
 
-        let campfire = new Lagerfeuer(new Position(0, 0));
-        let campfires = [campfire];
+        let campfire_1 = new Lagerfeuer(new Position(0, 0));
+        let campfire_2 = new Lagerfeuer(new Position(50, 40));
+        let campfires = [campfire_1, campfire_2];
+        //                           ^ added for testing -> TODO Fix flames, not drawn at the moment!
 
         let trees = [];
 
