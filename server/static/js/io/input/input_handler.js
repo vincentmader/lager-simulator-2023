@@ -23,6 +23,15 @@ class InputHandler {
         return world_coords;
     }
 
+    init_window_resize_listener() {
+        window.addEventListener("resize", (event) => {
+            this.game_display.width = window.innerWidth;
+            this.game_display.height = window.innerHeight;
+            this.game_display.element.width = window.innerWidth;
+            this.game_display.element.height = window.innerHeight;
+        });
+    }
+
     init_scroll_listener() {
         this.game_display.element.addEventListener('wheel', (event) => {
             if (event.deltaY > 0
@@ -100,6 +109,7 @@ class InputHandler {
     initialize() {
         this.init_scroll_listener();
         this.init_keyboard_listener();
+        this.init_window_resize_listener();
         this.game_display.element.addEventListener("click", (event) => {this.handle_task_lifecycle(event)});
         this.game_display.element.addEventListener("mousemove", (event) => {this.handle_mouse_movement(event)});
     }
