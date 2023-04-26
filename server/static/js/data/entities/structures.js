@@ -54,6 +54,9 @@ export class LeiterJurte extends Zelt {
 export class Lagerfeuer extends Entity {
     constructor(position) {
         super(position, [3, 3]);
+        this.animation_clock = 0;
+        this.animation_offset = 70;
+        this.particle_cache = [];
     }
 }
 

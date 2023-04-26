@@ -10,8 +10,6 @@ export class Renderer {
     constructor(world, game_display, active_entity) {
         this.world = world;
         this.game_display = game_display; // TODO Rename to `game_display` (everywhere).
-        this.environment_clock = Date.now();
-        this.fire_cache = []
         this.coordinate_transformer = new CoordinateTransformer(world, game_display);
         this.image_cache = {};
         this.active_entity = active_entity;
@@ -167,11 +165,11 @@ export class Renderer {
             z = fire.position.z;
         let scale = 0.2;
         // Define fire particle locatins.
-        if (Date.now() > this.environment_clock + 70) {
-            this.environment_clock = Date.now()
-            this.fire_cache = [];
+        if (Date.now() > fire.animation_clock + fire.animation_offset) {
+            fire.animation_clock = Date.now();
+            fire.particle_cache = [];
             for (let i = 0; i < 25; i++) {
-                let offset_x = gaussian_random() * 2;
+                let offset_x = gaussian_random(0, 2);
                 let offset_z = Math.abs(gaussian_random(0, 1.5));
                 let radius = Math.max(3, (10 - offset_z) * 0.6 + Math.random()) * scale * this.game_display.zoom_level * 0.1;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
@@ -179,17 +177,13 @@ export class Renderer {
                 let part_y = y;
                 let part_z = z + offset_z;
                 // Note: The factor 4 here is an ambiguous choice. Important is only to include the zoom level!
-                this.fire_cache.push([part_x, part_y, part_z, radius, color]);
+                fire.particle_cache.push([part_x, part_y, part_z, radius, color]);
             }
         }
         // Draw fire particles.
-        for (let i = 0; i < this.fire_cache.length; i++) {
-            let part_x = this.fire_cache[i][0],
-                part_y = this.fire_cache[i][1],
-                part_z = this.fire_cache[i][2],
-                radius = this.fire_cache[i][3],
-                color = this.fire_cache[i][4];
-            let position = new Position(part_x, -part_y, part_z);
+        for (let i = 0; i < fire.particle_cache.length; i++) {
+            let [part_x, part_y, part_z, radius, color] = fire.particle_cache[i];
+            let position = new Position(part_x, part_y, part_z);
             this.draw_circle(position, radius, color);
         }
         // Draw piece of wood.
