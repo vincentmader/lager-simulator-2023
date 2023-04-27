@@ -57,6 +57,7 @@ export class Renderer {
         if (this.draw_fps) {
             this.draw_fps();
         }
+        this.draw_cardinal_direction_labels();
 
         // TODO Remove this again (temporary test).
         // this.world.structures.forEach((structure) => {
@@ -367,6 +368,27 @@ export class Renderer {
 
     draw_bounding_box(entity) {
         this.draw_rectangle(entity.bounding_box, "red");
+    }
+
+    draw_cardinal_direction_labels() {
+        // TODO North is in the bottom left at the moment. Change?
+        let x_max = this.world.dimensions[0] / 2,
+            y_max = this.world.dimensions[1] / 2,
+            delta = 5;
+        let positions = [
+            new Position(0, y_max + delta),
+            new Position(0, -(y_max + delta)),
+            new Position(x_max + delta, 0),
+            new Position(-(x_max + delta), 0)
+        ]
+        let labels = ["N", "S", "E", "W"];
+        [0, 1, 2, 3].forEach((i) => {
+            let position = positions[i];
+            let label = labels[i];
+            let color;
+            if (label == "N") {color = "red";} else {color = "white";}
+            this.draw_text(position, labels[i], {color: color});
+        });
     }
 }
 
