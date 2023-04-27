@@ -50,31 +50,31 @@ class InputHandler {
         function keyHandler(e) {
             let camera_velocity = game_display.camera_velocity;
             let camera_speed = camera_velocity.abs();
-            let max_camera_speed = 1; // TODO Adjust magic number.
-            let pan_speed = 3 / game_display.zoom_level; // TODO Ajust magic number.
+            let max_camera_speed = 2; // TODO Adjust magic number.
+            let camera_speed_increment = 3 / game_display.zoom_level; // TODO Ajust magic number.
             let direction;
             // NOTE: x-direction is inverted, y-direction is not!
             if (e.code == "ArrowUp") {
                 if (camera_speed < max_camera_speed) {
-                    direction = new Vector(0, pan_speed);
+                    direction = new Vector(0, camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
             else if (e.code == "ArrowDown") {
                 if (camera_speed < max_camera_speed) {
-                    direction = new Vector(0, -pan_speed);
+                    direction = new Vector(0, -camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
             else if (e.code == "ArrowLeft") {
                 if (camera_speed < max_camera_speed) {
-                    direction = new Vector(pan_speed, 0);
+                    direction = new Vector(camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
             else if (e.code == "ArrowRight") {
                 if (camera_speed < max_camera_speed) {
-                    direction = new Vector(-pan_speed, 0);
+                    direction = new Vector(-camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
