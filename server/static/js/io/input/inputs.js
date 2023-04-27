@@ -20,14 +20,15 @@ class Input {
 
 export class UIButton {
 
-    constructor(width, height, position_top, position_left) {
-        this.button = document.createElement("button");
-        this.button.style.position = "absolute";
-        this.button.style.width = width;
-        this.button.style.height = height;
-        this.button.style.top = position_top;
-        this.button.style.left = position_left;
-        this.button.innerHTML = "Click me now!";
-        document.body.appendChild(this.button);
+    constructor(width, height, position_left, position_top, icon, on_click) {
+        this.element = document.createElement("button");
+        this.element.style.position = "absolute";
+        this.element.style.width = width;
+        this.element.style.height = height;
+        this.element.style.left = position_left;
+        this.element.style.top = position_top;
+        this.element.src = icon;
+        this.element.onclick = on_click;
+        document.body.appendChild(this.element);
     }
 }

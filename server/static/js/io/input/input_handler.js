@@ -1,7 +1,8 @@
 import {MoveTask} from "../../data/tasks.js";
 import {Position, Vector} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
-import {UIButton} from "../input/inputs.js";
+import {ButtonPane} from "./user_interface.js";
+import {UIButton} from "./inputs.js";
 
 class InputHandler {
 
@@ -30,6 +31,7 @@ class InputHandler {
             this.game_display.height = window.innerHeight;
             this.game_display.element.width = window.innerWidth;
             this.game_display.element.height = window.innerHeight;
+            this.initialize_ui();
         });
     }
 
@@ -100,15 +102,21 @@ class InputHandler {
                 }
             });
             if (clicked_person !== null) {
+                this.ui.forEach((pane) => {
+                    pane.visible(true);
+                });
                 this.active_entity["person"] = clicked_person;
-                this.current_task = MoveTask // TODO This should not be here! Get this information from the elsif statement below, from a button!
             }
         } else if (this.current_task == null) {
-            // TODO Get from clicked button.
+            // Unselect person
+            this.active_entity["person"] = null;
         } else {
             this.active_entity["person"].task_list.push(new this.current_task(clicked_world_coords));
             this.active_entity["person"] = null;
             this.current_task = null;
+            this.ui.forEach((pane) => {
+                pane.visible(false);
+            });
         }
     }
 
@@ -116,6 +124,8 @@ class InputHandler {
         let hover_world_coords = this.mouseclick_to_world_coordinates(event);
         this.active_entity["field"] = hover_world_coords;
     }
+
+    initialize_ui() {}
 
     initialize() {
         this.init_scroll_listener();
@@ -131,16 +141,53 @@ export class LagerInputHandler extends InputHandler {
 
     constructor(world, game_display, active_entity) {
         super(world, game_display, active_entity);
+        this.ui = [];
     }
 
     initialize_ui() {
-        button = new UIButton("10vw", "10vw", "50vh", "90vw");
+        this.ui.forEach((pane) => {
+            pane.clear();
+        });
+        this.ui = [];
+        let screen_height = this.game_display.height;
+        let screen_width = this.game_display.width;
+        let button_width = Math.min(screen_width*0.1, 100);
+        let command_pane = new ButtonPane(
+            screen_width-((2 + 0.2)*button_width), 
+            screen_height*0.5, 
+            2, 
+            5, 
+            Math.min(screen_width*0.1, 100));
+        command_pane.add(() => {this.current_task = MoveTask});
+        command_pane.add(() => {console.log("1")});
+        command_pane.add(() => {console.log("2")});
+        command_pane.add(() => {console.log("3")});
+        command_pane.add(() => {console.log("4")});
+        command_pane.add(() => {console.log("5")});
+        command_pane.visible(false);
 
+        this.ui.push(command_pane);
+
+        let inventory_pane = new ButtonPane(
+            screen_width*0.2, 
+            screen_height*0.9, 
+            6, 
+            1, 
+            Math.min(screen_width*0.1, 100));
+        inventory_pane.add(() => {console.log("0")});
+        inventory_pane.add(() => {console.log("1")});
+        inventory_pane.add(() => {console.log("2")});
+        inventory_pane.add(() => {console.log("3")});
+        inventory_pane.add(() => {console.log("4")});
+        inventory_pane.add(() => {console.log("5")});
+        inventory_pane.visible(false);
+
+        this.ui.push(inventory_pane);
     }
 
     initialize() {
         super.initialize();
-        initialize_ui();
+        this.initialize_ui();
     }
 }
 
