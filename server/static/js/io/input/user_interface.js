@@ -27,7 +27,7 @@ export class ButtonPane {
         }
         let pos_x = this.origin_left + x*(this.btn_width + this.padding);
         let pos_y = this.origin_top + y*(this.btn_height + this.padding);
-        let button = new UIButton(this.btn_width, this.btn_height, pos_x, pos_y, "/img/icon.png", on_click);
+        let button = new UIButton(this.btn_width, this.btn_height, pos_x, pos_y, "/img/inventory_slot.png", on_click);
         this.buttons[y*this.width + x] = button;
     }
 

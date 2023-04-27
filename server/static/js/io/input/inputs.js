@@ -15,9 +15,6 @@ class Input {
 }
 
 
-// <button type="button" style="color: white; visibility: visible; position: absolute; top: 50vh; left: 0;">Click me!</button>
-
-
 export class UIButton {
 
     constructor(width, height, position_left, position_top, icon, on_click) {
@@ -27,7 +24,8 @@ export class UIButton {
         this.element.style.height = height;
         this.element.style.left = position_left;
         this.element.style.top = position_top;
-        this.element.src = icon;
+        this.element.style.background = "url(" + icon + ")";
+        // TODO this.element.style.backgroundSize = width ?
         this.element.onclick = on_click;
         document.body.appendChild(this.element);
     }
