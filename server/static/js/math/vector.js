@@ -30,6 +30,10 @@ export class Vector {
     abs() {
         return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
     }
+
+    round() {
+        return new Vector(Math.round(this.x), Math.round(this.y), Math.round(this.z));
+    }
 }
 
 
