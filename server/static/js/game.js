@@ -15,6 +15,11 @@ const WORLD_DIMENSIONS = [128, 128]; // TODO Make dynamic?
 export class Game {
 
     constructor() {
+        // These two values will be updated every loop.
+        this.time_at_start_of_iteration = new Date();
+        this.dt = 0;
+
+        // Define people.
         let person_1 = new Woelfling(new Position(-1, 3));
         let person_2 = new Jupfi(new Position(-2, -3));
         let person_3 = new Pfadi(new Position(4, 3));
@@ -22,18 +27,20 @@ export class Game {
         let person_5 = new Leiter(new Position(2, -3));
         let people = [person_1, person_2, person_3, person_4, person_5];
 
+        // Define tents.
         let leiter_jurte = new LeiterJurte(new Position(7, 6));
         let rover_zelt = new RoverZelt(new Position(-5, 3));
         let tents = [leiter_jurte, rover_zelt];
 
+        // Define campfires.
         let campfire_1 = new Lagerfeuer(new Position(0, 0));
         let campfire_2 = new Lagerfeuer(new Position(50, 40));
         let campfires = [campfire_1, campfire_2];
-        //                           ^ added for testing -> TODO Fix flames, not drawn at the moment!
 
+        // Define trees. TODO Rename/Move this function.
         let trees = test_create_random_tree_distribution(WORLD_DIMENSIONS);
-        //                ^ TODO Rename/Move this function.
 
+        // ... 
         this.world = new World(WORLD_DIMENSIONS, people, tents, trees, campfires);
         this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL); // <- TODO Use `let game_display` here instead?
         this.io = new IO(this.world, this.game_display);
@@ -55,6 +62,11 @@ export class Game {
             }
         });
         this.io.renderer.game_display.frame_idx += 1;
+
+        // Calculate temporal difference between start & end of iteration.
+        let time_at_end_of_iteration = new Date();
+        this.dt = time_at_end_of_iteration - this.time_at_start_of_iteration;
+        this.time_at_start_of_iteration = time_at_end_of_iteration;
     }
 
     run() {
