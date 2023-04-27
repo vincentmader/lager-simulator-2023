@@ -67,23 +67,21 @@ export class Game {
 
 const test_create_random_tree_distribution = (world_dimensions) => {
     const NR_OF_TREES = 500;
+    const MINIMUM_DISTANCE_FROM_WORLD_ORIGIN = 20;
     let trees = [];
     for (let idx = 0; idx < NR_OF_TREES; idx++) {
-        // Choose position randomly (in polar coordinates).
-        let [r_min, r_max] = [20, (world_dimensions[0] / 2 - 1) * Math.sqrt(2)];
-        let r = r_min + Math.random() * (r_max - r_min),
-            phi = Math.random() * 2 * Math.PI;
-        // Convert to cartesian coordinates.
-        let x = r * Math.cos(phi),
-            y = r * Math.sin(phi);
-        if (Math.abs(x) >= world_dimensions[0] / 2 - 1 || Math.abs(y) >= world_dimensions[1] / 2 - 1) {continue;}
-        let position = new Position(Math.round(x), Math.round(y));
+        // Choose position randomly.
+        let x = (2 * Math.random() - 1) * (world_dimensions[0] / 2 - 1);
+        let y = (2 * Math.random() - 1) * (world_dimensions[1] / 2 - 1);
+        let position = new Position(x, y).round();
+        // Check if position is inside the "Lagerplatz"
+        let r = position.abs();
+        if (r < MINIMUM_DISTANCE_FROM_WORLD_ORIGIN) {continue;}
         // Get random tree texture.
         let texture_idx = random_randint(1, 6);
         let texture = "/img/sprites/structures/trees/tree_" + texture_idx + ".png";
-        // Push tree to array.
-        let tree = new Tree(position, texture);
-        trees.push(tree);
+        // Push tree to `trees` array.
+        trees.push(new Tree(position, texture));
     }
     trees = trees.sort((tree_a, tree_b) => {
         return (tree_a.position.x + tree_a.position.y) - (tree_b.position.x + tree_b.position.y);
