@@ -54,8 +54,8 @@ export class Renderer {
         this.world.campfires.forEach((campfire) => {
             this.draw_campfire(campfire);
         });
-        if (this.draw_frame_idx) {
-            this.draw_frame_idx();
+        if (this.draw_fps) {
+            this.draw_fps();
         }
 
         // TODO Remove this again (temporary test).
@@ -149,10 +149,11 @@ export class Renderer {
         this.game_display.ctx.drawImage(image, x, y, w, h);
     }
 
-    draw_frame_idx() {
+    draw_fps() {
         let font_size = 30;
         let position = new Position(10, font_size);
-        let text_content = this.game_display.frame_idx;
+        let fps = 1 / this.game_display.dt
+        let text_content = Math.round(fps) + " fps";
         this.game_display.ctx.font = font_size + "px " + "sans-serif";
         this.game_display.ctx.fillStyle = "white";
         this.game_display.ctx.textAlign = "left";

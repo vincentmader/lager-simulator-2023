@@ -22,7 +22,7 @@ export class GameDisplay {
 
         this.display_origin = new Position(0, 0);
         this.camera_velocity = new Vector(0, 0);
-        this.frame_idx = 0;
+        this.dt = 0;
 
         // this._setup_sliders();
         // this._setup_checkboxes();

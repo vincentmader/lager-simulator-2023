@@ -61,11 +61,11 @@ export class Game {
                 person.task_list.shift();
             }
         });
-        this.io.renderer.game_display.frame_idx += 1;
+        this.io.renderer.game_display.dt = this.dt;
 
         // Calculate temporal difference between start & end of iteration.
         let time_at_end_of_iteration = new Date();
-        this.dt = time_at_end_of_iteration - this.time_at_start_of_iteration;
+        this.dt = (time_at_end_of_iteration - this.time_at_start_of_iteration) / 1000;
         this.time_at_start_of_iteration = time_at_end_of_iteration;
     }
 
