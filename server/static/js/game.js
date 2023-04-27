@@ -9,6 +9,8 @@ import {IO} from "./io/io.js";
 import {RoverZelt, LeiterJurte, Lagerfeuer, Tree} from "./data/entities/structures.js";
 
 const INITIAL_ZOOM_LEVEL = 20;
+const WORLD_DIMENSIONS = [128, 128]; // TODO Make dynamic?
+
 
 export class Game {
 
@@ -29,10 +31,10 @@ export class Game {
         let campfires = [campfire_1, campfire_2];
         //                           ^ added for testing -> TODO Fix flames, not drawn at the moment!
 
-        let trees = test_create_random_tree_distribution();
+        let trees = test_create_random_tree_distribution(WORLD_DIMENSIONS);
         //                ^ TODO Rename/Move this function.
 
-        this.world = new World(people, tents, trees, campfires);
+        this.world = new World(WORLD_DIMENSIONS, people, tents, trees, campfires);
         this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL); // <- TODO Use `let game_display` here instead?
         this.io = new IO(this.world, this.game_display);
         this.task_executor = new TaskExecutor(this.world);
@@ -63,17 +65,18 @@ export class Game {
     }
 }
 
-const test_create_random_tree_distribution = () => {
-    const NR_OF_TREES = 300;
+const test_create_random_tree_distribution = (world_dimensions) => {
+    const NR_OF_TREES = 500;
     let trees = [];
     for (let idx = 0; idx < NR_OF_TREES; idx++) {
         // Choose position randomly (in polar coordinates).
-        let [r_min, r_max] = [20, 64 - 1];
+        let [r_min, r_max] = [20, (world_dimensions[0] / 2 - 1) * Math.sqrt(2)];
         let r = r_min + Math.random() * (r_max - r_min),
             phi = Math.random() * 2 * Math.PI;
         // Convert to cartesian coordinates.
         let x = r * Math.cos(phi),
             y = r * Math.sin(phi);
+        if (Math.abs(x) >= world_dimensions[0] / 2 - 1 || Math.abs(y) >= world_dimensions[1] / 2 - 1) {continue;}
         let position = new Position(Math.round(x), Math.round(y));
         // Get random tree texture.
         let texture_idx = random_randint(1, 6);

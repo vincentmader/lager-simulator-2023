@@ -1,11 +1,11 @@
 import {FloorGrid} from "./floor_grid.js";
 
 export const dt = 1; // TODO Make dynamic.
-export const N = 128;
 
 export class World {
 
     constructor(
+        dimensions,
         people,
         tents,
         trees,
@@ -16,7 +16,7 @@ export class World {
         this.trees = trees;
         this.campfires = campfires;
 
-        this.dimensions = [N, N]; // TODO Make dynamic?
+        this.dimensions = dimensions;
         this.floor_grid = new FloorGrid(this.dimensions);
         // TODO ^ Is this the right location for storing the `FloorGrid`?
     }
