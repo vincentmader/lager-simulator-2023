@@ -19,28 +19,12 @@ export class Game {
         this.time_at_start_of_iteration = new Date();
         this.dt = 0;
 
-        // Define people.
-        let person_1 = new Woelfling(new Position(-1, 3));
-        let person_2 = new Jupfi(new Position(-2, -3));
-        let person_3 = new Pfadi(new Position(4, 3));
-        let person_4 = new Rover(new Position(-4, -3));
-        let person_5 = new Leiter(new Position(2, -3));
-        let people = [person_1, person_2, person_3, person_4, person_5];
+        // Define entities.
+        let tents = initialize_list_of_tents();
+        let people = initialize_list_of_people();
+        let campfires = initialize_list_of_campfires();
+        let trees = initialize_list_of_trees(WORLD_DIMENSIONS);
 
-        // Define tents.
-        let leiter_jurte = new LeiterJurte(new Position(7, 6));
-        let rover_zelt = new RoverZelt(new Position(-5, 3));
-        let tents = [leiter_jurte, rover_zelt];
-
-        // Define campfires.
-        let campfire_1 = new Lagerfeuer(new Position(0, 0));
-        let campfire_2 = new Lagerfeuer(new Position(50, 40));
-        let campfires = [campfire_1, campfire_2];
-
-        // Define trees. TODO Rename/Move this function.
-        let trees = test_create_random_tree_distribution(WORLD_DIMENSIONS);
-
-        // ... 
         this.world = new World(WORLD_DIMENSIONS, people, tents, trees, campfires);
         this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL); // <- TODO Use `let game_display` here instead?
         this.io = new IO(this.world, this.game_display);
@@ -77,7 +61,7 @@ export class Game {
     }
 }
 
-const test_create_random_tree_distribution = (world_dimensions) => {
+const initialize_list_of_trees = (world_dimensions) => {
     const NR_OF_TREES = 500;
     const MINIMUM_DISTANCE_FROM_WORLD_ORIGIN = 20;
     let trees = [];
@@ -101,3 +85,40 @@ const test_create_random_tree_distribution = (world_dimensions) => {
     // TODO Only use free tiles for a tree, a tree takes up 3x3 tiles. => No overlapping trees
     return trees;
 };
+
+const initialize_list_of_tents = () => {
+    // TODO Rename classes: `RoverZelt` -> name of actual tent. (Jurte, GJ, "WeissZelt1", ...)
+    let woelflings_zelt = new RoverZelt(new Position(-10, 8));
+    let jupfi_zelt = new RoverZelt(new Position(-11, 3));
+    let pfadi_zelt = new RoverZelt(new Position(-10, -2));
+    let rover_zelt = new LeiterJurte(new Position(-3, -10));
+    let leiter_jurte = new LeiterJurte(new Position(3, -9));
+    let tents = [woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt, leiter_jurte];
+    tents = tents.sort((tent_a, tent_b) => {
+        return (tent_a.position.x + tent_a.position.y) - (tent_b.position.x + tent_b.position.y);
+    });
+    return tents;
+}
+
+const initialize_list_of_people = () => {
+    let w1 = new Woelfling(new Position(2, 5));
+    let w2 = new Woelfling(new Position(1, 5));
+    let w3 = new Woelfling(new Position(-1, 5));
+    let j1 = new Jupfi(new Position(0, 5));
+    let p1 = new Pfadi(new Position(5, 0));
+    let p2 = new Pfadi(new Position(5, 1));
+    let r1 = new Rover(new Position(5, 2));
+    let l1 = new Leiter(new Position(5, -1));
+    let l2 = new Leiter(new Position(-5, 0));
+    let l3 = new Leiter(new Position(-5, 1));
+    let people = [w1, w2, w3, j1, p1, p2, r1, l1, l2, l3];
+    return people;
+}
+
+const initialize_list_of_campfires = () => {
+    let campfire_1 = new Lagerfeuer(new Position(0, 0));
+    let campfire_2 = new Lagerfeuer(new Position(50, 40));
+    let campfires = [campfire_1, campfire_2];
+    return campfires;
+
+}
