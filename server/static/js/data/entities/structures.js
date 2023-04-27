@@ -9,6 +9,14 @@ export class Entity {
     }
 }
 
+export class Lightsource {
+    constructor(position, intensity, color) {
+        this.position = position;
+        this.intensity = intensity;
+        this.color = color;
+    }
+}
+
 export class Zelt extends Entity {
     constructor(position, bounding_box_dims, texture, texture_origin) {
         super(position, bounding_box_dims, texture, texture_origin);
@@ -58,6 +66,7 @@ export class Lagerfeuer extends Entity {
         this.animation_offset = 70;
         this.particle_cache = [];
         this.lighting_cache = [];
+        this.wood_amount = 5;
     }
 }
 

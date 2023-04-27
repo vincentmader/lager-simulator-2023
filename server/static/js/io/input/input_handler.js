@@ -1,6 +1,7 @@
 import {MoveTask} from "../../data/tasks.js";
 import {Position, Vector} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
+import {UIButton} from "../input/inputs.js";
 
 class InputHandler {
 
@@ -130,6 +131,16 @@ export class LagerInputHandler extends InputHandler {
 
     constructor(world, game_display, active_entity) {
         super(world, game_display, active_entity);
+    }
+
+    initialize_ui() {
+        button = new UIButton("10vw", "10vw", "50vh", "90vw");
+
+    }
+
+    initialize() {
+        super.initialize();
+        initialize_ui();
     }
 }
 

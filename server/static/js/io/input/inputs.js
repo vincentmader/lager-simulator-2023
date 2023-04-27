@@ -14,53 +14,20 @@ class Input {
     }
 }
 
-export class Slider extends Input {
 
-    constructor(
-        element_id,
-        {
-            oninput = () => {},
-            onchange = () => {},
-            onclick = () => {},
-            min = 0,
-            max = 100,
-            step = 1,
-            value = 50,
-        }
-    ) {
-        super(
-            element_id,
-            {
-                oninput: oninput,
-                onchange: onchange,
-                onclick: onclick,
-            }
-        );
-        this.element.min = min;
-        this.element.max = max;
-        this.element.step = step;
-        this.element.value = value;
-    }
-}
+// <button type="button" style="color: white; visibility: visible; position: absolute; top: 50vh; left: 0;">Click me!</button>
 
-export class CheckBox extends Input {
-    constructor(
-        element_id,
-        {
-            oninput = () => {},
-            onchange = () => {},
-            onclick = () => {},
-            checked = false,
-        }
-    ) {
-        super(
-            element_id,
-            {
-                oninput: oninput,
-                onchange: onchange,
-                onclick: onclick,
-            }
-        );
-        this.element.checked = checked;
+
+export class UIButton {
+
+    constructor(width, height, position_top, position_left) {
+        this.button = document.createElement("button");
+        this.button.style.position = "absolute";
+        this.button.style.width = width;
+        this.button.style.height = height;
+        this.button.style.top = position_top;
+        this.button.style.left = position_left;
+        this.button.innerHTML = "Click me now!";
+        document.body.appendChild(this.button);
     }
 }
