@@ -112,7 +112,8 @@ export class Renderer {
         ]
         this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
         for (let idx = 1; idx < corners.length; idx++) {
-            this.game_display.ctx.lineTo(corners[idx].x, corners[idx].y);
+            let to = corners[idx];
+            this.game_display.ctx.lineTo(to.x, to.y);
         }
         this.game_display.ctx.closePath();
         this.game_display.ctx.fill();
@@ -265,14 +266,12 @@ export class Renderer {
 
         this.game_display.ctx.strokeStyle = color;
         this.game_display.ctx.beginPath();
-        for (let idx = 0; idx < corners.length; idx++) {
-            let from = corners[idx];
-            let jdx = idx + 1;
-            if (jdx == corners.length) {jdx = 0;}
-            let to = corners[jdx];
-            this.game_display.ctx.moveTo(from.x, from.y);
+        this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
+        for (let idx = 1; idx < corners.length; idx++) {
+            let to = corners[idx];
             this.game_display.ctx.lineTo(to.x, to.y);
         }
+        this.game_display.ctx.closePath();
         this.game_display.ctx.stroke();
     }
 
@@ -288,13 +287,11 @@ export class Renderer {
         this.game_display.ctx.fillStyle = color;
         this.game_display.ctx.beginPath();
         this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
-        for (let idx = 0; idx < corners.length; idx++) {
-            let from = corners[idx];
-            let jdx = idx + 1;
-            if (jdx == corners.length) {jdx = 0;}
-            let to = corners[jdx];
+        for (let idx = 1; idx < corners.length; idx++) {
+            let to = corners[idx];
             this.game_display.ctx.lineTo(to.x, to.y);
         }
+        this.game_display.ctx.closePath();
         this.game_display.ctx.fill();
     }
 
