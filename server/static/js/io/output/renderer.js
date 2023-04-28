@@ -42,8 +42,10 @@ export class Renderer {
             this.draw_rectangle(rect, "white");
         }
 
+        let active_person = this.active_entity["person"];
         this.world.people.forEach((person) => {
-            this.draw_person(person);
+            let is_activated = active_person == person;
+            this.draw_person(person, is_activated);
         });
         this.world.trees.forEach((tree) => {
             this.draw_tree(tree);
@@ -59,39 +61,6 @@ export class Renderer {
         }
         this.draw_cardinal_direction_labels();
 
-        // TODO Remove this again (temporary test).
-        // this.world.structures.forEach((structure) => {
-        //     switch (structure.constructor) {
-        //         case Lagerfeuer:
-        //             this.draw_fire(structure);
-        //             break
-        //         case WoelflingsZelt:
-        //         case JupfiZelt:
-        //         case PfadiZelt:
-        //         case RoverZelt:
-        //         case LeiterJurte:
-        //             this.draw_tent(structure);
-        //             break
-        //     }
-        // });
-
-        if (this.active_entity["person"] !== null) {
-            let active_person = this.active_entity["person"];
-            let speech_bubble_position = new Position(
-                active_person.position.x,
-                active_person.position.y,
-                active_person.position.z + 5,
-            )
-            let speech_bubble_width = 15 * this.game_display.zoom_level,
-                speech_bubble_height = 5 * this.game_display.zoom_level;
-            let speech_bubble_text_content = "Lass uns mal Tequila trinken!";
-            this.draw_speech_bubble(
-                speech_bubble_position,
-                speech_bubble_width,
-                speech_bubble_height,
-                speech_bubble_text_content
-            );
-        }
         // this.game_display.element.style.filter = "grayscale(100%)";
     }
 
@@ -121,10 +90,14 @@ export class Renderer {
         this.draw_text(position, text, {font_size: font_size, color: "black"});
     }
 
-    draw_person(person) {
+    draw_person(person, is_activated = false) {
         let position = person.position;
         let color = person.color;
-        this.draw_circle(position, 0.5 * this.game_display.zoom_level, color);
+        let player_radius = 0.5 * this.game_display.zoom_level;
+        if (is_activated) {
+            this.draw_circle(position, player_radius*1.1, "white");
+        }
+        this.draw_circle(position, player_radius, color);
         // let dimensions = [100, 100]; // TODO Define image size.
         // let src = "/img/sprite.png";
         // this.draw_image(src, position, dimensions);
