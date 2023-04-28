@@ -37,13 +37,11 @@ export class ButtonPane {
         }
     }
 
-    visible(visible) {
-        let visible_str = "hidden";
-        if (visible) {
-            visible_str = "visible";
-        }
+    visible(is_visible) {
+        let visibility_category = is_visible ? "visible" : "hidden";
         for (let idx in this.buttons) {
-            this.buttons[idx].element.style.visibility = visible_str;
+            let btn = this.buttons[idx];
+            btn.element.style.visibility = visibility_category;
         }
     }
 }

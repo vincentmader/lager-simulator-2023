@@ -42,8 +42,10 @@ export class Renderer {
             this.draw_rectangle(rect, "white");
         }
 
+        let active_person = this.active_entity["person"];
         this.world.people.forEach((person) => {
-            this.draw_person(person);
+            let is_selected = (active_person !== null) && (active_person == person);
+            this.draw_person(person, is_selected);
         });
         this.world.trees.forEach((tree) => {
             this.draw_tree(tree);
@@ -58,39 +60,6 @@ export class Renderer {
             this.draw_fps();
         }
 
-        // TODO Remove this again (temporary test).
-        // this.world.structures.forEach((structure) => {
-        //     switch (structure.constructor) {
-        //         case Lagerfeuer:
-        //             this.draw_fire(structure);
-        //             break
-        //         case WoelflingsZelt:
-        //         case JupfiZelt:
-        //         case PfadiZelt:
-        //         case RoverZelt:
-        //         case LeiterJurte:
-        //             this.draw_tent(structure);
-        //             break
-        //     }
-        // });
-
-        if (this.active_entity["person"] !== null) {
-            let active_person = this.active_entity["person"];
-            let speech_bubble_position = new Position(
-                active_person.position.x,
-                active_person.position.y,
-                active_person.position.z + 5,
-            )
-            let speech_bubble_width = 15 * this.game_display.zoom_level,
-                speech_bubble_height = 5 * this.game_display.zoom_level;
-            let speech_bubble_text_content = "Lass uns mal Tequila trinken!";
-            this.draw_speech_bubble(
-                speech_bubble_position,
-                speech_bubble_width,
-                speech_bubble_height,
-                speech_bubble_text_content
-            );
-        }
         // this.game_display.element.style.filter = "grayscale(100%)";
     }
 
@@ -119,10 +88,14 @@ export class Renderer {
         this.draw_text(position, text, {font_size: font_size, color: "black"});
     }
 
-    draw_person(person) {
+    draw_person(person, is_selected) {
         let position = person.position;
         let color = person.color;
-        this.draw_circle(position, 0.5 * this.game_display.zoom_level, color);
+        let person_radius = 0.5 * this.game_display.zoom_level;
+        if (is_selected) {
+            this.draw_circle(position, person_radius*1.1, "white");
+        }
+        this.draw_circle(position, person_radius, color);
         // let dimensions = [100, 100]; // TODO Define image size.
         // let src = "/img/sprite.png";
         // this.draw_image(src, position, dimensions);
@@ -264,14 +237,12 @@ export class Renderer {
 
         this.game_display.ctx.strokeStyle = color;
         this.game_display.ctx.beginPath();
-        for (let idx = 0; idx < corners.length; idx++) {
-            let from = corners[idx];
-            let jdx = idx + 1;
-            if (jdx == corners.length) {jdx = 0;}
-            let to = corners[jdx];
-            this.game_display.ctx.moveTo(from.x, from.y);
+        this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
+        for (let idx = 1; idx < corners.length; idx++) {
+            let to = corners[idx];
             this.game_display.ctx.lineTo(to.x, to.y);
         }
+        this.game_display.ctx.closePath();
         this.game_display.ctx.stroke();
     }
 
@@ -287,13 +258,11 @@ export class Renderer {
         this.game_display.ctx.fillStyle = color;
         this.game_display.ctx.beginPath();
         this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
-        for (let idx = 0; idx < corners.length; idx++) {
-            let from = corners[idx];
-            let jdx = idx + 1;
-            if (jdx == corners.length) {jdx = 0;}
-            let to = corners[jdx];
+        for (let idx = 1; idx < corners.length; idx++) {
+            let to = corners[idx];
             this.game_display.ctx.lineTo(to.x, to.y);
         }
+        this.game_display.ctx.closePath();
         this.game_display.ctx.fill();
     }
 
