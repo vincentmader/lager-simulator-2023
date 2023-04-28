@@ -112,6 +112,7 @@ class InputHandler {
         } else if (this.current_task == null) {
             // Clicking on empty tile unselects current selection.
             this.active_entity["person"] = null;
+            this.ui.visible(false);
         } else {
             // Provide positions to current task if one is currently selected.
             if (left_button_clicked) {

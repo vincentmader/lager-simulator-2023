@@ -9,6 +9,13 @@ export class UserInputHandler {
         this.panes = [];
     }
 
+    overwrite_command(task_cls) {
+        // Reset task list of active person.
+        this.input_handler.active_entity["person"].task_list.reset();
+        // Assign new task.
+        this.input_handler.current_task = task_cls;
+    }
+
     initialize() {
         this.panes.forEach((pane) => {
             pane.clear();
@@ -23,8 +30,8 @@ export class UserInputHandler {
             2, 
             5, 
             Math.min(screen_width*0.1, 100));
-        command_pane.add(() => {this.input_handler.current_task = MoveTask});
-        command_pane.add(() => {this.input_handler.current_task = PatrolTask});
+        command_pane.add(() => { this.overwrite_command(MoveTask)});
+        command_pane.add(() => {this.overwrite_command(PatrolTask)});
         command_pane.add(() => {console.log("command 2")});
         command_pane.add(() => {console.log("command 3")});
         command_pane.add(() => {console.log("command 4")});
