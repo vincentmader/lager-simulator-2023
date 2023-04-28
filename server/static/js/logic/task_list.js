@@ -1,4 +1,4 @@
-import {MoveTask, IdleTask} from "../data/tasks.js";
+import {MoveTask, IdleTask, PatrolTask} from "../data/tasks.js";
 import {CollisionDetector} from "./collision.js"
 import {Position, Vector} from "../math/vector.js";
 
@@ -63,6 +63,8 @@ export class TaskExecutor {
             case IdleTask:
                 return true;
             case MoveTask:
+                return this.execute_move(task);
+            case PatrolTask:
                 return this.execute_move(task);
         }
     }

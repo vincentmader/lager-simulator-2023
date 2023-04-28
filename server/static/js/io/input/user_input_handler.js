@@ -1,5 +1,5 @@
 import {ButtonPane} from "./user_interface.js";
-import {MoveTask} from "../../data/tasks.js";
+import {MoveTask, PatrolTask} from "../../data/tasks.js";
 
 export class UserInputHandler {
 
@@ -24,11 +24,11 @@ export class UserInputHandler {
             5, 
             Math.min(screen_width*0.1, 100));
         command_pane.add(() => {this.input_handler.current_task = MoveTask});
-        command_pane.add(() => {console.log("1")});
-        command_pane.add(() => {console.log("2")});
-        command_pane.add(() => {console.log("3")});
-        command_pane.add(() => {console.log("4")});
-        command_pane.add(() => {console.log("5")});
+        command_pane.add(() => {this.input_handler.current_task = PatrolTask});
+        command_pane.add(() => {console.log("command 2")});
+        command_pane.add(() => {console.log("command 3")});
+        command_pane.add(() => {console.log("command 4")});
+        command_pane.add(() => {console.log("command 5")});
         command_pane.visible(false);
 
         this.panes.push(command_pane);
@@ -39,12 +39,12 @@ export class UserInputHandler {
             6, 
             1, 
             Math.min(screen_width*0.1, 100));
-        inventory_pane.add(() => {console.log("0")});
-        inventory_pane.add(() => {console.log("1")});
-        inventory_pane.add(() => {console.log("2")});
-        inventory_pane.add(() => {console.log("3")});
-        inventory_pane.add(() => {console.log("4")});
-        inventory_pane.add(() => {console.log("5")});
+        inventory_pane.add(() => {console.log("item 0")});
+        inventory_pane.add(() => {console.log("item 1")});
+        inventory_pane.add(() => {console.log("item 2")});
+        inventory_pane.add(() => {console.log("item 3")});
+        inventory_pane.add(() => {console.log("item 4")});
+        inventory_pane.add(() => {console.log("item 5")});
         inventory_pane.visible(false);
 
         this.panes.push(inventory_pane);

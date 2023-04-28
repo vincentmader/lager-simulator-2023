@@ -1,6 +1,7 @@
 import {Position, Vector} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 import {UserInputHandler} from "./user_input_handler.js";
+import {ExecutionMode} from "../../data/tasks.js";
 
 class InputHandler {
 
@@ -79,8 +80,7 @@ class InputHandler {
                     direction = new Vector(-camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
-            }
-            else {
+            } else {
                 return;
                 // TODO: Define all other key-press events.
             }
@@ -92,26 +92,39 @@ class InputHandler {
 
     handle_task_lifecycle(event) {
         let clicked_world_coords = this.mouseclick_to_world_coordinates(event);
+        let left_button_clicked = event.button == 0;
+        let right_button_clicked = event.button == 2;
+        if (right_button_clicked) {
+            this.current_task = null;
+            this.active_entity["person"] = null;
+            this.ui.visible(false);
+            return;
+        }
         if (this.active_entity["person"] == null) {
-            let clicked_person = null;
-            this.world.people.forEach((person) => {
-                if (person.bounding_box.contains(clicked_world_coords)) {
-                    clicked_person = person;
-                    return;
-                }
-            });
-            if (clicked_person !== null) {
+            // Select person if no person is active.
+            let clicked_person = this.world.people.find(person => 
+                person.bounding_box.contains(clicked_world_coords)
+            );
+            if (clicked_person) {
                 this.ui.visible(true);
                 this.active_entity["person"] = clicked_person;
             }
         } else if (this.current_task == null) {
-            // Clicking on empty tile unselects current selection
+            // Clicking on empty tile unselects current selection.
             this.active_entity["person"] = null;
         } else {
-            this.active_entity["person"].task_list.push(new this.current_task(clicked_world_coords));
-            this.active_entity["person"] = null;
-            this.current_task = null;
-            this.ui.visible(false);
+            // Provide positions to current task if one is currently selected.
+            if (left_button_clicked) {
+                // Push new task with left click.
+                this.active_entity["person"].task_list.push(new this.current_task(clicked_world_coords));
+            }
+            let currently_executed_task = this.active_entity["person"].task_list.peek();
+            if (currently_executed_task.execution_mode == ExecutionMode.SINGLE) {
+                // If no more parameters to give, or task is aborted, unselect person and task.
+                this.current_task = null;
+                this.active_entity["person"] = null;
+                this.ui.visible(false);
+            }
         }
     }
 
@@ -125,7 +138,9 @@ class InputHandler {
         this.init_scroll_listener();
         this.init_keyboard_listener();
         this.init_window_resize_listener();
-        this.game_display.element.addEventListener("click", (event) => {this.handle_task_lifecycle(event)});
+        // Disable right-click in-game.
+        document.addEventListener("contextmenu", event => event.preventDefault());
+        this.game_display.element.addEventListener("mousedown", (event) => {this.handle_task_lifecycle(event)});
         this.game_display.element.addEventListener("mousemove", (event) => {this.handle_mouse_movement(event)});
         this.ui.initialize();
     }
