@@ -19,7 +19,7 @@ export class ButtonPane {
         this.buttons = {};
     }
 
-    add(on_click, x=-1, y=-1) {
+    add(on_click, texture="/img/inventory_slot.png", x=-1, y=-1) {
         let num_buttons = Object.keys(this.buttons).length;
         if (x < 0 || y < 0) {
             x = num_buttons % this.width;
@@ -27,7 +27,7 @@ export class ButtonPane {
         }
         let pos_x = this.origin_left + x*(this.btn_width + this.padding);
         let pos_y = this.origin_top + y*(this.btn_height + this.padding);
-        let button = new UIButton(this.btn_width, this.btn_height, pos_x, pos_y, "/img/inventory_slot.png", on_click);
+        let button = new UIButton(this.btn_width, this.btn_height, pos_x, pos_y, texture, on_click);
         this.buttons[y*this.width + x] = button;
     }
 

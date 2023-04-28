@@ -30,8 +30,8 @@ export class UserInputHandler {
             2, 
             5, 
             Math.min(screen_width*0.1, 100));
-        command_pane.add(() => { this.overwrite_command(MoveTask)});
-        command_pane.add(() => {this.overwrite_command(PatrolTask)});
+        command_pane.add(() => { this.overwrite_command(MoveTask)}, "/img/move_icon.png");
+        command_pane.add(() => {this.overwrite_command(PatrolTask)}, "/img/patrol_icon.png");
         command_pane.add(() => {console.log("command 2")});
         command_pane.add(() => {console.log("command 3")});
         command_pane.add(() => {console.log("command 4")});
