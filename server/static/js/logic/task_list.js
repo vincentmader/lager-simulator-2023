@@ -65,7 +65,12 @@ export class TaskExecutor {
             case MoveTask:
                 return this.execute_move(task);
             case PatrolTask:
-                return this.execute_move(task);
+                // Loop patrol points.
+                let patrol_towards_next_point = this.execute_move(task);
+                if (!patrol_towards_next_point) {
+                    task.owner.task_list.circular_shift();
+                }
+                return true;
         }
     }
 }
