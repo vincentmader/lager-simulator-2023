@@ -1,12 +1,13 @@
-import {MoveTask} from "../../data/tasks.js";
 import {Position, Vector} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
+import {UserInputHandler} from "./user_input_handler.js";
 
 class InputHandler {
 
     constructor(world, game_display, active_entity) {
         this.world = world;
         this.game_display = game_display;
+        this.ui = new UserInputHandler(game_display, this);
         this.coordinate_transformer = new CoordinateTransformer(world, game_display);
         this.active_entity = active_entity;
         this.current_task = null;
@@ -29,6 +30,7 @@ class InputHandler {
             this.game_display.height = window.innerHeight;
             this.game_display.element.width = window.innerWidth;
             this.game_display.element.height = window.innerHeight;
+            this.ui.initialize(); // TODO This is temporary and horrible! Should re-initialize the button-sizes and -positions, not remove and re-add all of them!
         });
     }
 
@@ -99,15 +101,17 @@ class InputHandler {
                 }
             });
             if (clicked_person !== null) {
+                this.ui.visible(true);
                 this.active_entity["person"] = clicked_person;
-                this.current_task = MoveTask // TODO This should not be here! Get this information from the elsif statement below, from a button!
             }
         } else if (this.current_task == null) {
-            // TODO Get from clicked button.
+            // Clicking on empty tile unselects current selection
+            this.active_entity["person"] = null;
         } else {
             this.active_entity["person"].task_list.push(new this.current_task(clicked_world_coords));
             this.active_entity["person"] = null;
             this.current_task = null;
+            this.ui.visible(false);
         }
     }
 
@@ -116,12 +120,14 @@ class InputHandler {
         this.active_entity["field"] = hover_world_coords;
     }
 
+
     initialize() {
         this.init_scroll_listener();
         this.init_keyboard_listener();
         this.init_window_resize_listener();
         this.game_display.element.addEventListener("click", (event) => {this.handle_task_lifecycle(event)});
         this.game_display.element.addEventListener("mousemove", (event) => {this.handle_mouse_movement(event)});
+        this.ui.initialize();
     }
 }
 

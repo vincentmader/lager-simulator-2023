@@ -93,11 +93,11 @@ export class Renderer {
     draw_person(person, is_activated = false) {
         let position = person.position;
         let color = person.color;
-        let player_radius = 0.5 * this.game_display.zoom_level;
+        let person_radius = 0.5 * this.game_display.zoom_level;
         if (is_activated) {
-            this.draw_circle(position, player_radius*1.1, "white");
+            this.draw_circle(position, person_radius*1.1, "white");
         }
-        this.draw_circle(position, player_radius, color);
+        this.draw_circle(position, person_radius, color);
         // let dimensions = [100, 100]; // TODO Define image size.
         // let src = "/img/sprite.png";
         // this.draw_image(src, position, dimensions);
@@ -146,8 +146,8 @@ export class Renderer {
             fire.animation_clock = Date.now();
             fire.particle_cache = [];
             for (let i = 0; i < 25; i++) {
-                let offset_x = gaussian_random(0, 2);
-                let offset_z = Math.abs(gaussian_random(0, 1.5));
+                let offset_x = gaussian_random(0, fire.wood_amount/4);
+                let offset_z = Math.abs(gaussian_random(0, fire.wood_amount/3));
                 let radius = Math.max(3, (10 - offset_z) * 0.6 + Math.random()) * scale * this.game_display.zoom_level * 0.1;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
@@ -170,7 +170,7 @@ export class Renderer {
     }
 
     draw_point_light(light) {
-        let radius = Math.ceil(light.bounding_box.dimensions[0]);
+        let radius = Math.ceil(light.bounding_box.dimensions[0] * light.wood_amount/5);
         let update_lighting_values = false;
         if (Date.now() > light.animation_clock + light.animation_offset) {
             update_lighting_values = true;
