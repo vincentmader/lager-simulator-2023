@@ -44,8 +44,8 @@ export class Renderer {
 
         let active_person = this.active_entity["person"];
         this.world.people.forEach((person) => {
-            let is_selected = (active_person !== null) && (active_person == person);
-            this.draw_person(person, is_selected);
+            let is_activated = active_person == person;
+            this.draw_person(person, is_activated);
         });
         this.world.trees.forEach((tree) => {
             this.draw_tree(tree);
@@ -59,6 +59,7 @@ export class Renderer {
         if (this.draw_fps) {
             this.draw_fps();
         }
+        this.draw_cardinal_direction_labels();
 
         // this.game_display.element.style.filter = "grayscale(100%)";
     }
@@ -80,7 +81,8 @@ export class Renderer {
         ]
         this.game_display.ctx.moveTo(corners[0].x, corners[0].y);
         for (let idx = 1; idx < corners.length; idx++) {
-            this.game_display.ctx.lineTo(corners[idx].x, corners[idx].y);
+            let to = corners[idx];
+            this.game_display.ctx.lineTo(to.x, to.y);
         }
         this.game_display.ctx.closePath();
         this.game_display.ctx.fill();
@@ -88,11 +90,11 @@ export class Renderer {
         this.draw_text(position, text, {font_size: font_size, color: "black"});
     }
 
-    draw_person(person, is_selected) {
+    draw_person(person, is_activated = false) {
         let position = person.position;
         let color = person.color;
         let person_radius = 0.5 * this.game_display.zoom_level;
-        if (is_selected) {
+        if (is_activated) {
             this.draw_circle(position, person_radius*1.1, "white");
         }
         this.draw_circle(position, person_radius, color);
@@ -336,6 +338,27 @@ export class Renderer {
 
     draw_bounding_box(entity) {
         this.draw_rectangle(entity.bounding_box, "red");
+    }
+
+    draw_cardinal_direction_labels() {
+        // TODO North is in the bottom left at the moment. Change?
+        let x_max = this.world.dimensions[0] / 2,
+            y_max = this.world.dimensions[1] / 2,
+            delta = 5;
+        let positions = [
+            new Position(0, y_max + delta),
+            new Position(0, -(y_max + delta)),
+            new Position(x_max + delta, 0),
+            new Position(-(x_max + delta), 0)
+        ]
+        let labels = ["N", "S", "E", "W"];
+        [0, 1, 2, 3].forEach((i) => {
+            let position = positions[i];
+            let label = labels[i];
+            let color;
+            if (label == "N") {color = "red";} else {color = "white";}
+            this.draw_text(position, labels[i], {color: color});
+        });
     }
 }
 
