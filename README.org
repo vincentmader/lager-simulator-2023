@@ -120,9 +120,9 @@ _TODOs_:
 - [X] Feuer (Wind ausmachen)
 - [X] Zelt malen
 - [X] Personen anklicken
-- [ ] Personen abklicken
+- [X] Personen abklicken
 - [X] Debug-Option: Hit-Boxes anzeigen
-- [ ] Debug-Option: FPS anzeigen
+- [X] Debug-Option: FPS anzeigen
 - [ ] Texturen: Pixel-Zahl == Tile-Size
 - [ ] Debug-Option: Show 1x1x1 cube
 - [ ] Debug-Option in den Canvas hinein schieben
@@ -134,7 +134,7 @@ _TODOs_:
 - [X] Diskrete Bewegung
 - [ ] Charakter-Sprites
 - [ ] Direction-Enum
-- [ ] Himmelsrichtungen in den Ecken anzeigen (bei rauszoomen)
+- [X] Himmelsrichtungen in den Ecken anzeigen (bei rauszoomen)
 - [ ] Hike
 - [ ] Fog of War
 - [ ] Taschenlampen-Kegel
