@@ -77,15 +77,16 @@ export class Renderer {
 
 
         this.world.people.forEach((person) => {
-            illuminate_region_around(person.position, person.vision * zoom);
+            illuminate_region_around(person.position, 0, 2*Math.PI, person.vision * zoom);
         });
 
         this.world.campfires.forEach((light) => {
-            illuminate_region_around(light.position, light.wood_amount * zoom);
+            illuminate_region_around(light.position, 0, 2*Math.PI, 
+                (light.wood_amount + Math.sin(Date.now()*0.01)*0.05) * zoom);
         });
         fog.globalCompositeOperation = "source-over";
 
-        function illuminate_region_around(position, radius) {
+        function illuminate_region_around(position, direction, spread, radius) {
             let canvas_position = coordinate_transformer.cartesian_to_isometric(position);
             canvas_position = coordinate_transformer.world_to_game_display(canvas_position, zoom);
 
@@ -94,7 +95,8 @@ export class Renderer {
             fog_gd.addColorStop(1, "rgba(0, 0, 0, 1)");
             fog.fillStyle = fog_gd;
             fog.beginPath();
-            fog.arc(canvas_position.x, canvas_position.y, radius, 0, 2*Math.PI);
+            fog.arc(canvas_position.x, canvas_position.y, radius, direction*spread, (direction+1)*spread);
+            fog.lineTo(canvas_position.x, canvas_position.y);
             fog.closePath();
             fog.fill();
         }
