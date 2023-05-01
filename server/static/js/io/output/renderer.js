@@ -60,8 +60,44 @@ export class Renderer {
             this.draw_fps();
         }
         this.draw_cardinal_direction_labels();
+        this.draw_fog_of_war();
 
         // this.game_display.element.style.filter = "grayscale(100%)";
+    
+    }
+
+    draw_fog_of_war() {
+        let fog = this.game_display.fog_ctx;
+        let coordinate_transformer = this.coordinate_transformer;
+        let zoom = this.game_display.zoom_level;
+
+        fog.fillStyle = "rgba(0, 0, 0, 0.5)";
+        fog.fillRect(0, 0, this.game_display.width, this.game_display.height);
+        fog.globalCompositeOperation = "destination-out";
+
+
+        this.world.people.forEach((person) => {
+            illuminate_region_around(person.position, person.vision * zoom);
+        });
+
+        this.world.campfires.forEach((light) => {
+            illuminate_region_around(light.position, light.wood_amount * zoom);
+        });
+        fog.globalCompositeOperation = "source-over";
+
+        function illuminate_region_around(position, radius) {
+            let canvas_position = coordinate_transformer.cartesian_to_isometric(position);
+            canvas_position = coordinate_transformer.world_to_game_display(canvas_position, zoom);
+
+            let fog_gd = fog.createRadialGradient(canvas_position.x, canvas_position.y, radius, canvas_position.x, canvas_position.y, radius/1.2);
+            fog_gd.addColorStop(0, "rgba(0, 0, 0, 0)");
+            fog_gd.addColorStop(1, "rgba(0, 0, 0, 1)");
+            fog.fillStyle = fog_gd;
+            fog.beginPath();
+            fog.arc(canvas_position.x, canvas_position.y, radius, 0, 2*Math.PI);
+            fog.closePath();
+            fog.fill();
+        }
     }
 
     draw_speech_bubble(position, width, height, text) {
@@ -139,7 +175,7 @@ export class Renderer {
         let x = fire.position.x,
             y = fire.position.y,
             z = fire.position.z;
-        this.draw_point_light(fire);
+        // this.draw_point_light(fire);
         let scale = 0.2;
         // Define fire particle locatins.
         if (Date.now() > fire.animation_clock + fire.animation_offset) {
@@ -316,6 +352,7 @@ export class Renderer {
         let W = this.game_display.width,
             H = this.game_display.height;
         this.game_display.ctx.clearRect(0, 0, W, H);
+        this.game_display.fog_ctx.clearRect(0, 0, W, H);
     }
 
     draw_tent(tent) {

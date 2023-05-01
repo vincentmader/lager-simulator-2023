@@ -3,10 +3,11 @@ import {TaskList} from "../../logic/task_list.js";
 
 class Person extends Entity {
 
-    constructor(position, speed) {
+    constructor(position, speed, vision) {
         super(position, [0.99, 0.99], "");
         this.speed = speed;
         this.task_list = new TaskList(this, []);
+        this.vision = vision;
     }
 
     move(new_position) {
@@ -18,14 +19,14 @@ class Person extends Entity {
 export class Woelfling extends Person {
 
     constructor(position) {
-        super(position, 0.05);
+        super(position, 0.05, 4);
         this.color = "orange";
     }
 }
 export class Jupfi extends Person {
 
     constructor(position) {
-        super(position, 0.075);
+        super(position, 0.075, 5);
         this.color = "blue";
     }
 }
@@ -33,7 +34,7 @@ export class Jupfi extends Person {
 export class Pfadi extends Person {
 
     constructor(position) {
-        super(position, 0.1);
+        super(position, 0.1, 6);
         this.color = "green";
     }
 }
@@ -41,7 +42,7 @@ export class Pfadi extends Person {
 export class Rover extends Person {
 
     constructor(position) {
-        super(position, 0.125);
+        super(position, 0.125, 7);
         this.color = "red";
     }
 }
@@ -49,7 +50,7 @@ export class Rover extends Person {
 export class Leiter extends Person {
 
     constructor(position) {
-        super(position, 0.15);
+        super(position, 0.15, 8);
         this.color = "gray";
     }
 }
