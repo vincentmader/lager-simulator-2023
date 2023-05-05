@@ -1,6 +1,6 @@
 import {MoveTask, IdleTask, PatrolTask} from "../data/tasks.js";
 import {CollisionDetector} from "./collision.js"
-import {Position, Vector} from "../math/vector.js";
+import {Direction, Position, Vector} from "../math/vector.js";
 
 
 var dt = 1; // TODO
@@ -17,13 +17,21 @@ export class TaskExecutor {
     execute_move(task) {
         let person = task.owner
         let step_size = person.speed * dt;
-        let diff = task.target_position.sub(person.position);
+        let diff = Direction.from_vector(task.target_position.sub(person.position));
         let distance = Math.abs(diff.x) + Math.abs(diff.y);
         let move_along_x_axis = Math.abs(diff.x) >= step_size;
-        let discrete_diff = new Vector(
+        let discrete_diff = new Direction(
             Math.sign(diff.x) * move_along_x_axis,
             Math.sign(diff.y) * (1-move_along_x_axis),
         );
+        let target_direction = discrete_diff.to_radian() + Math.PI/4;
+        let turn_difference = (target_direction - person.direction);
+        person.direction += Math.max(0.1*Math.sign(turn_difference), turn_difference)
+        let future_turn_difference = (target_direction - person.direction);
+        if (Math.abs(future_turn_difference) > Math.abs(turn_difference)) {
+            person.direction = target_direction;
+        }
+
         let direction = new Position(
             discrete_diff.x * step_size,
             discrete_diff.y * step_size,
