@@ -15,35 +15,41 @@ export class TaskExecutor {
     }
 
     execute_move(task) {
-        let person = task.owner
+        let person = task.owner;
         let step_size = person.speed * dt;
+        let rotation_speed = dt * Math.PI * 0.05;
         let diff = Direction.from_vector(task.target_position.sub(person.position));
-        let distance = Math.abs(diff.x) + Math.abs(diff.y);
         let move_along_x_axis = Math.abs(diff.x) >= step_size;
-        let discrete_diff = new Direction(
+        let current_movement_direction = new Direction(
             Math.sign(diff.x) * move_along_x_axis,
             Math.sign(diff.y) * (1-move_along_x_axis),
         );
-        let target_direction = discrete_diff.to_radian() + Math.PI/4;
-        let turn_difference = (target_direction - person.direction);
-        person.direction += Math.max(0.1*Math.sign(turn_difference), turn_difference)
-        let future_turn_difference = (target_direction - person.direction);
-        if (Math.abs(future_turn_difference) > Math.abs(turn_difference)) {
-            person.direction = target_direction;
+        if (current_movement_direction.length() > step_size) {
+            person.direction = current_movement_direction.discretize();
         }
 
-        let direction = new Position(
-            discrete_diff.x * step_size,
-            discrete_diff.y * step_size,
+        let rotation_difference = person.direction - person.rotation;
+        // Handle case when transitioning beyond 2*Math.PI.
+        if (Math.abs(rotation_difference) >= Math.PI) {
+            rotation_difference += -Math.sign(rotation_difference) * 2*Math.PI;
+        }
+        person.rotation += Math.sign(rotation_difference) * rotation_speed;
+        if (Math.abs(rotation_difference) < rotation_speed) {
+            person.rotation = person.direction;
+        }
+
+        let stride = new Position(
+            current_movement_direction.x * step_size,
+            current_movement_direction.y * step_size,
         );
         let future_position = new Position(
-            person.position.x + direction.x,
-            person.position.y + direction.y
+            person.position.x + stride.x,
+            person.position.y + stride.y
         );
         let collision = false;
         this.collision_detector.get_neighbouring_cells(person.position).forEach((cell) => {
             let relevant_entities = cell._entities.filter((obj) => obj !== person);
-            if (person.bounding_box.overlaps_towards_direction(relevant_entities.map(e => e.bounding_box), direction)) {
+            if (person.bounding_box.overlaps_towards_direction(relevant_entities.map(e => e.bounding_box), stride)) {
                 collision = true;
             }
         });
@@ -51,18 +57,20 @@ export class TaskExecutor {
         if (!collision
             && this.world.floor_grid.boundary.contains(future_position)) {
             // Math.sqrt(2) since both axes may have an offset of < step-size due to smooth movement.
-            if (distance >= Math.sqrt(2) * step_size) {
+            if (diff.length() >= Math.sqrt(2) * step_size) {
                 person.move(future_position);
                 this.collision_detector.update_cells(person);
                 return true;
             } else {
                 person.move(task.target_position);
+                person.rotation = person.direction;
             }
         }
         person.move(new Position(
             Math.round(person.position.x), 
             Math.round(person.position.y)
         ));
+        person.rotation = person.direction;
         return false;
     }
 

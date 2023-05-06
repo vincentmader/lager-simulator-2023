@@ -77,7 +77,7 @@ export class Renderer {
 
 
         this.world.people.forEach((person) => {
-            illuminate_region_around(person.position, person.direction, Math.PI/4, person.vision * zoom);
+            illuminate_region_around(person.position, person.rotation+Math.PI/4, Math.PI/4, person.vision * zoom);
         });
 
         this.world.campfires.forEach((light) => {
@@ -89,7 +89,7 @@ export class Renderer {
         function illuminate_region_around(position, direction, spread, radius) {
             let canvas_position = coordinate_transformer.cartesian_to_isometric(position);
             canvas_position = coordinate_transformer.world_to_game_display(canvas_position, zoom);
-            let ellipse_radius = radius / (Math.sqrt(Math.tan(Math.PI/4)^2) + 0.25)
+            let ellipse_radius = radius / (Math.sqrt(Math.tan(Math.PI/4)**2) + 0.25)
             // let isometric_angle_radian = Math.PI*(2*direction+1)/4
 
             let fog_gd = fog.createRadialGradient(canvas_position.x, canvas_position.y, ellipse_radius*2, canvas_position.x, canvas_position.y, ellipse_radius*2);

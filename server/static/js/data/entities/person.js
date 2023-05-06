@@ -10,6 +10,7 @@ class Person extends Entity {
         this.task_list = new TaskList(this, []);
         this.vision = vision;
         this.direction = direction;
+        this.rotation = direction;
     }
 
     move(new_position) {

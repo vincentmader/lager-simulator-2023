@@ -46,17 +46,18 @@ export class Position extends Vector {
 }
 
 export class Direction extends Vector {
-    static RIGHT = Math.PI/4;
-    static BOTTOM = Math.PI*3/4;
-    static LEFT = Math.PI*5/4;
-    static TOP =Math.PI*7/4;
 
     constructor(x, y, z = 0) {
         super(x, y, z);
     }
 
+    length() {
+        let length = Math.sqrt(this.x**2 + this.y**2 + this.z**2);
+        return length;
+    }
+
     normalize() {
-        let length = Math.sqrt(this.x^2 + this.y^2 + this.z^2);
+        let length = this.length();
         return new Direction(this.x/length, this.y/length, this.z/length);
     }
 
@@ -65,7 +66,25 @@ export class Direction extends Vector {
     * Retrieves the radian of the angle of direction.
     */
     to_radian() {
-        return Math.atan(this.y/this.x);
+        let radian = Math.atan2(this.y, this.x);
+        if (radian < 0) {
+            radian += 2*Math.PI;
+        }
+        return radian;
+    }
+
+    discretize() {
+        let eps = 0.1*Math.PI
+        if (Math.abs(this.x) < eps && Math.abs(this.y-1) < eps) {
+            return DirectionEnum.BOTTOM;
+        } else if (Math.abs(this.x) < eps && Math.abs(this.y+1) < eps) {
+            return DirectionEnum.TOP;
+        } else if (Math.abs(this.x-1) < eps && Math.abs(this.y) < eps) {
+            return DirectionEnum.RIGHT;
+        } else if (Math.abs(this.x+1) < eps && Math.abs(this.y) < eps) {
+            return DirectionEnum.LEFT;
+        }
+        throw new Error("Vector (" + this.x + ", " + this.y + ", " + this.z + ") is not 2d-discretizable!");
     }
 
     angle_between(direction) {
@@ -78,4 +97,17 @@ export class Direction extends Vector {
     static from_vector(vector) {
         return new Direction(vector.x, vector.y, vector.z);
     }
+
+    static from_radian(radian) {
+        let x = Math.cos(radian);
+        let y = Math.sin(radian);
+        return new Direction(x, y);
+    }
+}
+
+export const DirectionEnum = {
+    RIGHT: 0,
+    BOTTOM: Math.PI/2,
+    LEFT: Math.PI,
+    TOP: Math.PI*3/2
 }

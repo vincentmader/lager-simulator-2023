@@ -7,7 +7,7 @@ import {run_tests} from "./tests/main.js";
 import {random_randint} from "./math/random.js";
 import {IO} from "./io/io.js";
 import {RoverZelt, LeiterJurte, Lagerfeuer, Tree} from "./data/entities/structures.js";
-import {Direction} from "./math/vector.js";
+import {DirectionEnum} from "./math/vector.js";
 
 const INITIAL_ZOOM_LEVEL = 20;
 const WORLD_DIMENSIONS = [128, 128]; // TODO Make dynamic?
@@ -102,16 +102,16 @@ const initialize_list_of_tents = () => {
 }
 
 const initialize_list_of_people = () => {
-    let w1 = new Woelfling(new Position(2, 5), Direction.TOP);
-    let w2 = new Woelfling(new Position(1, 5), Direction.TOP);
-    let w3 = new Woelfling(new Position(-1, 5), Direction.TOP);
-    let j1 = new Jupfi(new Position(0, 5), Direction.TOP);
-    let p1 = new Pfadi(new Position(5, 0), Direction.LEFT);
-    let p2 = new Pfadi(new Position(5, 1), Direction.LEFT);
-    let r1 = new Rover(new Position(5, 2), Direction.LEFT);
-    let l1 = new Leiter(new Position(5, -1), Direction.LEFT);
-    let l2 = new Leiter(new Position(-5, 0), Direction.RIGHT);
-    let l3 = new Leiter(new Position(-5, 1), Direction.RIGHT);
+    let w1 = new Woelfling(new Position(2, 5), DirectionEnum.TOP);
+    let w2 = new Woelfling(new Position(1, 5), DirectionEnum.TOP);
+    let w3 = new Woelfling(new Position(-1, 5), DirectionEnum.TOP);
+    let j1 = new Jupfi(new Position(0, 5), DirectionEnum.TOP);
+    let p1 = new Pfadi(new Position(5, 0), DirectionEnum.LEFT);
+    let p2 = new Pfadi(new Position(5, 1), DirectionEnum.LEFT);
+    let r1 = new Rover(new Position(5, 2), DirectionEnum.LEFT);
+    let l1 = new Leiter(new Position(5, -1), DirectionEnum.LEFT);
+    let l2 = new Leiter(new Position(-5, 0), DirectionEnum.RIGHT);
+    let l3 = new Leiter(new Position(-5, 1), DirectionEnum.RIGHT);
     let people = [w1, w2, w3, j1, p1, p2, r1, l1, l2, l3];
     return people;
 }
