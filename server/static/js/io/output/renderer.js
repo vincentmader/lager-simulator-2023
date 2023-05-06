@@ -81,8 +81,10 @@ export class Renderer {
         });
 
         this.world.campfires.forEach((light) => {
+            let amplitude = 0.05;
+            let frequency = 0.01;
             illuminate_region_around(light.position, 0, 2*Math.PI, 
-                (light.wood_amount + Math.sin(Date.now()*0.01)*0.05) * zoom);
+                (light.wood_amount + Math.sin(Date.now()*frequency)*amplitude) * zoom);
         });
         fog.globalCompositeOperation = "source-over";
 
@@ -90,7 +92,6 @@ export class Renderer {
             let canvas_position = coordinate_transformer.cartesian_to_isometric(position);
             canvas_position = coordinate_transformer.world_to_game_display(canvas_position, zoom);
             let ellipse_radius = radius / (Math.sqrt(Math.tan(Math.PI/4)**2) + 0.25)
-            // let isometric_angle_radian = Math.PI*(2*direction+1)/4
 
             let fog_gd = fog.createRadialGradient(canvas_position.x, canvas_position.y, ellipse_radius*2, canvas_position.x, canvas_position.y, ellipse_radius*2);
             fog_gd.addColorStop(0, "rgba(0, 0, 0, 0)");
@@ -98,7 +99,6 @@ export class Renderer {
             fog.beginPath();
             fog.ellipse(canvas_position.x, canvas_position.y, ellipse_radius*2, ellipse_radius, 0, direction-spread/2, direction+spread/2);
 
-            // fog.arc(canvas_position.x, canvas_position.y, radius, isometric_angle_radian[direction]-spread/2, isometric_angle_radian[direction]+spread/2);
             fog.lineTo(canvas_position.x, canvas_position.y);
             fog.closePath();
             fog.fill();
