@@ -19,12 +19,13 @@ export class TaskExecutor {
         let step_size = person.speed * dt;
         let rotation_speed = dt * Math.PI * 0.05;
         let diff = Direction.from_vector(task.target_position.sub(person.position));
+        // Always move along x axis first.
         let move_along_x_axis = Math.abs(diff.x) >= step_size;
         let current_movement_direction = new Direction(
             Math.sign(diff.x) * move_along_x_axis,
             Math.sign(diff.y) * (1-move_along_x_axis),
         );
-        if (current_movement_direction.length() > step_size) {
+        if (current_movement_direction.length() > 0.01) {
             person.direction = current_movement_direction.discretize();
         }
 

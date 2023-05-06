@@ -9,18 +9,18 @@ export class Vector {
     mul(other) {
         if (other instanceof Vector || other instanceof Position) {
             // TODO ^ Check whether second term is needed.
-            return new Vector(this.x * other.x, this.y * other.y, this.z * other.z);
+            return new this.constructor(this.x * other.x, this.y * other.y, this.z * other.z);
         } else {
-            return new Vector(this.x * other, this.y * other, this.z * other);
+            return new this.constructor(this.x * other, this.y * other, this.z * other);
         }
     }
 
     add(other) {
-        return new Vector(this.x + other.x, this.y + other.y, this.z + other.z);
+        return new this.constructor(this.x + other.x, this.y + other.y, this.z + other.z);
     }
 
     sub(other) {
-        return new Vector(this.x - other.x, this.y - other.y, this.z - other.z);
+        return new this.constructor(this.x - other.x, this.y - other.y, this.z - other.z);
     }
 
     max() {
@@ -63,7 +63,7 @@ export class Direction extends Vector {
 
     /**
     * Assumes that the direction is only in the x/y plane.
-    * Retrieves the radian of the angle of direction.
+    * Retrieves the radian [0, 2*Math.PI) of the angle of direction.
     */
     to_radian() {
         let radian = Math.atan2(this.y, this.x);
@@ -73,6 +73,9 @@ export class Direction extends Vector {
         return radian;
     }
 
+    /**
+     * Returns the DirectionEnum which equals the Vector, if possible.
+     */
     discretize() {
         let eps = 0.1*Math.PI
         if (Math.abs(this.x) < eps && Math.abs(this.y-1) < eps) {
@@ -88,6 +91,7 @@ export class Direction extends Vector {
     }
 
     angle_between(direction) {
+        // TODO: Untested.
         return Math.atan((this.y*direction.x-this.x*direction.y)/(this.x*direction.x - this.y*direction.y));
     }
 
