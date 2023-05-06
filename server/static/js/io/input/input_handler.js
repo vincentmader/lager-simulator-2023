@@ -31,12 +31,14 @@ class InputHandler {
             this.game_display.height = window.innerHeight;
             this.game_display.element.width = window.innerWidth;
             this.game_display.element.height = window.innerHeight;
+            this.game_display.fog_element.width = window.innerWidth;
+            this.game_display.fog_element.height = window.innerHeight;
             this.ui.initialize(); // TODO This is temporary and horrible! Should re-initialize the button-sizes and -positions, not remove and re-add all of them!
         });
     }
 
     init_scroll_listener() {
-        this.game_display.element.addEventListener('wheel', (event) => {
+        this.game_display.fog_element.addEventListener('wheel', (event) => {
             if (event.deltaY > 0
                 && this.game_display.zoom_level < 101) {
                 this.game_display.zoom_level *= 1.02;
@@ -141,8 +143,8 @@ class InputHandler {
         this.init_window_resize_listener();
         // Disable right-click in-game.
         document.addEventListener("contextmenu", event => event.preventDefault());
-        this.game_display.element.addEventListener("mousedown", (event) => {this.handle_task_lifecycle(event)});
-        this.game_display.element.addEventListener("mousemove", (event) => {this.handle_mouse_movement(event)});
+        this.game_display.fog_element.addEventListener("mousedown", (event) => {this.handle_task_lifecycle(event)});
+        this.game_display.fog_element.addEventListener("mousemove", (event) => {this.handle_mouse_movement(event)});
         this.ui.initialize();
     }
 }

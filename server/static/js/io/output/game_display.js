@@ -6,11 +6,14 @@ export class GameDisplay {
         this.element = document.getElementById("canvas-0");
         this.ctx = this.element.getContext('2d');
 
+        this.fog_element = document.getElementById("fog_canvas");
+        this.fog_ctx = this.fog_element.getContext("2d");
+
         this.width = window.innerWidth;
         this.height = window.innerHeight;
 
-        this.element.width = this.width;
-        this.element.height = this.height;
+        this.element.width = this.fog_element.width = this.width;
+        this.element.height = this.fog_element.height = this.height;
 
         this.zoom_level = zoom_level;
         this.draw_floor_grid = false;
