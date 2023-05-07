@@ -58,7 +58,11 @@ export class Direction extends Vector {
 
     normalize() {
         let length = this.length();
-        return new Direction(this.x/length, this.y/length, this.z/length);
+        return new this.constructor(this.x/length, this.y/length, this.z/length);
+    }
+
+    scale(scalar) {
+        return new this.constructor(this.x*scalar, this.y*scalar, this.z*scalar);
     }
 
     /**
@@ -77,7 +81,7 @@ export class Direction extends Vector {
      * Returns the DirectionEnum which equals the Vector, if possible.
      */
     discretize() {
-        let eps = 0.1*Math.PI
+        let eps = 0.1*Math.PI;
         if (Math.abs(this.x) < eps && Math.abs(this.y-1) < eps) {
             return DirectionEnum.BOTTOM;
         } else if (Math.abs(this.x) < eps && Math.abs(this.y+1) < eps) {

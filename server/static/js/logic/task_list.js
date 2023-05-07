@@ -1,5 +1,6 @@
 import {MoveTask, IdleTask, PatrolTask} from "../data/tasks.js";
 import {CollisionDetector} from "./collision.js"
+import {XFirstMovementPlanningStrategy} from "./movement.js"
 import {Direction, Position, Vector} from "../math/vector.js";
 
 
@@ -12,25 +13,32 @@ export class TaskExecutor {
     constructor(world) {
         this.world = world;
         this.collision_detector = new CollisionDetector(this.world);
+        this.movement_planning_strategy = new XFirstMovementPlanningStrategy(world, this.collision_detector);
     }
 
     execute_move(task) {
         let person = task.owner;
-        let step_size = person.speed * dt;
         let rotation_speed = dt * Math.PI * 0.05;
-        let diff = Direction.from_vector(task.target_position.sub(person.position));
-        // Always move along x axis first.
-        let move_along_x_axis = Math.abs(diff.x) >= step_size;
-        let current_movement_direction = new Direction(
-            Math.sign(diff.x) * move_along_x_axis,
-            Math.sign(diff.y) * (1-move_along_x_axis),
-        );
-        if (current_movement_direction.length() > 0.01) {
-            person.direction = current_movement_direction.discretize();
-        }
 
-        let rotation_difference = person.direction - person.rotation;
-        // Handle case when transitioning beyond 2*Math.PI.
+        this.handle_rotation(person, rotation_speed);
+
+        // Obstacle Avoidance
+        let step_size = person.speed * dt;
+        let [movement_finished, future_position] = this.movement_planning_strategy.execute(person, task.target_position, step_size)
+        let current_movement_direction = Direction.from_vector(future_position.sub(person.position)).scale(1/step_size);
+        try {
+            person.direction = current_movement_direction.discretize();
+        } catch (Error) {} // Do not change direction when stopping (current_movement_direction == 0)
+        person.move(future_position);
+        this.collision_detector.update_cells(person);
+
+        return movement_finished;
+    }
+
+    handle_rotation(person, rotation_speed) {
+        // Rotation handling
+        let rotation_difference = person.direction - person.rotation
+        // Handle case when transitioning beyond 2*Math.PI
         if (Math.abs(rotation_difference) >= Math.PI) {
             rotation_difference += -Math.sign(rotation_difference) * 2*Math.PI;
         }
@@ -38,47 +46,12 @@ export class TaskExecutor {
         if (Math.abs(rotation_difference) < rotation_speed) {
             person.rotation = person.direction;
         }
-
-        let stride = new Position(
-            current_movement_direction.x * step_size,
-            current_movement_direction.y * step_size,
-        );
-        let future_position = new Position(
-            person.position.x + stride.x,
-            person.position.y + stride.y
-        );
-        let collision = false;
-        this.collision_detector.get_neighbouring_cells(person.position).forEach((cell) => {
-            let relevant_entities = cell._entities.filter((obj) => obj !== person);
-            if (person.bounding_box.overlaps_towards_direction(relevant_entities.map(e => e.bounding_box), stride)) {
-                collision = true;
-            }
-        });
-
-        if (!collision
-            && this.world.floor_grid.boundary.contains(future_position)) {
-            // Math.sqrt(2) since both axes may have an offset of < step-size due to smooth movement.
-            if (diff.length() >= Math.sqrt(2) * step_size) {
-                person.move(future_position);
-                this.collision_detector.update_cells(person);
-                return true;
-            } else {
-                person.move(task.target_position);
-                person.rotation = person.direction;
-            }
-        }
-        person.move(new Position(
-            Math.round(person.position.x), 
-            Math.round(person.position.y)
-        ));
-        person.rotation = person.direction;
-        return false;
     }
 
     execute(task) {
         switch (task.constructor) {
             case IdleTask:
-                return true;
+                return false;
             case MoveTask:
                 return this.execute_move(task);
             case PatrolTask:
@@ -87,7 +60,7 @@ export class TaskExecutor {
                 if (!patrol_towards_next_point) {
                     task.owner.task_list.circular_shift();
                 }
-                return true;
+                return false;
         }
     }
 }

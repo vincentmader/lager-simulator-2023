@@ -42,7 +42,8 @@ export class Game {
 
         this.world.people.forEach((person) => {
             let task = person.task_list.peek();
-            if (!this.task_executor.execute(task)) {
+            let task_finished = this.task_executor.execute(task);
+            if (task_finished) {
                 person.task_list.shift();
             }
         });
