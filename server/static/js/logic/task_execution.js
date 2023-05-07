@@ -1,11 +1,10 @@
 import {MoveTask, IdleTask, PatrolTask} from "../data/tasks.js";
 import {CollisionDetector} from "./collision.js"
 import {XFirstMovementPlanningStrategy} from "./movement.js"
-import {Direction, Position, Vector} from "../math/vector.js";
+import {Direction} from "../math/vector.js";
 
 
 var dt = 1; // TODO
-var idle_task = new IdleTask();
 
 
 export class TaskExecutor {
@@ -62,43 +61,5 @@ export class TaskExecutor {
                 }
                 return false;
         }
-    }
-}
-
-
-export class TaskList {
-
-    constructor(owner, entries) {
-        this.owner = owner;
-        this._entries = entries;
-    }
-
-    push(task) {
-        task.owner = this.owner;
-        this._entries.push(task);
-    }
-
-    peek() {
-        if (this.is_executable()) {
-            return this._entries[0];
-        } else {
-            return idle_task;
-        }
-    }
-
-    shift() {
-        this._entries.shift();
-    }
-
-    circular_shift() {
-        this._entries.push(this._entries.shift());
-    }
-
-    reset() {
-        this._entries = [];
-    }
-
-    is_executable() {
-        return this._entries.length > 0;
     }
 }

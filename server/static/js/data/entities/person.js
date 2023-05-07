@@ -1,5 +1,5 @@
 import {Entity} from "./structures.js"
-import {TaskList} from "../../logic/task_execution.js";
+import {TaskList} from "../task_list.js";
 
 class Person extends Entity {
 
