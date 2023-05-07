@@ -5,7 +5,8 @@ class Item {
     }
 }
 
-class Teddy {
+
+export class Knife extends Item {
     constructor() {
         super("/img/sprites/items/knife.png", "/img/sprites/items/knife.png");
     }

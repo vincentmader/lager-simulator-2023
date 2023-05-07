@@ -109,6 +109,12 @@ class InputHandler {
             );
             if (clicked_person) {
                 this.ui.visible(true);
+                // TODO panes[1] = inventory_pane
+                let inventory_pane = this.ui.panes[1];
+                let items = clicked_person.inventory.items;
+                for (const [index, item] of Object.entries(items)) {
+                    inventory_pane.buttons[index].set_icon(item.icon_texture);
+                }
                 this.active_entity["person"] = clicked_person;
             }
         } else if (this.current_task == null) {

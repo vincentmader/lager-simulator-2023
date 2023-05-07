@@ -1,5 +1,6 @@
 import {Entity} from "./structures.js"
 import {TaskList} from "../task_list.js";
+import {Inventory} from "../inventory.js";
 
 class Person extends Entity {
 
@@ -10,6 +11,7 @@ class Person extends Entity {
         this.vision = vision;
         this.direction = direction;
         this.rotation = direction;
+        this.inventory = new Inventory();
     }
 
     move(new_position) {

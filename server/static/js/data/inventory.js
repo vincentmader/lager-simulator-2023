@@ -1,4 +1,4 @@
-class Inventory {
+export class Inventory {
 
     constructor() {
         this.size = 6;
@@ -10,7 +10,7 @@ class Inventory {
             if (index < 0) {
                 let success = false;
                 for (let i = 0; i < this.size; i++) {
-                    if (!this.items.hasKey(i)) {
+                    if (this.items[i] == undefined) {
                         this.items[i] = item;
                         success = true;
                         break;
@@ -20,7 +20,7 @@ class Inventory {
                     throw Error("Inventory already full!");
                 }
             } else {
-                if (!this.items.hasKey(index)) {
+                if (this.items[index] == undefined) {
                     this.items[index] = item;
                 } else {
                     throw Error("Inventory slot already occupied! by " + this.items[index]);
@@ -32,7 +32,7 @@ class Inventory {
     }
 
     remove_at(index) {
-        if(this.items.hasKey(index)) {
+        if(this.items[index] !== undefined) {
             let obj = this.items[index];
             delete this.items[index];
             return obj;
