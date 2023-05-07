@@ -1,6 +1,5 @@
 import {Entity} from "./structures.js"
-import {TaskList} from "../../logic/task_list.js";
-import {Direction} from "../../math/vector.js";
+import {TaskList} from "../../logic/task_execution.js";
 
 class Person extends Entity {
 

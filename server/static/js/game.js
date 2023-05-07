@@ -1,7 +1,7 @@
 import {World} from "./data/world.js";
 import {Woelfling, Jupfi, Pfadi, Rover, Leiter} from "./data/entities/person.js";
 import {GameDisplay} from "./io/output/game_display.js";
-import {TaskExecutor} from "./logic/task_list.js";
+import {TaskExecutor} from "./logic/task_execution.js";
 import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
 import {random_randint} from "./math/random.js";
