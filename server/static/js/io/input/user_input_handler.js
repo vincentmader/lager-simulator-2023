@@ -23,14 +23,14 @@ export class UserInputHandler {
         }
         let screen_height = this.game_display.height;
         let screen_width = this.game_display.width;
-        let button_width = Math.min(screen_width*0.1, 100);
+        let button_size = Math.min(screen_width*0.1, 100);
         this.panes["command"] = new ButtonPane(
-            screen_width-button_width*2, 
-            screen_height*0.5-button_width, 
+            screen_width-button_size*2, 
+            screen_height*0.5-button_size, 
             2, 
             3, 
-            button_width,
-            button_width,
+            button_size,
+            button_size,
             0
         );
         this.panes["command"].add(() => {this.overwrite_command(MoveTask)}, "/img/move_icon.png");
@@ -41,12 +41,12 @@ export class UserInputHandler {
         this.panes["command"].add(() => {console.log("command 5")});
 
         this.panes["inventory"] = new ButtonPane(
-            screen_width/2-3*button_width, 
-            screen_height-button_width, 
+            screen_width/2-3*button_size, 
+            screen_height-button_size, 
             6, 
             1, 
-            button_width,
-            button_width,
+            button_size,
+            button_size,
             0
         );
         this.panes["inventory"].add(() => {console.log("item 0")});
