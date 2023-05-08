@@ -58,16 +58,16 @@ class InputHandler {
             let max_camera_speed = 2; // TODO Adjust magic number.
             let camera_speed_increment = 3 / game_display.zoom_level; // TODO Ajust magic number.
             let direction;
-            // NOTE: x-direction is inverted, y-direction is not!
+            // NOTE: `direction` is inverted.
             if (e.code == "ArrowUp") {
                 if (camera_speed < max_camera_speed) {
-                    direction = new Vector(0, camera_speed_increment);
+                    direction = new Vector(0, -camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
             else if (e.code == "ArrowDown") {
                 if (camera_speed < max_camera_speed) {
-                    direction = new Vector(0, -camera_speed_increment);
+                    direction = new Vector(0, camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
@@ -104,7 +104,7 @@ class InputHandler {
         }
         if (this.active_entity["person"] == null) {
             // Select person if no person is active.
-            let clicked_person = this.world.people.find(person => 
+            let clicked_person = this.world.people.find(person =>
                 person.bounding_box.contains(clicked_world_coords)
             );
             if (clicked_person) {
