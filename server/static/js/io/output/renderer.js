@@ -78,7 +78,6 @@ export class Renderer {
         fog.fillRect(0, 0, this.game_display.width, this.game_display.height);
         fog.globalCompositeOperation = "destination-out";
 
-
         this.world.people.forEach((person) => {
             illuminate_region_around(person.position, person.rotation + Math.PI / 4, Math.PI / 4, person.vision * zoom);
         });
@@ -225,10 +224,12 @@ export class Renderer {
                 if (update_lighting_values) {
                     light.lighting_cache[lighting_cache_index] = (0.5 - (Math.abs(dx) + Math.abs(dy)) / (4 * radius) + Math.random() * 0.1)
                 }
-                this.fill_rectangle(new Rectangle(
-                    light.position.add(new Position(dx, dy)),
-                    [1, 1]),
-                    "rgba(255, 102, 0, " + light.lighting_cache[lighting_cache_index] + ")")
+                this.fill_rectangle(
+                    new Rectangle(
+                        light.position.add(new Position(dx, dy)),
+                        [1, 1]
+                    ), "rgba(255, 102, 0, " + light.lighting_cache[lighting_cache_index] + ")"
+                )
             }
         }
     }
@@ -334,10 +335,12 @@ export class Renderer {
             for (let y = 0; y < tiles; y++) {
                 let x_pos = this.world.dimensions[0] * ((x + 0.5) / tiles - 0.5) - 0.5;
                 let y_pos = this.world.dimensions[1] * ((y + 0.5) / tiles - 0.5) - 0.5;
-                this.draw_image("/img/grass.png", new Position(x_pos, y_pos), [
-                    tile_size,
-                    tile_size
-                ], [0.5, 0.5]);
+                this.draw_image(
+                    "/img/grass.png",
+                    new Position(x_pos, y_pos),
+                    [tile_size, tile_size],
+                    [0.5, 0.5]
+                );
             }
         }
     }

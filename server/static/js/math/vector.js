@@ -51,17 +51,17 @@ export class Direction extends Vector {
         super(x, y, z);
     }
 
-    length() {
+    length() {  // TODO Move to `Vector` class
         let length = Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
         return length;
     }
 
-    normalize() {
+    normalize() {  // TODO Move to `Vector` class
         let length = this.length();
         return new this.constructor(this.x / length, this.y / length, this.z / length);
     }
 
-    scale(scalar) {
+    scale(scalar) {  // TODO Move to `Vector` class
         return new this.constructor(this.x * scalar, this.y * scalar, this.z * scalar);
     }
 
@@ -82,13 +82,18 @@ export class Direction extends Vector {
      */
     discretize() {
         let eps = 0.1 * Math.PI;
+        // TODO Handle `z != 0`.
         if (Math.abs(this.x) < eps && Math.abs(this.y - 1) < eps) {
+            // console.log("N");
             return DirectionEnum.NORTH;
         } else if (Math.abs(this.x) < eps && Math.abs(this.y + 1) < eps) {
+            // console.log("S");
             return DirectionEnum.SOUTH;
         } else if (Math.abs(this.x - 1) < eps && Math.abs(this.y) < eps) {
+            // console.log("E");
             return DirectionEnum.EAST;
         } else if (Math.abs(this.x + 1) < eps && Math.abs(this.y) < eps) {
+            // console.log("W");
             return DirectionEnum.WEST;
         }
         throw new Error("Vector (" + this.x + ", " + this.y + ", " + this.z + ") is not 2d-discretizable!");
@@ -96,6 +101,7 @@ export class Direction extends Vector {
 
     angle_between(direction) {
         // TODO: Untested.
+        // NOTE: This will not work reliably: Use atan2 instead.
         return Math.atan((this.y * direction.x - this.x * direction.y) / (this.x * direction.x - this.y * direction.y));
     }
 
