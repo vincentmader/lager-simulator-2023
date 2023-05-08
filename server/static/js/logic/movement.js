@@ -28,7 +28,7 @@ export class XFirstMovementPlanningStrategy extends MovementPlanningStrategy {
         let move_along_x_axis = Math.abs(diff.x) >= step_size;
         let current_movement_direction = new Direction(
             Math.sign(diff.x) * move_along_x_axis,
-            Math.sign(diff.y) * (1-move_along_x_axis),
+            Math.sign(diff.y) * (1 - move_along_x_axis),
         );
         let stride = current_movement_direction.scale(step_size);
         let collision = false;
@@ -45,8 +45,8 @@ export class XFirstMovementPlanningStrategy extends MovementPlanningStrategy {
             || !this.world.floor_grid.boundary.contains(future_position)
             || diff.length() < Math.sqrt(2) * step_size) {
             future_position = new Position(
-                Math.round(person.position.x), 
-                Math.round(person.position.y)
+                Math.round(person.position.x),
+                Math.round(person.position.y),
             );
             movement_finished = true;
         }
