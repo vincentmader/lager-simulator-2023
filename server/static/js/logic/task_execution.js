@@ -25,7 +25,7 @@ export class TaskExecutor {
         // Obstacle Avoidance
         let step_size = person.speed * dt;
         let [movement_finished, future_position] = this.movement_planning_strategy.execute(person, task.target_position, step_size)
-        let current_movement_direction = Direction.from_vector(future_position.sub(person.position)).scale(1/step_size);
+        let current_movement_direction = Direction.from_vector(future_position.sub(person.position)).scale(1 / step_size);
         try {
             person.direction = current_movement_direction.discretize();
         } catch (Error) {} // Do not change direction when stopping (current_movement_direction == 0)
@@ -40,7 +40,7 @@ export class TaskExecutor {
         let rotation_difference = person.direction - person.rotation
         // Handle case when transitioning beyond 2*Math.PI
         if (Math.abs(rotation_difference) >= Math.PI) {
-            rotation_difference += -Math.sign(rotation_difference) * 2*Math.PI;
+            rotation_difference += -Math.sign(rotation_difference) * 2 * Math.PI;
         }
         person.rotation += Math.sign(rotation_difference) * rotation_speed;
         if (Math.abs(rotation_difference) < rotation_speed) {
