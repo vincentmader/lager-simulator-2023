@@ -18,6 +18,7 @@ class Person extends Entity {
         this.bounding_box.corners = this.bounding_box._corners();
     }
 }
+
 export class Woelfling extends Person {
 
     constructor(position, direction) {
@@ -25,6 +26,7 @@ export class Woelfling extends Person {
         this.color = "orange";
     }
 }
+
 export class Jupfi extends Person {
 
     constructor(position, direction) {
