@@ -6,7 +6,7 @@ import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
 import {random_randint} from "./math/random.js";
 import {IO} from "./io/io.js";
-import {RoverZelt, LeiterJurte, Lagerfeuer, Tree} from "./data/entities/structures.js";
+import {RoverZelt, LeiterJurte, Lagerfeuer, Tree, PfadiZelt} from "./data/entities/structures.js";
 import {DirectionEnum} from "./math/vector.js";
 
 const INITIAL_ZOOM_LEVEL = 20;
@@ -93,8 +93,8 @@ const initialize_list_of_tents = () => {
     let woelflings_zelt = new RoverZelt(new Position(-10, 8));
     let jupfi_zelt = new RoverZelt(new Position(-11, 3));
     let pfadi_zelt = new RoverZelt(new Position(-10, -2));
-    let rover_zelt = new LeiterJurte(new Position(-3, -10));
-    let leiter_jurte = new LeiterJurte(new Position(3, -9));
+    let rover_zelt = new PfadiZelt(new Position(-3, -10));
+    let leiter_jurte = new PfadiZelt(new Position(3, -9));
     let tents = [woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt, leiter_jurte];
     tents = tents.sort((tent_a, tent_b) => {
         return (tent_a.position.x + tent_a.position.y) - (tent_b.position.x + tent_b.position.y);

@@ -1,7 +1,7 @@
 import {Rectangle} from "../../math/rectangle.js";
 
 export class Entity {
-    constructor(position, bounding_box_dims, texture, texture_origin=[0.5, 0.5]) {
+    constructor(position, bounding_box_dims, texture, texture_origin = [0.5, 0.5]) {
         this.position = position;
         this.bounding_box = new Rectangle(this.position, bounding_box_dims);
         this.texture = texture;
@@ -43,7 +43,7 @@ export class JupfiZelt extends Zelt {
 
 export class PfadiZelt extends Zelt {
     constructor(position) {
-        super(position);
+        super(position, [3, 5], "/img/sprites/structures/tents/LEFT_NO_OUTLINE.png", [0.4, 0.67]);
     }
 }
 
@@ -55,7 +55,7 @@ export class RoverZelt extends Zelt {
 
 export class LeiterJurte extends Zelt {
     constructor(position) {
-        super(position, [3, 5], "/img/sprites/structures/tents/LEFT_NO_OUTLINE.png", [0.4, 0.67]);
+        super(position);
     }
 }
 
