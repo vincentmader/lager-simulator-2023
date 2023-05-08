@@ -91,6 +91,7 @@ export class Renderer {
         fog.globalCompositeOperation = "source-over";
 
         function illuminate_region_around(position, direction, spread, radius) {
+            direction = 2 * Math.PI - direction;
             let canvas_position = coordinate_transformer.cartesian_to_isometric(position);
             canvas_position = coordinate_transformer.world_to_game_display(canvas_position, zoom);
             let ellipse_radius = radius / (Math.sqrt(Math.tan(Math.PI / 4) ** 2) + 0.25)
