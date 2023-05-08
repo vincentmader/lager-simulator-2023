@@ -16,13 +16,13 @@ export class Zelt extends Entity {
 
 export class WeissZelt1 extends Zelt {
     constructor(position) {
-        super(position, [3, 5], "/img/sprites/structures/tents/LEFT_NO_OUTLINE.png", [0.4, 0.67]);
+        super(position, [3, 5], "/img/sprites/structures/tents/RIGHT_NO_OUTLINE.png", [0.6, 0.67]);
     }
 }
 
 export class WeissZelt2 extends Zelt {
     constructor(position) {
-        super(position, [5, 3], "/img/sprites/structures/tents/RIGHT_NO_OUTLINE.png", [0.6, 0.67]);
+        super(position, [5, 3], "/img/sprites/structures/tents/LEFT_NO_OUTLINE.png", [0.4, 0.67]);
     }
 }
 
