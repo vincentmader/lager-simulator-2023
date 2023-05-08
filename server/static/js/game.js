@@ -94,11 +94,16 @@ const initialize_list_of_tents = () => {
     let woelflings_zelt = new RoverZelt(new Position(-10, 8));
     let jupfi_zelt = new RoverZelt(new Position(-11, 3));
     let pfadi_zelt = new RoverZelt(new Position(-10, -2));
-    let rover_zelt = new PfadiZelt(new Position(-3, -10));
-    let geruest_zelt = new PfadiZelt(new Position(3, -9));
-    let leiter_jurte = new LeiterJurte(new Position(12, -2));
-    let aufenthalts_jurte = new LeiterJurte(new Position(-9, -8));
-    let tents = [woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt, geruest_zelt, leiter_jurte, aufenthalts_jurte];
+    let rover_zelt = new PfadiZelt(new Position(10, 5));
+    let geruest_zelt = new PfadiZelt(new Position(-3, -11));
+    let kuechen_zelt = new PfadiZelt(new Position(-8, -9));
+    let leiter_jurte = new LeiterJurte(new Position(-2, 13));
+    let aufenthalts_jurte = new LeiterJurte(new Position(5, 11));
+    let party_jurte = new LeiterJurte(new Position(12, -3));
+    let tents = [
+        woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt,
+        geruest_zelt, leiter_jurte, kuechen_zelt, aufenthalts_jurte, party_jurte
+    ];
     tents = tents.sort((tent_a, tent_b) => {
         return (tent_a.position.x + tent_a.position.y) - (tent_b.position.x + tent_b.position.y);
     });
@@ -129,11 +134,11 @@ const initialize_list_of_campfires = () => {
 }
 
 const initialize_list_of_dixies = () => {
-    let dixi_1 = new Dixi(new Position(0, 13));
-    let dixi_2 = new Dixi(new Position(2, 13));
-    let dixi_3 = new Dixi(new Position(4, 13));
-    let dixi_4 = new Dixi(new Position(6, 13));
-    let dixi_5 = new Dixi(new Position(8, 13));
+    let dixi_1 = new Dixi(new Position(3, -10));
+    let dixi_2 = new Dixi(new Position(5, -10));
+    let dixi_3 = new Dixi(new Position(7, -10));
+    let dixi_4 = new Dixi(new Position(-8, 16));
+    let dixi_5 = new Dixi(new Position(-8, 14));
     let dixies = [dixi_1, dixi_2, dixi_3, dixi_4, dixi_5];
     return dixies;
 
