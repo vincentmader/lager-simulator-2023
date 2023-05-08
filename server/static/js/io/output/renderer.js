@@ -50,6 +50,9 @@ export class Renderer {
         this.world.trees.forEach((tree) => {
             this.draw_tree(tree);
         });
+        this.world.dixies.forEach((dixi) => {
+            this.draw_dixi(dixi);
+        });
         this.world.tents.forEach((tent) => {
             this.draw_tent(tent);
         });
@@ -63,7 +66,7 @@ export class Renderer {
         this.draw_fog_of_war();
 
         // this.game_display.element.style.filter = "grayscale(100%)";
-    
+
     }
 
     draw_fog_of_war() {
@@ -77,27 +80,27 @@ export class Renderer {
 
 
         this.world.people.forEach((person) => {
-            illuminate_region_around(person.position, person.rotation+Math.PI/4, Math.PI/4, person.vision * zoom);
+            illuminate_region_around(person.position, person.rotation + Math.PI / 4, Math.PI / 4, person.vision * zoom);
         });
 
         this.world.campfires.forEach((light) => {
             let amplitude = 0.05;
             let frequency = 0.01;
-            illuminate_region_around(light.position, 0, 2*Math.PI, 
-                (light.wood_amount + Math.sin(Date.now()*frequency)*amplitude) * zoom);
+            illuminate_region_around(light.position, 0, 2 * Math.PI,
+                (light.wood_amount + Math.sin(Date.now() * frequency) * amplitude) * zoom);
         });
         fog.globalCompositeOperation = "source-over";
 
         function illuminate_region_around(position, direction, spread, radius) {
             let canvas_position = coordinate_transformer.cartesian_to_isometric(position);
             canvas_position = coordinate_transformer.world_to_game_display(canvas_position, zoom);
-            let ellipse_radius = radius / (Math.sqrt(Math.tan(Math.PI/4)**2) + 0.25)
+            let ellipse_radius = radius / (Math.sqrt(Math.tan(Math.PI / 4) ** 2) + 0.25)
 
-            let fog_gd = fog.createRadialGradient(canvas_position.x, canvas_position.y, ellipse_radius*2, canvas_position.x, canvas_position.y, ellipse_radius*2);
+            let fog_gd = fog.createRadialGradient(canvas_position.x, canvas_position.y, ellipse_radius * 2, canvas_position.x, canvas_position.y, ellipse_radius * 2);
             fog_gd.addColorStop(0, "rgba(0, 0, 0, 0)");
             fog_gd.addColorStop(1, "rgba(0, 0, 0, 1)");
             fog.beginPath();
-            fog.ellipse(canvas_position.x, canvas_position.y, ellipse_radius*2, ellipse_radius, 0, direction-spread/2, direction+spread/2);
+            fog.ellipse(canvas_position.x, canvas_position.y, ellipse_radius * 2, ellipse_radius, 0, direction - spread / 2, direction + spread / 2);
 
             fog.lineTo(canvas_position.x, canvas_position.y);
             fog.closePath();
@@ -136,7 +139,7 @@ export class Renderer {
         let color = person.color;
         let person_radius = 0.5 * this.game_display.zoom_level;
         if (is_activated) {
-            this.draw_circle(position, person_radius*1.1, "white");
+            this.draw_circle(position, person_radius * 1.1, "white");
         }
         this.draw_circle(position, person_radius, color);
         // let dimensions = [100, 100]; // TODO Define image size.
@@ -187,8 +190,8 @@ export class Renderer {
             fire.animation_clock = Date.now();
             fire.particle_cache = [];
             for (let i = 0; i < 25; i++) {
-                let offset_x = gaussian_random(0, fire.wood_amount/4);
-                let offset_z = Math.abs(gaussian_random(0, fire.wood_amount/3));
+                let offset_x = gaussian_random(0, fire.wood_amount / 4);
+                let offset_z = Math.abs(gaussian_random(0, fire.wood_amount / 3));
                 let radius = Math.max(3, (10 - offset_z) * 0.6 + Math.random()) * scale * this.game_display.zoom_level * 0.1;
                 let color = "rgb(255, " + Math.min(220, (20 * scale * offset_z) ** 2 + Math.abs(30 * scale * offset_x ** 3)) + ", 0)";
                 let part_x = x + offset_x * scale;
@@ -211,7 +214,7 @@ export class Renderer {
     }
 
     draw_point_light(light) {
-        let radius = Math.ceil(light.bounding_box.dimensions[0] * light.wood_amount/5);
+        let radius = Math.ceil(light.bounding_box.dimensions[0] * light.wood_amount / 5);
         let update_lighting_values = false;
         if (Date.now() > light.animation_clock + light.animation_offset) {
             update_lighting_values = true;
@@ -367,6 +370,15 @@ export class Renderer {
             631 * this.game_display.zoom_level * scale,
         ];
         this.draw_image(tent.texture, tent.position, dimensions, tent.texture_origin);
+    };
+
+    draw_dixi(dixi) {
+        let scale = 1 / 50; // TODO Remove magic number.
+        let dimensions = [
+            1024 * this.game_display.zoom_level * scale,
+            631 * this.game_display.zoom_level * scale,
+        ];
+        this.draw_image(dixi.texture, dixi.position, dimensions, dixi.texture_origin);
     };
 
     draw_tree(tree) {

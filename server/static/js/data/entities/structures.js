@@ -75,3 +75,9 @@ export class Tree extends Entity {
         super(position, [3, 3], texture, [0.5, 0.83]);
     }
 }
+
+export class Dixi extends Entity {
+    constructor(position) {
+        super(position, [1, 1], "/img/sprites/structures/dixies/dixi_left.png", [0.5, 0.6]);
+    }
+}

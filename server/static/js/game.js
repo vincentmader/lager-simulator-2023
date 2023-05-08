@@ -6,7 +6,7 @@ import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
 import {random_randint} from "./math/random.js";
 import {IO} from "./io/io.js";
-import {RoverZelt, LeiterJurte, Lagerfeuer, Tree, PfadiZelt} from "./data/entities/structures.js";
+import {RoverZelt, LeiterJurte, Lagerfeuer, Tree, Dixi, PfadiZelt} from "./data/entities/structures.js";
 import {DirectionEnum} from "./math/vector.js";
 
 const INITIAL_ZOOM_LEVEL = 20;
@@ -25,8 +25,9 @@ export class Game {
         let people = initialize_list_of_people();
         let campfires = initialize_list_of_campfires();
         let trees = initialize_list_of_trees(WORLD_DIMENSIONS);
+        let dixies = initialize_list_of_dixies(WORLD_DIMENSIONS);
 
-        this.world = new World(WORLD_DIMENSIONS, people, tents, trees, campfires);
+        this.world = new World(WORLD_DIMENSIONS, people, tents, trees, campfires, dixies);
         this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL); // <- TODO Use `let game_display` here instead?
         this.io = new IO(this.world, this.game_display);
         this.task_executor = new TaskExecutor(this.world);
@@ -124,5 +125,16 @@ const initialize_list_of_campfires = () => {
     let campfire_2 = new Lagerfeuer(new Position(50, 40));
     let campfires = [campfire_1, campfire_2];
     return campfires;
+
+}
+
+const initialize_list_of_dixies = () => {
+    let dixi_1 = new Dixi(new Position(0, 13));
+    let dixi_2 = new Dixi(new Position(2, 13));
+    let dixi_3 = new Dixi(new Position(4, 13));
+    let dixi_4 = new Dixi(new Position(6, 13));
+    let dixi_5 = new Dixi(new Position(8, 13));
+    let dixies = [dixi_1, dixi_2, dixi_3, dixi_4, dixi_5];
+    return dixies;
 
 }

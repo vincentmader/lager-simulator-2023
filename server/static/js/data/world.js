@@ -10,11 +10,13 @@ export class World {
         tents,
         trees,
         campfires,
+        dixies,
     ) {
         this.people = people;
         this.tents = tents;
         this.trees = trees;
         this.campfires = campfires;
+        this.dixies = dixies;
 
         this.dimensions = dimensions;
         this.floor_grid = new FloorGrid(this.dimensions);
@@ -26,6 +28,7 @@ export class World {
             this.tents,
             this.trees,
             this.campfires,
+            this.dixies,
         );
     }
 }
