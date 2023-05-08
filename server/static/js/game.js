@@ -66,7 +66,7 @@ export class Game {
 
 const initialize_list_of_trees = (world_dimensions) => {
     const NR_OF_TREES = 500;
-    const MINIMUM_DISTANCE_FROM_WORLD_ORIGIN = 20;
+    const MINIMUM_DISTANCE_FROM_WORLD_ORIGIN = 22;
     let trees = [];
     for (let idx = 0; idx < NR_OF_TREES; idx++) {
         // Choose position randomly.
