@@ -409,12 +409,12 @@ export class Renderer {
             new Position(x_max + delta, 0),
             new Position(-(x_max + delta), 0)
         ]
-        let labels = ["N", "S", "E", "W"];
+        let labels = ["N = (0,+1)", "S = (0,-1)", "E = (+1, 0)", "W = (-1, 0)"];
         [0, 1, 2, 3].forEach((i) => {
             let position = positions[i];
             let label = labels[i];
             let color;
-            if (label == "N") {color = "red";} else {color = "white";}
+            if (label[0] == "N") {color = "red";} else {color = "white";}
             this.draw_text(position, labels[i], {color: color});
         });
     }
