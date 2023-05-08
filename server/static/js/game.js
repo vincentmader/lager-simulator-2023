@@ -111,16 +111,16 @@ const initialize_list_of_tents = () => {
 }
 
 const initialize_list_of_people = () => {
-    let w1 = new Woelfling(new Position(2, 5), DirectionEnum.TOP);
-    let w2 = new Woelfling(new Position(1, 5), DirectionEnum.TOP);
-    let w3 = new Woelfling(new Position(-1, 5), DirectionEnum.TOP);
-    let j1 = new Jupfi(new Position(0, 5), DirectionEnum.TOP);
-    let p1 = new Pfadi(new Position(5, 0), DirectionEnum.LEFT);
-    let p2 = new Pfadi(new Position(5, 1), DirectionEnum.LEFT);
-    let r1 = new Rover(new Position(5, 2), DirectionEnum.LEFT);
-    let l1 = new Leiter(new Position(5, -1), DirectionEnum.LEFT);
-    let l2 = new Leiter(new Position(-5, 0), DirectionEnum.RIGHT);
-    let l3 = new Leiter(new Position(-5, 1), DirectionEnum.RIGHT);
+    let w1 = new Woelfling(new Position(2, 5), DirectionEnum.SOUTH);
+    let w2 = new Woelfling(new Position(1, 5), DirectionEnum.SOUTH);
+    let w3 = new Woelfling(new Position(-1, 5), DirectionEnum.SOUTH);
+    let j1 = new Jupfi(new Position(0, 5), DirectionEnum.SOUTH);
+    let p1 = new Pfadi(new Position(5, 0), DirectionEnum.WEST);
+    let p2 = new Pfadi(new Position(5, 1), DirectionEnum.WEST);
+    let r1 = new Rover(new Position(5, 2), DirectionEnum.WEST);
+    let l1 = new Leiter(new Position(5, -1), DirectionEnum.WEST);
+    let l2 = new Leiter(new Position(-5, 0), DirectionEnum.EAST);
+    let l3 = new Leiter(new Position(-5, 1), DirectionEnum.EAST);
     let people = [w1, w2, w3, j1, p1, p2, r1, l1, l2, l3];
     return people;
 }

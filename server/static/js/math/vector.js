@@ -83,13 +83,13 @@ export class Direction extends Vector {
     discretize() {
         let eps = 0.1 * Math.PI;
         if (Math.abs(this.x) < eps && Math.abs(this.y - 1) < eps) {
-            return DirectionEnum.BOTTOM;
+            return DirectionEnum.NORTH;
         } else if (Math.abs(this.x) < eps && Math.abs(this.y + 1) < eps) {
-            return DirectionEnum.TOP;
+            return DirectionEnum.SOUTH;
         } else if (Math.abs(this.x - 1) < eps && Math.abs(this.y) < eps) {
-            return DirectionEnum.RIGHT;
+            return DirectionEnum.EAST;
         } else if (Math.abs(this.x + 1) < eps && Math.abs(this.y) < eps) {
-            return DirectionEnum.LEFT;
+            return DirectionEnum.WEST;
         }
         throw new Error("Vector (" + this.x + ", " + this.y + ", " + this.z + ") is not 2d-discretizable!");
     }
@@ -114,8 +114,8 @@ export class Direction extends Vector {
 }
 
 export const DirectionEnum = {
-    RIGHT: 0,
-    BOTTOM: Math.PI / 2,
-    LEFT: Math.PI,
-    TOP: Math.PI * 3 / 2
+    EAST: 0,
+    NORTH: Math.PI / 2,
+    WEST: Math.PI,
+    SOUTH: Math.PI * 3 / 2
 }
