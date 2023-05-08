@@ -52,17 +52,17 @@ export class Direction extends Vector {
     }
 
     length() {
-        let length = Math.sqrt(this.x**2 + this.y**2 + this.z**2);
+        let length = Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
         return length;
     }
 
     normalize() {
         let length = this.length();
-        return new this.constructor(this.x/length, this.y/length, this.z/length);
+        return new this.constructor(this.x / length, this.y / length, this.z / length);
     }
 
     scale(scalar) {
-        return new this.constructor(this.x*scalar, this.y*scalar, this.z*scalar);
+        return new this.constructor(this.x * scalar, this.y * scalar, this.z * scalar);
     }
 
     /**
@@ -72,7 +72,7 @@ export class Direction extends Vector {
     to_radian() {
         let radian = Math.atan2(this.y, this.x);
         if (radian < 0) {
-            radian += 2*Math.PI;
+            radian += 2 * Math.PI;
         }
         return radian;
     }
@@ -81,14 +81,14 @@ export class Direction extends Vector {
      * Returns the DirectionEnum which equals the Vector, if possible.
      */
     discretize() {
-        let eps = 0.1*Math.PI;
-        if (Math.abs(this.x) < eps && Math.abs(this.y-1) < eps) {
+        let eps = 0.1 * Math.PI;
+        if (Math.abs(this.x) < eps && Math.abs(this.y - 1) < eps) {
             return DirectionEnum.BOTTOM;
-        } else if (Math.abs(this.x) < eps && Math.abs(this.y+1) < eps) {
+        } else if (Math.abs(this.x) < eps && Math.abs(this.y + 1) < eps) {
             return DirectionEnum.TOP;
-        } else if (Math.abs(this.x-1) < eps && Math.abs(this.y) < eps) {
+        } else if (Math.abs(this.x - 1) < eps && Math.abs(this.y) < eps) {
             return DirectionEnum.RIGHT;
-        } else if (Math.abs(this.x+1) < eps && Math.abs(this.y) < eps) {
+        } else if (Math.abs(this.x + 1) < eps && Math.abs(this.y) < eps) {
             return DirectionEnum.LEFT;
         }
         throw new Error("Vector (" + this.x + ", " + this.y + ", " + this.z + ") is not 2d-discretizable!");
@@ -96,7 +96,7 @@ export class Direction extends Vector {
 
     angle_between(direction) {
         // TODO: Untested.
-        return Math.atan((this.y*direction.x-this.x*direction.y)/(this.x*direction.x - this.y*direction.y));
+        return Math.atan((this.y * direction.x - this.x * direction.y) / (this.x * direction.x - this.y * direction.y));
     }
 
     /**
@@ -115,7 +115,7 @@ export class Direction extends Vector {
 
 export const DirectionEnum = {
     RIGHT: 0,
-    BOTTOM: Math.PI/2,
+    BOTTOM: Math.PI / 2,
     LEFT: Math.PI,
-    TOP: Math.PI*3/2
+    TOP: Math.PI * 3 / 2
 }
