@@ -6,7 +6,8 @@ export class UserInputHandler {
     constructor(game_display, input_handler) {
         this.game_display = game_display;
         this.input_handler = input_handler;
-        this.panes = [];
+        this.panes = {};
+        this.is_visible = false;
     }
 
     overwrite_command(task_cls) {
@@ -17,49 +18,57 @@ export class UserInputHandler {
     }
 
     initialize() {
-        this.panes.forEach((pane) => {
-            pane.clear();
-        });
-        this.panes = [];
+        for(let type in this.panes) {
+            this.panes[type].clear();
+        }
         let screen_height = this.game_display.height;
         let screen_width = this.game_display.width;
         let button_width = Math.min(screen_width*0.1, 100);
-        let command_pane = new ButtonPane(
-            screen_width-((2 + 0.2)*button_width), 
-            screen_height*0.5, 
+        this.panes["command"] = new ButtonPane(
+            screen_width-button_width*2, 
+            screen_height*0.5-button_width, 
             2, 
-            5, 
-            Math.min(screen_width*0.1, 100));
-        command_pane.add(() => {this.overwrite_command(MoveTask)}, "/img/move_icon.png");
-        command_pane.add(() => {this.overwrite_command(PatrolTask)}, "/img/patrol_icon.png");
-        command_pane.add(() => {console.log("command 2")});
-        command_pane.add(() => {console.log("command 3")});
-        command_pane.add(() => {console.log("command 4")});
-        command_pane.add(() => {console.log("command 5")});
-        command_pane.visible(false);
+            3, 
+            button_width,
+            button_width,
+            0
+        );
+        this.panes["command"].add(() => {this.overwrite_command(MoveTask)}, "/img/move_icon.png");
+        this.panes["command"].add(() => {this.overwrite_command(PatrolTask)}, "/img/patrol_icon.png");
+        this.panes["command"].add(() => {console.log("command 2")});
+        this.panes["command"].add(() => {console.log("command 3")});
+        this.panes["command"].add(() => {console.log("command 4")});
+        this.panes["command"].add(() => {console.log("command 5")});
 
-        this.panes.push(command_pane);
-
-        let inventory_pane = new ButtonPane(
-            screen_width*0.2, 
-            screen_height*0.9, 
+        this.panes["inventory"] = new ButtonPane(
+            screen_width/2-3*button_width, 
+            screen_height-button_width, 
             6, 
             1, 
-            Math.min(screen_width*0.1, 100));
-        inventory_pane.add(() => {console.log("item 0")});
-        inventory_pane.add(() => {console.log("item 1")});
-        inventory_pane.add(() => {console.log("item 2")});
-        inventory_pane.add(() => {console.log("item 3")});
-        inventory_pane.add(() => {console.log("item 4")});
-        inventory_pane.add(() => {console.log("item 5")});
-        inventory_pane.visible(false);
+            button_width,
+            button_width,
+            0
+        );
+        this.panes["inventory"].add(() => {console.log("item 0")});
+        this.panes["inventory"].add(() => {console.log("item 1")});
+        this.panes["inventory"].add(() => {console.log("item 2")});
+        this.panes["inventory"].add(() => {console.log("item 3")});
+        this.panes["inventory"].add(() => {console.log("item 4")});
+        this.panes["inventory"].add(() => {console.log("item 5")});
 
-        this.panes.push(inventory_pane);
+        this.visible(this.is_visible, this.input_handler.active_entity["person"]);
     }
 
-    visible(is_visible) {
-        this.panes.forEach((pane) => {
-            pane.visible(is_visible);
-        })
+    visible(is_visible, context_person=null) {
+        this.is_visible = is_visible;
+        for(let type in this.panes) {
+            this.panes[type].visible(is_visible);
+        }
+        if (is_visible && context_person !== null) {
+            let items = context_person.inventory.items;
+            for (const [index, item] of Object.entries(items)) {
+                this.panes["inventory"].buttons[index].set_icon(item.icon_texture);
+            }
+        }
     }
 }
