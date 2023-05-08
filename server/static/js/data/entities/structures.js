@@ -55,7 +55,7 @@ export class RoverZelt extends Zelt {
 
 export class LeiterJurte extends Zelt {
     constructor(position) {
-        super(position);
+        super(position, [5, 5], "/img/sprites/structures/tents/jurte.png", [0.5, 0.67]);
     }
 }
 

@@ -94,8 +94,10 @@ const initialize_list_of_tents = () => {
     let jupfi_zelt = new RoverZelt(new Position(-11, 3));
     let pfadi_zelt = new RoverZelt(new Position(-10, -2));
     let rover_zelt = new PfadiZelt(new Position(-3, -10));
-    let leiter_jurte = new PfadiZelt(new Position(3, -9));
-    let tents = [woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt, leiter_jurte];
+    let geruest_zelt = new PfadiZelt(new Position(3, -9));
+    let leiter_jurte = new LeiterJurte(new Position(12, -2));
+    let aufenthalts_jurte = new LeiterJurte(new Position(-9, -8));
+    let tents = [woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt, geruest_zelt, leiter_jurte, aufenthalts_jurte];
     tents = tents.sort((tent_a, tent_b) => {
         return (tent_a.position.x + tent_a.position.y) - (tent_b.position.x + tent_b.position.y);
     });
