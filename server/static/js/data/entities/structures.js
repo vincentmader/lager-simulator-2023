@@ -14,37 +14,19 @@ export class Zelt extends Entity {
     }
 }
 
-export class KuechenZelt extends Zelt {
-    constructor(position) {
-        super(position);
-    }
-}
-
-export class WoelflingsZelt extends Zelt {
-    constructor(position) {
-        super(position);
-    }
-}
-
-export class JupfiZelt extends Zelt {
-    constructor(position) {
-        super(position);
-    }
-}
-
-export class PfadiZelt extends Zelt {
+export class WeissZelt1 extends Zelt {
     constructor(position) {
         super(position, [3, 5], "/img/sprites/structures/tents/LEFT_NO_OUTLINE.png", [0.4, 0.67]);
     }
 }
 
-export class RoverZelt extends Zelt {
+export class WeissZelt2 extends Zelt {
     constructor(position) {
         super(position, [5, 3], "/img/sprites/structures/tents/RIGHT_NO_OUTLINE.png", [0.6, 0.67]);
     }
 }
 
-export class LeiterJurte extends Zelt {
+export class Jurte extends Zelt {
     constructor(position) {
         super(position, [5, 5], "/img/sprites/structures/tents/jurte.png", [0.5, 0.67]);
     }

@@ -6,7 +6,7 @@ import {Position} from "./math/vector.js";
 import {run_tests} from "./tests/main.js";
 import {random_randint} from "./math/random.js";
 import {IO} from "./io/io.js";
-import {RoverZelt, LeiterJurte, Lagerfeuer, Tree, Dixi, PfadiZelt} from "./data/entities/structures.js";
+import {Lagerfeuer, Tree, Dixi, WeissZelt1, WeissZelt2, Jurte} from "./data/entities/structures.js";
 import {DirectionEnum} from "./math/vector.js";
 
 const INITIAL_ZOOM_LEVEL = 20;
@@ -91,15 +91,15 @@ const initialize_list_of_trees = (world_dimensions) => {
 
 const initialize_list_of_tents = () => {
     // TODO Rename classes: `RoverZelt` -> name of actual tent. (Jurte, GJ, "WeissZelt1", ...)
-    let woelflings_zelt = new RoverZelt(new Position(-10, 8));
-    let jupfi_zelt = new RoverZelt(new Position(-11, 3));
-    let pfadi_zelt = new RoverZelt(new Position(-10, -2));
-    let rover_zelt = new PfadiZelt(new Position(10, 5));
-    let geruest_zelt = new PfadiZelt(new Position(-3, -11));
-    let kuechen_zelt = new PfadiZelt(new Position(-8, -9));
-    let leiter_jurte = new LeiterJurte(new Position(-2, 13));
-    let aufenthalts_jurte = new LeiterJurte(new Position(5, 11));
-    let party_jurte = new LeiterJurte(new Position(12, -3));
+    let woelflings_zelt = new WeissZelt2(new Position(-10, 8));
+    let jupfi_zelt = new WeissZelt2(new Position(-11, 3));
+    let pfadi_zelt = new WeissZelt2(new Position(-10, -2));
+    let rover_zelt = new WeissZelt1(new Position(10, 5));
+    let geruest_zelt = new WeissZelt1(new Position(-3, -11));
+    let kuechen_zelt = new WeissZelt1(new Position(-8, -9));
+    let leiter_jurte = new Jurte(new Position(-2, 13));
+    let aufenthalts_jurte = new Jurte(new Position(5, 11));
+    let party_jurte = new Jurte(new Position(12, -3));
     let tents = [
         woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt,
         geruest_zelt, leiter_jurte, kuechen_zelt, aufenthalts_jurte, party_jurte
