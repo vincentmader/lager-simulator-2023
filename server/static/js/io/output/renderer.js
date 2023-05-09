@@ -115,12 +115,12 @@ export class Renderer {
         this.game_display.ctx.fillText(text_content, position.x, position.y);
     }
 
-    draw_image(src, position, dimensions, texture_origin) {
+    draw_image(src, position, dimensions, texture_origin, {scale} = {scale: 1}) {
         position = this.coordinate_transformer.cartesian_to_isometric(position);
         position = this.coordinate_transformer.world_to_game_display(position, this.game_display.zoom_level);
 
-        let w = dimensions[0],
-            h = dimensions[1];
+        let w = dimensions[0] * scale,
+            h = dimensions[1] * scale;
         let image = null;
         if (this.image_cache[src] == null) {
             image = new Image(w, h);
@@ -143,12 +143,11 @@ export class Renderer {
     }
 
     draw_tent(tent) {
-        let scale = 1 / 100; // TODO Remove magic number.
-        let dimensions = [
-            1024 * this.game_display.zoom_level * scale,
-            631 * this.game_display.zoom_level * scale,
-        ];
-        this.draw_image(tent.texture, tent.position, dimensions, tent.texture_origin);
+        let img_path = tent.texture.img_path;
+        let img_dimensions = tent.texture.img_dimensions;
+        let texture_scale = tent.texture.texture_scale * this.game_display.zoom_level;
+        let texture_origin = tent.texture.texture_origin;
+        this.draw_image(img_path, tent.position, img_dimensions, texture_origin, {scale: texture_scale});
     };
 
     draw_person(person, is_activated = false) {
@@ -165,12 +164,11 @@ export class Renderer {
     }
 
     draw_dixi(dixi) {
-        let scale = 1 / 50; // TODO Remove magic number.
-        let dimensions = [
-            1024 * this.game_display.zoom_level * scale,
-            631 * this.game_display.zoom_level * scale,
-        ];
-        this.draw_image(dixi.texture, dixi.position, dimensions, dixi.texture_origin);
+        let img_path = dixi.texture.img_path;
+        let img_dimensions = dixi.texture.img_dimensions;
+        let texture_scale = dixi.texture.texture_scale * this.game_display.zoom_level;
+        let texture_origin = dixi.texture.texture_origin;
+        this.draw_image(img_path, dixi.position, img_dimensions, texture_origin, {scale: texture_scale});
     };
 
     draw_tree(tree) {
