@@ -1,33 +1,187 @@
 #+title: Lager-Simulator 2023
 
-_Spiel-Ziel_:
-- den Banner klauen
-  bzw. den Banner nicht klauen lassen
+* TODOs
+- [X] 3D-Vektor
+- [ ] Sprites & Animation
+- [X] Zoom
+- [X] IO Class (?)
+- [X] Pan (drag-&-drop und Pfeiltasten)
+- [X] Feuer (Wind ausmachen)
+- [X] Zelt malen
+- [X] Personen anklicken
+- [X] Personen abklicken
+- [X] Debug-Option: Hit-Boxes anzeigen
+- [X] Debug-Option: FPS anzeigen
+- [ ] Texturen: Pixel-Zahl == Tile-Size
+- [ ] Debug-Option: Show 1x1x1 cube
+- [ ] Debug-Option in den Canvas hinein schieben
+- [X] Full-Screen Canvas (kein Scrolling)
+- [ ] Fortlaufende Uhr
+- [ ] Uhr visualisieren
+- [ ] Tag-Nacht Zyklus
+- [ ] Tag-Nacht Zyklus + Filter
+- [X] Diskrete Bewegung
+- [ ] Charakter-Sprites
+- [ ] Direction-Enum
+- [X] Himmelsrichtungen in den Ecken anzeigen (bei rauszoomen)
+- [ ] Hike
+- [ ] Fog of War
+- [ ] Taschenlampen-Kegel
+- [ ] Gedanken machen, was passiert wenn man jemanden anklickt
+- [ ] Baeume
+- [ ] Kommentare aufpoppen
+- [ ] Simple Vogel-Animation
+- [ ] Charakter-Inventar
+- [ ] Zelt-Kontor
+- [ ] Schoenere Umrandung fuer Spielwelt
+- [ ] git pipeline
+- [ ] Aufnaeher
+* Milestones
+- 2023-??-??: The isometric projection now works.
+- 2023-??-??: There is now a chess-like (ClashOfClans-like) floor grid.
+- 2023-??-??: Panning & Zooming the camera now works.
+- 2023-??-??: Campfires are part of the game now (and they flicker!).
+- 2023-??-??: Tents are now shown on the map.
+  + The sprites were downloaded from Google Images.
+- 2023-??-??: People can now walk.
+  + There are two modes: "Normal" + "Patrol".
+- 2023-??-??: There is now an inventory UI that's displayed when clicking on a person.
+- 2023-??-??: Movement of people now only works along discrete (cardinal) directions.
+  + This is done via an "enum" (in JS, that's an object).
+- 2023-??-??: Cardinal directions (N/E/S/W) are now shown at the edge of the map.
+- 2023-??-??: People now carry flashlights.
+  + They project a cone of light forwards.
+- 2023-??-??: There is now a fog-of-war.
+  + This was done by stacking multiple canvases on top of each other (along Z-axis).
+- 2023-??-??: Yurts are part of the game now.
+  + They were designed in Blender.
+- 2023-??-??: Banner Poles are part of the game now.
+  + They were designed in Blender.
+- 2023-??-??: Dixi toilets are part of the game now.
+  + They were designed in Blender.
+- 2023-??-??: "Berg-Bier-Kaesten" are part of the game now.
+  + They were designed in Blender.
+- 2023-??-??: "Waschstellen" are part of the game now.
+  + They were designed in Blender.
+- 2023-??-??: "Bier-Baenke + Bier-Tische" are part of the game now
+  + They were designed in Blender.
+- 2023-05-10: Fullscreen Mode now works without (annoying) scrolling.
+  + This was done by setting `overflow: hidden` in the CSS file.
+* Questions & Answers
+** What is the goal of the game?
+A) Attacker Team:
+   - Get to the banner pole & steal the flag.
+B) Defender Team:
+   - Don't let the attacker team steal the flag.
+** When does a Game Over event occur?
+A) Attacker Team:
+   1. Hard Game Over
+      - Someone dies.
+   2. Soft Game Over
+      - When the scout camp is over.
+B) Defender Team:
+   1. Hard Game Over
+      - Someone dies.
+      - A forest fire destroys the camp.
+   2. Soft Game Over
+      - The attackers team steal the banner.
+      - The camp is canceled due to low morale.
+      - No beer is left.
+** What exactly does Game Over mean?
+- Is the game really over?
+- Or is it just the camp that ends?
+** What kinds of resources are there?
+1. Money
+2. Food
+3. Water
+4. Beer
+5. Wood
+** What kinds of "score thingies" are there?
+1. (Average) Morale
+2. Georgs-Punkte
+** What kinds of items are there?
+| ~Item~             | ~Usage~                           | ~Effects~                   |
+|------------------+---------------------------------+-----------------------------|
+| Axe              | Gather wood.                    | The campfire stops burning. |
+|------------------+---------------------------------+-----------------------------|
+| Guitar/Cajon     | Play music.                     | Raise morale.               |
+|------------------+---------------------------------+-----------------------------|
+| Flashlight/Torch | Illuminate environment.         | E.g.: Detect attackers.     |
+|------------------+---------------------------------+-----------------------------|
+| Nutella-Brot     | Eat.                            | Raise morale.               |
+|------------------+---------------------------------+-----------------------------|
+| Bier <3          | Drink.                          | Raise morale.               |
+|------------------+---------------------------------+-----------------------------|
+| Coffee           | Drink.                          | Fight fatigue.              |
+|------------------+---------------------------------+-----------------------------|
+| SoundBox         | Make music.                     | Raise morale. / Distract.   |
+|------------------+---------------------------------+-----------------------------|
+| Wood             | Make fire. / Build Lagerbauten. |                             |
+|------------------+---------------------------------+-----------------------------|
+| Multi-Tool       |                                 |                             |
+|------------------+---------------------------------+-----------------------------|
+| Ball             |                                 |                             |
+|------------------+---------------------------------+-----------------------------|
+| Rope             |                                 |                             |
+|------------------+---------------------------------+-----------------------------|
+** What kinds of skills are there?
+| ~Skill~                      | ~Aufnaeher-Symbol~ |
+|----------------------------+------------------|
+| Run fast.                  | Rabbit (?)       |
+|----------------------------+------------------|
+| Carry heavy things.        | Biceps (?)       |
+|----------------------------+------------------|
+| Sneak.                     |                  |
+|----------------------------+------------------|
+| Make fire.                 | Campfire         |
+|----------------------------+------------------|
+| Hear quiet noises.         | Ear (?)          |
+|----------------------------+------------------|
+| Play the guitar.           | Guitar           |
+|----------------------------+------------------|
+| Play the cajon.            | Cajon            |
+|----------------------------+------------------|
+| Sing songs.                |                  |
+|----------------------------+------------------|
+| Shout loudly.              |                  |
+|----------------------------+------------------|
+| Cook food.                 | Cooking pot (?)  |
+|----------------------------+------------------|
+| Throw ball accurately/far. |                  |
+|----------------------------+------------------|
+| Tie knots.                 |                  |
+|----------------------------+------------------|
+** What kinds of structures are there on the campsite?
+*** Banner
+- The attackers want to steal it.
+- The defenders want to keep it.
+*** Campfire
+*** Stufen-Zelte
+1. Leiter-Jurten
+2. Rover-Zelte
+3. Pfadi-Zelte
+4. Jupfi-Zelte
+5. Woelflings-Zelte
 
-_Lager_:
-- Lagerfeuer
-- Bannermast
-- Zelte drum rum
-- Dixies
-- Baeume/Gebuesch
-
-_Bannermast_:
-- Ziel der Ueberfaeller (wollen Banner klauen)
-- muss beschuetzt werden, sonst: Game Over
-
-_Zelte_:
-- Leiter-Jurte
-- Stufen-Zelte
-  - hier schlafen Kinder (koennen geweckt werden)
-- Kuechen-Zelt
-  - Bier
-  - Nutella
-- Geruest-Zelt
-
-_Dixies_:
-- funktionieren als Versteck
-- niemand schaut rein (weil abgeschlossen)
-- wenn man weiss, da ist jmd, laesst man jmd da
+Children can be awakened by leaders (for night watch).
+*** Kuechen-Zelte
+- This is were important resources are stored, e.g.
+  + Food (e.g. Nutella-Brote)
+  + Water
+  + Beer
+*** Aufenthalts-Jurten
+*** Geruest-Zelte
+*** Planungs-/Leiter-Zelte
+*** Dixies
+- They can be used as a hiding sport.
+- They can be locked.
+- If you know that someone is hidden in there,
+  you could station someone in front of it.
+*** Cars
+*** Trees
+*** Bushes
+*** Rocks
+* Unsorted Notes
 
 _Ueberfaeller_:
 - Ziele
@@ -72,20 +226,6 @@ _Welt_:
 - Tag-Nacht-Rhythmus
 - Lager geht mehrere Tage lang
 
-_Ressourcen_:
-- Holz $\to$ benoetigt fuer's Feuer
-- Bier $\to$ benoetigt fuer die Leiter
-- Cola & Nutella-Brote $\to$ benoetigt, um Kinder wach zu halten
-- Geld (hat man am Anfang)
-- Wasser
-
-_Waehrungen_:
-- benoetigt fuer die Berechnung des Spiel-Scores
-- Varianten
-  - Macht-Punkte
-  - Bier
-  - Georgs-Punkte
-
 _User-Input_:
 - zieht die Patrouillen-Wege der Kinder
 - gibt Befehle
@@ -105,45 +245,3 @@ _Spiel-Setup_:
 _Sprueche-Sammlung_:
 - "Wenn ich einen seh' ... Der kriegt's mit meinem Multitool zu tun!"
 
-_Game Over Conditions_:
-- banner weg
-- einer ist gestorben
-- waldbrand verursacht
-- kein bier mehr?
-
-_TODOs_:
-- [X] 3D-Vektor
-- [ ] Sprites & Animation
-- [X] Zoom
-- [X] IO Class (?)
-- [X] Pan (drag-&-drop und Pfeiltasten)
-- [X] Feuer (Wind ausmachen)
-- [X] Zelt malen
-- [X] Personen anklicken
-- [X] Personen abklicken
-- [X] Debug-Option: Hit-Boxes anzeigen
-- [X] Debug-Option: FPS anzeigen
-- [ ] Texturen: Pixel-Zahl == Tile-Size
-- [ ] Debug-Option: Show 1x1x1 cube
-- [ ] Debug-Option in den Canvas hinein schieben
-- [X] Full-Screen Canvas (kein Scrolling)
-- [ ] Fortlaufende Uhr
-- [ ] Uhr visualisieren
-- [ ] Tag-Nacht Zyklus
-- [ ] Tag-Nacht Zyklus + Filter
-- [X] Diskrete Bewegung
-- [ ] Charakter-Sprites
-- [ ] Direction-Enum
-- [X] Himmelsrichtungen in den Ecken anzeigen (bei rauszoomen)
-- [ ] Hike
-- [ ] Fog of War
-- [ ] Taschenlampen-Kegel
-- [ ] Gedanken machen, was passiert wenn man jemanden anklickt
-- [ ] Baeume
-- [ ] Kommentare aufpoppen
-- [ ] Simple Vogel-Animation
-- [ ] Charakter-Inventar
-- [ ] Zelt-Kontor
-- [ ] Schoenere Umrandung fuer Spielwelt
-- [ ] git pipeline
-- [ ] Aufnaeher
