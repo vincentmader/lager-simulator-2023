@@ -9,6 +9,7 @@ export class Zelt extends Entity {
     }
 }
 
+
 export class WeissZelt1 extends Zelt {
 
     constructor(position) {
@@ -23,6 +24,7 @@ export class WeissZelt1 extends Zelt {
         super(position, bounding_box_dims, texture);
     }
 }
+
 
 export class WeissZelt2 extends Zelt {
 
@@ -39,6 +41,7 @@ export class WeissZelt2 extends Zelt {
     }
 }
 
+
 export class Jurte extends Zelt {
 
     constructor(position) {
@@ -54,6 +57,7 @@ export class Jurte extends Zelt {
     }
 }
 
+
 export class Lagerfeuer extends Entity {
 
     constructor(position) {
@@ -66,12 +70,6 @@ export class Lagerfeuer extends Entity {
     }
 }
 
-export class Tree extends Entity {
-
-    constructor(position, texture) {
-        super(position, [3, 3], texture, [0.5, 0.83]);
-    }
-}
 
 export class Dixi extends Entity {
 
@@ -85,6 +83,14 @@ export class Dixi extends Entity {
         let bounding_box_dims = [1, 1];
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture);
+    }
+}
+
+
+export class Tree extends Entity {
+
+    constructor(position, texture) {
+        super(position, [3, 3], texture, [0.5, 0.83]);
     }
 }
 

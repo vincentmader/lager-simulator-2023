@@ -142,14 +142,6 @@ export class Renderer {
         scout_camp.campfires.forEach((campfire) => this.draw_campfire(campfire));
     }
 
-    draw_tent(tent) {
-        let img_path = tent.texture.img_path;
-        let img_dimensions = tent.texture.img_dimensions;
-        let texture_scale = tent.texture.texture_scale * this.game_display.zoom_level;
-        let texture_origin = tent.texture.texture_origin;
-        this.draw_image(img_path, tent.position, img_dimensions, texture_origin, {scale: texture_scale});
-    };
-
     draw_person(person, is_activated = false) {
         let position = person.position;
         let color = person.color;
@@ -162,6 +154,14 @@ export class Renderer {
         // let src = "/img/sprite.png";
         // this.draw_image(src, position, dimensions);
     }
+
+    draw_tent(tent) {
+        let img_path = tent.texture.img_path;
+        let img_dimensions = tent.texture.img_dimensions;
+        let texture_scale = tent.texture.texture_scale * this.game_display.zoom_level;
+        let texture_origin = tent.texture.texture_origin;
+        this.draw_image(img_path, tent.position, img_dimensions, texture_origin, {scale: texture_scale});
+    };
 
     draw_dixi(dixi) {
         let img_path = dixi.texture.img_path;
