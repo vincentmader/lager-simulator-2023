@@ -1,5 +1,6 @@
 import {Entity} from "./entity.js"
 import {TaskList} from "../../logic/task_execution.js";
+import {direction_from_string} from "../../math/vector.js";
 
 
 class Person extends Entity {
@@ -9,6 +10,7 @@ class Person extends Entity {
         this.speed = speed;
         this.task_list = new TaskList(this, []);
         this.vision = vision;
+        direction = direction_from_string(direction);
         this.direction = direction;
         this.rotation = direction;
     }

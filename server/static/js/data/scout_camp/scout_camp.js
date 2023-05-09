@@ -1,7 +1,6 @@
 import {Woelfling, Jupfi, Pfadi, Rover, Leiter} from "../entities/person.js";
 import {Position} from "../../math/vector.js";
 import {Lagerfeuer, Dixi, WeissZelt_1, WeissZelt_2, Jurte_1, Jurte_2, WaschStelle, BierBank, BierTisch} from "../entities/structures.js";
-import {DirectionEnum} from "../../math/vector.js";
 
 
 export class ScoutCamp {
@@ -90,16 +89,16 @@ const initialize_list_of_tents = () => {
 }
 
 const initialize_list_of_people = () => {
-    let w1 = new Woelfling(new Position(2, 5), DirectionEnum.SOUTH);
-    let w2 = new Woelfling(new Position(1, 5), DirectionEnum.SOUTH);
-    let w3 = new Woelfling(new Position(-1, 5), DirectionEnum.SOUTH);
-    let j1 = new Jupfi(new Position(0, 5), DirectionEnum.SOUTH);
-    let p1 = new Pfadi(new Position(5, 0), DirectionEnum.WEST);
-    let p2 = new Pfadi(new Position(5, 1), DirectionEnum.WEST);
-    let r1 = new Rover(new Position(5, 2), DirectionEnum.WEST);
-    let l1 = new Leiter(new Position(5, -1), DirectionEnum.WEST);
-    let l2 = new Leiter(new Position(-5, 0), DirectionEnum.EAST);
-    let l3 = new Leiter(new Position(-5, 1), DirectionEnum.EAST);
+    let w1 = new Woelfling(new Position(2, 5), "south");
+    let w2 = new Woelfling(new Position(1, 5), "south");
+    let w3 = new Woelfling(new Position(-1, 5), "south");
+    let j1 = new Jupfi(new Position(0, 5), "south");
+    let p1 = new Pfadi(new Position(5, 0), "west");
+    let p2 = new Pfadi(new Position(5, 1), "west");
+    let r1 = new Rover(new Position(5, 2), "west");
+    let l1 = new Leiter(new Position(5, -1), "west");
+    let l2 = new Leiter(new Position(-5, 0), "east");
+    let l3 = new Leiter(new Position(-5, 1), "east");
     let people = [w1, w2, w3, j1, p1, p2, r1, l1, l2, l3];
     return people;
 }
