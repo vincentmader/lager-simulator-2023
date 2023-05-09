@@ -16,35 +16,34 @@ export class Renderer {
 
     display() {
         this.clear_screen();
-        if (this.game_display.draw_floor_background) {this.draw_floor_background();}
-        if (this.game_display.draw_world_boundary) {this.draw_world_boundary();}
-        if (this.game_display.draw_floor_grid) {this.draw_floor_grid();}
-        if (this.game_display.draw_labeled_positions) {
-            this.draw_labeled_positions();
-        }
-        if (true) {
-            this.world.people.forEach((person) => {this.draw_bounding_box(person);});
-            this.world.structures.forEach((structure) => {this.draw_bounding_box(structure);})
-        }
+        if (this.game_display.draw_floor_background) this.draw_floor_background();
+        if (this.game_display.draw_world_boundary) this.draw_world_boundary();
+        if (this.game_display.draw_floor_grid) this.draw_floor_grid();
+        if (this.game_display.draw_labeled_positions) this.draw_labeled_positions();
+        if (this.draw_bounding_boxes) this.draw_bounding_boxes();
+        this.draw_active_selection();
+        this.world.trees.forEach((tree) => this.draw_tree(tree));
+        this.world.scout_camps.forEach((scout_camp) => {this.draw_scout_camp(scout_camp);})
+        if (this.game_display.draw_fps) this.draw_fps();
+        this.draw_cardinal_direction_labels();
+        this.draw_fog_of_war();
+    }
+
+    draw_active_selection() {
         if (this.active_entity["field"] !== null) {
             let rect = new Rectangle(this.active_entity["field"], [1, 1]);
             this.draw_rectangle(rect, "white");
         }
-
         let active_person = this.active_entity["person"];
         this.world.people.forEach((person) => {
             let is_activated = active_person == person;
             this.draw_person(person, is_activated);
         });
-        this.world.trees.forEach((tree) => {
-            this.draw_tree(tree);
-        });
+    }
 
-        this.world.scout_camps.forEach((scout_camp) => {this.draw_scout_camp(scout_camp);})
-
-        if (this.draw_fps) {this.draw_fps();}
-        this.draw_cardinal_direction_labels();
-        this.draw_fog_of_war();
+    draw_bounding_boxes() {
+        this.world.people.forEach((person) => {this.draw_bounding_box(person);});
+        this.world.structures.forEach((structure) => {this.draw_bounding_box(structure);})
     }
 
     draw_scout_camp(scout_camp) {
