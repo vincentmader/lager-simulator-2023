@@ -295,13 +295,10 @@ export class Renderer {
         let floor_grid = this.world.floor_grid;
         let rectangles = floor_grid.rectangles;
         rectangles.forEach((rect) => {
-            let scale = 5;
             let position = rect.position;
-            let radius = 2 * this.game_display.zoom_level / scale;
-            this.draw_circle(position, radius, "#444444");
             let text_content = " (" + position.x + "," + position.y + ")";
-            let font_size = 15 * this.game_display.zoom_level / scale;
-            this.draw_text(position, text_content, {font_size: font_size, color: "#444444"});
+            let font_size = this.game_display.zoom_level / 4;
+            this.draw_text(position, text_content, {font_size: font_size, color: "white"});
         });
     }
 
