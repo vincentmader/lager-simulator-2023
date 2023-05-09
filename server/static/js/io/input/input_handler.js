@@ -59,25 +59,25 @@ class InputHandler {
             let max_camera_speed = 2; // TODO Adjust magic number.
             let camera_speed_increment = 3 / game_display.zoom_level; // TODO Ajust magic number.
             let direction;
-            if (e.code == "ArrowUp") {
+            if (["ArrowUp", "KeyK", "KeyW"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(0, camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
-            else if (e.code == "ArrowDown") {
+            else if (["ArrowDown", "KeyJ", "KeyS"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(0, -camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
-            else if (e.code == "ArrowLeft") {
+            else if (["ArrowLeft", "KeyH", "KeyA"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(-camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
             }
-            else if (e.code == "ArrowRight") {
+            else if (["ArrowRight", "KeyL", "KeyD"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
