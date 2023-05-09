@@ -4,13 +4,24 @@ import {Lagerfeuer, Dixi, WeissZelt1, WeissZelt2, Jurte} from "../entities/struc
 import {DirectionEnum} from "../../math/vector.js";
 
 export class ScoutCamp {
-    constructor() {
-        this.tents = initialize_list_of_tents();
+    constructor(position) {
+        this.position = position;
+
         this.people = initialize_list_of_people();
+        for (let p of this.people) {
+            p.position = p.position.add(position);
+            p.bounding_box = p.bounding_box.move(position);
+        }
+
+        this.tents = initialize_list_of_tents();
         this.campfires = initialize_list_of_campfires();
         this.dixies = initialize_list_of_dixies();
 
         this.structures = this._structures();
+        for (let s of this.structures) {
+            s.position = s.position.add(position);
+            s.bounding_box = s.bounding_box.move(position);
+        }
     }
 
     _structures() {
@@ -23,7 +34,6 @@ export class ScoutCamp {
 }
 
 const initialize_list_of_tents = () => {
-    // TODO Rename classes: `RoverZelt` -> name of actual tent. (Jurte, GJ, "WeissZelt1", ...)
     let woelflings_zelt = new WeissZelt2(new Position(-10, 8));
     let jupfi_zelt = new WeissZelt2(new Position(-11, 3));
     let pfadi_zelt = new WeissZelt2(new Position(-10, -2));

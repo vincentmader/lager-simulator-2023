@@ -19,7 +19,7 @@ export class Game {
         this.time_at_start_of_iteration = new Date();
         this.dt = 0;
 
-        let scout_camp = new ScoutCamp();
+        let scout_camp = new ScoutCamp(new Position(0, 0));
         let scout_camps = [scout_camp];
 
         let trees = initialize_list_of_trees(WORLD_DIMENSIONS);
