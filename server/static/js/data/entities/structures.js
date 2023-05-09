@@ -183,12 +183,12 @@ export class BannerMast extends Entity {
 
 export class Tree extends Entity {
 
-    constructor(position, variant_idx) { // TODO `variant_idx`
+    constructor(position, variant_idx, scale) { // TODO `variant_idx`
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/trees/tree_" + variant_idx + ".png";
         let img_dimensions = [150, 150];
         let texture_origin = [0.5, 0.83]
-        let texture_scale = 1 / 20;
+        let texture_scale = 1 / 20 * scale;
         // Define `Entity` object.
         let bounding_box_dims = [3, 3];
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);

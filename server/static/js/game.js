@@ -79,8 +79,9 @@ const initialize_list_of_trees = (world_dimensions, scout_camps) => {
             if (r < MINIMUM_DISTANCE_FROM_WORLD_ORIGIN) too_close = true;
         }
         if (too_close) continue;
+        let scale = random_randint(100, 120) / 100;
         let variant_idx = random_randint(1, 6); // TODO Do this differently?
-        trees.push(new Tree(position, variant_idx));
+        trees.push(new Tree(position, variant_idx, scale));
     }
 
     trees = trees.sort((tree_a, tree_b) => {
