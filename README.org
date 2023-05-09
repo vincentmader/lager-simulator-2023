@@ -1,5 +1,11 @@
 #+title: Lager-Simulator 2023
 
+- [[TODOs]]
+- [[Milestones]]
+- [[Questions & Answers]]
+- [[Notes on Implementation]]
+- [[Unsorted Notes]]
+
 * TODOs
 - [X] 3D-Vektor
 - [ ] Sprites & Animation
@@ -181,6 +187,60 @@ Children can be awakened by leaders (for night watch).
 *** Trees
 *** Bushes
 *** Rocks
+* Notes on Implementation
+** Coordinate Transformations
+*** Transformation between Cartesian and Isometric Coordinate Systems
+Let $x$, $y$, and $z$ label the cartesian coordinates,
+whereas $x'$, $y'$, and $z'$ label the isometric coordinates.
+
+Let then the transformation from cartesian to isometric coordinates be given by the mapping
+\begin{align*}
+  f
+    \begin{pmatrix}
+      x\\y\\z
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+      x'\\y'\\z'
+    \end{pmatrix}
+\end{align*}
+and the inverse transformation from isometric to cartesian coordinates by
+\begin{align*}
+  g
+    \begin{pmatrix}
+      x'\\y'\\z'
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+      x\\y\\z
+    \end{pmatrix}
+\end{align*}
+
+The transformations can be expressed as
+\begin{align*}
+  f
+    \begin{pmatrix}
+      x\\y\\z
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+      x-y\\\frac{1}{2}(x+y)\\z
+    \end{pmatrix}
+\end{align*}
+and
+\begin{align*}
+  g
+    \begin{pmatrix}
+      x'\\y'\\z'
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+      y'+\frac{1}{2}x'\\
+      y'-\frac{1}{2}x'+z\\
+      z
+    \end{pmatrix}
+\end{align*}
+
 * Unsorted Notes
 
 _Ueberfaeller_:
@@ -244,4 +304,3 @@ _Spiel-Setup_:
 
 _Sprueche-Sammlung_:
 - "Wenn ich einen seh' ... Der kriegt's mit meinem Multitool zu tun!"
-
