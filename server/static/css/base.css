@@ -1,16 +1,20 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+}
+
 * {
-    --DEFAULT-MARGIN: 4%;
-    --DEFAULT-BORDER: 1px solid white;
-    --DEFAULT-BORDER-RADIUS: 20px;
-    margin: 0px;
-    padding: 0px;
+    /* --DEFAULT-MARGIN: 4%; */
+    /* --DEFAULT-BORDER: 1px solid white; */
+    /* --DEFAULT-BORDER-RADIUS: 20px; */
+    /* margin: 0px; */
+    /* padding: 0px; */
     color: white;
     font-family: "Arial Black";
     font-size: 14px;
-}
-
-body {
-    background-color: black;
 }
 
 /* h2 { */
@@ -26,6 +30,7 @@ canvas {
     width: 100vw;
     height: 100vh;
 }
+
 
 /* .section-frame { */
 /*     width: calc(100% - 3 * var(--DEFAULT-MARGIN)); */
