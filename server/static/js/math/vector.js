@@ -127,20 +127,3 @@ export const DirectionEnum = {
     WEST: Math.PI,
     SOUTH: Math.PI * 3 / 2
 }
-
-export const direction_to_string = (direction) => {
-    // TODO Do this conversion differently?
-    if (Math.abs((direction - 0)) < 0.1 * Math.PI) {
-        return "east";
-    }
-    else if (Math.abs((direction - Math.PI / 2)) < 0.1 * Math.PI) {
-        return "north";
-    }
-    else if (Math.abs((direction - Math.PI)) < 0.1 * Math.PI) {
-        return "west";
-    }
-    else if (Math.abs((direction - Math.PI * 3 / 2)) < 0.1 * Math.PI) {
-        return "south";
-    }
-    throw new Error("Vector (" + this.x + ", " + this.y + ", " + this.z + ") is not 2d-discretizable!");
-}
