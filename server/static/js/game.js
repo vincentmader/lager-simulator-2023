@@ -79,11 +79,8 @@ const initialize_list_of_trees = (world_dimensions, scout_camps) => {
             if (r < MINIMUM_DISTANCE_FROM_WORLD_ORIGIN) too_close = true;
         }
         if (too_close) continue;
-        // Get random tree texture.
-        let texture_idx = random_randint(1, 6);
-        let texture = "/img/sprites/structures/trees/tree_" + texture_idx + ".png";
-        // Push tree to `trees` array.
-        trees.push(new Tree(position, texture));
+        let variant_idx = random_randint(1, 6); // TODO Do this differently?
+        trees.push(new Tree(position, variant_idx));
     }
 
     trees = trees.sort((tree_a, tree_b) => {

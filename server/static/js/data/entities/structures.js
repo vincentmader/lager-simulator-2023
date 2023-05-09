@@ -1,5 +1,5 @@
 import {Entity} from "./entity.js";
-import {Texture} from "../../io/output/texture.js";
+import {Texture} from "../../data/texture.js";
 
 
 export class Zelt extends Entity {
@@ -74,6 +74,22 @@ export class Dixi extends Entity {
 }
 
 
+export class Tree extends Entity {
+
+    constructor(position, variant_idx) { // TODO `variant_idx`
+        // Define `Texture` object.
+        let img_path = "/img/sprites/structures/trees/tree_" + variant_idx + ".png";
+        let img_dimensions = [150, 150];
+        let texture_origin = [0.5, 0.83]
+        let texture_scale = 1 / 20;
+        // Define `Entity` object.
+        let bounding_box_dims = [3, 3];
+        let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
+        super(position, bounding_box_dims, texture);
+    }
+}
+
+
 export class Lagerfeuer extends Entity {
 
     constructor(position) {
@@ -83,14 +99,6 @@ export class Lagerfeuer extends Entity {
         this.particle_cache = [];
         this.lighting_cache = [];
         this.wood_amount = 5;
-    }
-}
-
-
-export class Tree extends Entity {
-
-    constructor(position, texture) {
-        super(position, [3, 3], texture, [0.5, 0.83]);
     }
 }
 

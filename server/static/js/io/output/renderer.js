@@ -172,12 +172,11 @@ export class Renderer {
     };
 
     draw_tree(tree) {
-        let scale = 1 / 20; // TODO Remove magic number.
-        let dimensions = [
-            150 * this.game_display.zoom_level * scale,
-            150 * this.game_display.zoom_level * scale,
-        ];
-        this.draw_image(tree.texture, tree.position, dimensions, tree.texture_origin);
+        let img_path = tree.texture.img_path;
+        let img_dimensions = tree.texture.img_dimensions;
+        let texture_scale = tree.texture.texture_scale * this.game_display.zoom_level;
+        let texture_origin = tree.texture.texture_origin;
+        this.draw_image(img_path, tree.position, img_dimensions, texture_origin, {scale: texture_scale});
     }
 
     draw_campfire(fire) {
