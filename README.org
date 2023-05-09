@@ -1,10 +1,10 @@
 #+title: Lager-Simulator 2023
 
-- [[TODOs]]
-- [[Milestones]]
-- [[Questions & Answers]]
-- [[Notes on Implementation]]
-- [[Unsorted Notes]]
+# - [[TODOs]]
+# - [[Milestones]]
+# - [[Questions & Answers]]
+# - [[Notes on Implementation]]
+# - [[Unsorted Notes]]
 
 * TODOs
 - [X] 3D-Vektor
