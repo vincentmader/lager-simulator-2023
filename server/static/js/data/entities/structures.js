@@ -1,15 +1,6 @@
 import {Entity} from "./entity.js";
 
 
-export class Lightsource {
-
-    constructor(position, intensity, color) {
-        this.position = position;
-        this.intensity = intensity;
-        this.color = color;
-    }
-}
-
 export class Zelt extends Entity {
 
     constructor(position, bounding_box_dims, texture, texture_origin) {
@@ -63,3 +54,14 @@ export class Dixi extends Entity {
         super(position, [1, 1], "/img/sprites/structures/dixies/dixi_left.png", [0.5, 0.6]);
     }
 }
+
+
+// export class LightSource {
+
+//     constructor(position, intensity, color) {
+//         this.position = position;
+//         this.intensity = intensity;
+//         this.color = color;
+//     }
+// }
+
