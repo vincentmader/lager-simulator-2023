@@ -36,15 +36,15 @@ export class ScoutCamp {
 }
 
 const initialize_list_of_tents = () => {
-    let woelflings_zelt = new WeissZelt2(new Position(-10, 8));
-    let jupfi_zelt = new WeissZelt2(new Position(-11, 3));
-    let pfadi_zelt = new WeissZelt2(new Position(-10, -2));
-    let rover_zelt = new WeissZelt1(new Position(10, 5));
-    let geruest_zelt = new WeissZelt1(new Position(-3, -11));
-    let kuechen_zelt = new WeissZelt1(new Position(-8, -9));
-    let leiter_jurte = new Jurte(new Position(-2, 13));
-    let aufenthalts_jurte = new Jurte(new Position(5, 11));
-    let party_jurte = new Jurte(new Position(12, -3));
+    let woelflings_zelt = new WeissZelt2(new Position(-10, 8), "north");
+    let jupfi_zelt = new WeissZelt2(new Position(-11, 3), "north");
+    let pfadi_zelt = new WeissZelt2(new Position(-10, -2), "north");
+    let rover_zelt = new WeissZelt1(new Position(10, 5), "east");
+    let geruest_zelt = new WeissZelt1(new Position(-3, -11), "east");
+    let kuechen_zelt = new WeissZelt1(new Position(-8, -9), "east");
+    let leiter_jurte = new Jurte(new Position(-2, 13), "north");
+    let aufenthalts_jurte = new Jurte(new Position(5, 11), "north");
+    let party_jurte = new Jurte(new Position(12, -3), "north");
     let tents = [
         woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt,
         geruest_zelt, leiter_jurte, kuechen_zelt, aufenthalts_jurte, party_jurte
@@ -78,11 +78,11 @@ const initialize_list_of_campfires = () => {
 }
 
 const initialize_list_of_dixies = () => {
-    let dixi_1 = new Dixi(new Position(3, -10));
-    let dixi_2 = new Dixi(new Position(5, -10));
-    let dixi_3 = new Dixi(new Position(7, -10));
-    let dixi_4 = new Dixi(new Position(-8, 16));
-    let dixi_5 = new Dixi(new Position(-8, 14));
+    let dixi_1 = new Dixi(new Position(3, -10), "north");
+    let dixi_2 = new Dixi(new Position(5, -10), "north");
+    let dixi_3 = new Dixi(new Position(7, -10), "north");
+    let dixi_4 = new Dixi(new Position(-8, 16), "north");
+    let dixi_5 = new Dixi(new Position(-8, 14), "north");
     let dixies = [dixi_1, dixi_2, dixi_3, dixi_4, dixi_5];
     return dixies;
 

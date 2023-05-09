@@ -4,72 +4,73 @@ import {Texture} from "../../data/texture.js";
 
 export class Zelt extends Entity {
 
-    constructor(position, bounding_box_dims, texture) {
-        super(position, bounding_box_dims, texture);
+    constructor(position, bounding_box_dims, texture, orientation) {
+        super(position, bounding_box_dims, texture, orientation);
     }
 }
 
 
 export class WeissZelt1 extends Zelt {
 
-    constructor(position) {
+    constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/tents/RIGHT_NO_OUTLINE.png";
-        let img_dimensions = [1024, 631];
-        let texture_origin = [0.6, 0.67];
-        let texture_scale = 1 / 120;
+        let img_path = "/img/sprites/structures/tents/weisszelt_1/" + orientation + ".png";
+        let img_dimensions = [1920, 1080];
+        let texture_origin = [0.5, 0.6];
+        let texture_scale = 1 / 100;
         // Define `Zelt` object.
         let bounding_box_dims = [3, 4];
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
-        super(position, bounding_box_dims, texture);
+        super(position, bounding_box_dims, texture, orientation);
     }
 }
 
 
 export class WeissZelt2 extends Zelt {
 
-    constructor(position) {
+    constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/tents/LEFT_NO_OUTLINE.png";
+        let img_path = "/img/sprites/structures/tents/weisszelt_2/" + orientation + ".png";
         let img_dimensions = [1024, 631];
         let texture_origin = [0.4, 0.67];
         let texture_scale = 1 / 120;
         // Define `Zelt` object.
         let bounding_box_dims = [4, 3];
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
-        super(position, bounding_box_dims, texture);
+        super(position, bounding_box_dims, texture, orientation);
     }
 }
 
 
 export class Jurte extends Zelt {
 
-    constructor(position) {
+    constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/tents/jurte.png";
-        let img_dimensions = [1024, 631];
-        let texture_origin = [0.5, 0.67]
+        let img_path = "/img/sprites/structures/tents/jurte_1/" + orientation + ".png";
+        let img_dimensions = [1920, 1080];
+        let texture_origin = [0.5, 0.6]
         let texture_scale = 1 / 80;
         // Define `Zelt` object.
         let bounding_box_dims = [6, 6];
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
-        super(position, bounding_box_dims, texture);
+        super(position, bounding_box_dims, texture, orientation);
     }
 }
 
 
 export class Dixi extends Entity {
 
-    constructor(position) {
+    constructor(position, orientation) {
+        let state = "closed"; // TODO
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/dixies/dixi_left.png";
+        let img_path = "/img/sprites/structures/dixies/" + orientation + "_" + state + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.6]
         let texture_scale = 1 / 100;
         // Define `Zelt` object.
         let bounding_box_dims = [1, 1];
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
-        super(position, bounding_box_dims, texture);
+        super(position, bounding_box_dims, texture, orientation);
     }
 }
 
