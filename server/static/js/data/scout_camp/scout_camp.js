@@ -1,6 +1,7 @@
 import {Woelfling, Jupfi, Pfadi, Rover, Leiter} from "../entities/person.js";
 import {Position} from "../../math/vector.js";
 import {
+    BannerMast,
     BierBank,
     BierKasten,
     BierTisch,
@@ -32,6 +33,7 @@ export class ScoutCamp {
         this.biertische = initialize_list_of_biertische();
         this.bierbaenke = initialize_list_of_bierbaenke();
         this.bierkaesten = initialize_list_of_bierkaesten();
+        this.banners = initialize_list_of_banners();
 
         this.textured_structures = this._textured_structures();
         this.structures = this._structures();
@@ -43,12 +45,13 @@ export class ScoutCamp {
 
     _textured_structures() {
         let textured_structures = [].concat(
-            this.tents,
-            this.dixies,
-            this.waschstellen,
+            this.banners,
             this.bierbaenke,
-            this.biertische,
             this.bierkaesten,
+            this.biertische,
+            this.dixies,
+            this.tents,
+            this.waschstellen,
         );
         textured_structures = textured_structures.sort((structure_b, structure_a) => {
             return (structure_a.position.x + structure_a.position.y) - (structure_b.position.x + structure_b.position.y);
@@ -166,6 +169,13 @@ const initialize_list_of_biertische = () => {
     let biertisch_2 = new BierTisch(new Position(8, 0), "east");
     let biertische = [biertisch_1, biertisch_2];
     return biertische;
+
+}
+
+const initialize_list_of_banners = () => {
+    return [
+        new BannerMast(new Position(6, 4), "north"),
+    ];
 
 }
 
