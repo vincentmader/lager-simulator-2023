@@ -198,7 +198,7 @@ export class Renderer {
     }
 
     draw_point_light(light) {
-        let radius = Math.ceil(light.bounding_box.dimensions[0] * light.wood_amount / 5);
+        let radius = Math.ceil(light.bounding_box.dimensions[0] * light.wood_amount / 3.5);
         let update_lighting_values = false;
         if (Date.now() > light.animation_clock + light.animation_offset) {
             update_lighting_values = true;
@@ -209,12 +209,11 @@ export class Renderer {
                 if (update_lighting_values) {
                     light.lighting_cache[lighting_cache_index] = (0.5 - (Math.abs(dx) + Math.abs(dy)) / (4 * radius) + Math.random() * 0.1)
                 }
+                let alpha = light.lighting_cache[lighting_cache_index] / 2;
                 this.fill_rectangle(
-                    new Rectangle(
-                        light.position.add(new Position(dx, dy)),
-                        [1, 1]
-                    ), "rgba(255, 102, 0, " + light.lighting_cache[lighting_cache_index] + ")"
-                )
+                    new Rectangle(light.position.add(new Position(dx, dy)), [1, 1]),
+                    "rgba(255, 102, 0, " + alpha + ")"
+                );
             }
         }
     }
