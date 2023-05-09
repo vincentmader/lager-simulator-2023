@@ -20,7 +20,7 @@ export class Renderer {
         if (this.game_display.draw_world_boundary) this.draw_world_boundary();
         if (this.game_display.draw_floor_grid) this.draw_floor_grid();
         if (this.game_display.draw_labeled_positions) this.draw_labeled_positions();
-        if (this.draw_bounding_boxes) this.draw_bounding_boxes();
+        if (this.game_display.draw_bounding_boxes) this.draw_bounding_boxes();
         this.draw_active_selection();
         this.world.trees.forEach((tree) => this.draw_tree(tree));
         this.world.scout_camps.forEach((scout_camp) => {this.draw_scout_camp(scout_camp);})
