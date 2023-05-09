@@ -1,5 +1,6 @@
 import {Position} from "./vector.js";
 
+
 export class Rectangle {
 
     constructor(position, dimensions) {

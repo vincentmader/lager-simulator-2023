@@ -1,6 +1,7 @@
 import {Entity} from "./entity.js"
 import {TaskList} from "../../logic/task_execution.js";
 
+
 class Person extends Entity {
 
     constructor(position, speed, vision, direction) {

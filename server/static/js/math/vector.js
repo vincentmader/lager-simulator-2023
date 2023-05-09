@@ -45,6 +45,7 @@ export class Position extends Vector {
     }
 }
 
+
 export class Direction extends Vector {
 
     constructor(x, y, z = 0) {
@@ -118,6 +119,7 @@ export class Direction extends Vector {
         return new Direction(x, y);
     }
 }
+
 
 export const DirectionEnum = {
     EAST: 0,

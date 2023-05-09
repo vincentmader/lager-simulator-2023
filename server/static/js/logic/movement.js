@@ -1,5 +1,6 @@
 import {Direction, Position} from "../math/vector.js";
 
+
 class MovementPlanningStrategy {
 
     constructor(world, collision_detector) {

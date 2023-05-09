@@ -3,6 +3,7 @@ import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 import {UserInputHandler} from "./user_input_handler.js";
 import {ExecutionMode} from "../../data/tasks.js";
 
+
 class InputHandler {
 
     constructor(world, game_display, active_entity) {

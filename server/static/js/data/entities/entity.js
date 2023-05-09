@@ -1,5 +1,6 @@
 import {Rectangle} from "../../math/rectangle.js";
 
+
 export class Entity {
 
     constructor(

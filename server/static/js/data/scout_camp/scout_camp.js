@@ -3,7 +3,9 @@ import {Position} from "../../math/vector.js";
 import {Lagerfeuer, Dixi, WeissZelt1, WeissZelt2, Jurte} from "../entities/structures.js";
 import {DirectionEnum} from "../../math/vector.js";
 
+
 export class ScoutCamp {
+
     constructor(position) {
         this.position = position;
 
