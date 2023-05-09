@@ -196,35 +196,27 @@ whereas $x'$, $y'$, and $z'$ label the isometric coordinates.
 Let then the transformation from cartesian to isometric coordinates be given by the mapping
 $$f\begin{pmatrix}
       x\\y\\z
-    \end{pmatrix}
-  =
-    \begin{pmatrix}
+    \end{pmatrix}=\begin{pmatrix}
       x'\\y'\\z'
     \end{pmatrix}$$
 and the inverse transformation from isometric to cartesian coordinates by
 $$g\begin{pmatrix}
       x'\\y'\\z'
-    \end{pmatrix}
-  =
-    \begin{pmatrix}
+    \end{pmatrix}=\begin{pmatrix}
       x\\y\\z
     \end{pmatrix}$$
 
 The transformations can be expressed as
 $$f\begin{pmatrix}
       x\\y\\z
-    \end{pmatrix}
-  =
-    \begin{pmatrix}
+    \end{pmatrix}=\begin{pmatrix}
       x-y\\\frac{1}{2}(x+y)\\z
     \end{pmatrix}
 \end{align}$$
 and
 $$g\begin{pmatrix}
       x'\\y'\\z'
-    \end{pmatrix}
-  =
-    \begin{pmatrix}
+    \end{pmatrix}=\begin{pmatrix}
       y'+\frac{1}{2}x'\\
       y'-\frac{1}{2}x'+z\\
       z
