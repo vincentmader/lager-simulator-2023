@@ -194,7 +194,7 @@ Let $x$, $y$, and $z$ label the cartesian coordinates,
 whereas $x'$, $y'$, and $z'$ label the isometric coordinates.
 
 Let then the transformation from cartesian to isometric coordinates be given by the mapping
-\begin{align*}
+\begin{align}
   f
     \begin{pmatrix}
       x\\y\\z
@@ -203,9 +203,9 @@ Let then the transformation from cartesian to isometric coordinates be given by 
     \begin{pmatrix}
       x'\\y'\\z'
     \end{pmatrix}
-\end{align*}
+\end{align}
 and the inverse transformation from isometric to cartesian coordinates by
-\begin{align*}
+\begin{align}
   g
     \begin{pmatrix}
       x'\\y'\\z'
@@ -214,10 +214,10 @@ and the inverse transformation from isometric to cartesian coordinates by
     \begin{pmatrix}
       x\\y\\z
     \end{pmatrix}
-\end{align*}
+\end{align}
 
 The transformations can be expressed as
-\begin{align*}
+\begin{align}
   f
     \begin{pmatrix}
       x\\y\\z
@@ -226,9 +226,9 @@ The transformations can be expressed as
     \begin{pmatrix}
       x-y\\\frac{1}{2}(x+y)\\z
     \end{pmatrix}
-\end{align*}
+\end{align}
 and
-\begin{align*}
+\begin{align}
   g
     \begin{pmatrix}
       x'\\y'\\z'
@@ -239,7 +239,7 @@ and
       y'-\frac{1}{2}x'+z\\
       z
     \end{pmatrix}
-\end{align*}
+\end{align}
 
 * Unsorted Notes
 
