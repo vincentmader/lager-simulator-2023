@@ -140,6 +140,9 @@ export class Renderer {
         scout_camp.dixies.forEach((dixi) => this.draw_dixi(dixi));
         scout_camp.tents.forEach((tent) => this.draw_tent(tent));
         scout_camp.campfires.forEach((campfire) => this.draw_campfire(campfire));
+        scout_camp.waschstellen.forEach((waschstelle) => this.draw_waschstelle(waschstelle));
+        scout_camp.bierbaenke.forEach((bierbank) => this.draw_bierbank(bierbank));
+        scout_camp.biertische.forEach((biertisch) => this.draw_biertisch(biertisch));
     }
 
     draw_person(person, is_activated = false) {
@@ -155,6 +158,7 @@ export class Renderer {
         // this.draw_image(src, position, dimensions);
     }
 
+    // NOTE: The methods below can probably be combined into a `draw_structure(structure)` method.
     draw_tent(tent) {
         let img_path = tent.texture.img_path;
         let img_dimensions = tent.texture.img_dimensions;
@@ -177,6 +181,30 @@ export class Renderer {
         let texture_scale = tree.texture.texture_scale * this.game_display.zoom_level;
         let texture_origin = tree.texture.texture_origin;
         this.draw_image(img_path, tree.position, img_dimensions, texture_origin, {scale: texture_scale});
+    }
+
+    draw_waschstelle(waschstelle) {
+        let img_path = waschstelle.texture.img_path;
+        let img_dimensions = waschstelle.texture.img_dimensions;
+        let texture_scale = waschstelle.texture.texture_scale * this.game_display.zoom_level;
+        let texture_origin = waschstelle.texture.texture_origin;
+        this.draw_image(img_path, waschstelle.position, img_dimensions, texture_origin, {scale: texture_scale});
+    }
+
+    draw_biertisch(biertisch) {
+        let img_path = biertisch.texture.img_path;
+        let img_dimensions = biertisch.texture.img_dimensions;
+        let texture_scale = biertisch.texture.texture_scale * this.game_display.zoom_level;
+        let texture_origin = biertisch.texture.texture_origin;
+        this.draw_image(img_path, biertisch.position, img_dimensions, texture_origin, {scale: texture_scale});
+    }
+
+    draw_bierbank(bierbank) {
+        let img_path = bierbank.texture.img_path;
+        let img_dimensions = bierbank.texture.img_dimensions;
+        let texture_scale = bierbank.texture.texture_scale * this.game_display.zoom_level;
+        let texture_origin = bierbank.texture.texture_origin;
+        this.draw_image(img_path, bierbank.position, img_dimensions, texture_origin, {scale: texture_scale});
     }
 
     draw_campfire(fire) {

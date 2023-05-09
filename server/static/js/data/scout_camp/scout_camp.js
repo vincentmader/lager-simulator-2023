@@ -1,6 +1,6 @@
 import {Woelfling, Jupfi, Pfadi, Rover, Leiter} from "../entities/person.js";
 import {Position} from "../../math/vector.js";
-import {Lagerfeuer, Dixi, WeissZelt_1, WeissZelt_2, Jurte_1, Jurte_2} from "../entities/structures.js";
+import {Lagerfeuer, Dixi, WeissZelt_1, WeissZelt_2, Jurte_1, Jurte_2, WaschStelle, BierBank, BierTisch} from "../entities/structures.js";
 import {DirectionEnum} from "../../math/vector.js";
 
 
@@ -18,6 +18,9 @@ export class ScoutCamp {
         this.tents = initialize_list_of_tents();
         this.campfires = initialize_list_of_campfires();
         this.dixies = initialize_list_of_dixies();
+        this.waschstellen = initialize_list_of_waschstellen();
+        this.biertische = initialize_list_of_biertische();
+        this.bierbaenke = initialize_list_of_bierbaenke();
 
         this.structures = this._structures();
         for (let s of this.structures) {
@@ -31,6 +34,9 @@ export class ScoutCamp {
             this.tents,
             this.campfires,
             this.dixies,
+            this.waschstellen,
+            this.bierbaenke,
+            this.biertische,
         );
     }
 }
@@ -98,5 +104,29 @@ const initialize_list_of_dixies = () => {
     let dixi_5 = new Dixi(new Position(13, 0), "south");
     let dixies = [dixi_1, dixi_2, dixi_3, dixi_4, dixi_5];
     return dixies;
+
+}
+
+const initialize_list_of_waschstellen = () => {
+    let waschstelle_1 = new WaschStelle(new Position(14, -3), "west");
+    let waschstelle_2 = new WaschStelle(new Position(12, -3), "east");
+    let waschstellen = [waschstelle_1, waschstelle_2];
+    return waschstellen;
+
+}
+
+const initialize_list_of_bierbaenke = () => {
+    let bierbank_1 = new BierBank(new Position(-1, 6), "north");
+    let bierbank_2 = new BierBank(new Position(4, 6), "north");
+    let bierbaenke = [bierbank_1, bierbank_2];
+    return bierbaenke;
+
+}
+
+const initialize_list_of_biertische = () => {
+    let biertisch_1 = new BierTisch(new Position(-1, 8), "north");
+    let biertisch_2 = new BierTisch(new Position(4, 8), "north");
+    let biertische = [biertisch_1, biertisch_2];
+    return biertische;
 
 }
