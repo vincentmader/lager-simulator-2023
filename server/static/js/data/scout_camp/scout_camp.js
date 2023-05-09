@@ -1,6 +1,6 @@
 import {Woelfling, Jupfi, Pfadi, Rover, Leiter} from "../entities/person.js";
 import {Position} from "../../math/vector.js";
-import {Lagerfeuer, Dixi, WeissZelt1, WeissZelt2, Jurte} from "../entities/structures.js";
+import {Lagerfeuer, Dixi, WeissZelt_1, WeissZelt_2, Jurte_1, Jurte_2} from "../entities/structures.js";
 import {DirectionEnum} from "../../math/vector.js";
 
 
@@ -36,20 +36,33 @@ export class ScoutCamp {
 }
 
 const initialize_list_of_tents = () => {
-    let woelflings_zelt = new WeissZelt2(new Position(-10, 8), "north");
-    let jupfi_zelt = new WeissZelt2(new Position(-11, 3), "north");
-    let pfadi_zelt = new WeissZelt2(new Position(-10, -2), "north");
-    let rover_zelt = new WeissZelt1(new Position(10, 5), "east");
-    let geruest_zelt = new WeissZelt1(new Position(-3, -11), "east");
-    let kuechen_zelt = new WeissZelt1(new Position(-8, -9), "east");
-    let leiter_jurte = new Jurte(new Position(-2, 13), "north");
-    let aufenthalts_jurte = new Jurte(new Position(5, 11), "north");
-    let party_jurte = new Jurte(new Position(12, -3), "north");
+    let woelflings_zelt = new WeissZelt_2(new Position(-11, 9), "north");
+    let jupfi_zelt = new WeissZelt_2(new Position(-12, 4), "north");
+    let pfadi_zelt = new WeissZelt_2(new Position(-12, -1), "north");
+    let rover_zelt_1 = new WeissZelt_1(new Position(9, 8), "east");
+    let rover_zelt_2 = new WeissZelt_1(new Position(13, 5), "east");
+    let geruest_zelt = new WeissZelt_1(new Position(-12, -9), "south");
+    let kuechen_zelt = new WeissZelt_1(new Position(-8, -9), "south");
+    let leiter_jurte_1 = new Jurte_1(new Position(-2, 13), "north");
+    let leiter_jurte_2 = new Jurte_2(new Position(-7, 16), "north");
+    let leiter_jurte_3 = new Jurte_2(new Position(4, 13), "north");
+    let aufenthalts_jurte = new Jurte_2(new Position(10, -10), "north");
+    let party_jurte = new Jurte_1(new Position(0, -12), "north");
     let tents = [
-        woelflings_zelt, jupfi_zelt, pfadi_zelt, rover_zelt,
-        geruest_zelt, leiter_jurte, kuechen_zelt, aufenthalts_jurte, party_jurte
+        woelflings_zelt,
+        jupfi_zelt,
+        pfadi_zelt,
+        rover_zelt_1,
+        rover_zelt_2,
+        geruest_zelt,
+        kuechen_zelt,
+        aufenthalts_jurte,
+        party_jurte,
+        leiter_jurte_1,
+        leiter_jurte_2,
+        leiter_jurte_3,
     ];
-    tents = tents.sort((tent_a, tent_b) => {
+    tents = tents.sort((tent_b, tent_a) => {
         return (tent_a.position.x + tent_a.position.y) - (tent_b.position.x + tent_b.position.y);
     });
     return tents;
@@ -78,11 +91,11 @@ const initialize_list_of_campfires = () => {
 }
 
 const initialize_list_of_dixies = () => {
-    let dixi_1 = new Dixi(new Position(3, -10), "north");
-    let dixi_2 = new Dixi(new Position(5, -10), "north");
-    let dixi_3 = new Dixi(new Position(7, -10), "north");
-    let dixi_4 = new Dixi(new Position(-8, 16), "north");
-    let dixi_5 = new Dixi(new Position(-8, 14), "north");
+    let dixi_1 = new Dixi(new Position(17, -1), "west");
+    let dixi_2 = new Dixi(new Position(17, -3), "west");
+    let dixi_3 = new Dixi(new Position(17, -5), "west");
+    let dixi_4 = new Dixi(new Position(15, 0), "south");
+    let dixi_5 = new Dixi(new Position(13, 0), "south");
     let dixies = [dixi_1, dixi_2, dixi_3, dixi_4, dixi_5];
     return dixies;
 

@@ -10,7 +10,7 @@ export class Zelt extends Entity {
 }
 
 
-export class WeissZelt1 extends Zelt {
+export class WeissZelt_1 extends Zelt {
 
     constructor(position, orientation) {
         // Define `Texture` object.
@@ -26,7 +26,7 @@ export class WeissZelt1 extends Zelt {
 }
 
 
-export class WeissZelt2 extends Zelt {
+export class WeissZelt_2 extends Zelt {
 
     constructor(position, orientation) {
         // Define `Texture` object.
@@ -42,7 +42,7 @@ export class WeissZelt2 extends Zelt {
 }
 
 
-export class Jurte extends Zelt {
+export class Jurte_1 extends Zelt {
 
     constructor(position, orientation) {
         // Define `Texture` object.
@@ -52,6 +52,22 @@ export class Jurte extends Zelt {
         let texture_scale = 1 / 80;
         // Define `Zelt` object.
         let bounding_box_dims = [6, 6];
+        let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
+        super(position, bounding_box_dims, texture, orientation);
+    }
+}
+
+
+export class Jurte_2 extends Zelt {
+
+    constructor(position, orientation) {
+        // Define `Texture` object.
+        let img_path = "/img/sprites/structures/tents/jurte_2/" + orientation + ".png";
+        let img_dimensions = [1920, 1080];
+        let texture_origin = [0.5, 0.6]
+        let texture_scale = 1 / 100;
+        // Define `Zelt` object.
+        let bounding_box_dims = [5, 5];
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
