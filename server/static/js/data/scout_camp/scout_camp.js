@@ -70,8 +70,7 @@ const initialize_list_of_people = () => {
 
 const initialize_list_of_campfires = () => {
     let campfire_1 = new Lagerfeuer(new Position(0, 0));
-    let campfire_2 = new Lagerfeuer(new Position(50, 40));
-    let campfires = [campfire_1, campfire_2];
+    let campfires = [campfire_1];
     return campfires;
 
 }
