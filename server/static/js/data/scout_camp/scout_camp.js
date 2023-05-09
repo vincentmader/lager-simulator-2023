@@ -80,11 +80,11 @@ const initialize_list_of_tents = () => {
         new WeissZelt_1(new Position(14, 6), "north"),
         new WeissZelt_1(new Position(-12, -9), "west"),
         new WeissZelt_1(new Position(-8, -9), "west"),
-        new Jurte_1(new Position(-2, 13), "north"),
-        new Jurte_2(new Position(-7, 16), "north"),
-        new Jurte_2(new Position(4, 13), "north"),
-        new Jurte_2(new Position(10, -10), "north"),
-        new Jurte_1(new Position(0, -12), "north"),
+        new Jurte_1(new Position(-2, 13), "west"),
+        new Jurte_2(new Position(-7, 16), "east"),
+        new Jurte_2(new Position(4, 13), "south"),
+        new Jurte_2(new Position(10, -10), "south"),
+        new Jurte_1(new Position(0, -12), "east"),
     ];
 }
 
