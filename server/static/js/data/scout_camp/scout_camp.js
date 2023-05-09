@@ -31,20 +31,28 @@ export class ScoutCamp {
     }
 
     _textured_structures() {
-        return [].concat(
+        let textured_structures = [].concat(
             this.tents,
             this.dixies,
             this.waschstellen,
             this.bierbaenke,
             this.biertische,
         );
+        textured_structures = textured_structures.sort((structure_b, structure_a) => {
+            return (structure_a.position.x + structure_a.position.y) - (structure_b.position.x + structure_b.position.y);
+        });
+        return textured_structures;
     }
 
     _structures() {
-        return [].concat(
+        let structures = [].concat(
             this._textured_structures(),
             this.campfires,
         );
+        structures = structures.sort((structure_b, structure_a) => {
+            return (structure_a.position.x + structure_a.position.y) - (structure_b.position.x + structure_b.position.y);
+        });
+        return structures;
     }
 }
 
@@ -123,16 +131,27 @@ const initialize_list_of_waschstellen = () => {
 }
 
 const initialize_list_of_bierbaenke = () => {
-    let bierbank_1 = new BierBank(new Position(-1, 6), "north");
-    let bierbank_2 = new BierBank(new Position(4, 6), "north");
-    let bierbaenke = [bierbank_1, bierbank_2];
+    let bierbank_1 = new BierBank(new Position(4, 7), "north");
+    let bierbank_3 = new BierBank(new Position(4, 9), "north");
+    let bierbank_2 = new BierBank(new Position(9, 0), "east");
+    let bierbank_4 = new BierBank(new Position(7, 0), "east");
+    // let bierbank_5 = new BierBank(new Position(5, 0), "east");
+    // let bierbank_6 = new BierBank(new Position(0, 5), "north");
+    let bierbaenke = [
+        bierbank_1,
+        bierbank_2,
+        bierbank_3,
+        bierbank_4,
+        // bierbank_5,
+        // bierbank_6
+    ];
     return bierbaenke;
 
 }
 
 const initialize_list_of_biertische = () => {
-    let biertisch_1 = new BierTisch(new Position(-1, 8), "north");
-    let biertisch_2 = new BierTisch(new Position(4, 8), "north");
+    let biertisch_1 = new BierTisch(new Position(4, 8), "north");
+    let biertisch_2 = new BierTisch(new Position(8, 0), "east");
     let biertische = [biertisch_1, biertisch_2];
     return biertische;
 
