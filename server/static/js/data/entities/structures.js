@@ -58,19 +58,6 @@ export class Jurte extends Zelt {
 }
 
 
-export class Lagerfeuer extends Entity {
-
-    constructor(position) {
-        super(position, [3, 3]);
-        this.animation_clock = 0;
-        this.animation_offset = 70;
-        this.particle_cache = [];
-        this.lighting_cache = [];
-        this.wood_amount = 5;
-    }
-}
-
-
 export class Dixi extends Entity {
 
     constructor(position) {
@@ -83,6 +70,19 @@ export class Dixi extends Entity {
         let bounding_box_dims = [1, 1];
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture);
+    }
+}
+
+
+export class Lagerfeuer extends Entity {
+
+    constructor(position) {
+        super(position, [3, 3]);
+        this.animation_clock = 0;
+        this.animation_offset = 70;
+        this.particle_cache = [];
+        this.lighting_cache = [];
+        this.wood_amount = 5;
     }
 }
 
