@@ -19,7 +19,8 @@ export class WeissZelt_1 extends Zelt {
         let texture_origin = [0.5, 0.6];
         let texture_scale = 1 / 100;
         // Define `Zelt` object.
-        let bounding_box_dims = [3, 4];
+        let bounding_box_dims = [4, 3];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
@@ -36,6 +37,7 @@ export class WeissZelt_2 extends Zelt {
         let texture_scale = 1 / 120;
         // Define `Zelt` object.
         let bounding_box_dims = [4, 3];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
@@ -52,6 +54,7 @@ export class Jurte_1 extends Zelt {
         let texture_scale = 1 / 80;
         // Define `Zelt` object.
         let bounding_box_dims = [6, 6];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
@@ -68,6 +71,7 @@ export class Jurte_2 extends Zelt {
         let texture_scale = 1 / 100;
         // Define `Zelt` object.
         let bounding_box_dims = [5, 5];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
@@ -85,6 +89,7 @@ export class Dixi extends Entity {
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
@@ -100,7 +105,8 @@ export class WaschStelle extends Entity {
         let texture_origin = [0.5, 0.6]
         let texture_scale = 1 / 100;
         // Define `Entity` object.
-        let bounding_box_dims = [2, 3];
+        let bounding_box_dims = [2, 2];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
@@ -117,6 +123,7 @@ export class BierBank extends Entity {
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [4, 1];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
@@ -133,6 +140,7 @@ export class BierTisch extends Entity {
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [4, 1];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
     }
@@ -149,6 +157,7 @@ export class BierKasten extends Entity {
         let texture_scale = 1 / 50;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture);
     }
@@ -165,6 +174,7 @@ export class BannerMast extends Entity {
         let texture_scale = 1 / 30;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
+        bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture);
     }
@@ -208,3 +218,16 @@ export class Lagerfeuer extends Entity {
 //         this.color = color;
 //     }
 // }
+
+// TODO Move elsewhere, or implement differently. Use e.g. `Vector` class?
+const utility_func_for_rotating_bounding_boxes = (bounding_box_dims, orientation) => {
+    if (orientation == "north" || orientation == "south") {
+        // return bounding_box_dims;
+        return [bounding_box_dims[1], bounding_box_dims[0]];
+    } else if (orientation == "west" || orientation == "east") {
+        // return [bounding_box_dims[1], bounding_box_dims[0]];
+        return bounding_box_dims;
+    } else {
+        throw "Orientation " + orientation + "is not defined.";
+    }
+}

@@ -72,51 +72,35 @@ export class ScoutCamp {
 }
 
 const initialize_list_of_tents = () => {
-    let woelflings_zelt = new WeissZelt_2(new Position(-11, 9), "north");
-    let jupfi_zelt = new WeissZelt_2(new Position(-12, 4), "north");
-    let pfadi_zelt = new WeissZelt_2(new Position(-12, -1), "north");
-    let rover_zelt_1 = new WeissZelt_1(new Position(9, 8), "east");
-    let rover_zelt_2 = new WeissZelt_1(new Position(13, 5), "east");
-    let geruest_zelt = new WeissZelt_1(new Position(-12, -9), "south");
-    let kuechen_zelt = new WeissZelt_1(new Position(-8, -9), "south");
-    let leiter_jurte_1 = new Jurte_1(new Position(-2, 13), "north");
-    let leiter_jurte_2 = new Jurte_2(new Position(-7, 16), "north");
-    let leiter_jurte_3 = new Jurte_2(new Position(4, 13), "north");
-    let aufenthalts_jurte = new Jurte_2(new Position(10, -10), "north");
-    let party_jurte = new Jurte_1(new Position(0, -12), "north");
-    let tents = [
-        woelflings_zelt,
-        jupfi_zelt,
-        pfadi_zelt,
-        rover_zelt_1,
-        rover_zelt_2,
-        geruest_zelt,
-        kuechen_zelt,
-        aufenthalts_jurte,
-        party_jurte,
-        leiter_jurte_1,
-        leiter_jurte_2,
-        leiter_jurte_3,
+    return [
+        new WeissZelt_2(new Position(-11, 9), "west"),
+        new WeissZelt_2(new Position(-12, 4), "west"),
+        new WeissZelt_2(new Position(-12, -1), "west"),
+        new WeissZelt_1(new Position(10, 9), "north"),
+        new WeissZelt_1(new Position(14, 6), "north"),
+        new WeissZelt_1(new Position(-12, -9), "west"),
+        new WeissZelt_1(new Position(-8, -9), "west"),
+        new Jurte_1(new Position(-2, 13), "north"),
+        new Jurte_2(new Position(-7, 16), "north"),
+        new Jurte_2(new Position(4, 13), "north"),
+        new Jurte_2(new Position(10, -10), "north"),
+        new Jurte_1(new Position(0, -12), "north"),
     ];
-    tents = tents.sort((tent_b, tent_a) => {
-        return (tent_a.position.x + tent_a.position.y) - (tent_b.position.x + tent_b.position.y);
-    });
-    return tents;
 }
 
 const initialize_list_of_people = () => {
-    let w1 = new Woelfling(new Position(2, 5), "south");
-    let w2 = new Woelfling(new Position(1, 5), "south");
-    let w3 = new Woelfling(new Position(-1, 5), "south");
-    let j1 = new Jupfi(new Position(0, 5), "south");
-    let p1 = new Pfadi(new Position(5, 0), "west");
-    let p2 = new Pfadi(new Position(5, 1), "west");
-    let r1 = new Rover(new Position(5, 2), "west");
-    let l1 = new Leiter(new Position(5, -1), "west");
-    let l2 = new Leiter(new Position(-5, 0), "east");
-    let l3 = new Leiter(new Position(-5, 1), "east");
-    let people = [w1, w2, w3, j1, p1, p2, r1, l1, l2, l3];
-    return people;
+    return [
+        new Woelfling(new Position(2, 5), "south"),
+        new Woelfling(new Position(1, 5), "south"),
+        new Woelfling(new Position(-1, 5), "south"),
+        new Jupfi(new Position(0, 5), "south"),
+        new Pfadi(new Position(5, 0), "west"),
+        new Pfadi(new Position(5, 1), "west"),
+        new Rover(new Position(5, 2), "west"),
+        new Leiter(new Position(5, -1), "west"),
+        new Leiter(new Position(-5, 0), "east"),
+        new Leiter(new Position(-5, 1), "east"),
+    ];
 }
 
 const initialize_list_of_campfires = () => {
@@ -127,60 +111,48 @@ const initialize_list_of_campfires = () => {
 }
 
 const initialize_list_of_dixies = () => {
-    let dixi_1 = new Dixi(new Position(17, -1), "west");
-    let dixi_2 = new Dixi(new Position(17, -3), "west");
-    let dixi_3 = new Dixi(new Position(17, -5), "west");
-    let dixi_4 = new Dixi(new Position(15, 0), "south");
-    let dixi_5 = new Dixi(new Position(13, 0), "south");
-    let dixies = [dixi_1, dixi_2, dixi_3, dixi_4, dixi_5];
-    return dixies;
-
+    return [
+        new Dixi(new Position(17, -1), "west"),
+        new Dixi(new Position(17, -3), "west"),
+        new Dixi(new Position(17, -5), "west"),
+        new Dixi(new Position(15, 0), "south"),
+        new Dixi(new Position(13, 0), "south"),
+    ];
 }
 
 const initialize_list_of_waschstellen = () => {
-    let waschstelle_1 = new WaschStelle(new Position(14, -3), "west");
-    let waschstelle_2 = new WaschStelle(new Position(12, -3), "east");
-    let waschstellen = [waschstelle_1, waschstelle_2];
-    return waschstellen;
-
+    return [
+        new WaschStelle(new Position(14, -3), "north"),
+        new WaschStelle(new Position(11, -3), "south"),
+    ]
 }
 
 const initialize_list_of_bierbaenke = () => {
-    let bierbank_1 = new BierBank(new Position(4, 7), "north");
-    let bierbank_3 = new BierBank(new Position(4, 9), "north");
-    let bierbank_2 = new BierBank(new Position(9, 0), "east");
-    let bierbank_4 = new BierBank(new Position(7, 0), "east");
-    // let bierbank_5 = new BierBank(new Position(5, 0), "east");
-    // let bierbank_6 = new BierBank(new Position(0, 5), "north");
-    let bierbaenke = [
-        bierbank_1,
-        bierbank_2,
-        bierbank_3,
-        bierbank_4,
-        // bierbank_5,
-        // bierbank_6
+    return [
+        new BierBank(new Position(4, 7), "east"),
+        new BierBank(new Position(4, 9), "east"),
+        new BierBank(new Position(9, 0), "north"),
+        new BierBank(new Position(7, 0), "north"),
+        // new BierBank(new Position(5, 0), "north"),
+        // new BierBank(new Position(0, 5), "east"),
     ];
-    return bierbaenke;
-
 }
 
 const initialize_list_of_biertische = () => {
-    let biertisch_1 = new BierTisch(new Position(4, 8), "north");
-    let biertisch_2 = new BierTisch(new Position(8, 0), "east");
-    let biertische = [biertisch_1, biertisch_2];
-    return biertische;
-
+    return [
+        new BierTisch(new Position(4, 8), "east"),
+        new BierTisch(new Position(8, 0), "north"),
+    ];
 }
 
 const initialize_list_of_banners = () => {
     return [
         new BannerMast(new Position(6, 4), "north"),
     ];
-
 }
 
 const initialize_list_of_bierkaesten = () => {
-    let kaesten = [
+    return [
         new BierKasten(new Position(-8, -2), "east"),
         new BierKasten(new Position(-8, -1), "east"),
         new BierKasten(new Position(-8, +0), "east"),
@@ -194,6 +166,4 @@ const initialize_list_of_bierkaesten = () => {
         new BierKasten(new Position(-7, +2), "north"),
         new BierKasten(new Position(-7, +3), "north"),
     ];
-    return kaesten;
-
 }
