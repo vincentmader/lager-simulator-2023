@@ -82,6 +82,13 @@ class InputHandler {
                     direction = new Vector(camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
+            }
+            else if (["KeyB"].includes(e.code)) {
+                game_display.draw_bounding_boxes = !game_display.draw_bounding_boxes;
+            }
+            else if (["KeyG"].includes(e.code)) {
+                game_display.draw_floor_grid = !game_display.draw_floor_grid;
+                game_display.draw_floor_background = !game_display.draw_floor_background;
             } else {
                 return;
                 // TODO: Define all other key-press events.
@@ -89,7 +96,7 @@ class InputHandler {
         }
 
         document.addEventListener("keydown", keyHandler);
-        document.addEventListener("keyup", keyHandler);
+        // document.addEventListener("keyup", keyHandler);
     }
 
     handle_task_lifecycle(event) {
