@@ -22,6 +22,7 @@ export class ScoutCamp {
         this.biertische = initialize_list_of_biertische();
         this.bierbaenke = initialize_list_of_bierbaenke();
 
+        this.textured_structures = this._textured_structures();
         this.structures = this._structures();
         for (let s of this.structures) {
             s.position = s.position.add(position);
@@ -29,14 +30,20 @@ export class ScoutCamp {
         }
     }
 
-    _structures() {
+    _textured_structures() {
         return [].concat(
             this.tents,
-            this.campfires,
             this.dixies,
             this.waschstellen,
             this.bierbaenke,
             this.biertische,
+        );
+    }
+
+    _structures() {
+        return [].concat(
+            this._textured_structures(),
+            this.campfires,
         );
     }
 }
