@@ -156,14 +156,14 @@ const initialize_list_of_bierkaesten = () => {
         new BierKasten(new Position(-8, -2), "east"),
         new BierKasten(new Position(-8, -1), "east"),
         new BierKasten(new Position(-8, +0), "east"),
-        new BierKasten(new Position(-8, +1), "north"),
         new BierKasten(new Position(-8, +2), "north"),
         new BierKasten(new Position(-8, +3), "north"),
+        new BierKasten(new Position(-8, +4), "north"),
         new BierKasten(new Position(-7, -2), "east"),
         new BierKasten(new Position(-7, -1), "east"),
         new BierKasten(new Position(-7, +0), "east"),
-        new BierKasten(new Position(-7, +1), "north"),
         new BierKasten(new Position(-7, +2), "north"),
         new BierKasten(new Position(-7, +3), "north"),
+        new BierKasten(new Position(-7, +4), "north"),
     ];
 }
