@@ -84,7 +84,7 @@ const initialize_list_of_trees = (world_dimensions, scout_camps) => {
     }
 
     trees = trees.sort((tree_a, tree_b) => {
-        return (tree_a.position.x + tree_a.position.y) - (tree_b.position.x + tree_b.position.y);
+        return (tree_b.position.x + tree_b.position.y) - (tree_a.position.x + tree_a.position.y);
     });
     // TODO Only use free tiles for a tree, a tree takes up 3x3 tiles. => No overlapping trees
     return trees;
