@@ -127,3 +127,15 @@ export const DirectionEnum = {
     WEST: Math.PI,
     SOUTH: Math.PI * 3 / 2
 }
+
+export const direction_from_string = (string) => {
+    if (string == "east") {
+        return DirectionEnum.EAST;
+    } else if (string == "north") {
+        return DirectionEnum.NORTH;
+    } else if (string == "west") {
+        return DirectionEnum.WEST;
+    } else if (string == "south") {
+        return DirectionEnum.SOUTH;
+    }
+}
