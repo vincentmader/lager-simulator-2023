@@ -64,29 +64,24 @@ class InputHandler {
                     direction = new Vector(0, camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
-            }
-            else if (["ArrowDown", "KeyJ", "KeyS"].includes(e.code)) {
+            } else if (["ArrowDown", "KeyJ", "KeyS"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(0, -camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
-            }
-            else if (["ArrowLeft", "KeyH", "KeyA"].includes(e.code)) {
+            } else if (["ArrowLeft", "KeyH", "KeyA"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(-camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
-            }
-            else if (["ArrowRight", "KeyL", "KeyD"].includes(e.code)) {
+            } else if (["ArrowRight", "KeyL", "KeyD"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
-            }
-            else if (["KeyB"].includes(e.code)) {
+            } else if (["KeyB"].includes(e.code)) {
                 game_display.draw_bounding_boxes = !game_display.draw_bounding_boxes;
-            }
-            else if (["KeyG"].includes(e.code)) {
+            } else if (["KeyG"].includes(e.code)) {
                 game_display.draw_floor_grid = !game_display.draw_floor_grid;
                 game_display.draw_floor_background = !game_display.draw_floor_background;
             } else {
