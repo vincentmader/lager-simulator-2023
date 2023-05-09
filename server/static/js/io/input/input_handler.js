@@ -81,6 +81,10 @@ class InputHandler {
                 }
             } else if (["KeyB"].includes(e.code)) {
                 game_display.draw_bounding_boxes = !game_display.draw_bounding_boxes;
+            } else if (["Minus"].includes(e.code)) {
+                if (game_display.zoom_level > 5) game_display.zoom_level /= 1.02;
+            } else if (["Equal"].includes(e.code)) {
+                if (game_display.zoom_level < 101) game_display.zoom_level *= 1.02;
             } else if (["KeyG"].includes(e.code)) {
                 game_display.draw_floor_grid = !game_display.draw_floor_grid;
                 game_display.draw_floor_background = !game_display.draw_floor_background;
