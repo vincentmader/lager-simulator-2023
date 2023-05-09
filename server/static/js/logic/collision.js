@@ -7,7 +7,7 @@ export class CollisionDetector {
         for (let i = 0; i < this.granularity * this.granularity; i++) {
             this.cells[i] = new Cell();
         }
-        this.world.structures().forEach((structure) => {
+        this.world.structures.forEach((structure) => {
             this.update_cells(structure)
         });
         this.world.people.forEach((person) => {

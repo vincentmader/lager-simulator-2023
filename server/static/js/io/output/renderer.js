@@ -2,14 +2,13 @@ import {Position} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
 import {gaussian_random} from "../../math/utils.js";
 import {Rectangle} from "../../math/rectangle.js";
-// import {JupfiZelt, Lagerfeuer, LeiterJurte, PfadiZelt, RoverZelt, WoelflingsZelt} from "../../data/entities/structures.js";
 
 
 export class Renderer {
 
     constructor(world, game_display, active_entity) {
         this.world = world;
-        this.game_display = game_display; // TODO Rename to `game_display` (everywhere).
+        this.game_display = game_display;
         this.coordinate_transformer = new CoordinateTransformer(world, game_display);
         this.image_cache = {};
         this.active_entity = active_entity;
@@ -17,25 +16,15 @@ export class Renderer {
 
     display() {
         this.clear_screen();
-        if (this.game_display.draw_floor_background) {
-            this.draw_floor_background();
-        }
-        if (this.game_display.draw_world_boundary) {
-            this.draw_world_boundary();
-        }
-        if (this.game_display.draw_floor_grid) {
-            this.draw_floor_grid();
-        }
+        if (this.game_display.draw_floor_background) {this.draw_floor_background();}
+        if (this.game_display.draw_world_boundary) {this.draw_world_boundary();}
+        if (this.game_display.draw_floor_grid) {this.draw_floor_grid();}
         if (this.game_display.draw_labeled_positions) {
             this.draw_labeled_positions();
         }
         if (true) {
-            this.world.people.forEach((person) => {
-                this.draw_bounding_box(person);
-            });
-            this.world.structures().forEach((structure) => {
-                this.draw_bounding_box(structure);
-            })
+            this.world.people.forEach((person) => {this.draw_bounding_box(person);});
+            this.world.structures.forEach((structure) => {this.draw_bounding_box(structure);})
         }
         if (this.active_entity["field"] !== null) {
             let rect = new Rectangle(this.active_entity["field"], [1, 1]);
@@ -50,23 +39,18 @@ export class Renderer {
         this.world.trees.forEach((tree) => {
             this.draw_tree(tree);
         });
-        this.world.dixies.forEach((dixi) => {
-            this.draw_dixi(dixi);
-        });
-        this.world.tents.forEach((tent) => {
-            this.draw_tent(tent);
-        });
-        this.world.campfires.forEach((campfire) => {
-            this.draw_campfire(campfire);
-        });
-        if (this.draw_fps) {
-            this.draw_fps();
-        }
+
+        this.world.scout_camps.forEach((scout_camp) => {this.draw_scout_camp(scout_camp);})
+
+        if (this.draw_fps) {this.draw_fps();}
         this.draw_cardinal_direction_labels();
         this.draw_fog_of_war();
+    }
 
-        // this.game_display.element.style.filter = "grayscale(100%)";
-
+    draw_scout_camp(scout_camp) {
+        scout_camp.dixies.forEach((dixi) => this.draw_dixi(dixi));
+        scout_camp.tents.forEach((tent) => this.draw_tent(tent));
+        scout_camp.campfires.forEach((campfire) => this.draw_campfire(campfire));
     }
 
     draw_fog_of_war() {
@@ -183,7 +167,7 @@ export class Renderer {
         let x = fire.position.x,
             y = fire.position.y,
             z = fire.position.z;
-        // this.draw_point_light(fire);
+        this.draw_point_light(fire);
         let scale = 0.2;
         // Define fire particle locatins.
         if (Date.now() > fire.animation_clock + fire.animation_offset) {
