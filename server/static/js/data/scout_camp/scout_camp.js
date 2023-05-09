@@ -1,6 +1,17 @@
 import {Woelfling, Jupfi, Pfadi, Rover, Leiter} from "../entities/person.js";
 import {Position} from "../../math/vector.js";
-import {Lagerfeuer, Dixi, WeissZelt_1, WeissZelt_2, Jurte_1, Jurte_2, WaschStelle, BierBank, BierTisch} from "../entities/structures.js";
+import {
+    BierBank,
+    BierKasten,
+    BierTisch,
+    Dixi,
+    Jurte_1,
+    Jurte_2,
+    Lagerfeuer,
+    WaschStelle,
+    WeissZelt_1,
+    WeissZelt_2,
+} from "../entities/structures.js";
 
 
 export class ScoutCamp {
@@ -20,6 +31,7 @@ export class ScoutCamp {
         this.waschstellen = initialize_list_of_waschstellen();
         this.biertische = initialize_list_of_biertische();
         this.bierbaenke = initialize_list_of_bierbaenke();
+        this.bierkaesten = initialize_list_of_bierkaesten();
 
         this.textured_structures = this._textured_structures();
         this.structures = this._structures();
@@ -36,6 +48,7 @@ export class ScoutCamp {
             this.waschstellen,
             this.bierbaenke,
             this.biertische,
+            this.bierkaesten,
         );
         textured_structures = textured_structures.sort((structure_b, structure_a) => {
             return (structure_a.position.x + structure_a.position.y) - (structure_b.position.x + structure_b.position.y);
@@ -153,5 +166,24 @@ const initialize_list_of_biertische = () => {
     let biertisch_2 = new BierTisch(new Position(8, 0), "east");
     let biertische = [biertisch_1, biertisch_2];
     return biertische;
+
+}
+
+const initialize_list_of_bierkaesten = () => {
+    let kaesten = [
+        new BierKasten(new Position(-8, -2), "east"),
+        new BierKasten(new Position(-8, -1), "east"),
+        new BierKasten(new Position(-8, +0), "east"),
+        new BierKasten(new Position(-8, +1), "north"),
+        new BierKasten(new Position(-8, +2), "north"),
+        new BierKasten(new Position(-8, +3), "north"),
+        new BierKasten(new Position(-7, -2), "east"),
+        new BierKasten(new Position(-7, -1), "east"),
+        new BierKasten(new Position(-7, +0), "east"),
+        new BierKasten(new Position(-7, +1), "north"),
+        new BierKasten(new Position(-7, +2), "north"),
+        new BierKasten(new Position(-7, +3), "north"),
+    ];
+    return kaesten;
 
 }
