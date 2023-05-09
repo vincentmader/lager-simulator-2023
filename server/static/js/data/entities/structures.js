@@ -155,6 +155,21 @@ export class BierKasten extends Entity {
 }
 
 
+export class BannerMast extends Entity {
+
+    constructor(position, orientation) {
+        // Define `Texture` object.
+        let img_path = "/img/sprites/structures/banner/" + orientation + ".png";
+        let img_dimensions = [1920, 1080];
+        let texture_origin = [0.5, 0.59]
+        let texture_scale = 1 / 30;
+        // Define `Entity` object.
+        let bounding_box_dims = [1, 1];
+        let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
+        super(position, bounding_box_dims, texture);
+    }
+}
+
 
 export class Tree extends Entity {
 
