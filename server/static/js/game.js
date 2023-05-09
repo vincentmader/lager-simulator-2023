@@ -8,7 +8,7 @@ import {run_tests} from "./tests/main.js";
 import {Position} from "./math/vector.js";
 import {Tree} from "./data/entities/structures.js";
 
-const INITIAL_ZOOM_LEVEL = 20;
+const INITIAL_ZOOM_LEVEL = 10;
 const WORLD_DIMENSIONS = [128, 128]; // TODO Make dynamic?
 
 
@@ -19,10 +19,11 @@ export class Game {
         this.time_at_start_of_iteration = new Date();
         this.dt = 0;
 
-        let scout_camp = new ScoutCamp(new Position(0, 0));
-        let scout_camps = [scout_camp];
+        let scout_camp_1 = new ScoutCamp(new Position(10, -30));
+        let scout_camp_2 = new ScoutCamp(new Position(-10, 30));
+        let scout_camps = [scout_camp_1, scout_camp_2];
 
-        let trees = initialize_list_of_trees(WORLD_DIMENSIONS);
+        let trees = initialize_list_of_trees(WORLD_DIMENSIONS, scout_camps);
 
         this.world = new World(WORLD_DIMENSIONS, trees, scout_camps);
         this.game_display = new GameDisplay(INITIAL_ZOOM_LEVEL); // <- TODO Use `let game_display` here instead?
@@ -61,24 +62,30 @@ export class Game {
     }
 }
 
-const initialize_list_of_trees = (world_dimensions) => {
-    const NR_OF_TREES = 500;
+const initialize_list_of_trees = (world_dimensions, scout_camps) => {
     const MINIMUM_DISTANCE_FROM_WORLD_ORIGIN = 22;
+    const NR_OF_TREES = 500;
+
     let trees = [];
-    for (let idx = 0; idx < NR_OF_TREES; idx++) {
+    while (trees.length < NR_OF_TREES) {
         // Choose position randomly.
         let x = (2 * Math.random() - 1) * (world_dimensions[0] / 2 - 1);
         let y = (2 * Math.random() - 1) * (world_dimensions[1] / 2 - 1);
         let position = new Position(x, y).round();
-        // Check if position is inside the "Lagerplatz"
-        let r = position.abs();
-        if (r < MINIMUM_DISTANCE_FROM_WORLD_ORIGIN) {continue;}
+        // Check if position is inside a scout camp.
+        let too_close = false;
+        for (let scout_camp of scout_camps) {
+            let r = (position.sub(scout_camp.position)).abs();
+            if (r < MINIMUM_DISTANCE_FROM_WORLD_ORIGIN) too_close = true;
+        }
+        if (too_close) continue;
         // Get random tree texture.
         let texture_idx = random_randint(1, 6);
         let texture = "/img/sprites/structures/trees/tree_" + texture_idx + ".png";
         // Push tree to `trees` array.
         trees.push(new Tree(position, texture));
     }
+
     trees = trees.sort((tree_a, tree_b) => {
         return (tree_a.position.x + tree_a.position.y) - (tree_b.position.x + tree_b.position.y);
     });
