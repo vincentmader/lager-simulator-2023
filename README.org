@@ -6,6 +6,18 @@
 # - [[Notes on Implementation]]
 # - [[Unsorted Notes]]
 
+* Game Controls
+| Key     | Function                                        |
+|---------+-------------------------------------------------|
+| "Up"    | Move camera up (same as "W" and "K").           |
+| "Down"  | Move camera down (same as "S" and "J").         |
+| "Left"  | Move camera to the left (same as "A" and "H").  |
+| "Right" | Move camera to the right (same as "D" and "L"). |
+| "+"     | Zoom in (or: mouse wheel).                      |
+| "-"     | Zoom out (or: mouse wheel).                     |
+| "G"     | Toggle display of floor grid.                   |
+| "B"     | Toggle display of bounding boxes.               |
+|---------+-------------------------------------------------|
 * TODOs
 - [X] 3D-Vektor
 - [ ] Sprites & Animation
