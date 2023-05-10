@@ -1,5 +1,6 @@
 import {Entity} from "./entity.js"
-import {TaskList} from "../../logic/task_execution.js";
+import {TaskList} from "../task_list.js";
+import {Inventory} from "../inventory.js";
 import {direction_from_string} from "../../math/vector.js";
 
 
@@ -13,6 +14,7 @@ class Person extends Entity {
         direction = direction_from_string(direction);
         this.direction = direction;
         this.rotation = direction;
+        this.inventory = new Inventory();
     }
 
     move(new_position) {
