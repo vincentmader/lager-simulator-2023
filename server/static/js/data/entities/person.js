@@ -34,6 +34,7 @@ export class Jupfi extends Person {
 
     constructor(position, direction) {
         super(position, 0.075, 5, direction);
+        this.color = "blue";
     }
 }
 
