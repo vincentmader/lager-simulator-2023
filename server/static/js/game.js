@@ -116,7 +116,7 @@ const initialize_list_of_people = () => {
     let l3 = new Leiter(new Position(-5, 1), DirectionEnum.RIGHT);
     let people = [w1, w2, w3, j1, p1, p2, r1, l1, l2, l3];
     people.forEach((person) => {
-        person.inventory.add(new Knife(), 2);
+        person.inventory.add(new Knife(), Math.floor(Math.random()*6));
     });
     return people;
 }
