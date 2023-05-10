@@ -12,6 +12,7 @@ export class World {
         scout_camps,
     ) {
         this.dimensions = dimensions;
+        this.floor_grid = new FloorGrid(this.dimensions);
 
         this.trees = trees;
         this.scout_camps = scout_camps;
@@ -19,11 +20,21 @@ export class World {
         // TODO Update the arrays below when adding to e.g. a `ScoutCamp`.
         this.people = this._people();
         this.structures = this._structures();
+        this.textured_structures = this._textured_structures();
         this.campfires = this._campfires();
 
-        this.floor_grid = new FloorGrid(this.dimensions);
-        // TODO ^ Is this the right location for storing the `FloorGrid`?
-        // TODO   Maybe remove the grid now?
+    }
+
+    _textured_structures() {
+        let textured_structures = [];
+        textured_structures = textured_structures.concat(this.trees);
+        for (let idx = 0; idx < this.scout_camps.length; idx++) {
+            textured_structures = textured_structures.concat(this.scout_camps[idx].textured_structures);
+        }
+        textured_structures = textured_structures.sort((structure_b, structure_a) => {
+            return (structure_a.position.x + structure_a.position.y) - (structure_b.position.x + structure_b.position.y);
+        });
+        return textured_structures;
     }
 
     _structures() {
@@ -32,6 +43,9 @@ export class World {
         for (let idx = 0; idx < this.scout_camps.length; idx++) {
             structures = structures.concat(this.scout_camps[idx].structures);
         }
+        structures = structures.sort((structure_b, structure_a) => {
+            return (structure_a.position.x + structure_a.position.y) - (structure_b.position.x + structure_b.position.y);
+        });
         return structures;
     }
 

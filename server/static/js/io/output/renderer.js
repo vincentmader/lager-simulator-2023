@@ -22,8 +22,15 @@ export class Renderer {
         if (this.game_display.draw_labeled_positions) this.draw_labeled_positions();
         if (this.game_display.draw_bounding_boxes) this.draw_bounding_boxes();
         this.draw_active_selection();
-        this.world.trees.forEach((tree) => this.draw_textured_structure(tree));
-        this.world.scout_camps.forEach((scout_camp) => {this.draw_scout_camp(scout_camp);})
+
+        // this.world.trees.forEach((tree) => this.draw_textured_structure(tree));
+        // this.world.scout_camps.forEach((scout_camp) => {this.draw_scout_camp(scout_camp);});
+        this.world.textured_structures.forEach((structure) => this.draw_textured_structure(structure));
+        this.world.scout_camps.forEach((scout_camp) => {
+            scout_camp.campfires.forEach((campfire) => this.draw_campfire(campfire));
+            // scout_camp.textured_structures.forEach((structure) => this.draw_textured_structure(structure));
+        });
+
         if (this.game_display.draw_fps) this.draw_fps();
         this.draw_cardinal_direction_labels();
         this.draw_fog_of_war();
@@ -134,11 +141,6 @@ export class Renderer {
         x = position.x - w * texture_origin[0];
         y = position.y - h * texture_origin[1];
         this.game_display.ctx.drawImage(image, x, y, w, h);
-    }
-
-    draw_scout_camp(scout_camp) {
-        scout_camp.textured_structures.forEach((structure) => this.draw_textured_structure(structure));
-        scout_camp.campfires.forEach((campfire) => this.draw_campfire(campfire));
     }
 
     draw_person(person, is_activated = false) {
