@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cd src && python3 main.py
+cd src && ../.venv/bin/python3 main.py

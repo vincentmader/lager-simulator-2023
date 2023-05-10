@@ -1,6 +1,6 @@
 import {Position, Vector} from "../../math/vector.js";
 import {CoordinateTransformer} from "../../math/coordinate_transformer.js";
-import {UserInputHandler} from "./user_input_handler.js";
+import {UIHandler, PersonUserInterface} from "./user_interface.js";
 import {ExecutionMode} from "../../data/tasks.js";
 
 
@@ -9,10 +9,10 @@ class InputHandler {
     constructor(world, game_display, active_entity) {
         this.world = world;
         this.game_display = game_display;
-        this.ui = new UserInputHandler(game_display, this);
+        this.ui = new UIHandler();
+        this.ui.set_active(new PersonUserInterface(game_display, active_entity));
         this.coordinate_transformer = new CoordinateTransformer(world, game_display);
         this.active_entity = active_entity;
-        this.current_task = null;
     }
 
     mouseclick_to_world_coordinates(event) {
@@ -34,7 +34,7 @@ class InputHandler {
             this.game_display.element.height = window.innerHeight;
             this.game_display.fog_element.width = window.innerWidth;
             this.game_display.fog_element.height = window.innerHeight;
-            this.ui.initialize(); // TODO This is temporary and horrible! Should re-initialize the button-sizes and -positions, not remove and re-add all of them!
+            this.ui.get_active().initialize(); // TODO This is temporary and horrible! Should re-initialize the button-sizes and -positions, not remove and re-add all of them!
         });
     }
 
@@ -105,9 +105,9 @@ class InputHandler {
         let left_button_clicked = event.button == 0;
         let right_button_clicked = event.button == 2;
         if (right_button_clicked) {
-            this.current_task = null;
+            this.active_entity["task"] = null;
             this.active_entity["person"] = null;
-            this.ui.visible(false);
+            this.ui.get_active().visible(false);
             return;
         }
         if (this.active_entity["person"] == null) {
@@ -116,25 +116,25 @@ class InputHandler {
                 person.bounding_box.contains(clicked_world_coords)
             );
             if (clicked_person) {
-                this.ui.visible(true);
+                this.ui.get_active().visible(true, clicked_person);
                 this.active_entity["person"] = clicked_person;
             }
-        } else if (this.current_task == null) {
+        } else if (this.active_entity["task"] == null) {
             // Clicking on empty tile unselects current selection.
             this.active_entity["person"] = null;
-            this.ui.visible(false);
+            this.ui.get_active().visible(false);
         } else {
             // Provide positions to current task if one is currently selected.
             if (left_button_clicked) {
                 // Push new task with left click.
-                this.active_entity["person"].task_list.push(new this.current_task(clicked_world_coords));
+                this.active_entity["person"].task_list.push(new this.active_entity["task"](clicked_world_coords));
             }
             let currently_executed_task = this.active_entity["person"].task_list.peek();
             if (currently_executed_task.execution_mode == ExecutionMode.SINGLE) {
                 // If no more parameters to give, or task is aborted, unselect person and task.
-                this.current_task = null;
+                this.active_entity["task"] = null;
                 this.active_entity["person"] = null;
-                this.ui.visible(false);
+                this.ui.get_active().visible(false);
             }
         }
     }
@@ -153,7 +153,7 @@ class InputHandler {
         document.addEventListener("contextmenu", event => event.preventDefault());
         this.game_display.fog_element.addEventListener("mousedown", (event) => {this.handle_task_lifecycle(event)});
         this.game_display.fog_element.addEventListener("mousemove", (event) => {this.handle_mouse_movement(event)});
-        this.ui.initialize();
+        this.ui.get_active().initialize();
     }
 }
 
