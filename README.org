@@ -17,6 +17,7 @@
 | "-"     | Zoom out (or: mouse wheel).                     |
 | "G"     | Toggle display of floor grid.                   |
 | "B"     | Toggle display of bounding boxes.               |
+| "V"     | Toggle display of map coordinates.              |
 |---------+-------------------------------------------------|
 * TODOs
 - [X] 3D-Vektor
