@@ -102,7 +102,6 @@ export class PersonUserInterface extends UserInterface {
 
     draw_inventory(context_person) {
         let items = context_person.inventory.items;
-        console.log(items)
         let buttons = this.panes["inventory"].buttons
         for(let index in buttons) {
             let button = buttons[index]

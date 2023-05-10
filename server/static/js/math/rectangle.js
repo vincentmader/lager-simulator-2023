@@ -1,11 +1,17 @@
 import {Position} from "./vector.js";
 
+
 export class Rectangle {
 
     constructor(position, dimensions) {
         this.position = position;
         this.dimensions = dimensions;
         this.corners = this._corners()
+    }
+
+    move(vector_offset) {
+        let position = this.position.add(vector_offset);
+        return new Rectangle(position, this.dimensions)
     }
 
     _corners() {
@@ -61,7 +67,7 @@ export class Rectangle {
     overlaps_towards_direction(rects, direction) {
         let projected_position = this.position.add(direction);
         let closest_corners_idx = this.closest_corner_indices(projected_position);
-        let opp_closest_corners_idx = closest_corners_idx.map(idx => (idx + 2)%4);
+        let opp_closest_corners_idx = closest_corners_idx.map(idx => (idx + 2) % 4);
         let collision = false;
         rects.forEach((rect) => {
             opp_closest_corners_idx.forEach((corner_id) => {

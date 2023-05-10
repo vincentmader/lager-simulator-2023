@@ -45,24 +45,25 @@ export class Position extends Vector {
     }
 }
 
+
 export class Direction extends Vector {
 
     constructor(x, y, z = 0) {
         super(x, y, z);
     }
 
-    length() {
-        let length = Math.sqrt(this.x**2 + this.y**2 + this.z**2);
+    length() {  // TODO Move to `Vector` class
+        let length = Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
         return length;
     }
 
-    normalize() {
+    normalize() {  // TODO Move to `Vector` class
         let length = this.length();
-        return new this.constructor(this.x/length, this.y/length, this.z/length);
+        return new this.constructor(this.x / length, this.y / length, this.z / length);
     }
 
-    scale(scalar) {
-        return new this.constructor(this.x*scalar, this.y*scalar, this.z*scalar);
+    scale(scalar) {  // TODO Move to `Vector` class
+        return new this.constructor(this.x * scalar, this.y * scalar, this.z * scalar);
     }
 
     /**
@@ -72,7 +73,7 @@ export class Direction extends Vector {
     to_radian() {
         let radian = Math.atan2(this.y, this.x);
         if (radian < 0) {
-            radian += 2*Math.PI;
+            radian += 2 * Math.PI;
         }
         return radian;
     }
@@ -81,22 +82,28 @@ export class Direction extends Vector {
      * Returns the DirectionEnum which equals the Vector, if possible.
      */
     discretize() {
-        let eps = 0.1*Math.PI;
-        if (Math.abs(this.x) < eps && Math.abs(this.y-1) < eps) {
-            return DirectionEnum.BOTTOM;
-        } else if (Math.abs(this.x) < eps && Math.abs(this.y+1) < eps) {
-            return DirectionEnum.TOP;
-        } else if (Math.abs(this.x-1) < eps && Math.abs(this.y) < eps) {
-            return DirectionEnum.RIGHT;
-        } else if (Math.abs(this.x+1) < eps && Math.abs(this.y) < eps) {
-            return DirectionEnum.LEFT;
+        let eps = 0.1 * Math.PI;
+        // TODO Handle `z != 0`.
+        if (Math.abs(this.x) < eps && Math.abs(this.y - 1) < eps) {
+            // console.log("N");
+            return DirectionEnum.NORTH;
+        } else if (Math.abs(this.x) < eps && Math.abs(this.y + 1) < eps) {
+            // console.log("S");
+            return DirectionEnum.SOUTH;
+        } else if (Math.abs(this.x - 1) < eps && Math.abs(this.y) < eps) {
+            // console.log("E");
+            return DirectionEnum.EAST;
+        } else if (Math.abs(this.x + 1) < eps && Math.abs(this.y) < eps) {
+            // console.log("W");
+            return DirectionEnum.WEST;
         }
         throw new Error("Vector (" + this.x + ", " + this.y + ", " + this.z + ") is not 2d-discretizable!");
     }
 
     angle_between(direction) {
         // TODO: Untested.
-        return Math.atan((this.y*direction.x-this.x*direction.y)/(this.x*direction.x - this.y*direction.y));
+        // NOTE: This will not work reliably: Use atan2 instead.
+        return Math.atan((this.y * direction.x - this.x * direction.y) / (this.x * direction.x - this.y * direction.y));
     }
 
     /**
@@ -113,9 +120,22 @@ export class Direction extends Vector {
     }
 }
 
+
 export const DirectionEnum = {
-    RIGHT: 0,
-    BOTTOM: Math.PI/2,
-    LEFT: Math.PI,
-    TOP: Math.PI*3/2
+    EAST: 0,
+    NORTH: Math.PI / 2,
+    WEST: Math.PI,
+    SOUTH: Math.PI * 3 / 2
+}
+
+export const direction_from_string = (string) => {
+    if (string == "east") {
+        return DirectionEnum.EAST;
+    } else if (string == "north") {
+        return DirectionEnum.NORTH;
+    } else if (string == "west") {
+        return DirectionEnum.WEST;
+    } else if (string == "south") {
+        return DirectionEnum.SOUTH;
+    }
 }

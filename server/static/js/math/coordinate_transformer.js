@@ -12,7 +12,7 @@ export class CoordinateTransformer {
     isometric_to_cartesian(position) {
         let x = (2 * position.y + position.x) / 2;
         let y = (2 * position.y - position.x) / 2 + position.z;
-        return new Position(x, y); // TODO Return `Position2D` here?
+        return new Position(x, y);
     }
 
     cartesian_to_isometric(position) {
@@ -24,15 +24,15 @@ export class CoordinateTransformer {
 
     world_to_game_display(position, zoom_level) {
         let canvas_origin = new Vector(this.game_display.width / 2, this.game_display.height / 2);
-        let x = canvas_origin.x + zoom_level * (position.x + this.game_display.display_origin.x);
-        let y = canvas_origin.y + zoom_level * (position.y + this.game_display.display_origin.y - position.z);
+        let x = canvas_origin.x + zoom_level * (position.x - this.game_display.display_origin.x);
+        let y = canvas_origin.y + zoom_level * -(position.y - this.game_display.display_origin.y + position.z);
         return new Position(x, y);
     }
 
     game_display_to_world(position, zoom_level) {
         let canvas_origin = new Vector(this.game_display.width / 2, this.game_display.height / 2);
-        let x = (position.x - canvas_origin.x) / zoom_level - this.game_display.display_origin.x;
-        let y = (position.y - canvas_origin.y) / zoom_level - this.game_display.display_origin.y + position.z;
+        let x = (position.x - canvas_origin.x) / zoom_level + this.game_display.display_origin.x;
+        let y = -(position.y - canvas_origin.y) / zoom_level + this.game_display.display_origin.y - position.z;
         return new Position(x, y);
     }
 }

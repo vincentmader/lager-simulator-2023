@@ -1,5 +1,6 @@
 import {Position, Vector} from "../../math/vector.js";
 
+
 export class GameDisplay {
 
     constructor(zoom_level) {
@@ -20,7 +21,8 @@ export class GameDisplay {
         this.draw_labeled_positions = false;
         this.draw_floor_background = true;
         this.draw_world_boundary = true;
-        this.draw_frame_idx = true;
+        this.draw_fps = true;
+        this.draw_bounding_boxes = true;
 
         this.display_origin = new Position(0, 0);
         this.camera_velocity = new Vector(0, 0);

@@ -1,6 +1,8 @@
-import {Entity} from "./structures.js"
+import {Entity} from "./entity.js"
 import {TaskList} from "../task_list.js";
 import {Inventory} from "../inventory.js";
+import {direction_from_string} from "../../math/vector.js";
+
 
 class Person extends Entity {
 
@@ -9,6 +11,7 @@ class Person extends Entity {
         this.speed = speed;
         this.task_list = new TaskList(this, []);
         this.vision = vision;
+        direction = direction_from_string(direction);
         this.direction = direction;
         this.rotation = direction;
         this.inventory = new Inventory();
@@ -20,6 +23,7 @@ class Person extends Entity {
         this.bounding_box.corners = this.bounding_box._corners();
     }
 }
+
 export class Woelfling extends Person {
 
     constructor(position, direction) {
@@ -27,10 +31,12 @@ export class Woelfling extends Person {
         this.color = "orange";
     }
 }
+
 export class Jupfi extends Person {
 
     constructor(position, direction) {
         super(position, 0.075, 5, direction);
+        this.color = "blue";
     }
 }
 

@@ -59,30 +59,37 @@ class InputHandler {
             let max_camera_speed = 2; // TODO Adjust magic number.
             let camera_speed_increment = 3 / game_display.zoom_level; // TODO Ajust magic number.
             let direction;
-            // NOTE: x-direction is inverted, y-direction is not!
-            if (e.code == "ArrowUp") {
+            if (["ArrowUp", "KeyK", "KeyW"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(0, camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
-            }
-            else if (e.code == "ArrowDown") {
+            } else if (["ArrowDown", "KeyJ", "KeyS"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(0, -camera_speed_increment);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
-            }
-            else if (e.code == "ArrowLeft") {
-                if (camera_speed < max_camera_speed) {
-                    direction = new Vector(camera_speed_increment, 0);
-                    game_display.camera_velocity = camera_velocity.add(direction);
-                }
-            }
-            else if (e.code == "ArrowRight") {
+            } else if (["ArrowLeft", "KeyH", "KeyA"].includes(e.code)) {
                 if (camera_speed < max_camera_speed) {
                     direction = new Vector(-camera_speed_increment, 0);
                     game_display.camera_velocity = camera_velocity.add(direction);
                 }
+            } else if (["ArrowRight", "KeyL", "KeyD"].includes(e.code)) {
+                if (camera_speed < max_camera_speed) {
+                    direction = new Vector(camera_speed_increment, 0);
+                    game_display.camera_velocity = camera_velocity.add(direction);
+                }
+            } else if (["KeyB"].includes(e.code)) {
+                game_display.draw_bounding_boxes = !game_display.draw_bounding_boxes;
+            } else if (["Minus"].includes(e.code)) {
+                if (game_display.zoom_level > 5) game_display.zoom_level /= 1.02;
+            } else if (["Equal"].includes(e.code)) {
+                if (game_display.zoom_level < 101) game_display.zoom_level *= 1.02;
+            } else if (["KeyV"].includes(e.code)) {
+                game_display.draw_labeled_positions = !game_display.draw_labeled_positions;
+            } else if (["KeyG"].includes(e.code)) {
+                game_display.draw_floor_grid = !game_display.draw_floor_grid;
+                game_display.draw_floor_background = !game_display.draw_floor_background;
             } else {
                 return;
                 // TODO: Define all other key-press events.
@@ -90,7 +97,7 @@ class InputHandler {
         }
 
         document.addEventListener("keydown", keyHandler);
-        document.addEventListener("keyup", keyHandler);
+        // document.addEventListener("keyup", keyHandler);
     }
 
     handle_task_lifecycle(event) {
@@ -105,7 +112,7 @@ class InputHandler {
         }
         if (this.active_entity["person"] == null) {
             // Select person if no person is active.
-            let clicked_person = this.world.people.find(person => 
+            let clicked_person = this.world.people.find(person =>
                 person.bounding_box.contains(clicked_world_coords)
             );
             if (clicked_person) {
