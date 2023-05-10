@@ -19,10 +19,10 @@ export class Game {
         this.time_at_start_of_iteration = new Date();
         this.dt = 0;
 
-        let scout_camp_1 = new ScoutCamp(new Position(10, -30));
-        let scout_camp_2 = new ScoutCamp(new Position(-10, 30));
-        let scout_camps = [scout_camp_1, scout_camp_2];
-
+        let scout_camps = [
+            new ScoutCamp(new Position(30, -30), "layout_v1"),
+            new ScoutCamp(new Position(-30, 30), "layout_v2"),
+        ];
         let trees = initialize_list_of_trees(WORLD_DIMENSIONS, scout_camps);
 
         this.world = new World(WORLD_DIMENSIONS, trees, scout_camps);
