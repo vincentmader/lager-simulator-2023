@@ -122,7 +122,7 @@ export class BierBank extends Entity {
         let texture_origin = [0.5, 0.6]
         let texture_scale = 1 / 100;
         // Define `Entity` object.
-        let bounding_box_dims = [4, 1];
+        let bounding_box_dims = [1, 4];
         bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
@@ -139,7 +139,7 @@ export class BierTisch extends Entity {
         let texture_origin = [0.5, 0.6]
         let texture_scale = 1 / 100;
         // Define `Entity` object.
-        let bounding_box_dims = [4, 1];
+        let bounding_box_dims = [1, 4];
         bounding_box_dims = utility_func_for_rotating_bounding_boxes(bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture, orientation);
