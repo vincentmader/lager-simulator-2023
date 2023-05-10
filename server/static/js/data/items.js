@@ -11,3 +11,5 @@ export class Knife extends Item {
         super("/img/sprites/items/knife.png", "/img/sprites/items/knife.png");
     }
 }
+
+

@@ -6,7 +6,8 @@ export class IO {
         this.active_entity = {
             person: null,
             structure: null,
-            field: null
+            field: null,
+            task: null
         };
         this.input_handler = new LagerInputHandler(world, game_display, this.active_entity).initialize();
         this.renderer = new Renderer(world, game_display, this.active_entity);
