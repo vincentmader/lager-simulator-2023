@@ -162,6 +162,7 @@ export class Renderer {
         let texture_scale = structure.texture.texture_scale * this.game_display.zoom_level;
         let texture_origin = structure.texture.texture_origin;
         this.draw_image(img_path, structure.position, img_dimensions, texture_origin, {scale: texture_scale});
+        if (this.game_display.draw_bounding_boxes) this.draw_circle(structure.position, 1, "red");
     };
 
     draw_campfire(fire) {
