@@ -28,9 +28,9 @@ export const initialize_list_of_tents = () => {
         new WeissZelt_1(new Position(0, -13), "north"),
         new WeissZelt_1(new Position(-5, -13), "north"),
         new WeissZelt_1(new Position(-14, -6), "north"),
-        new Jurte_1(new Position(7, 0), "west"),
-        new Jurte_2(new Position(12, -1), "east"),
-        new Jurte_2(new Position(5, 5), "east"),
+        new Jurte_1(new Position(8, 0), "west"),
+        new Jurte_2(new Position(13, -1), "east"),
+        new Jurte_2(new Position(6, 5), "east"),
     ];
 }
 
