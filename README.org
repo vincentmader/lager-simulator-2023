@@ -55,6 +55,59 @@
 - [ ] Schoenere Umrandung fuer Spielwelt
 - [ ] git pipeline
 - [ ] Aufnaeher
+** Sprites
+*** Items
+**** TODO Werkzeug
+- Axt
+- Beil
+- Spaten
+- Schaufel
+- Hammer
+- Vorschlag-Hammer
+- Meterstab
+- Seil
+*** Structures
+**** TODO Holz
+**** TODO Kanister
+**** TODO Tisch mit Toepfen
+**** TODO Geschirrbaum
+**** TODO Lagerbauten-Turm
+**** TODO Lagerpost-Briefkasten
+**** TODO Fancy-Bierbank
+**** TODO Soundbox
+**** TODO Cajon
+**** TODO Gitarre
+**** TODO Klappstuehle
+**** TODO Bank mit Jacke
+**** TODO Tisch mit Kasten Bier drauf
+**** TODO Autos
+**** TODO Anhaenger
+**** TODO SjR-Bus
+**** TODO Gemeindebus
+**** TODO Herings-Kiste
+**** TODO Kisten
+**** TODO Haengematte
+**** TODO Anhanger mit grossem Tank
+**** TODO Gasflaschen
+**** TODO Gaskocher
+**** TODO Gasbraeter
+**** TODO Grillrost
+**** TODO Grasnaben
+**** TODO Feuerschale
+**** TODO Grill
+**** TODO Traktor
+**** TODO Pferd
+**** TODO 3-Schritte-Laufen-Feld (Seil & Ball)
+**** TODO Baustrahler
+**** TODO Oel-Lampen
+**** TODO Handtuch-Trocken-Gestell
+**** TODO Klimmzugstange
+**** TODO Duschen
+**** TODO Tisch mit Leberschuss drauf
+**** TODO Leberschuss XXL
+**** TODO Flunky-Ball-Feld
+**** TODO Bierpong-Tisch
+**** TODO RageCage-Tisch
 * Milestones
 - 2023-??-??: The isometric projection now works.
 - 2023-??-??: There is now a chess-like (ClashOfClans-like) floor grid.
@@ -111,23 +164,21 @@ B) Defender Team:
 - Or is it just the camp that ends?
 ** What kinds of resources are there?
 1. Money
-- Can be gained through Day-Actions (Kekse verkaufen, Zwiebelspiel)
+   - Can be gained through Day-Actions (Kekse verkaufen, Zwiebelspiel)
 2. Food
 3. Water
-- Can be gained through Day-Actions (Wasser holen)
+   - Can be gained through Day-Actions (Wasser holen)
 4. Beer
-- Needed for morale of Leiter
+   - Needed for morale of Leiter
 5. Wood
-- Needed for campfires -> Vision
-- No campfire -> Less morale
+   - Needed for campfires -> Vision
+   - No campfire -> Less morale
 ** What kinds of "score thingies" are there?
 1. (Average) Morale
 2. Georgs-Punkte
-
 ** What scores are displayed at the top of the screen? (Always relevant)
 - Average morale
 - Wood
-
 ** Day-Actions
 - Take up an entire day for participating Scouts.
 - Thus, these Scouts are excluded from Level-ups (Aufstufungen)
@@ -138,8 +189,6 @@ B) Defender Team:
 - Zwiebelspiel (Geld)
 - Holz holen (Holz)
 - Einkaufen gehen (Essen, Trinken gegen Geld)
-
-
 ** What kinds of items are there?
 | ~Item~             | ~Usage~                           | ~Effects~                   |
 |------------------+---------------------------------+-----------------------------|
