@@ -85,7 +85,7 @@ export class Dixi extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/dixies/" + orientation + "_" + state + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.6]
+        let texture_origin = [0.5, 0.595]
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
@@ -102,7 +102,7 @@ export class WaschStelle extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/waschstelle/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.6]
+        let texture_origin = [0.5, 0.58];
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [2, 2];
@@ -119,7 +119,7 @@ export class BierBank extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/biergarnituren/bierbank/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.6]
+        let texture_origin = [0.5, 0.59]
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [1, 4];
@@ -136,7 +136,7 @@ export class BierTisch extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/biergarnituren/biertisch/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.6]
+        let texture_origin = [0.5, 0.59]
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [1, 4];
@@ -187,10 +187,10 @@ export class PofferBallFeld extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/pofferballfeld/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.59]
+        let texture_origin = [0.49, 0.6]
         let texture_scale = 1 / 100;
         // Define `Entity` object.
-        let bounding_box_dims = [8, 4];
+        let bounding_box_dims = [5, 9];
         [position, bounding_box_dims] = utility_func_for_rotating_bounding_boxes(position, bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture);

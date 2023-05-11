@@ -114,7 +114,7 @@ export const initialize_list_of_banners = () => {
 
 export const initialize_list_of_pofferballfelder = () => {
     return [
-        new PofferBallFeld(new Position(6, -12), "north"),
+        new PofferBallFeld(new Position(6, -12), "east"),
     ];
 }
 
