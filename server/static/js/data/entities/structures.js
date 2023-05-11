@@ -154,7 +154,7 @@ export class BierKasten extends Entity {
         let img_path = "/img/sprites/structures/bierkasten/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.59];
-        let texture_scale = 1 / 50;
+        let texture_scale = 1 / 80;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
         [position, bounding_box_dims] = fix_bounding_boxes(position, bounding_box_dims, orientation);
@@ -191,6 +191,23 @@ export class PofferBallFeld extends Entity {
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [5, 9];
+        [position, bounding_box_dims] = fix_bounding_boxes(position, bounding_box_dims, orientation);
+        let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
+        super(position, bounding_box_dims, texture);
+    }
+}
+
+
+export class SoundBoks extends Entity {
+
+    constructor(position, orientation) {
+        // Define `Texture` object.
+        let img_path = "/img/sprites/structures/soundboks/" + orientation + ".png";
+        let img_dimensions = [1920, 1080];
+        let texture_origin = [0.5, 0.59];
+        let texture_scale = 1 / 80;
+        // Define `Entity` object.
+        let bounding_box_dims = [1, 1];
         [position, bounding_box_dims] = fix_bounding_boxes(position, bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture);

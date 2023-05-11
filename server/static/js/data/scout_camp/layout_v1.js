@@ -9,6 +9,7 @@ import {
     Jurte_1,
     Jurte_2,
     Lagerfeuer,
+    SoundBoks,
     WaschStelle,
     WeissZelt_1,
     WeissZelt_2,
@@ -112,6 +113,13 @@ export const initialize_list_of_banners = () => {
 
 export const initialize_list_of_pofferballfelder = () => {
     return [];
+}
+
+
+export const initialize_list_of_soundbokses = () => {
+    return [
+        new SoundBoks(new Position(-3, 1), "north"),
+    ];
 }
 
 

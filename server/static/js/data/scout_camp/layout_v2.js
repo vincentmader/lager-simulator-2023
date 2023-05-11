@@ -13,6 +13,7 @@ import {
     WeissZelt_1,
     WeissZelt_2,
     PofferBallFeld,
+    SoundBoks,
 } from "../entities/structures.js";
 
 
@@ -115,6 +116,13 @@ export const initialize_list_of_banners = () => {
 export const initialize_list_of_pofferballfelder = () => {
     return [
         new PofferBallFeld(new Position(6, -12), "east"),
+    ];
+}
+
+
+export const initialize_list_of_soundbokses = () => {
+    return [
+        new SoundBoks(new Position(-2, -1), "west"),
     ];
 }
 
