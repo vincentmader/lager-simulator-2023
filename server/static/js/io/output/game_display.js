@@ -22,7 +22,7 @@ export class GameDisplay {
         this.draw_floor_background = true;
         this.draw_world_boundary = true;
         this.draw_fps = true;
-        this.draw_bounding_boxes = true;
+        this.draw_bounding_boxes = false;
 
         this.display_origin = new Position(0, 0);
         this.camera_velocity = new Vector(0, 0);
