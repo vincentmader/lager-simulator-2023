@@ -321,7 +321,7 @@ export class Renderer {
         let coordinate_transformer = this.coordinate_transformer;
         let zoom = this.game_display.zoom_level;
 
-        fog.fillStyle = "rgba(0, 0, 0, 0.5)";
+        fog.fillStyle = "rgba(0, 0, 0, 0.7)";
         fog.fillRect(0, 0, this.game_display.width, this.game_display.height);
         fog.globalCompositeOperation = "destination-out";
 
