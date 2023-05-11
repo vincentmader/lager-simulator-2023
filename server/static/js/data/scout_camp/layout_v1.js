@@ -110,6 +110,10 @@ export const initialize_list_of_banners = () => {
     ];
 }
 
+export const initialize_list_of_pofferballfelder = () => {
+    return [];
+}
+
 
 export const initialize_list_of_bierkaesten = () => {
     return [

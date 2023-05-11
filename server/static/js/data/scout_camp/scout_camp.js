@@ -25,6 +25,7 @@ export class ScoutCamp {
             this.dixies,
             this.tents,
             this.waschstellen,
+            this.pofferballfelder,
         );
         textured_structures = textured_structures.sort((structure_b, structure_a) => {
             return (structure_a.position.x + structure_a.position.y) - (structure_b.position.x + structure_b.position.y);
@@ -53,6 +54,7 @@ export class ScoutCamp {
             this.dixies = layout_v1.initialize_list_of_dixies();
             this.people = layout_v1.initialize_list_of_people();
             this.tents = layout_v1.initialize_list_of_tents();
+            this.pofferballfelder = layout_v1.initialize_list_of_pofferballfelder();
             this.waschstellen = layout_v1.initialize_list_of_waschstellen();
         } else if (layout_variant == "layout_v2") {
             this.banners = layout_v2.initialize_list_of_banners();
@@ -63,6 +65,7 @@ export class ScoutCamp {
             this.dixies = layout_v2.initialize_list_of_dixies();
             this.people = layout_v2.initialize_list_of_people();
             this.tents = layout_v2.initialize_list_of_tents();
+            this.pofferballfelder = layout_v2.initialize_list_of_pofferballfelder();
             this.waschstellen = layout_v2.initialize_list_of_waschstellen();
         }
     }

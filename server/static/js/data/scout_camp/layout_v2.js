@@ -12,6 +12,7 @@ import {
     WaschStelle,
     WeissZelt_1,
     WeissZelt_2,
+    PofferBallFeld,
 } from "../entities/structures.js";
 
 
@@ -108,6 +109,12 @@ export const initialize_list_of_biertische = () => {
 export const initialize_list_of_banners = () => {
     return [
         new BannerMast(new Position(0, 0), "south"),
+    ];
+}
+
+export const initialize_list_of_pofferballfelder = () => {
+    return [
+        new PofferBallFeld(new Position(6, -12), "north"),
     ];
 }
 
