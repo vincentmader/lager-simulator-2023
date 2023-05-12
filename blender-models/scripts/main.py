@@ -83,6 +83,10 @@ def create_sprites(project):
     # Set background to transparent.
     bpy.context.scene.render.film_transparent = True
 
+    # Make sure the `sprites` output directory exists.
+    if not os.path.exists(PATH_TO_SPRITES):
+        os.mkdir(PATH_TO_SPRITES)
+
     # Loop over cameras.
     cameras = bpy.data.collections.get("Cameras")
     for i, cam in enumerate(cameras.objects):
