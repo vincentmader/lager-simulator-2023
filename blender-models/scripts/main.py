@@ -14,6 +14,7 @@ sys.path.append(PATH_TO_SCRIPTS)
 
 from config import MODEL_CATEGORIES
 from config import CAMERA_LOCATIONS, CAMERA_ROTATIONS, CAMERA_ORTHOGRAPHIC_SCALE
+from config import LIGHT_STRENGTH
 from config import CARDINAL_DIRECTIONS
 import utils
 
@@ -92,6 +93,7 @@ def setup_lights():
     # Create lights.
     for i in range(4):
         sun = bpy.data.lights.new(name=f"Sun {CARDINAL_DIRECTIONS[i]}", type="SUN")
+        sun.energy = LIGHT_STRENGTH
         obj = bpy.data.objects.new(name=f"Sun {CARDINAL_DIRECTIONS[i]}", object_data=sun)
         obj.location = CAMERA_LOCATIONS[i]
         bpy.data.collections["Lights"].objects.link(obj)
@@ -102,16 +104,20 @@ def create_sprites(model_category, model):
     bpy.context.scene.render.film_transparent = True
 
     # Make sure the `sprites` output directory exists.
-    if not os.path.exists(PATH_TO_SPRITES):
+    if not (os.path.exists(PATH_TO_SPRITES) and os.path.isdir(PATH_TO_SPRITES)):
         os.mkdir(PATH_TO_SPRITES)
+    # Make sure the `sprites/<model_category>` output directory exists.
+    catpath = os.path.join(PATH_TO_SPRITES, model_category)
+    if not (os.path.exists(catpath) and os.path.isdir(catpath)):
+        os.mkdir(catpath)
+    # Define path to output files (& create directory, if not existing).
+    dirpath = os.path.join(catpath, model)
+    if not (os.path.exists(dirpath) and os.path.isdir(dirpath)):
+        os.mkdir(dirpath)
 
     # Loop over cameras.
     cameras = bpy.data.collections.get("Cameras")
     for i, cam in enumerate(cameras.objects):
-        # Define path to output file (& create directory, if not existing).
-        dirpath = os.path.join(PATH_TO_SPRITES, model_category, model)
-        if not (os.path.exists(dirpath) and os.path.isdir(dirpath)):
-            os.mkdir(dirpath)
         filename = f'./{CARDINAL_DIRECTIONS[i]}.png'
         filepath = os.path.join(dirpath, filename)
         # Get camera object & specify details for output image.
