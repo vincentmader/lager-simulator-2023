@@ -287,6 +287,94 @@ Children can be awakened by leaders (for night watch).
 *** Trees
 *** Bushes
 *** Rocks
+** How can I earn "Georgs-Punkte"?
+Beispiel:
+- Ueberfaeller greifen an.
+- Ueberfaeller werden dank guter Skillzz abgefangen
+  und setzen sich zu den Leitern ans Feuer.
+- Ueberfaeller koennen "ueberzeugt" werden, Georgs-Punkte zu generieren.
+  Voraussetzungen:
+  + Genug Bier vorhanden.
+  + Soziale Skillzz des ueberzeugenden Leiter sind hoch genug.
+  + Ueberfaeller laesst sich ueberzeugen. Je weiter weg er herkommt...
+    - desto mehr Punkte sind zu erreichen, aber
+    - desto schwieriger ist es auch, ihn zu ueberzeugen.
+* Ideas
+** Spiel-Ablauf
+*** Setup Screen
+- Waehle Dein Leitungs-Team.
+*** Aufbau-Lager
+_Ziel_:
+- Ein tolles Lager aufbauen.
+  + Je toller, desto mehr Kinder & Leiter kommen auf's Lager.
+
+_Aufgaben_:
+- Baue das Leiter-Zelt auf.
+- Baue das Kuechen-Zelt auf.
+- Baue das Geruest-Zelt auf.
+**** Tag 1
+**** Tag 2
+**** ...
+**** Ende des Aufbau-Lagers
+Wann ist das Aufbau-Lager vorbei?
+- ...
+*** Lager
+_Tages-Aufgaben_:
+- Hacke Holz.
+- Hole Wasser.
+- Verdiene Geld durch den Verkauf von Keksen.
+- Erwerbe neue Items durch das Zwiebel-Spiel.
+- Gehe in den Laden und kaufe
+  + Lebensmittel
+  + Bier
+  + Items
+- Spiele Spiele, um die Moral zu erhoehen
+  + 3-Schritte-Laufen
+  + Pofferball (/Powerball/?)
+- Verteile Aufnaeher an Kinder (neue Skillz)
+_Nacht-Aufgaben_:
+- Wehre die Ueberfaeller ab.
+- Schau, dass die Moral nicht zu weit sinkt.
+  Sonst gehen die Leiter ins Bett.
+  Wie geht das?
+  - Lege Holz nach, dass das Feuer nicht ausgeht.
+  - Hole neue Kaesten Bier.
+  - Mache Musik & singe Lieder.
+**** Tag 1
+**** Nacht 1
+**** Tag 2
+**** Nacht 2
+**** ...
+**** Ende des Lagers
+Wann ist das Lager vorbei?
+- ... (vllt. theoretisch Open-End?)
+
+Was wird dann gemacht?
+- Aufstufung der Kinder
+*** Score Screen
+Was passiert hier?
+- Berechnung & Darstellung der erreichten Punkte.
+- High-Score-Liste aller Spieler, die je gespielt haben.
+
+Man kann ueber verschiedene Wege seinen Score erhoehen.
+- Spieler 1 koennte z.B. keine Kekse verkaufen, dafuer viele Georgs-Punkte sammeln.
+- Spieler 2 koennte z.B. viele Kekse verkaufen, dafuer keine Georgs-Punkte sammeln.
+- Beide Spiele koennen (je nach Gewichtung) den gleichen Score erreichen.
+  + D.h.: Verschiedene Strategien fuehren zur Erhoehung des Scores.
+  + Der Replay-Wert wird hierdurch erhoeht, weil versch. Strategien ausprobiert werden koennen.
+
+Was fliesst alles ein in die Punkte-Berechnung?
+- Bonus: Laenge des Lagers (in Tagen)
+- Bonus: Durchschnittliche Moral (Spass-Faktor)
+- Bonus: Zahl der erreichten Georgs-Punkte
+- Bonus: Zahl der verkauften Kekse
+- Bonus: Zahl der abgefangenen Ueberfaeller
+- Bonus: Zahl der Kinder, die aufgestuft werden konnten
+- Malus: Zahl der Kinder, die abgeholt werden mussten
+- Bonus: Menge an Holz, das insgesamt gehackt wurde
+- Bonus: Menge an Holz, das insgesamt aufgelegt wurde
+- Bonus: Menge an Lagerbauten, die gebaut wurden.
+- Bonus: Menge an Items, die erspielt/ertauscht/gekauft wurden.
 * Notes on Implementation
 ** Coordinate Transformations
 *** Transformation between Cartesian and Isometric Coordinate Systems
