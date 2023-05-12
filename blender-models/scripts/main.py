@@ -62,8 +62,8 @@ def setup_cameras():
 
     # Create cameras.
     for i in range(4):
-        cam = bpy.data.cameras.new(name=f"Camera {i}")
-        obj = bpy.data.objects.new(name=f"Camera {i}", object_data=cam)
+        cam = bpy.data.cameras.new(name=f"Camera {CARDINAL_DIRECTIONS[i]}")
+        obj = bpy.data.objects.new(name=f"Camera {CARDINAL_DIRECTIONS[i]}", object_data=cam)
         obj.data.type = "ORTHO"
         obj.data.ortho_scale = CAMERA_ORTHOGRAPHIC_SCALE
         obj.location = CAMERA_LOCATIONS[i]
@@ -82,8 +82,8 @@ def setup_lights():
 
     # Create lights.
     for i in range(4):
-        sun = bpy.data.lights.new(name=f"Sun {i}", type="SUN")
-        obj = bpy.data.objects.new(name=f"Sun {i}", object_data=sun)
+        sun = bpy.data.lights.new(name=f"Sun {CARDINAL_DIRECTIONS[i]}", type="SUN")
+        obj = bpy.data.objects.new(name=f"Sun {CARDINAL_DIRECTIONS[i]}", object_data=sun)
         obj.location = CAMERA_LOCATIONS[i]
         bpy.data.collections["Lights"].objects.link(obj)
 
