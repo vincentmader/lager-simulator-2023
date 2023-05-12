@@ -67,24 +67,47 @@
 - Meterstab
 - Seil
 *** Structures
+**** DONE Jurte 1
+- 12-Eck
+**** DONE Jurte 2
+- 8-Eck
+**** DONE Dixi
+**** DONE Weisszelt 1
+**** DONE Wasch-Stellen
+**** DONE Bierkasten (Berg)
+**** DONE Bierflasche (Berg)
+**** DONE Bierbank
+**** DONE Biertisch
+**** DONE Banner-Mast
+**** DONE Pofferball-Feld
+**** DONE Soundbox
+**** DONE Cajon
+**** TODO Herings-Kiste
+**** TODO Tisch mit Toepfen drauf
+**** TODO Bierbank (geklappt)
+**** TODO Biertisch (geklappt)
+**** TODO 3-Schritte-Laufen-Feld (Seil & Ball)
+**** TODO Tisch mit Leberschuss drauf
+**** TODO Flunky-Ball-Feld
+**** TODO Bierpong-Tisch
+**** TODO RageCage-Tisch
+**** TODO Leberschuss XXL
+**** TODO Feuerschale
 **** TODO Holz
 **** TODO Kanister
-**** TODO Tisch mit Toepfen
 **** TODO Geschirrbaum
 **** TODO Lagerbauten-Turm
 **** TODO Lagerpost-Briefkasten
 **** TODO Fancy-Bierbank
-**** TODO Soundbox
-**** TODO Cajon
+**** TODO Dixi (offen)
 **** TODO Gitarre
 **** TODO Klappstuehle
-**** TODO Bank mit Jacke
+**** TODO Bank mit Jacke drauf
 **** TODO Tisch mit Kasten Bier drauf
 **** TODO Autos
 **** TODO Anhaenger
 **** TODO SjR-Bus
 **** TODO Gemeindebus
-**** TODO Herings-Kiste
 **** TODO Kisten
 **** TODO Haengematte
 **** TODO Anhanger mit grossem Tank
@@ -93,21 +116,14 @@
 **** TODO Gasbraeter
 **** TODO Grillrost
 **** TODO Grasnaben
-**** TODO Feuerschale
 **** TODO Grill
 **** TODO Traktor
 **** TODO Pferd
-**** TODO 3-Schritte-Laufen-Feld (Seil & Ball)
 **** TODO Baustrahler
 **** TODO Oel-Lampen
 **** TODO Handtuch-Trocken-Gestell
 **** TODO Klimmzugstange
 **** TODO Duschen
-**** TODO Tisch mit Leberschuss drauf
-**** TODO Leberschuss XXL
-**** TODO Flunky-Ball-Feld
-**** TODO Bierpong-Tisch
-**** TODO RageCage-Tisch
 * Milestones
 - 2023-??-??: The isometric projection now works.
 - 2023-??-??: There is now a chess-like (ClashOfClans-like) floor grid.
