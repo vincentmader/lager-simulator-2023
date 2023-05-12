@@ -9,13 +9,19 @@ import bpy
 # Setup path to `scripts` directory so that Blender knows it.
 path_to_main_blender_file = bpy.data.filepath
 path_to_parent_dir = Path(path_to_main_blender_file).parent.absolute()
-path_to_scripts = os.path.join(path_to_parent_dir, "scripts")
-sys.path.append(path_to_scripts)
+PATH_TO_SCRIPTS = os.path.join(path_to_parent_dir, "scripts")
+sys.path.append(PATH_TO_SCRIPTS)
 
-from config import PROJECTS
 from config import CAMERA_LOCATIONS, CAMERA_ROTATIONS, CAMERA_ORTHOGRAPHIC_SCALE
-from config import CARDINAL_DIRECTIONS, PATH_TO_SPRITES
+from config import CARDINAL_DIRECTIONS
 import utils
+
+PATH_TO_MODELS = os.path.join(path_to_parent_dir, "models")
+PATH_TO_SPRITES = os.path.join(path_to_parent_dir, "sprites")
+PROJECTS = sorted([
+    d for d in os.listdir(PATH_TO_MODELS) 
+    if os.path.isdir(os.path.join(PATH_TO_MODELS, d))
+])
 
 
 def main():
@@ -24,11 +30,14 @@ def main():
 
     # Loop over Blender projects.
     for project in PROJECTS:
-        # TODO Check if new render export is even needed!
-        filename = f"{project}.blend"
-        filepath = os.path.join(path_to_parent_dir, "models", project, filename)
+        # Define paths to Blender file as well as sprites directory for that project.
+        path_to_blender_file = os.path.join(PATH_TO_MODELS, project, f"{project}.blend")
+        path_to_sprites_dir = os.path.join(PATH_TO_SPRITES, project)
+        # Check if new render export is even needed.
+        if not utils.is_necessary_to_render(path_to_blender_file, path_to_sprites_dir):
+            continue
         # Load the Blender project file, apply modifications, & save to disk.
-        bpy.ops.wm.open_mainfile(filepath=filepath)
+        bpy.ops.wm.open_mainfile(filepath=path_to_blender_file)
         modify_project(project)
         bpy.ops.wm.save_mainfile()
 
@@ -99,7 +108,7 @@ def create_sprites(project):
         # Get camera object & specify details for output image.
         bpy.context.scene.camera = cam
         bpy.context.scene.render.filepath = filepath
-        bpy.context.scene.render.image_settings.file_format = 'PNG' 
+        bpy.context.scene.render.image_settings.file_format = 'PNG'
         # Write to file.
         bpy.ops.render.render(write_still=True)
 
