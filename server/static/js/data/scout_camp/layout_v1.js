@@ -13,6 +13,7 @@ import {
     WaschStelle,
     WeissZelt_1,
     WeissZelt_2,
+    Cajon,
 } from "../entities/structures.js";
 
 
@@ -119,6 +120,13 @@ export const initialize_list_of_pofferballfelder = () => {
 export const initialize_list_of_soundbokses = () => {
     return [
         new SoundBoks(new Position(-3, 1), "north"),
+    ];
+}
+
+
+export const initialize_list_of_cajons = () => {
+    return [
+        new Cajon(new Position(-10, 3), "south"),
     ];
 }
 

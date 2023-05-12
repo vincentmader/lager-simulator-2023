@@ -14,6 +14,7 @@ import {
     WeissZelt_2,
     PofferBallFeld,
     SoundBoks,
+    Cajon,
 } from "../entities/structures.js";
 
 
@@ -123,6 +124,14 @@ export const initialize_list_of_pofferballfelder = () => {
 export const initialize_list_of_soundbokses = () => {
     return [
         new SoundBoks(new Position(-2, -1), "west"),
+    ];
+}
+
+
+
+export const initialize_list_of_cajons = () => {
+    return [
+        new Cajon(new Position(-10, -2), "east"),
     ];
 }
 
