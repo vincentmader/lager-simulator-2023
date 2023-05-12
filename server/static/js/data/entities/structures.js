@@ -14,7 +14,7 @@ export class WeissZelt_1 extends Zelt {
 
     constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/tents/weisszelt_1/" + orientation + ".png";
+        let img_path = "/img/sprites/structures/weisszelt_1/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.6];
         let texture_scale = 1 / 100;
@@ -31,7 +31,7 @@ export class WeissZelt_2 extends Zelt {
 
     constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/tents/weisszelt_2/" + orientation + ".png";
+        let img_path = "/img/sprites/structures/weisszelt_2/" + orientation + ".png";
         let img_dimensions = [1024, 631];
         let texture_origin = [0.4, 0.67];
         let texture_scale = 1 / 120;
@@ -48,7 +48,7 @@ export class Jurte_1 extends Zelt {
 
     constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/tents/jurte_1/" + orientation + ".png";
+        let img_path = "/img/sprites/structures/jurte_1/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.6];
         let texture_scale = 1 / 80;
@@ -65,7 +65,7 @@ export class Jurte_2 extends Zelt {
 
     constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/tents/jurte_2/" + orientation + ".png";
+        let img_path = "/img/sprites/structures/jurte_2/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.6];
         let texture_scale = 1 / 100;
@@ -81,9 +81,9 @@ export class Jurte_2 extends Zelt {
 export class Dixi extends Entity {
 
     constructor(position, orientation) {
-        let state = "closed"; // TODO
+        let state = "closed"; // TODO Use this state!
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/dixies/" + orientation + "_" + state + ".png";
+        let img_path = "/img/sprites/structures/dixi/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.595];
         let texture_scale = 1 / 100;
@@ -117,7 +117,7 @@ export class BierBank extends Entity {
 
     constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/biergarnituren/bierbank/" + orientation + ".png";
+        let img_path = "/img/sprites/structures/bierbank/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.59];
         let texture_scale = 1 / 100;
@@ -134,7 +134,7 @@ export class BierTisch extends Entity {
 
     constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/biergarnituren/biertisch/" + orientation + ".png";
+        let img_path = "/img/sprites/structures/biertisch/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.59];
         let texture_scale = 1 / 100;
@@ -168,7 +168,7 @@ export class BannerMast extends Entity {
 
     constructor(position, orientation) {
         // Define `Texture` object.
-        let img_path = "/img/sprites/structures/banner/" + orientation + ".png";
+        let img_path = "/img/sprites/structures/bannermast/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
         let texture_origin = [0.5, 0.59];
         let texture_scale = 1 / 30;
