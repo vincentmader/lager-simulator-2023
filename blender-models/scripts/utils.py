@@ -22,12 +22,12 @@ def is_necessary_to_render(path_to_blender_file, path_to_sprites_dir):
     if not (os.path.exists(path_to_sprites_dir) and os.path.isdir(path_to_sprites_dir)):
         return True
     # Get timestamps of last modification.
-    project_modification_time = os.path.getmtime(path_to_blender_file)
+    model_modification_time = os.path.getmtime(path_to_blender_file)
     sprites_modification_time = modification_timestamp_for_directory(path_to_sprites_dir)
     # Return `True` only if Blender file was modified after last render.
-    dt_in_secs = project_modification_time - sprites_modification_time
+    dt_in_secs = model_modification_time - sprites_modification_time
     return dt_in_secs > 10
-    # ^ NOTE Just returning `project_modification_time > sprites_modification_time`
+    # ^ NOTE Just returning `model_modification_time > sprites_modification_time`
     # is NOT a sensible solution here, since the Blender file is saved after exporting
     # the images. For that reason, the Blender file's modification date will ALLWAYS be
     # larger than that of the sprites. To make this work anyway, we just define "later"

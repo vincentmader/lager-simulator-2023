@@ -2,6 +2,9 @@ import numpy as np
 
 PI = np.pi
 DEG_TO_RAD = 2 * PI / 360
+CARDINAL_DIRECTIONS = ["east", "north", "west", "south"]
+
+MODEL_CATEGORIES = ["structures", "items", "organisms"]
 
 CAMERA_LOCATIONS = [
     (+10, -10, +10),
@@ -19,4 +22,3 @@ CAMERA_ROTATIONS = [
 
 CAMERA_ORTHOGRAPHIC_SCALE = 15
 
-CARDINAL_DIRECTIONS = ["east", "north", "west", "south"]

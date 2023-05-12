@@ -12,43 +12,52 @@ path_to_parent_dir = Path(path_to_main_blender_file).parent.absolute()
 PATH_TO_SCRIPTS = os.path.join(path_to_parent_dir, "scripts")
 sys.path.append(PATH_TO_SCRIPTS)
 
+from config import MODEL_CATEGORIES
 from config import CAMERA_LOCATIONS, CAMERA_ROTATIONS, CAMERA_ORTHOGRAPHIC_SCALE
 from config import CARDINAL_DIRECTIONS
 import utils
 
+PATH_TO_STATIC = os.path.join(path_to_parent_dir, "..", "server", "static")
 PATH_TO_MODELS = os.path.join(path_to_parent_dir, "models")
 PATH_TO_SPRITES = os.path.join(path_to_parent_dir, "sprites")
-PROJECTS = sorted([
-    d for d in os.listdir(PATH_TO_MODELS) 
-    if os.path.isdir(os.path.join(PATH_TO_MODELS, d))
-])
 
 
 def main():
     # Make it possible to open multiple files at once. (Necessary!)
     bpy.app.handlers.load_post.append(utils.load_handler)
 
-    # Loop over Blender projects.
-    for project in PROJECTS:
-        # Define paths to Blender file as well as sprites directory for that project.
-        path_to_blender_file = os.path.join(PATH_TO_MODELS, project, f"{project}.blend")
-        path_to_sprites_dir = os.path.join(PATH_TO_SPRITES, project)
-        # Check if new render export is even needed.
-        if not utils.is_necessary_to_render(path_to_blender_file, path_to_sprites_dir):
-            continue
-        # Load the Blender project file, apply modifications, & save to disk.
-        bpy.ops.wm.open_mainfile(filepath=path_to_blender_file)
-        modify_project(project)
-        bpy.ops.wm.save_mainfile()
+    for model_category in MODEL_CATEGORIES:
+        # Define list of models in given category.
+        models = sorted([
+            d for d in os.listdir(os.path.join(PATH_TO_MODELS, model_category))
+            if os.path.isdir(os.path.join(PATH_TO_MODELS, model_category, d))
+        ])
+        
+        # Loop over models, set up cameras & lights, then render (if necessary).
+        for model in models:
+            # Define paths to Blender file as well as sprites directory for that model.
+            path_to_blender_file = os.path.join(PATH_TO_MODELS, model_category, model, f"{model}.blend")
+            path_to_sprites_dir = os.path.join(PATH_TO_SPRITES, model_category, model)
+            # Check if new render export is even needed.
+            if not utils.is_necessary_to_render(path_to_blender_file, path_to_sprites_dir):
+                continue
+            # Load the Blender model file, apply modifications, & save to disk.
+            bpy.ops.wm.open_mainfile(filepath=path_to_blender_file)
+            modify_project(model_category, model)
+            bpy.ops.wm.save_mainfile()
 
-    # Return to main Blender file.
-    bpy.ops.wm.open_mainfile(filepath=path_to_main_blender_file)
+        # Link sprites to static folder in server.
+        for model in models:
+            link_sprites_to_static(model_category, model)
+    
+        # Return to main Blender file.
+        bpy.ops.wm.open_mainfile(filepath=path_to_main_blender_file)
 
 
-def modify_project(project):
+def modify_project(model_category, model):
     setup_cameras()
     setup_lights()
-    create_sprites(project)
+    create_sprites(model_category, model)
 
 
 def setup_cameras():
@@ -88,7 +97,7 @@ def setup_lights():
         bpy.data.collections["Lights"].objects.link(obj)
 
 
-def create_sprites(project):
+def create_sprites(model_category, model):
     # Set background to transparent.
     bpy.context.scene.render.film_transparent = True
 
@@ -100,7 +109,7 @@ def create_sprites(project):
     cameras = bpy.data.collections.get("Cameras")
     for i, cam in enumerate(cameras.objects):
         # Define path to output file (& create directory, if not existing).
-        dirpath = os.path.join(PATH_TO_SPRITES, project)
+        dirpath = os.path.join(PATH_TO_SPRITES, model_category, model)
         if not (os.path.exists(dirpath) and os.path.isdir(dirpath)):
             os.mkdir(dirpath)
         filename = f'./{CARDINAL_DIRECTIONS[i]}.png'
@@ -111,6 +120,17 @@ def create_sprites(project):
         bpy.context.scene.render.image_settings.file_format = 'PNG'
         # Write to file.
         bpy.ops.render.render(write_still=True)
+
+
+def link_sprites_to_static(model_category, model):
+    # Define origin & target paths for symlink
+    path_to_model_sprites = os.path.join(
+        PATH_TO_SPRITES, model_category, model)
+    path_to_model_sprites_in_static = os.path.join(
+        PATH_TO_STATIC, "img", "sprites", model_category, model)
+    # Create symbolic link to static directory (if not already done).
+    if not os.path.exists(path_to_model_sprites_in_static):
+        os.symlink(path_to_model_sprites, path_to_model_sprites_in_static)
 
 
 if __name__ == "__main__":
