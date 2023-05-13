@@ -221,8 +221,8 @@ export class Cajon extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/cajon/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.69];
-        let texture_scale = 1 / 80;
+        let texture_origin = [0.505, 0.68];
+        let texture_scale = 1 / 120;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
         [position, bounding_box_dims] = fix_bounding_boxes(position, bounding_box_dims, orientation);
