@@ -14,6 +14,7 @@ import {
     WeissZelt_1,
     WeissZelt_2,
     Cajon,
+    DreiSchritteLaufenFeld,
 } from "../entities/structures.js";
 
 
@@ -127,6 +128,13 @@ export const initialize_list_of_soundbokses = () => {
 export const initialize_list_of_cajons = () => {
     return [
         new Cajon(new Position(-10, 3), "south"),
+    ];
+}
+
+
+export const initialize_list_of_dreischrittelaufenfelder = () => {
+    return [
+        new DreiSchritteLaufenFeld(new Position(11, -9), "south"),
     ];
 }
 

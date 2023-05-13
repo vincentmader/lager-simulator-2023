@@ -15,6 +15,7 @@ import {
     PofferBallFeld,
     SoundBoks,
     Cajon,
+    DreiSchritteLaufenFeld,
 } from "../entities/structures.js";
 
 
@@ -133,6 +134,11 @@ export const initialize_list_of_cajons = () => {
     return [
         new Cajon(new Position(-10, -2), "east"),
     ];
+}
+
+
+export const initialize_list_of_dreischrittelaufenfelder = () => {
+    return [];
 }
 
 
