@@ -135,8 +135,12 @@ def link_sprites_to_static(model_category, model):
     path_to_model_sprites_in_static = os.path.join(
         PATH_TO_STATIC, "img", "sprites", model_category, model)
     # Create symbolic link to static directory (if not already done).
-    if not os.path.exists(path_to_model_sprites_in_static):
-        os.symlink(path_to_model_sprites, path_to_model_sprites_in_static)
+    if os.path.exists(path_to_model_sprites_in_static):
+        if os.path.islink(path_to_model_sprites_in_static):
+            os.unlink(path_to_model_sprites_in_static)
+        else:
+            raise Exception(f"Cannot create link, directory with same name exists already: {path_to_model_sprites}")
+    os.symlink(path_to_model_sprites, path_to_model_sprites_in_static)
 
 
 if __name__ == "__main__":
