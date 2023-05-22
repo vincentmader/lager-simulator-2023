@@ -1,0 +1,3 @@
+[submodule "blender-models"]
+	path = blender-models
+	url = https://github.com/vincentmader/lager-simulator-blender-models

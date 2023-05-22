@@ -16,7 +16,7 @@ export class WeissZelt_1 extends Zelt {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/weisszelt_1/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.6];
+        let texture_origin = [0.5, 0.69];
         let texture_scale = 1 / 100;
         // Define `Zelt` object.
         let bounding_box_dims = [4, 3];
@@ -50,7 +50,7 @@ export class Jurte_1 extends Zelt {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/jurte_1/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.6];
+        let texture_origin = [0.5, 0.7];
         let texture_scale = 1 / 80;
         // Define `Zelt` object.
         let bounding_box_dims = [6, 6];
@@ -67,7 +67,7 @@ export class Jurte_2 extends Zelt {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/jurte_2/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.6];
+        let texture_origin = [0.5, 0.7];
         let texture_scale = 1 / 100;
         // Define `Zelt` object.
         let bounding_box_dims = [5, 5];
@@ -85,7 +85,7 @@ export class Dixi extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/dixi/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.595];
+        let texture_origin = [0.5, 0.695];
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
@@ -102,7 +102,7 @@ export class WaschStelle extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/waschstelle/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.58];
+        let texture_origin = [0.5, 0.68];
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [2, 2];
@@ -119,7 +119,7 @@ export class BierBank extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/bierbank/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.59];
+        let texture_origin = [0.5, 0.68];
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [1, 4];
@@ -136,7 +136,7 @@ export class BierTisch extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/biertisch/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.59];
+        let texture_origin = [0.5, 0.68];
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [1, 4];
@@ -153,7 +153,7 @@ export class BierKasten extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/bierkasten/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.59];
+        let texture_origin = [0.5, 0.68];
         let texture_scale = 1 / 80;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
@@ -170,7 +170,7 @@ export class BannerMast extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/bannermast/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.59];
+        let texture_origin = [0.5, 0.69];
         let texture_scale = 1 / 30;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
@@ -187,7 +187,7 @@ export class PofferBallFeld extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/pofferballfeld/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.53, 0.61];
+        let texture_origin = [0.53, 0.66];
         let texture_scale = 1 / 100;
         // Define `Entity` object.
         let bounding_box_dims = [5, 9];
@@ -204,7 +204,7 @@ export class SoundBoks extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/soundboks/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.59];
+        let texture_origin = [0.5, 0.69];
         let texture_scale = 1 / 80;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
@@ -221,10 +221,27 @@ export class Cajon extends Entity {
         // Define `Texture` object.
         let img_path = "/img/sprites/structures/cajon/" + orientation + ".png";
         let img_dimensions = [1920, 1080];
-        let texture_origin = [0.5, 0.59];
-        let texture_scale = 1 / 80;
+        let texture_origin = [0.505, 0.68];
+        let texture_scale = 1 / 120;
         // Define `Entity` object.
         let bounding_box_dims = [1, 1];
+        [position, bounding_box_dims] = fix_bounding_boxes(position, bounding_box_dims, orientation);
+        let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
+        super(position, bounding_box_dims, texture);
+    }
+}
+
+
+export class DreiSchritteLaufenFeld extends Entity {
+
+    constructor(position, orientation) {
+        // Define `Texture` object.
+        let img_path = "/img/sprites/structures/dreischrittelaufenfeld/" + orientation + ".png";
+        let img_dimensions = [1920, 1080];
+        let texture_origin = [0.5, 0.68];
+        let texture_scale = 1 / 50;
+        // Define `Entity` object.
+        let bounding_box_dims = [0, 0];
         [position, bounding_box_dims] = fix_bounding_boxes(position, bounding_box_dims, orientation);
         let texture = new Texture(img_path, img_dimensions, texture_origin, texture_scale);
         super(position, bounding_box_dims, texture);
