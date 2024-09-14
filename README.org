@@ -191,7 +191,7 @@ B) Defender Team:
    - No campfire -> Less morale
 ** What kinds of "score thingies" are there?
 1. (Average) Morale
-2. Georgs-Punkte
+2. GP
 ** What scores are displayed at the top of the screen? (Always relevant)
 - Average morale
 - Wood
@@ -287,12 +287,12 @@ Children can be awakened by leaders (for night watch).
 *** Trees
 *** Bushes
 *** Rocks
-** How can I earn "Georgs-Punkte"?
+** How can I earn points?
 Beispiel:
 - Ueberfaeller greifen an.
 - Ueberfaeller werden dank guter Skillzz abgefangen
   und setzen sich zu den Leitern ans Feuer.
-- Ueberfaeller koennen "ueberzeugt" werden, Georgs-Punkte zu generieren.
+- Ueberfaeller koennen "ueberzeugt" werden, GPs zu generieren.
   Voraussetzungen:
   + Genug Bier vorhanden.
   + Soziale Skillzz des ueberzeugenden Leiter sind hoch genug.
@@ -357,8 +357,8 @@ Was passiert hier?
 - High-Score-Liste aller Spieler, die je gespielt haben.
 
 Man kann ueber verschiedene Wege seinen Score erhoehen.
-- Spieler 1 koennte z.B. keine Kekse verkaufen, dafuer viele Georgs-Punkte sammeln.
-- Spieler 2 koennte z.B. viele Kekse verkaufen, dafuer keine Georgs-Punkte sammeln.
+- Spieler 1 koennte z.B. keine Kekse verkaufen, dafuer viele Punkte sammeln.
+- Spieler 2 koennte z.B. viele Kekse verkaufen, dafuer keine Punkte sammeln.
 - Beide Spiele koennen (je nach Gewichtung) den gleichen Score erreichen.
   + D.h.: Verschiedene Strategien fuehren zur Erhoehung des Scores.
   + Der Replay-Wert wird hierdurch erhoeht, weil versch. Strategien ausprobiert werden koennen.
@@ -366,7 +366,7 @@ Man kann ueber verschiedene Wege seinen Score erhoehen.
 Was fliesst alles ein in die Punkte-Berechnung?
 - Bonus: Laenge des Lagers (in Tagen)
 - Bonus: Durchschnittliche Moral (Spass-Faktor)
-- Bonus: Zahl der erreichten Georgs-Punkte
+- Bonus: Zahl der erreichten Punkte
 - Bonus: Zahl der verkauften Kekse
 - Bonus: Zahl der abgefangenen Ueberfaeller
 - Bonus: Zahl der Kinder, die aufgestuft werden konnten
